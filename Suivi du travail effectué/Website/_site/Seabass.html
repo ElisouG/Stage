@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Le bar (seabass)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools-used.html">Outils utilisés</a>
+    </li>
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Le bar (seabass)</h1>
+
+</div>
+
+
+<hr />
+<p>Some interesting extracts from papers :</p>
+<hr />
+<div id="european-sea-bass-genome-and-its-variation-provide-insights-into-adaptation-to-euryhalinity-and-speciation-tine-et-al.-2014-nature-communications." class="section level1">
+<h1>European sea bass genome and its variation provide insights into adaptation to euryhalinity and speciation, Tine et al., 2014, Nature Communications.</h1>
+<p style="text-align:justify" ;>
+The European sea bass (Dicentrarchus labrax) is a temperate-zone euryhaline teleost of prime importance for aquaculture and fisheries. This species is subdivided into two naturally hybridizing lineages, one inhabiting the north-eastern Atlantic Ocean and the other the Mediterranean and Black seas.
+</p>
+<p style="text-align:justify" ;>
+expansions of gene families specifically associated with ion and water regulation, high- lighting adaptation to variation in salinity.We further generate a genome-wide variation map through RAD-sequencing of Atlantic and Mediterranean populations.
+</p>
+<p style="text-align:justify" ;>
+This is an economically important species, and natural stocks are subject to intensive exploitation by professional and sport fisheries, thus raising future conservation and management issues.
+</p>
+<p style="text-align:justify" ;>
+The European sea bass inhabits coastal waters, where reproduction occurs; however, it can also enter brackish waters in estuarine areas and coastal lagoons, and occasionally rivers. Thus, the European sea bass is an euryhaline fish tolerating a wide range of salinities (0-60 psu)1. Although several genes involved in the physiological response to variation in salinity have been identified2, the genetic basis of its broad halotolerance remains unclear. Because adaptation to varying environments may also involve gene duplications3, obtaining the complete genome sequence of the European sea bass may help to identify the genetic basis for adaptation to euryhalinity.
+</p>
+<p style="text-align:justify" ;>
+Most sea bass chromosomes are highly collinear with those of upper teleosts, confirming the evolutionary stability of fish genomes.
+</p>
+</div>
+<div id="metapopulation-patterns-of-additive-and-nonadditive-genetic-variance-in-the-sea-bass-dicentrarchus-labrax-guinand-et-al.-2017-ecology-and-evolution." class="section level1">
+<h1>Metapopulation patterns of additive and nonadditive genetic variance in the sea bass (Dicentrarchus labrax), Guinand et al., 2017, Ecology and evolution.</h1>
+<p style="text-align:justify" ;>
+As for many other species (Patarnello et al., 2007), pop- ulations of sea bass have been shown to be genetically differentiated between the Atlantic and the Mediterranean Sea, and within the Mediterranean Sea itself (Quéré et al., 2012; Souche et al., 2015; Tine et al., 2014) (Figure 1). In sea bass, nuclear and mitochondrial (mtDNA) markers provided different pictures of genetic differentiation. Indeed, nuclear data generally demonstrated genetic homogeneity within the Atlantic, while the Mediterranean Sea is genetically structured, with one single panmictic population within the Western Mediterranean Sea (Naciri, Lemaire, Borsa, &amp; Bonhomme, 1999; Qu?r? et al., 2012; Souche et al., 2015), and one main metapopulation within the Eastern Mediterranean Sea subdivided in slightly genetically differentiated local populations
+</p>
+</div>
+<div id="qtl-for-body-weight-morphometric-traits-and-stress-response-in-european-sea-bass-dicentrarchus-labrax-massault-et-al.-2010-animal-genetics." class="section level1">
+<h1>QTL for body weight, morphometric traits and stress response in European sea bass Dicentrarchus labrax, Massault et al., 2010, Animal Genetics.</h1>
+<p style="text-align:justify" ;>
+cortisol levels, had been previously assigned to parents based on genotypes of 31 DNA microsatellite markers.
+</p>
+<p style="text-align:justify" ;>
+An important economical trait is stress, either linked to pathogen infection or behaviour (such as confinement and handling). Cortisol, a widely accepted proxy for stress in fish, affects the immune system response (Engelsma et al. 2002). Therefore, if genomic regions are found that influ- ence the stress response, this could have a beneficial effect on the management of fitness. All these features represent multiple steps towards the use of genetic and molecular tools for improvement of production.
+</p>
+</div>
+<div id="a-new-snp-based-vision-of-the-genetics-of-sex-determination-in-european-sea-bass-dicentrarchus-labrax-palaiokostas-et-al.-2015-genetics-selection-evolution" class="section level1">
+<h1>A new SNP-based vision of the genetics of sex determination in European sea bass (Dicentrarchus labrax), Palaiokostas et al., 2015, Genetics Selection Evolution</h1>
+<p style="text-align:justify" ;>
+Restriction-site associated DNA (RAD) sequencing is a reduced-representation sequencing platform that ex- ploits high-throughput sequencing methodologies, while the use of barcodes allows multiplexing of samples [18]. This technique can be used for the rapid discovery of thousands of single nucleotide polymorphisms (SNPs) by sequencing parts of the genome at high depth, which of- fers the possibility to construct high-density linkage maps in a cost-efficient manner. Sex-determining regions have already been identified in Danio rerio (zebrafish), Oreochromis niloticus (Nile tilapia) and Hippoglossus hip- poglossus (Atlantic halibut) using RAD-seq [19–22]. In this study, we used RAD sequencing to identify SNPs in F2 crosses of D. labrax that originated initially from an F0 cross between two families with divergent sex ratios. First, a high-density linkage map was constructed, then quanti- tative trait loci (QTL) mapping and a genome-wideassociation study (GWAS) were performed. We also car- ried out a preliminary genomic prediction approach to test the potential of SNP-based selection for increasing either female ratio or body length.
+</p>
+<p style="text-align:justify" ;>
+Parentage assignment – general statistics Parentage assignment was performed with Vitassign V8- 5.1 [29] using 200 SNPs and with R/hsphase using all discovered SNPs and allowing for a maximum genotyping error of 3 % [30]. R v.3.0.1 was used for chi-square tests to detect significant deviations from the equal sex ratio and for calculating correlations between phenotypic sex and weight or length. SAS-GENMOD was used to test for sire and dam effects (and their interaction) on sex, using a pro- bit link function and a binomial distribution.
+</p>
+<p style="text-align:justify" ;>
+Construction of the linkage map The linkage map was constructed with Lep-Map [32]. SNPs with a minor allele frequency (MAF) less than 0.05 and SNPs that deviated from the expected Mendelian segregation (P &lt; 0.001) were excluded. Linkage groups were formed with a minimum LOD value of 10 using the SeparateChromosomes module of Lep-Map. SNPs within each linkage group were ordered by applying the OrderMarkers module. Map distances were estimated in centiMorgans (cM) using the Kosambi mapping function.
+</p>
+<p style="text-align:justify" ;>
+Heritability estimation Heritability of phenotypic sex was estimated on the li- ability scale using R/MCMCglmm [33]. The observed phenotype was considered to follow a binomial distribution. The probit link function was used as follows: <span class="math inline">\(yi∼B (probit‐1 (li))\)</span> where yi is the observed phenotype coded as a binary trait and li is the latent variable. The latent variable was modelled as follows: <span class="math inline">\(li =µ+µi+ei\)</span> where μ is the intercept, ui animal random effect that follows ~ N(0,Aσg 2), with A the pedigree-based relation-ship matrix and σg 2 the additive genetic variance, and ei the residual error. The additive genetic variance was estimated by Markov chain Monte Carlo (MCMC) esti- mation, using a prior following the χ2 (1 df) distribution (10 000 000 iterations; 1 000 000 burn-in; 500 thin). Heritability was estimated using the following formula: <span class="math inline">\(σ2 h2 ¼ σ2 g g þσ2 e þ1\)</span> ; where σg 2 is the previous estimated additive genetic variance and σe 2 is the residual variance that was fixed to 1 due to the identifiability issue with binary data [33].
+</p>
+<p style="text-align:justify" ;>
+QTL mapping Sex-determining QTL were identified by Haley-Knott re- gression mapping using GridQTL [34, 35]. A half-sib model and a F2 sib regression analysis model of the en- tire pedigree were used, allowing for the existence of one QTL at tested intervals that were 1 cM apart. The models used had the following general form: <span class="math inline">\(yij ¼ mi þXz¼n z¼1μz ?pz þeij;\)</span> where yij is the phenotypic sex of individual j belonging to full/half sib family i, with males coded as 1 and females as 2, mi is the F2 – half sib family specific inter- cept, μz is the effect of marker z, n is the number of pos- sible QTL genotypes of the tested position, pz is the probability of the inferred genotype (gz) based on flank- ing markers (pz = Pr(gz |M), M flanking markers) and eij is the residual error. Confidence intervals (95 %) were estimated using bootstraps with resampling (10 000 iter- ations). Two levels of significance were calculated based on chromosome (α = 0.01) or genome-wide thresholds (α = 0.05) by performing 1000 permutations, with the detected QTL referred to as suggestive or significant, respectively.
+</p>
+<p style="text-align:justify" ;>
+GWAS approach A GWAS was performed using R/rrBLUP [38] in order to test for SNPs associated with phenotypic sex. The model used was based on Yu et al. [39] and had the fol- lowing format: <span class="math inline">\(y ¼ XαþZuþe;\)</span> where y is the vector of the phenotypes, α is the vector of marker effects, u is the vector of animal random effects ∼N(0,Gσg) and e is the vector of residuals. The matrix G represents the relationship matrix calculated from SNPs and σg 2 the additive genetic variance estimated using REML. X and Z are incidence matrices relating y to α and u, respectively. The Bonferroni correction was used to correct formultiple testing (Type I error rate= 0.05).
+</p>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

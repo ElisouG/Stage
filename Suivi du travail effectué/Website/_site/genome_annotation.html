@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Annotation d’un génome</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools-used.html">Outils utilisés</a>
+    </li>
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Annotation d’un génome</h1>
+
+</div>
+
+
+<hr />
+<p>Some interesting extracts from papers :</p>
+<hr />
+<div id="a-beginners-guide-to-eukaryotic-genome-annotation-yandell-et-al.-2012-nature-reviews-genetics" class="section level1">
+<h1>A beginner’s guide to eukaryotic genome annotation, Yandell et al., 2012, Nature Reviews Genetics</h1>
+<p style="text-align:justify" ;>
+Repeat identification : Identifying repeats is complicated by the fact that repeats are often poorly conserved; thus, accu- rate repeat detection usually requires users to create a repeat library for their genome of interest. Available tools for doing so generally fall into two classes: homology- based tools and de novo tools After it has been created, a repeat library can be used in conjunction with a tool such as RepeatMasker,which uses BLAST and Crossmatch34 to identify stretches of sequence in a target genome that are homologous to known repeats
+</p>
+<p style="text-align:justify" ;>
+Evidence alignment : In prin- ciple, TBLASTX can be used to align ESTs and RNA-seq data from phylogenetically distant organisms but, owing to high computational costs, this is only done rarely. EST and protein sequence data sets are often aligned to the genome in a two-tiered process. Frequently, BLAST and BLAT are used to. identify approximate regions of homology rapidly. These alignments are usually filtered to identify and to remove marginal alignments on the basis of metrics such as percent similarity or percent identity. Clustering has two purposes. First, it groups diverse computational results into a single cluster of data, all supporting the same gene. Second, it identifies and purges redundant evidence; highly expressed genes, for example, may be supported by hundreds if not thousands of identical ESTs splice-site-aware alignment algorithms, such as Splign, Spidey , sim4 and Exonerate, are often used to realign matching and highly similar ESTs, mRNAs and proteins to the genomic input sequence. RNA-seq data have the greatest potential to improve the accuracy of gene annotations, as these data provide copious evidence for better delimitation of exons, splice sites and alter- natively spliced exons. They can be assembled de novo - that is, independently of the genome - using tools such as ABySS, SOAPdenovo and Trinity can be directly aligned to the genome using tools such as TopHat, GSNAP or Scripture followed by the assembly of alignments (rather than reads) into transcripts using tools such as Cufflinks for guidance on the best way to use TopHat with Cufflinks. Cufflinks sometimes erroneously merge RNA-seq reads from neighbouring genes. In such cases, de novo assembly of the RNA-seq data mitigates the problem; in fact, Trinity50 is designed to deal with this issue. Several annotation pipelines are now compatible with RNA-seq data: these include PASA, which uses inchworm outputs, and MAKER, which can operate directly from Cufflinks54 outputs or can use preassembled RNA-seq data.
+</p>
+<p style="text-align:justify" ;>
+Ab initio gene prediction : most gene predictors find the single most likely coding sequence (CDS) and do not report untranslated regions (UTRs) or alternatively spliced transcripts. The MAKER pipeline provides a simplified process for training the predictors Augustus and SNAP using the EST, protein and mRNA-seq alignments that MAKER has produced. An alternative is to use GeneMark-ES: a self-training, but sometimes less-accurate, algorithm.
+</p>
+<p style="text-align:justify" ;>
+Automated annotation : to select the single prediction whose intron-exon structure best represents the consensus of the models from among the overlapping predictions that define each putative gene locus. This is the process used by JIGSAW. EVidenceModeler (EVM) and GLEAN (and its successor, Evigan). EVM allows the user to set expected evidence error rates manually or to learn them from a training set. By contrast, GLEAN and Evigan use an unsupervised learning method to estimate a joint error model, and thus they require no additional training. In a recent gene pre- diction competition, the combiners nearly always improved on the underlying gene prediction models, and JIGSAW, EVM or Evigan performed similarly. The predictions can also be processed - before or after running the chooser - to attain still greater accuracies by having the annotation pipeline add UTRs as suggested by the RNA-seq and EST data. This is the process used by PASA, Gnomon and MAKER. the post-processed gene model that is most consistent with the protein, EST and RNA-seq alignments ; EVM, MAKER and PASA all provide methods for doing so a full run by an annotation pipeline such as MAKER or PASA can take weeks, but because these pipelines align evidence to the genome, their outputs provide starting points for annotation curation and downstream analyses, such as differential expression analyses using RNA-seq data. Another factor to consider is the phylogenetic relationship of the study genome to other annotated genomes. If it is the first of its taxonomic order or family to be annotated, it would definitely be preferable to use a pipeline that can use the full repertory of external evidence, especially RNA-seq data, to inform its gene annotations; not doing so will almost certainly result in low-quality annotations
+</p>
+<p style="text-align:justify" ;>
+Visualizing the annotation data : Four commonly used formats for describing annotations are the GenBank, GFF3, GTF and EMBL formats. the Generic Model Organism Database (GMOD) project community has developed a series of standards and tools for description, analyses, visualization and redistribution of genome annotations, all of which use the GFF3 file format as inputs and outputs. Leveraging GMOD tools and GFF3 substantially simplifies curation, analysis, publication and management of genome annotations. Users can directly visualize these files using GBROWSE and JBROWSE to produce views of their data just like those offered at WormBase and UCSC.
+</p>
+<p style="text-align:justify" ;>
+Quality control : Even the best gene predictors and genome annotation pipelines rarely exceed accuracies of 80% at the exon level, meaning that most gene annotations contain at least one mis-annotated exon. Given these facts, assessing how accurately a genome is annotated is an important part of any project. Assessing annotation quality in the absence of reference genome annotations is a difficult problem. Experimental verification is one solution, but few projects have the resources to carry this out on a large scale.
+</p>
+<p style="text-align:justify" ;>
+Approaches for assessing annotation quality : One simple approach for obtaining a rough indication of annotation quality is to quantify the percentage of annotations that encode proteins with known domains using tools such as InterProScan and Pfam or tools such as MAKER, which provides an automated means for carrying out such analyses. Sequence Ontology Project has developed several metrics for quality control of genome annotations. Annotation edit distance (AED), for example, measures how congruent each annotation is with its overlapping evidence. The MAKER2 genome annotation pipeline provides some useful tools for automatically calculating AED.
+</p>
+<p style="text-align:justify" ;>
+Submitting annotations to public databases : Ensembl and GenBank also automatically handle the heavy lifting that is involved in relating gene models to those of other organisms and identifying homologues, paralogues and orthologues. in short, they integrate a data set into the larger landscape of genomics and genome annotations. Best of all, the entire process is free, and submission to these sites in no way abridges the rights of the generators of the data to host and maintain their own genome data- base.
+</p>
+<p style="text-align:justify" ;>
+Updating annotations : The question then becomes how to merge, update and improve the existing annotations and, at the same time, to document the process. Among existing tools, GLEAN and PASA can be used to report differences between pre-existing gene models and newly created ones. Ensembl has a proce- dure to merge annotation data sets to produce a con- sensus, and PASA has one for updating annotations with RNA-seq data. The MAKER annotation pipeline provides an automated toolkit with all of these func- tionalities and can revise, update and merge existing annotation data sets, as well as map them forwards to new assemblies. Ensembl also allows submission of such data, although the process is less formal, and interested parties should contact Ensembl directly
+</p>
+<p style="text-align:justify" ;>
+Conclusion : Genome annotation has moved beyond merely identifying protein-coding genes to include an ever-greater emphasis on the annotation of transposons, regulatory regions, pseudogenes and ncRNA genes. Annotation quality control and management are also increasingly becoming bottlenecks. As long as tools and sequencing technologies continue to develop, periodic updates to every genome’s annotations will remain necessary. Like parenthood, annotation responsibilities do not end with birth.
+</p>
+</div>
+<div id="improving-eukaryotic-genome-annotation-using-single-molecule-mrna-sequencing-magrini-et-al.-2018-bmc-genomics." class="section level1">
+<h1>Improving eukaryotic genome annotation using single molecule mRNA sequencing, Magrini et al., 2018, BMC Genomics.</h1>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

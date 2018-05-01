@@ -1,0 +1,110 @@
+---
+title: "Annotation fonctionnel des SNPs"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * * 
+
+# From array data
+
+## DAVID : The Database for Annotation, Visualization and Integrated Discovery
+
+<https://david.ncifcrf.gov/>
+
+Need a gene list and the type of array used.
+Not adapted for our analysis
+
+## BABELOMICS
+
+<http://babelomics.bioinfo.cipf.es/>
+
+a webtool
+
+## FatiGO+ : a functional profiling tool for genomic data. Integration of functional annotation, regulatory motifs and interaction data with microarray experiments, Al-Shahrour et al., 2007, Nucleic Acids Research.
+
+Cf BABELOMICS
+
+## SCAN : SNP and copy number annotation, Gamazon et al., 2010, Bioinformatics.
+
+Only for Affymetrix human array
+
+# From sequencing data
+
+## GATK : HaplotypeCaller, VariantAnnotator
+
+## snpEff : A program for annotating and predicting the effects of single nucleotide polymorphisms, Cingolani et al., 2012, Fly.
+
+Some extracts from the paper :
+
+<p style="text-align:justify";>SnpEff, which is able to analyze and annotate thousands of variants per second. SnpEff supports more genome
+versions, is open source for any user, supports variant call format (VCF) files and it is marginally faster. SnpEff, an abbreviation of “SNP effect,” is a multi-platform open source variant effect predictor program. SnpEff annotates variants and predicts the coding effects of genetic variations, such as SNPs, insertions and deletions (INDELs) and multiple nucle- otide polymorphisms (MNPs) (<http://SnpEff.sourceforge.net/>). The main features of SnpEff include: (1) speed—the ability to make thousands of predictions per second; (2) flexibility—the ability to add custom genomes and annotations; (3) the ability to integrate with Galaxy, an open access and web-based platform for computational bioinformatic research (<http://gmod.org/wiki/> Galaxy); (4) compatibility with multiple species and multiple codon usage tables (e.g., mitochondrial genomes); (5) integration with Genome Analysis Toolkit (GATK); and (6) ability to perform non-coding annotations. When SnpEff was integrated into the GATK, it replaced the ANNOVAR program for variant analyses.
+SnpEff algorithm : Il coupe le génome en forêt ou interval d'arbre est indexé sur le chromosome dont il provient. Chaque interval d'arbres est composé de neouds et chaque noeuds est composé de 5 éléments.</p>
+
+-> D_labrax database built.
+-> SNP_Array annotated.
+
+## VEP : The Ensembl Variant Effect Predictor, McLaren et al., 2016, Genome Biology
+
+<https://www.ensembl.org/info/docs/tools/vep/index.html>
+
+webtool and command line script possible
+
+Il faut avoir un bon r?seau internet pour pouvoir le t?l?charger. Ce que je ne peux pas faire pour le moment car je ne suis qu'en wi-fi et que cela ne fonctionne pas.
+
+Some interesting extract from the paper : 
+
+<p style="text-align:justify";>A script is included in the VEP script package to create an annota- tion set from a general feature format (GFF) and FASTA file pair. The downloadable Perl script is the most powerful and flexible way to use the VEP. It supports more options than the other interfaces, has no limit on input file size, and includes extensive input, output, filtering, and analysis options. To install the script, simply download the VEP package and run the installer script, which automatically downloads the necessary API and annotation files (or 'cache' files). Updates with the latest data are available for each Ensembl release. The full source code is freely available on the Ensembl GitHub repository. To process large volumes of data, the VEP script works most efficiently in "offline" mode using a local cache of transcript annotations rather than online public databases. As well as optimizing runtime, this ensures data privacy for clinically or commercially sensitive data. Furthermore, the VEP input can be configured to query overlaps with local, potentially private, variant and phenotype data or other custom data sets in a manner similar to vcfanno. In this way annotation in for- mats including BED, GFF, GTF, VCF, and bigWig can be incorporated into the VEP output.</p>
+
+## variant tools
+
+<http://varianttools.sourceforge.net/>
+
+Tutorials : <http://varianttools.sourceforge.net/Main/Documentation>
+
+## Blast2Go
+
+<https://www.blast2go.com/>
+
+purchase licence to use it
+
+## FASTSNP : An always up-to-date and extendable service for SNP function analysis and prioritization, Yuan et al., 2006, Nucleic Acids Research.
+
+<https://omictools.com/function-analysis-and-selection-tool-for-single-nucleotide-polymorphisms-tool>
+
+Not available anymore
+Only for human data
+
+## ANNOVAR : Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR, Yang et al., 2015, Nature Protocols.
+
+only for human data but can be adaptated to human maybe
+
+## Snpdat: Easy and rapid annotation of results from de novo snp discovery projects for model and non-model organisms, doran et al., 2013, BMC Bioinformatics
+
+Annotation de novo sur des organismes non-model
+
+## VAI from UCSC
+
+webtool work only with its database
+
+## SeattleSeq annotation
+
+human hg 19 only
+
+## Variant : VARIant ANalysis Tool
+
+On human mouse and rat
+
+## VAT
+
+On human with many depedencies to download.
+
+## Funseq2
+
+Regulatory mutation from cancer genome sequencing => human

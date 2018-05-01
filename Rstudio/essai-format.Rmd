@@ -1,0 +1,35 @@
+---
+title: "essai-format"
+author: "Elise GUERET"
+date: "16 avril 2018"
+output: 
+  word_document:
+    reference_docx: word-styles-reference-01.docx
+    fig_width: 5
+    fig_height: 5
+    fig_caption: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Mon rapport commence ici.
+
+# Titre 1 
+
+etblahblah
+
+etblahblahblah
+
+## Titre 2
+
+etblahblah
+
+etblahblahblah
+
+### Titre 3
+
+etblahblah
+
+etblahblahblah

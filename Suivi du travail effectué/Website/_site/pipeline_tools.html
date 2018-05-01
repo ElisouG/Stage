@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Pipeline tools</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools-used.html">Outils utilisés</a>
+    </li>
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Pipeline tools</h1>
+
+</div>
+
+
+<hr />
+<div id="stacks-deriving-genotypes-from-rad-seq-short-read-data-using-stacks-rochette-et-al.-2017-nature-protocols." class="section level1">
+<h1>Stacks : Deriving genotypes from RAD-seq short-read data using Stacks, Rochette et al., 2017, Nature Protocols.</h1>
+<p style="text-align:justify" ;>
+Restriction site-associated DNA sequencing (RAD-seq) allows for the genome-wide discovery and genotyping of single-nucleotide polymorphisms in hundreds of individuals at a time in model and nonmodel species alike. However, converting short-read sequencing data into reliable genotype data remains a nontrivial task, especially as RAD-seq is used in systems that have very diverse genomic properties. Here, we present a protocol to analyze RAD-seq data using the Stacks pipeline. This protocol will be of use in areas such as ecology and population genetics. It covers the assessment and demultiplexing of the sequencing data, read mapping, inference of RAD loci, genotype calling, and filtering of the output data, as well as providing two simple examples of downstream biological analyses. We place special emphasis on checking the soundness of the procedure and choosing the main parameters, given the properties of the data. The procedure can be completed in 1 week, but determining definitive methodological choices will typically take up to 1 month.
+</p>
+<p style="text-align:justify" ;>
+a state-of-the-art procedure to derive genotypes from raw short-read data in the RAD-seq context. We demonstrate both a reference-based analysis and a strictly de novo analysis of the same data, as particularly in the fields in which RAD-seq is used it may not be possible to rely on a reference genome
+</p>
+<p style="text-align:justify" ;>
+the quality assessment and demultiplexing of the raw data, mapping of reads (if a reference-based analysis is per- formed), assembly of RAD loci and calling of genotypes, and filtering and export of these genotypes for use in biological analyses
+</p>
+</div>
+<div id="gatk-and-wdl" class="section level1">
+<h1>GATK and wdl</h1>
+<p><a href="https://software.broadinstitute.org/gatk/" class="uri">https://software.broadinstitute.org/gatk/</a> <a href="https://software.broadinstitute.org/wdl/" class="uri">https://software.broadinstitute.org/wdl/</a></p>
+</div>
+<div id="ddocent-a-radseq-variant-calling-pipeline-designed-for-population-genomics-of-non-model-organisms-puritz-et-al.-2014-peerj." class="section level1">
+<h1>dDocent : a RADseq, variant-calling pipeline designed for population genomics of non-model organisms, Puritz et al., 2014, PeerJ.</h1>
+<p style="text-align:justify" ;>
+the variant-calling pipeline dDocent is introduced as a tool for generating population genomic data; a brief methodological outline of the analysis pipeline also is presented. dDocent is a wrapper script designed to take raw flRAD data and produce population informative SNP calls (SNPs that are shared across the majority of individuals and populations), taking full advantage of both paired-end reads. dDocent is configured for organismswith high levels of nucleotide and Indel polymorphisms, such as are found in many marine organisms (Guo, Zou&amp;Wagner, 2012; Keever et al., 2009; Sodergren et al., 2006;Waples, 1998;Ward,Woodwark &amp; Skibinski, 1994); however, the pipeline also can be adjusted for low polymorphism species. As input, dDocent takes paired FASTQ files for individuals and outputs raw SNP and Indel calls as well as filtered SNP calls in VCF format. The pipeline and a comprehensive online manual can be found at (<a href="http://dDocent.wordpress.com" class="uri">http://dDocent.wordpress.com</a>). Finally, results of pipeline analyses, using both dDocent and Stacks, of populations of three species of marine fishes are provided to demonstrate the utility of dDocent compared to Stacks, the first and most comprehensive, existing software package forRADpopulation genomics
+</p>
+<p style="text-align:justify" ;>
+There are two distinct modules of dDocent: dDocent.FB and dDocent.GATK. dDocent.FB uses minimal, BAM-file preparation steps before calling SNPs and Indels, simultaneously using FreeBayes (Garrison &amp;Marth, 2012). dDocent.GATK uses GATK (McKenna et al., 2010) for Indel realignment, SNP and Indel genotyping (using HaplotypeCaller), and variant quality-score recalibration, largely following GATK Best Practices recommendations (Van der Auwera et al., 2013; DePristo et al., 2011). The modules represent two different strategies for SNP/Indel calling that are completely independent of one another.
+</p>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

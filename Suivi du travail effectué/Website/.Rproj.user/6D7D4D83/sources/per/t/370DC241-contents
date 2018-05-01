@@ -1,0 +1,55 @@
+---
+title: "Annotation d'un génome"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+
+# Papers
+
+Some interesting extracts from papers :
+
+## A beginner's guide to eukaryotic genome annotation, Yandell et al., 2012, Nature Reviews Genetics
+
+<p style="text-align:justify";>Repeat identification : Identifying repeats is complicated by the fact
+that repeats are often poorly conserved; thus, accu- rate repeat detection usually requires users to create a repeat library for their genome of interest. Available tools for doing so generally fall into two classes: homology- based tools and de novo tools
+After it has been created, a repeat library can be used in conjunction with a tool such as RepeatMasker,which uses BLAST and Crossmatch34 to identify stretches of sequence in a target genome that are homologous to known repeats</p>
+
+<p style="text-align:justify";>Evidence alignment : In prin- ciple, TBLASTX can be used to align ESTs and RNA-seq data from phylogenetically distant organisms but, owing to high computational costs, this is only done rarely.
+EST and protein sequence data sets are often aligned to the genome in a two-tiered process. Frequently, BLAST and BLAT are used to.
+identify approximate regions of homology rapidly. These alignments are usually filtered to identify and to remove marginal alignments on the basis of metrics such as percent similarity or percent identity.
+Clustering has two purposes. First, it groups diverse computational results into a single cluster of data, all supporting the same gene. Second, it identifies and purges redundant evidence; highly expressed genes, for example, may be supported by hundreds if not thousands of identical ESTs
+splice-site-aware alignment algorithms, such as Splign, Spidey , sim4 and Exonerate, are often used to realign matching and highly similar ESTs, mRNAs and proteins to the genomic input sequence.
+RNA-seq data have the greatest potential to improve the accuracy of gene annotations, as these data provide copious evidence for better delimitation of exons, splice sites and alter- natively spliced exons. They can be assembled de novo - that is, independently of the genome - using tools such as ABySS, SOAPdenovo and Trinity can be directly aligned to the genome using tools such as TopHat, GSNAP or Scripture followed by the assembly of alignments (rather than reads) into transcripts using tools such as Cufflinks for guidance on the best way to use TopHat with Cufflinks.
+Cufflinks sometimes erroneously merge RNA-seq reads from neighbouring genes. In such cases, de novo assembly of the RNA-seq data mitigates the problem; in fact, Trinity50 is designed to deal with this issue. Several annotation pipelines are now compatible with RNA-seq data: these include PASA, which uses inchworm outputs, and MAKER, which can operate directly from Cufflinks54 outputs or can use preassembled RNA-seq data.</p>
+
+<p style="text-align:justify";>Ab initio gene prediction : most gene predictors find the single most likely coding sequence (CDS) and do not report untranslated regions (UTRs) or alternatively spliced transcripts. The MAKER pipeline provides a simplified process for training the predictors Augustus and SNAP using the EST, protein and mRNA-seq alignments that MAKER has produced. An alternative is to use GeneMark-ES: a self-training, but sometimes less-accurate, algorithm.</p>
+
+<p style="text-align:justify";>Automated annotation : to select the single prediction whose intron-exon structure best represents the consensus of the models from among the overlapping predictions that define each putative gene locus. This is the process used by JIGSAW. EVidenceModeler (EVM) and GLEAN (and its successor, Evigan).
+EVM allows the user to set expected evidence error rates manually or to learn them from a training set. By contrast, GLEAN and Evigan use an unsupervised learning method to estimate a joint error model, and thus they require no additional training. In a recent gene pre- diction competition, the combiners nearly always improved on the underlying gene prediction models, and JIGSAW, EVM or Evigan performed similarly.
+The predictions can also be processed - before or after running the chooser - to attain still greater accuracies by having the annotation pipeline add UTRs as suggested by the RNA-seq and EST data. This is the process used by PASA, Gnomon and MAKER. the post-processed gene model that is most consistent with the protein, EST and RNA-seq alignments ; EVM, MAKER and PASA all provide methods for doing so
+a full run by an annotation pipeline such as MAKER or PASA can take weeks, but because these pipelines align evidence to the genome, their outputs provide starting points for annotation curation and downstream analyses, such as differential expression analyses using RNA-seq data. Another factor to consider is the phylogenetic relationship of the study genome to other annotated genomes. If it is the first of its taxonomic order or family to be annotated, it would definitely be preferable to use a pipeline that can use the full repertory of external evidence, especially RNA-seq data, to inform its gene annotations; not doing so will almost certainly result in low-quality annotations</p>
+
+<p style="text-align:justify";>Visualizing the annotation data : Four commonly used formats for describing annotations are the GenBank, GFF3, GTF and EMBL formats. the Generic Model Organism Database (GMOD) project community has developed a series of standards and tools for description, analyses, visualization and redistribution of genome annotations, all of which use the GFF3 file format as inputs and outputs. Leveraging GMOD tools and GFF3 substantially simplifies curation, analysis, publication and management of genome annotations. Users can directly visualize these files using GBROWSE and JBROWSE to produce views of their data just like those offered at WormBase and UCSC.</p>
+
+<p style="text-align:justify";>Quality control : Even the best gene predictors and genome annotation pipelines rarely exceed accuracies of 80% at the exon level, meaning that most gene annotations contain at least one mis-annotated exon. Given these facts, assessing how accurately a genome is annotated is an important part of any project. Assessing annotation quality in the absence of reference genome annotations is a difficult problem. Experimental verification is one solution, but few projects have the resources to carry this out on a large scale.</p>
+
+<p style="text-align:justify";>Approaches for assessing annotation quality : One simple approach for obtaining a rough indication of annotation quality is to quantify the percentage of annotations that encode proteins with known domains using tools such as InterProScan and Pfam or tools such as MAKER, which provides an automated means for carrying out such analyses. 
+Sequence Ontology Project has developed several metrics for quality control of genome annotations.
+Annotation edit distance (AED), for example, measures how congruent each annotation is with its overlapping evidence. The MAKER2 genome annotation pipeline provides some useful tools for automatically calculating AED.</p>
+
+<p style="text-align:justify";>Submitting annotations to public databases : Ensembl and GenBank also automatically handle the heavy lifting that is involved in relating gene models to those of other organisms and identifying homologues, paralogues and orthologues. in short, they integrate a data set into the larger landscape of genomics and genome annotations. Best of all, the entire process is free, and submission to these sites in no way abridges the rights of the generators of the data to host and maintain their own genome data- base.</p>
+
+<p style="text-align:justify";>Updating annotations : The question then becomes how to merge, update and improve the existing annotations and, at the same time, to document the process. Among existing tools, GLEAN and PASA can be used to report differences between pre-existing gene models and newly created ones. Ensembl has a proce- dure to merge annotation data sets to produce a con- sensus, and PASA has one for updating annotations with RNA-seq data. The MAKER annotation pipeline provides an automated toolkit with all of these func- tionalities and can revise, update and merge existing annotation data sets, as well as map them forwards to new assemblies. 
+Ensembl also allows submission of such data, although the process is less formal, and interested parties should contact Ensembl directly</p>
+
+<p style="text-align:justify";>Conclusion : Genome annotation has moved beyond merely identifying protein-coding genes to include an ever-greater emphasis on the annotation of transposons, regulatory regions, pseudogenes and ncRNA genes. Annotation quality control and management are also increasingly becoming bottlenecks. As long as tools and sequencing technologies continue to develop, periodic updates to every genome's annotations will remain necessary. Like parenthood, annotation responsibilities do not end with birth.</p>
+
+## Improving eukaryotic genome annotation using single molecule mRNA sequencing, Magrini et al., 2018, BMC Genomics.

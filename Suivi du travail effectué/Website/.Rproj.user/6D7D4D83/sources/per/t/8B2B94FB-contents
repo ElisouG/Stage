@@ -1,0 +1,28 @@
+---
+title: "Troubleshooting"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * * 
+
+# Using snpEff
+
+All definitions are from [SnpEff manual](http://snpeff.sourceforge.net/SnpEff_manual.html) website : 
+
+* WARNING_TRANSCRIPT_INCOMPLETE	: A protein coding transcript having a non-multiple of 3 length. It indicates that the reference genome has missing information about this particular transcript.
+
+* WARNING_TRANSCRIPT_MULTIPLE_STOP_CODONS	: A protein coding transcript has two or more STOP codons in the middle of the coding sequence (CDS). This should not happen and it usually means the reference genome may have an error in this transcript.
+
+* WARNING_TRANSCRIPT_NO_START_CODON	: A protein coding transcript does not have a proper START codon. It is rare that a real transcript does not have a START codon, so this probably indicates an error or missing information in the reference genome.
+
+* WARNING_TRANSCRIPT_NO_STOP_CODON	
+
+Pour résoudre ces "warnings" provenant finalement d'un problème d'annotation du génome de *Dicentrarchus Labrax*, je crée un script en langage [Python](https://www.python.org/) pour récupérer ces erreurs ("warnings") pour les corriger au sein du fichier d'annotation.
+

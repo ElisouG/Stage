@@ -1,0 +1,46 @@
+---
+title: "Analyse statistiques des SNPs"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+
+Some interesting extracts from papers :
+
+* * * * *  
+
+# PLINK : A Tool Set for Whole-Genome Association and Population-Based Linkage Analyses, Purcell etal., 2007, The American Journal of Human Genetics
+
+# SHEsis : a powerful software platform for analyses of linkage disequilibrium, haplotype construction, and genetic association at polymorphism loci, she et al., 2005, Cell research
+
+# MapChart : Software for the Graphical Presentation of Linkage Maps and QTLs, Voorips et al., 2002, Journal of heredity
+
+# GCTA : A tool for genome-wide complex trait analysis, Yang et al., 2011, The American Journal of Human Genetics 
+
+# R-Packages
+
+## GWASTools
+
+<http://bioconductor.org/packages/release/bioc/html/GWASTools.html>
+
+## adegenet
+## genetics
+## haplo.stats
+## gap
+## ASMap
+## identity
+## pedigree
+## hwde
+## multic
+## LDheatmap
+## SNPassoc
+## snpMatrix
+## GenABEL
+## SNPStats
