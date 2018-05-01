@@ -27,22 +27,39 @@ from module_seb import fasta2dict
 
 if __name__ == "__main__":
 
-	#################### Path File ######################
+#################### Path File Ordi bureau   ######################
 
-	#pathFasta = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
-	#pathWarning = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
-	#pathGTF = "/media/sf_DATA/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
-	#pathAnnotation = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
+	# pathFasta = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
+	# pathWarning = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
+	# pathGTF = "/media/sf_DATA/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
+	# pathAnnotation = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
+	# pathF2 = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/NoStop_exo.txt"
+	# pathF1 = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/NoStart_exo.txt"
+	# pathAnntotationNew = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
+	# PathGenomeR = ''
+
+	#################### Path File Ordi_portable   ######################
+
 	pathFasta = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
 	pathWarning = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
 	pathGTF = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
 	pathAnnotation = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
-
-
-	#pathF2 = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/NoStop_exo.txt"
-	#pathF1 = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/NoStart_exo.txt"
 	pathF2 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStop_exo.txt"
 	pathF1 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStart_exo.txt"
+	pathAnntotationNew = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
+	PathGenomeR = '/mnt/c/Users/missl/Documents//Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	
+	
+    #################### Path File Cluster    ######################
+
+	# pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
+	# pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
+	# pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
+	# pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
+	# pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_30_04_18.txt"
+	# pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_30_04_18.txt"
+	# pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_30_04_2018.gtf"
+	# PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
 
 	################### Récupération info #################
@@ -109,18 +126,18 @@ if __name__ == "__main__":
 	#for elt in listeId:
 	#	f.write('>%s\n%s\n'%(elt,Genome[elt].seq.reverse_complement())) # Ecrit comme dans un fichier fasta le chromosome puis la séquence
 	#f.close() # Fermer le fichier
-	GenomeR = fasta2dict('/mnt/c/Users/missl/Documents//Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa') # Crée un dictionnaire du génome reverse précédemment créé
+	GenomeR = fasta2dict(PathGenomeR) # Crée un dictionnaire du génome reverse précédemment créé
 	
 	print('GenomeR')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
 	################### Recherche codons start, stop ##################
 
 	f1 = open(pathF1,"w") # Création d'un nouveau fichier
-	f1.write('%20s | %20s | %20s | %20s | %20s | %20s  |  brin \n' %('chromosome','codon_start','condon_end','début_codon','fin_codon','codon')) # Nomme les colonnes du fichier
-	f1.write('%20s | %20s | %20s | %20s | %20s | %20s  |  ---------- \n' %('-'*20,'-'*20,'-'*20,'-'*20,'-'*20,'-'*20))
+	f1.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  | brin \n' %('chromosome','old_start','old_end','new_start','new_end','codon','Length add')) # Nomme les colonnes du fichier
+	f1.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
 	f2 = open(pathF2,"w") # Création d'un nouveau fichier
-	f2.write('%20s | %20s | %20s | %20s  %20s | %20s  |  brin \n' %('chromosome','codon_start','condon_end','début_codon','fin_codon','codon')) # Nomme les colonnes du fichier
-	f2.write('%20s | %20s | %20s | %20s  %20s | %20s  |  ---------- \n' %('-'*20,'-'*20,'-'*20,'-'*20,'-'*20,'-'*20))
+	f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  | brin \n' %('chromosome','old_start','old_end','new_start','new_end','codon','Length add')) # Nomme les colonnes du fichier
+	f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
 	codonStop = ['TAA','TAG','TGA'] # Liste des différents codons stop existants
 	codonStart = 'ATG' # Nomme le codon start
 	codonStart2 = 'AAG' # Nomme le codon start alternatif
@@ -154,8 +171,9 @@ if __name__ == "__main__":
 					end1 = end1 -1
 				for i in range(end+1,end1-2,3): # Recherche des codons stop en aval du gène
 					if sequence[i:i+3] in codonStop :
+						Longueur = (i+3) - (int(endGTF)+1)
 						f2 = open(pathF2,"a") # Ouverture du fichier "No Stop"
-						f2.write('%20s | %20s | %20s | %20s |  %20s | %20s  |  +\n' %(chromosome,endGTF-1,endGTF+1,i+1,i+3,sequence[i:i+3])) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+						f2.write('%15s | %15s | %15s | %15s | %15s | %15s | %15s | +\n' %(chromosome,endGTF-1,endGTF+1,i+1,i+3,sequence[i:i+3],str(Longueur))) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
 						f2.close() # Fermer le fichier
 						listeNoStop.append([chromosome,str(int(endGTF)-1),str(int(endGTF)+1),str(i+1),str(i+3),'+'])
 						break # S'arrête dès qu'il trouve le premier codon stop
@@ -175,8 +193,9 @@ if __name__ == "__main__":
 						st = i
 						en = i+2
 				if st != 'NA':
+					Longueur = (int(startGTF)+1) - int((st+1))
 					f1 = open(pathF1,"a") # Ouverture du fichier "No Start"
-					f1.write('%20s | %20s | %20s | %20s | %20s | %20s  |  +\n' %(chromosome,startGTF+1,startGTF+3,st+1,en+1,sequence[st:en+1])) # Ecrire dans ce fichier les codons start trouvés ainsi que leur position
+					f1.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  +\n' %(chromosome,startGTF+1,startGTF+3,st+1,en+1,sequence[st:en+1],str(Longueur))) # Ecrire dans ce fichier les codons start trouvés ainsi que leur position
 					f1.close() # Fermer le fichier 	
 					listeNoStart.append([chromosome,str(int(startGTF)+1),str(int(startGTF)+3),str(st+1),str(en+1),'+'])
 		
@@ -192,8 +211,9 @@ if __name__ == "__main__":
 					start = start +1
 				for i in range(length-1-(start-1),length-1-(start-1002),3): # Recherche des codons stop en aval du gène
 					if sequence[i:i+3] in codonStop :
+						Longueur = (int(startGTF)+1) - (length-(i+1))
 						f2 = open(pathF2,"a") # Ouverture du fichier "No Stop"
-						f2.write('%20s | %20s | %20s | %20s | %20s | %20s  |  -\n' %(chromosome,startGTF +1,startGTF+3,str(length-(i+3)),str(length-(i+1)),sequence[i:i+3])) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+						f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  -\n' %(chromosome,startGTF +1,startGTF+3,str(length-(i+3)),str(length-(i+1)),sequence[i:i+3],str(Longueur))) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
 						f2.close() # Fermer le fichier
 						listeNoStop.append([chromosome,str(int(startGTF)+1),str(int(startGTF)+3),str(length-(i+3)),str(length-(i+1)),'-'])
 						break # S'arrête dès qu'il trouve le premier codon stop
@@ -210,8 +230,9 @@ if __name__ == "__main__":
 						st = i
 						en = i+2
 				if st != 'NA':
+					Longueur = (length-(st)) - (int(endGTF)+1)
 					f1 = open(pathF1,"a") # Ouverture du fichier "No Start"
-					f1.write('%20s | %20s | %20s | %20s | %20s | %20s  |  -\n' %(chromosome,endGTF-1,endGTF+1,length-(en),length-(st),sequence[st:en+1])) # Ecrire dans ce fichier les codons start trouvés ainsi que leur position
+					f1.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  -\n' %(chromosome,endGTF-1,endGTF+1,length-(en),length-(st),sequence[st:en+1],str(Longueur))) # Ecrire dans ce fichier les codons start trouvés ainsi que leur position
 					f1.close() # Fermer le fichier 
 					listeNoStart.append([chromosome,str(int(endGTF)-1),str(int(endGTF)+1),str(length-(en)),str(length-(st)),'-'])
 				
@@ -230,7 +251,7 @@ if __name__ == "__main__":
 	print('ListeAnnotation Done')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
 	#newAnnotation = open("/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf", "w")
-	newAnnotation = open("/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf", "w")
+	newAnnotation = open(pathAnntotationNew, "w")
 	for line in linesAnnotation:
 		for elt in listeNoStop:
 			if elt[0] in line and '\t'+elt[1]+'\t' in line and 'stop_codon' in line: 
@@ -241,8 +262,8 @@ if __name__ == "__main__":
 					line = line.replace(elt[2],elt[4])
 				elif 'CDS' in line and str(int(elt[2])-3) in line :
 					line = line.replace(str(int(elt[2])-3),str(int(elt[4])-3))
-			if  elt[5] == '-' and  elt[0] in line: :
-				elif 'exon' in line and elt[1] in line :
+			if  elt[5] == '-' and  elt[0] in line : 
+				if 'exon' in line and elt[1] in line :
 					line = line.replace(elt[1],elt[3])
 				elif 'CDS' in line and str(int(elt[1])+3) in line:
 					line = line.replace(str(int(elt[1])+3),str(int(elt[3])+3))
@@ -253,7 +274,7 @@ if __name__ == "__main__":
 			if  elt[5] == '+'  and  elt[0] in line:
 				if elt[1] in line  :
 					line = line.replace(elt[1],elt[3])
-			if  elt[5] == '-' and  elt[0] in line: :
+			if  elt[5] == '-' and  elt[0] in line: 
 				if elt[2] in line :
 					line = line.replace(elt[2],elt[4])
 
