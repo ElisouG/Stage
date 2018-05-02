@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/home/egueret/miniconda3/bin/python3
+##!/usr/bin/python3
 #-*- coding: utf-8 -*-
 # @package Correction_Annotation.py
 # @author Elise GUERET
@@ -56,9 +57,9 @@ if __name__ == "__main__":
 	pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
 	pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
 	pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
-	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_30_04_18.txt"
-	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_30_04_18.txt"
-	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_30_04_2018.gtf"
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_02_05_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_02_05_18.txt"
+	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_02_05_2018.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
 
