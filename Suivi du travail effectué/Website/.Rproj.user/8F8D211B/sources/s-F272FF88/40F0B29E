@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524234139473.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "40F0B29E",
+    "lastKnownWriteTime" : 1524235925,
+    "last_content_update" : 1524235927704,
+    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/GWAS_Stress_Fish.Rmd",
+    "project_path" : "GWAS_Stress_Fish.Rmd",
+    "properties" : {
+        "cursorPosition" : "39,378",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 24,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

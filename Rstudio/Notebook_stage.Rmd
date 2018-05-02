@@ -15,9 +15,9 @@ output:
 <p style="text-align:justify";>Faire une analyse SNP par famille (tolérante ou non au stress en donnant la position des SNP liés à la tolérance ou à l'intolérance au stress = > donc faire une GWAS.(association des SNP avec la tolérance ou l'intolérance au stress)</p>
 
 
-#Journal de bord
+#Journal de bord - Février
 
-##Jour 1 : 26/02/2018
+## Jour 1 : 26/02/2018
 
 <p style="text-align:justify";>Visite des différents bâtiments (22 là où sera mon bureau, 24 là où je vais faire les manip' et 21 l'administration de l'ISEM).</p>
 
@@ -33,7 +33,7 @@ RQE: Le MBB est la plate-forme bioinformatique de l'université de Montpellier 2
 
 <p style="text-align:justify";>Se renseigner sur Researchgate</p>
 
-##Jour 2 : 27/02/2018
+## Jour 2 : 27/02/2018
 
 <p style="text-align:justify";>Récupération du protocole pour le RAD-seq</p>
 
@@ -81,7 +81,7 @@ RQE: Le MBB est la plate-forme bioinformatique de l'université de Montpellier 2
 
 <p style="text-align:justify";>Je viens de recevoir mes LOG pour me connecter sur le serveur MBB pour lancer mes scripts.</p>
 
-##Jour 3 : 28/02/2018
+## Jour 3 : 28/02/2018
 
 <p style="text-align:justify";>J'ai re?u le fichier à compl?ter pour me faire rembourser mes titres de transport.</p>
 
@@ -102,15 +102,18 @@ RQE: Le MBB est la plate-forme bioinformatique de l'université de Montpellier 2
 
 <p style="text-align:justify";>J'ai install? un Ubuntu sous mon Windows10 et j'ai r?ussi à me connecter en ssh sur le serveur.</p>
 
-##Jour 4 : 01/03/2018
+
+#Journal de bord - Mars
+
+## Jour 4 : 01/03/2018
 
 <p style="text-align:justify";>La neige n'a pas fondu donc pas de transport en commun donc pas de stage.</p>
 
-##Jour 5 : 02/03/2018
+## Jour 5 : 02/03/2018
 
 <p style="text-align:justify";>La neige a commenc? à fondre mais il n'y a toujours pas de transport en commun donc pas de stage.</p>
 
-##Jour 6 : 05/03/2018
+## Jour 6 : 05/03/2018
 
 <p style="text-align:justify";>J'ai r?ussi à visualiser un peu les data que m'a donné Erick gr?ce à IGV sans grand int?r?t sous Windows ^^.</p>
 
@@ -129,18 +132,18 @@ Tuto Snakemake termin?!!!! J'ai compris commentçafonctionne il n'y a plus qu'? 
 
 <p style="text-align:justify";>J'aurai aim? faire un tuto R affy pour me remêmorer les ?tapes ?réaliser pour faire une analyse de puce Affymetrix avant d'obtenir mes data.</p>
 
-##Jour 7 : 06/03/2018
+## Jour 7 : 06/03/2018
 
 <p style="text-align:justify";>Aujourd'hui, je teste à nouveau de faire fonctionner GATK sur mon ordi. Pour feinter le non fonctionnement sous windows, je le télécharge sous windows, ensuite je vais le éplacer dans le bon r?pertoire pour le unzip via la ligne de commande et j'esp?re queçava fonctionner cette fois. Youpiçafonctionne !!</p>
 
 <p style="text-align:justify";>Je suis un premier tuto GATK à l'adresse suivante :
-<https://software.broadinstitute.org/wdl/documentation/article?id=7158> . Pour l'instantçase passe pas mal même si c'est moins simple qu'un snakemake ^^. Puis un deuxi?me tuto GATK à l'adresse suivante : <https://software.broadinstitute.org/wdl/documentation/article?id=7221> . Ca fonctionne pas tip-top. Et je ne sais pas pourquoi mais demain je lance mes .wdl direct depuis le serveur ^^. </p>
+<https://software.broadinstitute.org/wdl/documentation/article?id=7158> . Pour l'instant ça se passe pas mal même si c'est moins simple qu'un snakemake ^^. Puis un deuxième tuto GATK à l'adresse suivante : <https://software.broadinstitute.org/wdl/documentation/article?id=7221> . Ca fonctionne pas tip-top. Et je ne sais pas pourquoi mais demain je lance mes .wdl direct depuis le serveur ^^. </p>
 
 <p style="text-align:justify";>Je viens de voir Erick qui me dit qu'il faut que je refasse tout ce que je viens de faire sur le serveur directement et non pas sur mon ordi...</p> 
 
 <p style="text-align:justify";>J'ai commenc? à lire un article sur Stacks mais c'est hard ^^</p> 
 
-##Jour 8 : 07/03/2018
+## Jour 8 : 07/03/2018
 
 <p style="text-align:justify";>Comme je dois refaire tous mes tutos éj? effectué sur le serveur, j'utilise WinSCP pour copier mes fichiers dans mon home sur le serveur ^^. Pour cela j'ai suivi le tuto à l'adresse suivante : <http://www.otium-france.net/2009/10/20/tutorial-transferer-des-fichiers-sur-un-serveur-en-scp-sftp-via-winscp/>.</p> 
 
@@ -184,7 +187,7 @@ A cet endroit : C:\Users\missl\Documents\Stage_UM_ISEM\Data.
 
 <p style="text-align:justify";>Certains workflow sont ?crits en Snakemake pour faire l'analyse RAD-seq. Il n'y a donc plus qu'? les mettre les uns à la suite des autres pour pouvoir faire mon analyse ^^. Il sont disponibles à l'adresse suivante : <https://snakemake-wrappers.readthedocs.io/en/stable/index.html> . Il concerne les 4 ?tapes de Data_Pre-processing (bwa_mem, MergeBAMAlignement, MarkDuplicates et SortSAM qui sont aussi disponibles sur wdl (encore faut-il savoir commentçafonctionne? ^^). Toutes les autres ?tapes(8)  sont ?réaliser en wdl. Il faut donc faire fonctionner tous ces scripts sur le serveur ^^ et créer l'arborescence n?cessaire pour tout faire tout fonctionner au sein du serveur.</p>
 
-##Jour 9 : 08/03/2018
+## Jour 9 : 08/03/2018
 
 <p style="text-align:justify";>Installation de snakmeake sur mon ordi et sur le serveur. Pour que le fichier fonctionne il faut qu'il s'appelle Snakefile (?a va poser probl?me si il en faut plusieurs), il faut que l'environnement où il est soit activ? pour que le script se lance. Il faut que je trouve un moyen de le faire s'activer tout seul sans que j'ai besoin de le faire moi-même. D'autre part, ma commande java n'est pas reconnu par snakemake. Il faut que je trouve comment faire car je sais que c'est possible ^^.</p>
 
@@ -203,7 +206,7 @@ A cet endroit : C:\Users\missl\Documents\Stage_UM_ISEM\Data.
   - comment j'appelle GenomeAnalysisTK.jar (sachant que je vais mettre le chemin pour y accèder)
   - comment j'appelle bwa, samtools, bcftools, trimmomatic</p>
 
-##Jour 10 : 09/03/2018
+## Jour 10 : 09/03/2018
 
 <p style="text-align:justify";>Probl?me du script pour pr?parer le genome de référence résolu : c'êtait pas le bon chemin d'accès qui ?tait sp?cifi?. Maintenant qu'il est adpat? pour fonxtionner sur le cluster, il faut le lancer. Ce script s'appelle : Reference_preparation. Il s'agit d'un Snakefile.</p>
 
@@ -219,7 +222,7 @@ A cet endroit : C:\Users\missl\Documents\Stage_UM_ISEM\Data.
 
 <p style="text-align:justify";>Erick est pass? dans le bureau en fin de matin?e. Il est content que je me forme à l'?criture de script. D'autre part, il m'a parler d'une commande qui pourrait me permettre de lancer un job sur le cluster puis de récupérer la main. Ca serait bien que je la trouve pour l'utiliser ult?rieurement. D'autre part, j'ai accès à des formations online sur le cluster donc je pense que je vais y jeter un oeil pour voir ce que je sais faire et ce que je vais apprendre à faire. Je lui ai demané pour le choix des puces et de séquençage et pour l'instant, le premier verrou pour utiliser les puces est lev?. Il faut donc qu'on se voit la semaine prochaine avec Bruno pour éterminer notre méthode de géntotypage. Pour aider à faire le choix, il faut que les concentrations en ADN des échantillons extraits soit correct. Cependant, Eric n'arrive pas à voir quels sont les probl?mes car il à doser des échantillons avec une méthode de spectrophotom?trie et à obtenue une valeur puis il l'a refaite deux fois avec deux méthodes fluorim?trique et as obtenues deux autres valeurs qui ne concordent pas avec celles qu'il avait abtenu précédemment. J'esp?re qu'il va résoudre ce probl?me avant notre réunion de la semaine prochaine car cela pourra nous orienter sur le choix de notre méthode de génotypage. Pour les analyses j'aimerais queçasoit des données  de la puce mais question manip' j'esp?re queçasera du séquençage car commeçaje vais pouvoir participer à la fabrication des librairies. Il faut pas que j'oublies de lui proposer mon aide pour quantifier les ADN si il a besoin. Il m'a dit qu'il y avait de bon tutos Stacks à faire pour se former. Il m'a aussi dit que les bioinformaticiens préféraient utiliser GATK qui leur permet de choisir beaucoup plus d'option que Stacks et qui donc ?tait lus puissant pour obtenir des données correctes et exploitables. Je pense que je vais faire pareil parce que Stacks me semble encore indigeste pour le moment ^^. On verra siçava mieux quand j'aurai fait les tutos Stacks en entier et directement sur le serveur cette fois-ci pour gagner du temps peut-être.</p> 
 
-##Jour 11 : 13/03/2018
+## Jour 11 : 13/03/2018
 
 <p style="text-align:justify";>A près la RAD-seq, les puces maintenant l'epiGBS sera peut-être utilis?e pour séquencer mes échantillons et ainsi faire avec un même run de séquençage du génotypage et de l'épigéntique en même temps, c'estéch-dire sur les mêmes data. Le pipeline est dispo à l'adresse suivante : <https://www.nature.com/articles/nmeth.3763/figures/12> .</p>  
 
@@ -235,7 +238,7 @@ En général, tu peux utiliser "nohup ta_commande &". Le probl?me avec screen ou
 
 <p style="text-align:justify";>Comme j'en ai marre de "rien faire" et que je viens d'avoir cette iée : et si je faisais un Rmarkdown sur les puces affymetrix à l'aide de mes ppt de LicencePro. Je me dis que c'est pas mal alors je vais tenter de faireçaavec ce que je vais trouver dans ma boùte mail. En fait, dans ma boùte mail j'ai que les diapos sur R en général pas les diapos sur comment analyser des puces affymetrix. En plus, je viens de penser : comme la puce n'est pas commercialis?e et ne le sera pas avant un petit moment je suppose qu'ils ne vont pas évelopper un package R pour analyser les données produites avec cette puce. ^^ Je ne sais pas on verra bien ^^.</p>
 
-##Jour 12 : 13/03/2018
+## Jour 12 : 13/03/2018
 
 <p style="text-align:justify";>Bon bah mes jobs ne sont pas partis...</p>
 
@@ -257,7 +260,7 @@ ont été lanc? sur une autre queue que le queue mbb.q c'estéch-dire la queue c
 
 <p style="text-align:justify";>Je ne fais rien de mes journ?es vu que j'attends que mes scripts tournent cette fois je ne vais pas les qdel pour si ils tournent correctement. J'esp?re seulement qu'ils vont partir un jour ^^. Ca ne m'est jamais arriv? d'attendre aussi longtemps pour un petit script:-O .</p>
 
-##Jour 13 : 14/03/2018
+## Jour 13 : 14/03/2018
 
 <p style="text-align:justify";>Ce matin il y a eu réunion pour mon stage avec Erick et Bruno. J'ai eu quelques informations suppl?mentaires : le génome du loup re prèsente 700mb pour les contigs éj? assembl?s . Cependant il doit ?tre un peu plus conséqquent vu qu'il y a un groupe de liaison non assembl? éfinitivement. On va dans un premier temps faire du ddRADseq pour que j'ai des data à analyser. La cerise sur le g?teau serait de faire de l'epi-GBS (GBS ?tant l'autre nom  du ddRADseq) car il serait possible de faire avec une seule quantité d'ADN et un seuk run de séquençage à la fois une analyse des SNP et une analyse épigéntique. Car pour le moment dans le consortium dans lequel  mon travail s'insert il est question de faire une carte des SNPs puis de faire une analyse épigéntique. Cependant, pour l'?pi-GBS il faut des adaptateurs sp?cifiques qui ne sont pas sensible à la méthylation, ils doivent donc ?tre méthyl?s. La plate-forme GenSeq UM n'en a pas et ne sais pas combiençava coùter. Le set entier d'échantillons re prèsente 62 familles avec 10-12 descendants soit un total de 800 échantillons. Il ne va donc pas ?tre possible financi?rement dans un permier temps de séquencer l'ensemble des échantillons à notre disposition. Pour pallier à cela nous allons choisir un set d'un 15aines de famille dont certaines serait extr?me+ et  d'autres extr?me- avec en plus des familles moyenne (entre les deux). Ce la permettra pour l'analyse des SNP de ne pas donner le même poids à chacun des SNPs trouv?s en fonction de leur r?partition dans les familles (+/-). L s?lection d'une 15aine de famille re prèsenterai 192 (96*2) échantillons (éj? 170 s?lectionnées pour ?tre extr?mes donc reste 22 échantillons moyens à s?lectionner). Cela permettrait de mettre 96 échantillons dans une ligne de séquençage et nous permettrais donc d'en faire 2. avec une bonne profondeur pour écouvrir les SNP. Comme je veux participer aux manipulations, Eric va m'envoyer le protocole de pr?paration des librairies dd-RADseq pour que je calcule les quantités n?cessaire pour que je fasse cette manip. Ensuite on commande ce qu'il risque de manquer et on commence à pr?parer ces librairies. Eric me disait aussi que les kits nous faisait mesurer les quantités d'ADN avant la fragmentation alors que les biologiste mléculaire d'avant la gn??nration kit faisiat une mesure de la quantité a près la digestion carçapermet de mieux quantifier l'ADN avec lequel on va travailler ensuite et non de quantifier l'ADN que l'on a extrait.</p>
 
@@ -271,7 +274,7 @@ ont été lanc? sur une autre queue que le queue mbb.q c'estéch-dire la queue c
 
 <p style="text-align:justify";>J'ai fait les calculs pour le protocole de ddRADseq mais il restait quelques points obscurs donc je suis all?e voir Erick et en fait ce que je comprennait mal c'êtait les coquilles du protocole ^^.</p>
 
-##Jour 14 : 15/03/2018
+## Jour 14 : 15/03/2018
 
 <p style="text-align:justify";>Mon script snakemake est parti. La première rule a fonctionné mais pas la seconde donc je l'ai relanc?e ce matin. C'est trop bien. J'ai é faire quelques modifications pour que le script fonctionne maisça? l'air correct. On va bien voir plus tard.</p>
 
@@ -281,7 +284,7 @@ ont été lanc? sur une autre queue que le queue mbb.q c'estéch-dire la queue c
 
 <p style="text-align:justify";>J'ai lu 3 articles sur les GWAS sur ordi portable, les taux d'erreur des GWAS via stacks et un autre sur les challenges bioinfo lié aux GWAS. J'ai pas appris grand chose mais c'êtait int?ressant quand même sur l'article pour faire une GWAS sur un ordi portable :çaveut dire que sur le clusterçapeut ?tre ultra-ultra-ultra rapide à faire. A potasser plus profonément pour savoir si c'est envisageable.</p>
 
-##Jour 15 : 16/03/2018
+## Jour 15 : 16/03/2018
 
 <p style="text-align:justify";>Mes scripts ne sont toujours pas parti.</p>
 
@@ -374,6 +377,9 @@ S?minaire au CNRS
 ## Jour 25 : 30/03/2018
 
 <p style="text-align:justify";>Passage au fragment analyser des différentes fraction obtenu lors des purification et des dernières digestion avec les enzymes de la plate-forme.</p>
+
+
+#Journal de bord - Avril
 
 ## Jour 26 : 03/04/2018
 
@@ -525,7 +531,52 @@ $ sudo ./Build installexes [option n] à la place de Y pour faire le télécharg
 
 <p style="text-align:justify";>Installation de biopython sur le cluster.</p>
 
+## Jour 41 : 24/04/2018
 
+<p style="text-align:justify";>Je continue d'installer MAKER2 et toutes ses dependances. J'espère que je vais y arriver aujourd'hui. C'est fait et fini. J'en ai profité pour installer Augustus et GeneMark-ES.</p>
+
+<p style="text-align:justify";>Erick vient de passer pour me donner les fichiers BAM du projet CRECHE de 2016. Il faut qu'à partir de ces fichiers je fasse une recherche de SNP via GATK. J'ai 67 BAM à analyser. Je vais voir pour analyser tout ça.</p>
+
+<p style="text-align:justify";>J'ai refait le 1er tuto GATK sur ma VM en y ajoutant la tâche VariantToTable pour produire un tableau. Tout d'abord ça ne fonctionne pas si les données sont dans /media/sf_DATA. Et ça ne fonctionne pas non plus quand le script seul y est. Il faut donc que tout soit dans le même répertoire et directement sur ma VM et pas sur le disque-dur de Windows. Pour VariantToTable j'avais mis une option -R comme sur le forum mais cette option n'est pas disponible. Donc je l'ai supprimé et j'ai relancé mon script. Mais je n'avais pas enregistré la modification donc ça na strictement rien changé. J'ai donc enregistré et relancé le script. Sauf que je modifiais le fichier sur le disque-dur Windows et non celui que je lançais dans le terminal ^^. En changeant la place des arguments pour VariantsToTable, j'ai oublié de rajouter un "-" devant "F" du coup il ne comprend pas cet argument. J'espère vraiment que cette fois est la bonne. Et c'est la bonne : tout fonctionne correctement ^^. Plus qu'à faire la suite pour créer in fine le script pour tous les bams. Il faut aussi que je crée tous les BAI de tous les BAM que m'a donné Erick.</p>
+
+## Jour 42 : 25/04/2018
+
+<p style="text-align:justify";>Mon script python a fonctionné et il a mis environ 16h à tourner mais il y a encore quelques erreurs pour les Nostart sur le brin antisens il ya encore quelques décalage à gérer. Et pour les Nostop, pour les brins antisens les coordonnées sont bonnes mais ne s'affichent pas dans le bon sens (le début et la fin du codon sont inversées : le début est inscrit dans le colonne fin et inversement pour la fin).</p>
+
+<p style="text-align:justify";>J'ai refait tous les tutos WDL pour utiliser GATK. Je vais maintenant pouvoir passer à l'étape suivante, c'est-à-dire créer les bai à partir des bam pour essayer de faire la même chose sur les BAM qu'Erick m'a donné.
+J'ai indexé les fichiers bam d'Erick via la commande :
+$ samtools index file.bam file.bam.bai.</p>
+
+<p style="text-align:justify";>Info complémentaires sur les fichiers BAM : Le séquençage a été réalisé en paired-end 2x150bp. Les données ont été mettoyées avec trimmomatic et alignées sur le génome avec TopHat2. La suite a été faite avec cufflinks puis cuffmerge. Tout cela a été effectué en suivant l'ordre alphanumérique des chromosomes, aussi bien dans le fichier d'annotation d eréférence utilisé : Combined-annotation_Labrax-2014_Ordered.gtf que dans le fichier fatsa du génome. Cela donne donc : LG10 à LG19 puis LG1A, LG1B, LG2, LG20, LG22-25, LG24, puis LG3 à LG9, LGx, MT et enfin UN.</p>
+
+<p style="text-align:justify";>Trimmomatic permet d'éliminer tous les reads correspondant aux séquences des adaptateurs illumina, des séquences avec des N et selon la qualité.
+TopHat est un algner de reads qui réalise aussi des analyses de "splice-jonction".</p>
+<p style="text-align:justify";>Cufflinks : Cufflinks assembles transcripts, estimates their abundances, and tests for differential expression and regulation in RNA-Seq samples. It accepts aligned RNA-Seq reads and assembles the alignments into a parsimonious set of transcripts. Cufflinks then estimates the relative abundances of these transcripts based on how many reads support each one, taking into account biases in library preparation protocols.<http://cole-trapnell-lab.github.io/cufflinks/></p>
+<p style="text-align:justify";>Cuffmerge : Merge multiple Cufflinks assemblies.<http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/Cuffmerge/3></p>
+
+## Jour 43 : 26/04/2018
+
+<p style="text-align:justify";>Mes scripts python pour corriger les erreurs ne mettent plus que 15min environ ^^. Je ne sais pas ce qu'il s'est passé avant pour qu'il mettent autant de temps. Les deux versions sont quasi aussi rapide.</p>
+
+<p style="text-align:justify";>D'autre part j'ai lancé sur le cluster mon script wdl pour pre-processer mes data Creche. On verra bien ce que cela va donner.</p>
+
+## Jour 44 : 27/04/2018
+
+<p style="text-align:justify";>Aujourd'hui j'ai essayé de rendre compatible mes scripts wdl à mes bam. Mais ça ne fonctionne pas. Il faut que je creuse encore ^^.
+Je n'ai pas touché à mon script python de la journée.</p>
+
+## Jour 45 : 30/04/2018
+
+<p style="text-align:justify";>Aujourd'hui est un jour d'appui pour les grèves résultat il n'y a personne à la fac. Je ne l'ai jamais vu aussi vide. Même quand il y a eu la grève il y a vait plus de mond sur le campus et dans les couloirs. Bruno à reommander aux stagiaires et à Madoka de ne pas venir aujourd'hui car le travail isolé est interdit mais comme je ne suis pas UM il pensait que ça s'appliquait aussi à moi. Je ne savais donc pas quoi faire mais j'étais contente de pouvoir avoir un grand weekend. Mais c'était sans compter sur les réponses de Christelle la tutrice d'Olivia qui a dit être présente mais dont le bureau est fermé ainsi qu'Erick qui a dit qu'il serait présent et pas seul au sein du bâtiment 24.
+Du coup dans le doute je suis venue ce matin mais je ne fais pas grand chose de très efficace.</p>
+
+<p style="text-align:justify";>J'ai relancé mon script python en faisant les modif dans le GTF des Nostop et des NoStart et des allongements des séquences (CDS Exons) jusqu'au stop ou au start trouvé.
+Il faut maintenant que j'y ajoute la comptablisation de la longueur en bp qui sépare la fin ou le début du codon stop ou du codon start.</p>
+
+<p style="text-align:justify";>Concernant mes scripts wdl, je me suis dit que comme mes BAM sont "corrompus" il devait y avoir un problème de compatibilité entre TopHat2 et MarkDuplicates. Hors en vérifiant c'est bien le cas. TopHat donne les niveau de qualité de 255 qui sont considérés par GATK comme des niveau de qualité null et les reads ayant cette qualité sont ignorés. Cf : <https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_engine_filters_ReassignOneMappingQualityFilter.php>. Donc j'ai lancé un changement de cette qualité mais pour ce faire il faut utiliser GATK3.5.0 et non GATK4.0.3.0. Sauf qu'ensuite un nouveau problème est apparu : Lordre des chromosomes n'est pas le même dans le bam et dans le fasta. Donc j'ai dû ajouté une nouvelle étape qui va réordrer les reads en fonction des contigs du fichier fasta. Cf : <https://software.broadinstitute.org/gatk/documentation/article.php?id=1328>. Il seront donc comptatibles. Je viens donc de lancer cela sur le cluster.</p>
+
+
+#Journal de bord - Mai
 
 #Bibliographie
 
