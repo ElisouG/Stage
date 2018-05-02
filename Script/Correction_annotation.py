@@ -40,26 +40,26 @@ if __name__ == "__main__":
 
 	#################### Path File Ordi_portable   ######################
 
-	pathFasta = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
-	pathWarning = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
-	pathGTF = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
-	pathAnnotation = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
-	pathF2 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStop_exo.txt"
-	pathF1 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStart_exo.txt"
-	pathAnntotationNew = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
-	PathGenomeR = '/mnt/c/Users/missl/Documents//Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	# pathFasta = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
+	# pathWarning = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
+	# pathGTF = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
+	# pathAnnotation = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
+	# pathF2 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStop_exo.txt"
+	# pathF1 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStart_exo.txt"
+	# pathAnntotationNew = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
+	# PathGenomeR = '/mnt/c/Users/missl/Documents//Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 	
 	
     #################### Path File Cluster    ######################
 
-	# pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
-	# pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
-	# pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
-	# pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
-	# pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_30_04_18.txt"
-	# pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_30_04_18.txt"
-	# pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_30_04_2018.gtf"
-	# PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
+	pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
+	pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
+	pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_30_04_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_30_04_18.txt"
+	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_30_04_2018.gtf"
+	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
 
 	################### Récupération info #################
