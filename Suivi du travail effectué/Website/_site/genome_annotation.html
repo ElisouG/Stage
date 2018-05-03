@@ -434,6 +434,96 @@ Conclusion : Genome annotation has moved beyond merely identifying protein-codin
 </div>
 <div id="improving-eukaryotic-genome-annotation-using-single-molecule-mrna-sequencing-magrini-et-al.-2018-bmc-genomics." class="section level1">
 <h1>Improving eukaryotic genome annotation using single molecule mRNA sequencing, Magrini et al., 2018, BMC Genomics.</h1>
+<p style="text-align:justify" ;>
+PacBio sequencing is unique when compared to sequencing-by-synthesis approaches. Read lengths are proportional to reaction times (movie lengths). Thus, PacBio is becoming the gold standard in long read sequencing technologies with average polymerase reads easily exceeding 14kbp.
+</p>
+<p style="text-align:justify" ;>
+Gene calling, annotation and comparison Repeat sequences were identified by generating a custom repeat library using Repeatmodeler (<a href="http://www.repeatmasker.org/RepeatModeler/" class="uri">http://www.repeatmasker.org/RepeatModeler/</a>). The ribosomal RNA genes were dentified using RNAmmer [37] and transfer RNAs (tRNAs) were identified using tRNAscan-SE [38]. Other non-coding RNAs (such as microRNAs) were identified by a sequence homology search of the Rfam database [39]. These repeats and predicted RNAs were thenmasked using RepeatMasker [40]. Protein-coding genes were predicted using a combination of ab initio predictors Snap [41]and Fgenesh [42] and the evidence based predictor Augustus [43]. These predictions were fed to the annotation pipeline tool Maker (version 2.26) [44] which utilizes aligned EST [20] and protein evidence, to revise the predicted gene structures.
+</p>
+</div>
+<div id="the-state-of-play-in-higher-eukaryote-gene-annotation-mudge-et-al.-2016-nature-reviews-genetics." class="section level1">
+<h1>The state of play in higher eukaryote gene annotation, Mudge et al., 2016, Nature Reviews Genetics.</h1>
+<p style="text-align:justify" ;>
+gene annotation is a key mechanism through which information is lever- aged from genome sequences, and deficiencies in gene- builds will be propagated into downstream analyses
+</p>
+<p style="text-align:justify" ;>
+A key annotation question concerns the proportion of the transcriptome that con- tributes to cellular function, and it could be argued that the goal of annotation projects should be to describe only this ‘functional transcriptome’: to extract the signal from the noise
+</p>
+<p style="text-align:justify" ;>
+We explain below how gene annotation projects are coordinating efforts to combine such data sets into fully integrated views of genomic organization.
+</p>
+<p style="text-align:justify" ;>
+annotation defines the structure of a transcript and it provides inferences into its potential function
+</p>
+<p style="text-align:justify" ;>
+Annotation strategies. Numerous factors come into play when choosing an annotation strategy for a genome (FIGS 2,3). Obviously, financial considera- tions can place major constraints on the availability of human resources and computational power, as well as on the generation of experimental data to provide evidence for model construction.
+</p>
+<p style="text-align:justify" ;>
+For example, a com- mon goal of sequencing projects within evolutionary biology is to find genes that have been subjected to positive selection. In this scenario, a high premium is placed on the identification of protein-coding sequences; features such as pseudogenes and small RNAs may even be completely ignored. Meanwhile, the Functional Annotation of Animal Genomes (FAANG) consortium plans to sequence and annotate livestock genomes in order to further our understanding of quantitative phenotypes.
+</p>
+<p style="text-align:justify" ;>
+Finally, we note that genome quality is an important factor when strat egizing. One cannot create high-quality genebuilds using poor-quality genomes, and even modest genome assembly improvements can be massively beneficial to annotation projects, as demonstrated for the honeybee.
+</p>
+<p style="text-align:justify" ;>
+Annotation evidence. Regardless of the scientific context of an annotation project, the most important factors to influence the genebuild that is produced are the evidence and methodologies that are used for model construction.
+</p>
+<p style="text-align:justify" ;>
+The second key source of evidence is protein sequences, but this situation is more complicated, as the field of experimental protein sequencing lags far behind that for RNA or DNA sequencing. Thus, the earliest annotation projects described coding sequences (CDSs) based on curated protein sequences from Swiss-Prot13 (TABLE 1) and through the use of ab initio ‘open read- ing frame (ORF)-finders’ (REFS 14,15). The ORF-finding strategy sought to identify CDSs through a combination of codon frequency usage and ORF size, although many translations were subsequently judged to be spurious by manual curation.
+</p>
+<p style="text-align:justify" ;>
+Annotation workflows. The annotation ‘workflow’ chosen illustrates a second key difference between reference and non-reference genebuilds.
+</p>
+<p style="text-align:justify" ;>
+Manual annotation is regarded as the gold standard18 , and is one of the core workflows that allows genebuilds to be classified as ‘mature’ when performed to a significant degree (FIG. 3). Nonetheless, such labour-intensive work cannot cope with the number of species genomes that are becoming available, and most new genebuilds are generated entirely in silico.
+</p>
+<p style="text-align:justify" ;>
+Computational annotation has three core processes, depending on the resources available (FIG. 2). The first process is based on the alignment of transcript evi- dence. The second process is comparative annotation, by which the evolutionary closeness of two species allows for annotation — commonly the CDSs — to be ‘projected’ from one genome to another, or for evidence from one species to be used to build models on another. The third process is ab initio annotation, through which algorithm-based ‘gene finders’ such as GENSCAN or AUGUSTUS construct models on the basis of a priori knowledge of their likely sequence. Pure ab initio anno- tation is actually now uncommon in higher eukaryotic genomes, and these strategies are most often used in combination. The RefSeq Gnomon pipeline is a modi- fied form of GENSCAN that can perform purely ab initio annotation, although it can also integrate RNA and protein homology data when available (see The NCBI Eukaryotic Genome Annotation Pipeline). Ensembl have adapted their pipeline in a similar manner, and the less species-specific evidence that is available for a given genome, the more annotation will be based on a combi- nation of projection and ab initio modelling.
+</p>
+<p style="text-align:justify" ;>
+AUGUSTUS remains a popular choice; although it was developed as an ab initio tool for the Human Genome Project, its modern incarnation can incorporate transcript libraries and comparative evidence, albeit with a cost in terms of speed and ease of use. For such practical reasons, researchers often annotate their genome using a simpler RNA-seq assembly pipeline such as Cufflinks.
+</p>
+<p style="text-align:justify" ;>
+Community annotation : One solution is to manually improve the annotation in a systematic, collaborative manner based on ‘crowdsourcing. the same annotation criteria and using software such as WebApollo.
+</p>
+<p style="text-align:justify" ;>
+Annotation in population genomics : If DNA variation is of primary interest, single nucleo- tide polymorphisms (SNPs) can simply be extracted and displayed against the main assembly for that spe- cies. <strong>Manual annota- tion can also be essential when investigating structural variants (SVs), which are of great interest to biologists owing to their association with disease and evolution.</strong>
+</p>
+<p style="text-align:justify" ;>
+Identifying missing transcripts : Meanwhile, transcribed sequences may be absent from genebuilds for three reasons: existing models may be incomplete, that is, truncated at one or both ends; whole transcripts could be missing within existing genes; and entire genes could be absent.
+</p>
+<p style="text-align:justify" ;>
+Meanwhile, long-read RNA-seq libraries are becoming available to improve annotation (BOX 1). It is easier to align longer reads with accuracy, although the sequen cing quality is still not comparable to that of Sanger protocols.
+</p>
+<p style="text-align:justify" ;>
+CaptureSeq involves the use of genomic hybridization arrays to ‘pull down’ portions of the transcriptome for sequencing44. It is effective at isolating transcripts that are expressed at low levels, which may otherwise be ‘drowned out’ in whole RNA assays. CaptureSeq is typically used to identify novel genes (FIG. 4) and to target partial models for completion. The experimental set-up is laborious, however, and its use is currently limited to humans and mice.
+</p>
+<p style="text-align:justify" ;>
+Annotating transcript end points : TESs can be identified from the 3ʹ polyadenylation tail, although there is no consistent diagnostic sequence for the TSS so it is difficult to know whether a transcript is 5ʹ truncated. Such ambiguity is problematic, because confident functional annotation depends on accurate structures. Whereas a CDS may be obvious on a full-length transcript, it could be missed on a truncated version, especially if sequencing has not encom- passed the translation initiation site (TIS) or STOP codon.
+</p>
+<p style="text-align:justify" ;>
+Functional annotation : Traditionally, functional annotation centred on the question of which models encode protein.
+</p>
+<p style="text-align:justify" ;>
+Distinguishing protein-coding genes and pseudogenes : Although there are a limited number of dedicated tools for the computational analysis of pseudogenes, including PseudoPipe, manual annotation remains preferable.
+</p>
+<p style="text-align:justify" ;>
+The coding potential of alternative splicing. A second complication in CDS annotation is that protein-coding genes can make distinct proteins (isoforms) through alter- native splicing.
+</p>
+<p style="text-align:justify" ;>
+Non-productive transcription and untranslated regions in protein-coding genes : Just as for TSSs, annotation projects generally extend models to the maximum 3ʹ distance that is supported by transcriptional evidence, and do not annotate additional models based solely on alternative TESs.
+</p>
+<p style="text-align:justify" ;>
+Annotating proteins with experimental data : CDS annotation is interpretive because the chemistry of the protein molecule makes it far less amenable than RNA to sequencing. Ribosome profiling (RP) identifies RNA regions that are undergoing translation. Although RP has been carried out on at least six other eukary otic genomes so far — as collated by the RPFdb resource88 — these data have not yet been incorporated into the computational annotation pipelines of reference genomes.
+</p>
+<p style="text-align:justify" ;>
+LncRNA annotation : However, lncRNA functional annotation may become more proactive: sequences such as microRNA binding sites and RNA structures are beginning to be described, and ultraviolet (UV) crosslinking immunoprecipitation followed by sequen- cing (CLIP-seq) can identify RNAs interacting with RNA-binding proteins.
+</p>
+<p style="text-align:justify" ;>
+The prioritization of functional transcripts : Clearly, there is a close relationship between the quality of gene annotation and the accuracy of vari- ant interpretation, and yet many aspects of annotation — especially functional annotation — remain puta- tive. Putative functional annotation can introduce false positives into variant-calling workflows; for example, where LoF mutations are called in CDS exons that are not in reality coding.
+</p>
+<p style="text-align:justify" ;>
+Conclusions : The complexity of gene annotation projects reflects the complexity that exists in eukaryotic cells, and, as we do not currently fully understand the transcrip- tome, all of our genebuilds are incomplete. Current ambiguities are most keenly felt in our own species, where nothing less than a total understanding of biol- ogy is demanded. For other projects, the ‘finish line’ may not be so far into the distance, and the length of journey taken will in many ways reflect the value of that genome to science. However, all genebuilds face challenges in how they present their resource to the public; most obviously, they must find ways to make sure that increasing complexity does not correlate with decreasing usability.
+</p>
 </div>
 
 <p>Copyright &copy; 2018 | Elise GUERET</p>
