@@ -174,7 +174,7 @@ if __name__ == "__main__":
 					if sequence[i:i+3] in codonStop :
 						Longueur = (i+3) - (int(endGTF)+1)
 						f2 = open(pathF2,"a") # Ouverture du fichier "No Stop"
-						f2.write('%15s | %15s | %15s | %15s | %15s | %15s | %15s | +\n' %(chromosome,endGTF-1,endGTF+1,i+1,i+3,sequence[i:i+3],str(Longueur))) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+						f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  +\n' %(chromosome,endGTF-1,endGTF+1,i+1,i+3,sequence[i:i+3],str(Longueur))) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
 						f2.close() # Fermer le fichier
 						listeNoStop.append([chromosome,str(int(endGTF)-1),str(int(endGTF)+1),str(i+1),str(i+3),'+'])
 						break # S'arrête dès qu'il trouve le premier codon stop
@@ -251,7 +251,6 @@ if __name__ == "__main__":
 
 	print('ListeAnnotation Done')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
-	#newAnnotation = open("/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf", "w")
 	newAnnotation = open(pathAnntotationNew, "w")
 	for line in linesAnnotation:
 		for elt in listeNoStop:

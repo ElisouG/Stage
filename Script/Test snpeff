@@ -1,0 +1,47 @@
+# Essai build comme sur le site SnpEff avec un gtf
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_database_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_build_database_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_build_database_gtf.err -b y "java -jar snpEff.jar build -gtf22 -v D_labrax"
+
+# Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations (bis)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_database_gtf2 -o /home/egueret/Stage_UM_ISEM/sge_test_build_database_gtf2.out -e /home/egueret/Stage_UM_ISEM/sge_test_build_database_gtf2.err -b y "java -jar snpEff.jar build -gtf22 -v Labrax"
+
+# Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations et l'ancien fasta (last)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
+
+# Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations et les modifications des stop et l'ancien fasta (new)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax_New -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_New.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_New.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
+
+# Test snpeff et la puce (New)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_New -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce_New.html Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_New.ann.vcf" 
+
+# Test snpeff et la puce (New debug)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_New_debug -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New_debug.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New_debug.err -b y "java -Xmx4g -jar snpEff.jar -d Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_New_debug.ann.vcf" 
+
+# Test snpeff et la puce (last)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_last -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_last.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_last.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce_last.html Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_last.ann.vcf" 
+
+# Test snpeff et la puce (last debug)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_last_debug -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_last_debug.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_last_debug.err -b y "java -Xmx4g -jar snpEff.jar -d Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_last.ann.vcf" 
+
+# Test snpeff et la puce (last) option closest
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_closest -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_closest.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_closest.err -b y "java -Xmx4g -jar snpEff.jar closest -tss -v Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_closest.ann.vcf" 
+
+# Test snpeff et la puce (first)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce.html D_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode.ann.vcf" 
+
+# Test idem avec MT codon table vertebrate_mitochondrial (_2)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce2 -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce2.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce2.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce2.html D_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list2_57907_SNPs.recode.ann.vcf" 
+
+# Test avec gtf plus annoté et avec MT codon table vertebrate_mitochondrial (bis)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_bis -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_bis.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_bis.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce_bis.html Labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_bis_57907_SNPs.recode.ann.vcf" 
+
+# Avec GATK
+# Etape 1 
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_gatk -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_gatk.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_gatk.err -b y "java -Xmx4g -jar snpEff.jar -v -o gatk D_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode.ann.gatk.vcf" 
+
+# Etapes préliminaires à l'Etape 2 
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Faidx -o /home/egueret/Stage_UM_ISEM/sge_faidx.out -e /home/egueret/Stage_UM_ISEM/sge_faidx.err -b y "samtools faidx LG_2014.fa > LG_2014.fa.fai"
+
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Faidx -o /home/egueret/Stage_UM_ISEM/sge_faidx.out -e /home/egueret/Stage_UM_ISEM/sge_faidx.err -b y "java -jar path/to/picard.jar CreateSequenceDictionary REFERENCE=LG_2014.fa OUTPUT=LG_2014.dict"
+
+# Etape 2 
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Faidx -o /home/egueret/Stage_UM_ISEM/sge_faidx.out -e /home/egueret/Stage_UM_ISEM/sge_faidx.err -b y "java -Xmx4g -jar $HOME/tools/gatk/GenomeAnalysisTK.jar VariantAnnotator -R LG_2014.fa -A SnpEff  --variant /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf --snpEffFile Final_list_57907_SNPs.recode.ann.gatk.vcf -L /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf -O Final_list_57907_SNPs.recode.ann.gatk.gatk.vcf"
