@@ -9,37 +9,19 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Elise GUERET" />
 
 
-<title>Presentation_1</title>
+<title>Reunion du 04/05/2018</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
 
 
 
@@ -244,6 +226,9 @@ $(document).ready(function () {
     <li>
       <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
     </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -311,36 +296,23 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Presentation_1</h1>
-<h4 class="author"><em>Elise GUERET</em></h4>
-<h4 class="date"><em>2 mai 2018</em></h4>
+<h1 class="title toc-ignore">Reunion du 04/05/2018</h1>
 
 </div>
 
 
-<div id="first-slide" class="section level1">
-<h1>First Slide</h1>
-<p>For more details on authoring R presentations please visit <a href="https://support.rstudio.com/hc/en-us/articles/200486468" class="uri">https://support.rstudio.com/hc/en-us/articles/200486468</a>.</p>
-<ul>
-<li>Bullet 1</li>
-<li>Bullet 2</li>
-<li>Bullet 3</li>
-</ul>
-</div>
-<div id="slide-with-code" class="section level1">
-<h1>Slide With Code</h1>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="slide-with-plot" class="section level1">
-<h1>Slide With Plot</h1>
-<p><img src="Presentation_1_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<hr />
+<div id="reunion-avec-erick-et-bruno" class="section level1">
+<h1>Réunion avec Erick et Bruno :</h1>
+<p style="text-align:justify" ;>
+Concernant la présentation devant l’ISEM du 14 Mai prochain, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.
+</p>
+<p style="text-align:justify" ;>
+Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l’annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu’Érick m’a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c’est la cas c’est parfait. D’autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3’ ou 5’. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d’un BLAST pour trouver les protéines ou du moins les domaines similaires dans d’autres espèces.
+</p>
+<p style="text-align:justify" ;>
+Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.
+</p>
 </div>
 
 <p>Copyright &copy; 2018 | Elise GUERET</p>

@@ -1,0 +1,84 @@
+00:00:00	SnpEff version SnpEff 4.3t (build 2017-11-24 10:18), by Pablo Cingolani
+00:00:00	Command: 'ann'
+00:00:00	Reading configuration file 'snpEff.config'. Genome: 'Dicentrarchus_labrax'
+00:00:00	Reading config file: /home/egueret/snpEff/snpEff.config
+00:00:01	done
+00:00:01	Reading database for genome version 'Dicentrarchus_labrax' from file '/home/egueret/snpEff/./data/Dicentrarchus_labrax/snpEffectPredictor.bin' (this might take a while)
+00:01:11	done
+00:01:11	Loading Motifs and PWMs
+00:01:11	Building interval forest
+00:01:11	Gene 'DLAgn_00169630 | ubiquitin-conjugating enzyme e2 q2-like isoform 1 | UBE2Q2 | EC:6.3.2.0' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG6:-14596772-13592434
+	New gene    :Gene_LG6:13588357-41777563
+	Chrsomosome :Chromosome_LG6:1-28185129
+00:01:11	Gene 'DLAgn_00265270 | histone-lysine n-methyltransferase setdb2-like | SETDB2 | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_UN:-2760346-94180537
+	New gene    :Gene_UN:94179256-191120139
+	Chrsomosome :Chromosome_UN:1-96939602
+00:01:11	Gene 'DLAgn_00128920 | bromodomain and phd finger 1 | BRPF1 | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG22-25:-18309225-8132787
+	New gene    :Gene_LG22-25:8130864-34572876
+	Chrsomosome :Chromosome_LG22-25:1-26440089
+00:01:11	Gene 'DLAgn_00219940 | cub and zona pellucida-like domain-containing protein 1-like | - | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_UN:-79421648-17523683
+	New gene    :Gene_UN:17517954-114463285
+	Chrsomosome :Chromosome_UN:1-96939602
+00:01:11	Gene 'DLAgn_00228440 | ---NA--- | - | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_UN:-64144064-32795540
+	New gene    :Gene_UN:32795538-129735142
+	Chrsomosome :Chromosome_UN:1-96939602
+00:01:11	Gene 'DLAgn_00227030 | novel protein human titin | TTN | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_UN:-66144250-30800661
+	New gene    :Gene_UN:30795352-127740263
+	Chrsomosome :Chromosome_UN:1-96939602
+00:01:11	Gene 'DLAgn_00108780 | fact complex subunit ssrp1 | SSRP1 | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG2:-18611191-7613426
+	New gene    :Gene_LG2:7607646-33832263
+	Chrsomosome :Chromosome_LG2:1-26218837
+00:01:11	Gene 'DLAgn_00242740 | unconventional myosin-vb | MYO5B | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_UN:-38983743-57966132
+	New gene    :Gene_UN:57955859-154905734
+	Chrsomosome :Chromosome_UN:1-96939602
+00:01:11	Gene 'DLAgn_00131220 | n-terminal acetyltransferase complex ard1 subunit homolog a | NAA10 | EC:2.3.1.88' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG22-25:-13340343-13102762
+	New gene    :Gene_LG22-25:13099746-39542851
+	Chrsomosome :Chromosome_LG22-25:1-26440089
+00:01:11	Gene 'DLAgn_00092500 | mucin-2 | MUC2 | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG1A:-13840363-15204027
+	New gene    :Gene_LG1A:15196525-44240915
+	Chrsomosome :Chromosome_LG1A:1-29036888
+00:01:11	Gene 'DLAgn_00130290 | ubiquitin-conjugating enzyme e2 t | UBE2T | EC:6.3.2.19' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG22-25:-15130333-11309872
+	New gene    :Gene_LG22-25:11309756-37749961
+	Chrsomosome :Chromosome_LG22-25:1-26440089
+00:01:11	Gene 'DLAgn_00204270 | plectin-like isoform x1 | PLECA | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG9:-1619525-20772347
+	New gene    :Gene_LG9:20743065-43134937
+	Chrsomosome :Chromosome_LG9:1-22362590
+00:01:11	Gene 'DLAgn_00099550 | trinucleotide repeat-containing gene 6b protein | TNRC6B | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG1B:-14044021-3953575
+	New gene    :Gene_LG1B:3951843-21949439
+	Chrsomosome :Chromosome_LG1B:1-17995864
+00:01:11	Gene 'DLAgn_00169850 | reelin isoform x2 | RELN | -' spans across coordinate zero: Assuming circular chromosome, creating mirror gene at the end.
+	Gene        :Gene_LG6:-14125326-14114941
+	New gene    :Gene_LG6:14059803-42300070
+	Chrsomosome :Chromosome_LG6:1-28185129
+00:01:11	Total: 14 added as circular mirrored genes (appended '_circ' to IDs).
+00:01:38	done.
+00:01:38	Genome stats :
+java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:3332)
+	at java.lang.String.<init>(String.java:166)
+	at org.snpeff.binseq.DnaNSequence.getBases(DnaNSequence.java:83)
+	at org.snpeff.binseq.DnaSequence.getSequence(DnaSequence.java:134)
+	at org.snpeff.binseq.DnaNSequence.toString(DnaNSequence.java:194)
+	at org.snpeff.interval.MarkerSeq.getSequence(MarkerSeq.java:226)
+	at org.snpeff.interval.Genome.toString(Genome.java:498)
+	at org.snpeff.SnpEff.loadDb(SnpEff.java:629)
+	at org.snpeff.snpEffect.commandLine.SnpEffCmdEff.run(SnpEffCmdEff.java:1001)
+	at org.snpeff.snpEffect.commandLine.SnpEffCmdEff.run(SnpEffCmdEff.java:984)
+	at org.snpeff.SnpEff.run(SnpEff.java:1183)
+	at org.snpeff.SnpEff.main(SnpEff.java:162)
+00:02:26	Logging
+00:02:27	Checking for updates...
+00:02:28	Done.

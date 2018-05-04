@@ -33,6 +33,8 @@ navbar:
       href: troisiemeReunion_0304.html
     - text: "Réunion du 06/04/2018"
       href: quatriemeReunion_0604.html
+    - text: "Réunion du 04/05/2018"
+      href: cinquiemeReunion_0405.html
   - text: "Séminaires"
     menu:
     - text: "Séminaires CNRS"

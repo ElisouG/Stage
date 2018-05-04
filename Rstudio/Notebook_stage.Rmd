@@ -222,7 +222,7 @@ A cet endroit : C:\Users\missl\Documents\Stage_UM_ISEM\Data.
 
 <p style="text-align:justify";>Erick est pass? dans le bureau en fin de matin?e. Il est content que je me forme à l'?criture de script. D'autre part, il m'a parler d'une commande qui pourrait me permettre de lancer un job sur le cluster puis de récupérer la main. Ca serait bien que je la trouve pour l'utiliser ult?rieurement. D'autre part, j'ai accès à des formations online sur le cluster donc je pense que je vais y jeter un oeil pour voir ce que je sais faire et ce que je vais apprendre à faire. Je lui ai demané pour le choix des puces et de séquençage et pour l'instant, le premier verrou pour utiliser les puces est lev?. Il faut donc qu'on se voit la semaine prochaine avec Bruno pour éterminer notre méthode de géntotypage. Pour aider à faire le choix, il faut que les concentrations en ADN des échantillons extraits soit correct. Cependant, Eric n'arrive pas à voir quels sont les probl?mes car il à doser des échantillons avec une méthode de spectrophotom?trie et à obtenue une valeur puis il l'a refaite deux fois avec deux méthodes fluorim?trique et as obtenues deux autres valeurs qui ne concordent pas avec celles qu'il avait abtenu précédemment. J'esp?re qu'il va résoudre ce probl?me avant notre réunion de la semaine prochaine car cela pourra nous orienter sur le choix de notre méthode de génotypage. Pour les analyses j'aimerais queçasoit des données  de la puce mais question manip' j'esp?re queçasera du séquençage car commeçaje vais pouvoir participer à la fabrication des librairies. Il faut pas que j'oublies de lui proposer mon aide pour quantifier les ADN si il a besoin. Il m'a dit qu'il y avait de bon tutos Stacks à faire pour se former. Il m'a aussi dit que les bioinformaticiens préféraient utiliser GATK qui leur permet de choisir beaucoup plus d'option que Stacks et qui donc ?tait lus puissant pour obtenir des données correctes et exploitables. Je pense que je vais faire pareil parce que Stacks me semble encore indigeste pour le moment ^^. On verra siçava mieux quand j'aurai fait les tutos Stacks en entier et directement sur le serveur cette fois-ci pour gagner du temps peut-être.</p> 
 
-## Jour 11 : 13/03/2018
+## Jour 11 : 12/03/2018
 
 <p style="text-align:justify";>A près la RAD-seq, les puces maintenant l'epiGBS sera peut-être utilis?e pour séquencer mes échantillons et ainsi faire avec un même run de séquençage du génotypage et de l'épigéntique en même temps, c'estéch-dire sur les mêmes data. Le pipeline est dispo à l'adresse suivante : <https://www.nature.com/articles/nmeth.3763/figures/12> .</p>  
 
@@ -593,20 +593,42 @@ Il faut maintenant que j'y ajoute la comptablisation de la longueur en bp qui s�
 
 ## Jour 47 : 03/05/2018
 
-Donc pour l'instant c'est-à-dire depuis que je suis arrivée (3h) je suis après résoudre mes problèmes avec GATK. Le réordrage des reads à l'air de fonctionner sans problème mais le changement de la valeur de qualité pose toujourts pb; Sauf que en regardant bien l'erreur que j'obtiens en fait j'utilise GATK 3.5.0 alors qu'il faut que j'utilise GATK 3.8.0. Donc j'ai téléchargé cette version de GATK, j'ai changé kle path dans le fichier jason et j'ai relancé tout ça sur le cluster. 
-Comme ça ne fonctionnait toujours pas après plusieurs lancement et changement j'ai décidé de changer mon fusil d'épaule et de chercher si 255 était la bonne valuer or je viens de trouver [ceci](https://gatkforums.broadinstitute.org/gatk/discussion/7227/mapq-60-is-compulsory-for-the-whole-of-gatk-pipeline) qui dit que TopHat2 donne une valeur de 50 et que cette valeur de 50 est prise en compte donc pas besoin de faire ce réassignement de score. J'ai donc modifié mon script "Data_PreProcessing.wdl" pour y ajouter l'étape de Réordrage. Et je l'ai ensuite lancé sur le cluster.
+<p style="text-align:justify";>Donc pour l'instant c'est-à-dire depuis que je suis arrivée (3h) je suis après résoudre mes problèmes avec GATK. Le réordrage des reads à l'air de fonctionner sans problème mais le changement de la valeur de qualité pose toujourts pb; Sauf que en regardant bien l'erreur que j'obtiens en fait j'utilise GATK 3.5.0 alors qu'il faut que j'utilise GATK 3.8.0. Donc j'ai téléchargé cette version de GATK, j'ai changé kle path dans le fichier jason et j'ai relancé tout ça sur le cluster. 
+Comme ça ne fonctionnait toujours pas après plusieurs lancement et changement j'ai décidé de changer mon fusil d'épaule et de chercher si 255 était la bonne valuer or je viens de trouver [ceci](https://gatkforums.broadinstitute.org/gatk/discussion/7227/mapq-60-is-compulsory-for-the-whole-of-gatk-pipeline) qui dit que TopHat2 donne une valeur de 50 et que cette valeur de 50 est prise en compte donc pas besoin de faire ce réassignement de score. J'ai donc modifié mon script "Data_PreProcessing.wdl" pour y ajouter l'étape de Réordrage. Et je l'ai ensuite lancé sur le cluster.</p>
 
-Ensuite je me suis attelée à l'écriture du script de data_processing. Pour cela je me suis penchée sur le choix des filtres à appliquer et j'ai trouvé différents sites qui en parlent :
+<p style="text-align:justify";>Ensuite je me suis attelée à l'écriture du script de data_processing. Pour cela je me suis penchée sur le choix des filtres à appliquer et j'ai trouvé différents sites qui en parlent :</p>
 
 * <https://software.broadinstitute.org/gatk/documentation/article.php?id=1255>    
 * <https://software.broadinstitute.org/gatk/documentation/article.php?id=3225>    
 * <https://software.broadinstitute.org/gatk/documentation/article.php?id=6925>    
 
-Puis je me suis lancée dans l'écriture du suivi des troubleshooting sur mon site web.
+<p style="text-align:justify";>Puis je me suis lancée dans l'écriture du suivi des troubleshooting sur mon site web.</p>
 
-Je viens d efaire un ticket pour savoir quelle est la taille de mon espace disque sur le cluster.
+<p style="text-align:justify";>Je viens d efaire un ticket pour savoir quelle est la taille de mon espace disque sur le cluster.</p>
 
-Je vais tenter de refaire une analyse snpEff.
+<p style="text-align:justify";>Je vais tenter de refaire une analyse snpEff. Je ne sais plus combien de temps cela prenait. On verra bien. Du coup le temps est cours mais j'ai un problème avec 14 gènes car snpEff les circularise donc il faut que je traite cela demain en priorité.</p>
+
+A la fin de mes scripts wdl il faut faire une évaluation de ce callset pour cela on peut choisir deux voies : 
+
+* CollectVariantCallingMetrics de Picard  
+* et GenotypeConcordance de Picard   
+* ou VariantEval de GATK    
+* et GenotypeConcordance de GATK   
+
+Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evaluating-the-quality-of-a-variant-callset).
+
+## Jour 48 : 04/05/2018
+
+Dès que je suis arrivée j'ai retravaillé ma présentation pour en parler avec Erick et Bruno à la réunion de ce matin.
+
+Réunion avec Erick et Bruno :
+Concernant la présentation, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.
+Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l'annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu'Érick m'a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c'est la cas c'est parfait. D'autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3' ou 5'. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d'un BLAST pour trouver les protéines ou du moins les domaines similaires dans d'autres espèces.
+Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.
+
+Pour le run de GATK d'hier : J'avais laissé les runtime en actif et non en commentaire du coup ça ne lui a pas plu. Donc j'ai fait cette modif et j'ai relancé le script.
+
+Je suis allée voir Théo pour qu'il me parle de son analyse RDA (redondance analysis).
 
 #Bibliographie
 
