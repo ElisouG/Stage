@@ -619,16 +619,23 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 ## Jour 48 : 04/05/2018
 
-Dès que je suis arrivée j'ai retravaillé ma présentation pour en parler avec Erick et Bruno à la réunion de ce matin.
+<p style="text-align:justify";>Dès que je suis arrivée j'ai retravaillé ma présentation pour en parler avec Erick et Bruno à la réunion de ce matin.</p>
 
-Réunion avec Erick et Bruno :
-Concernant la présentation, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.
-Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l'annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu'Érick m'a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c'est la cas c'est parfait. D'autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3' ou 5'. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d'un BLAST pour trouver les protéines ou du moins les domaines similaires dans d'autres espèces.
-Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.
+<p style="text-align:justify";>Réunion avec Erick et Bruno :</p>
+<p style="text-align:justify";>Concernant la présentation, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.</p>
+<p style="text-align:justify";>Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l'annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu'Érick m'a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c'est la cas c'est parfait. D'autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3' ou 5'. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d'un BLAST pour trouver les protéines ou du moins les domaines similaires dans d'autres espèces.</p>
+<p style="text-align:justify";>Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.</p>
 
-Pour le run de GATK d'hier : J'avais laissé les runtime en actif et non en commentaire du coup ça ne lui a pas plu. Donc j'ai fait cette modif et j'ai relancé le script.
+<p style="text-align:justify";>Pour le run de GATK d'hier : J'avais laissé les runtime en actif et non en commentaire du coup ça ne lui a pas plu. Donc j'ai fait cette modif et j'ai relancé le script.</p>
 
-Je suis allée voir Théo pour qu'il me parle de son analyse RDA (redondance analysis).
+<p style="text-align:justify";>Je suis allée voir Théo pour qu'il me parle de son analyse RDA (redondance analysis).</p>
+
+
+## Jour 49 : 07/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, pas grand chose de très productif. J'ai regardé où mon script wdl en était et j'ai découvert qu'il s'était arrêté à MarkDuplicates car  il n'y a plus assez d'espace disque. Si mes calculs sont corrects il devait s'arrêter ce soir vers 17h. Mais n'ayant plus d'espace disue il ne pouvait plus rien faire. Donc je l'ai arrêté. POur voir si toutes les étapes fonctionnent, je l'ai relancé mais avec un seul fichier BAM à traiter à la place de 3. Ça devrait prendre moins d'espace disque sur le serveur et pouvoir tourner jusqu'à la fin. En fin j'espère. J'aimerais que ça ait fini de tourner mercredi pour que je lance la suite du script et voir ce qui fonctionne et ce qui ne fonctionne pas. Ensuite pour le choix des filtres à appliquer à mes données ("hardfiltering") je pense que je vais produire un VariantsToTable pour voir les scores disponibles avant de choisir mes filtres. IL faut aussi que je sache exactement ce qu'ils veulent dire.</p>
+
+Comme j'ai pas trop envie de travailler sur mon script Python j'essaie de faire une digestion in silico du génome du bar via un Package R nommé SimRAD. Pour l'instant j'en suis seulement à l'installation des packages. J'ai réussi à faire fonctionner le package et là je suis après essayer de faire un Rmd avec cela pour en rendre compte à Erick plus tard. En disant que j'avais fait ça avant.
 
 #Bibliographie
 
