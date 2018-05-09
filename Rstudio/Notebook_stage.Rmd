@@ -515,7 +515,7 @@ Il faut que je récupére les données de RNA-seq de Morone saxatilis dans le bu
 
 ## Jour 39 : 20/04/2018
 
-<p style="text-align:justify";>J'ai regardé les fichiers produits ce matin avec les modifications d'hier. J'ai découvert que pour les brin sens tout se passe pour le mieux. Par contre concernant le brin antisens cela ne se passe pas de la même manière. En effet, il y a un décalage de 1 par rapport au fasta. Il faut donc que je récrive un fichier GTF avec les modifications pour les brins antisens uniquement ^^.</p>
+<p style="text-align:justify";>J'ai regardé les fichiers produits ce matin avec les modifications d'hier. J'ai découvert que pour les brin sens toReassignOneMappingQualityFilterut se passe pour le mieux. Par contre concernant le brin antisens cela ne se passe pas de la même manière. En effet, il y a un décalage de 1 par rapport au fasta. Il faut donc que je récrive un fichier GTF avec les modifications pour les brins antisens uniquement ^^.</p>
 
 <p style="text-align:justify";>J'ai lancé la modification de tous les brins antisens mais ça va prendre environ8h pour faire ça donc je l'ai également lancé sur le cluster pour qu'il continue de tourner ce soir et demain matin s'il n'a pas fini.</p>
 
@@ -547,10 +547,10 @@ $ sudo ./Build installexes [option n] à la place de Y pour faire le télécharg
 J'ai indexé les fichiers bam d'Erick via la commande :
 $ samtools index file.bam file.bam.bai.</p>
 
-<p style="text-align:justify";>Info complémentaires sur les fichiers BAM : Le séquençage a été réalisé en paired-end 2x150bp. Les données ont été mettoyées avec trimmomatic et alignées sur le génome avec TopHat2. La suite a été faite avec cufflinks puis cuffmerge. Tout cela a été effectué en suivant l'ordre alphanumérique des chromosomes, aussi bien dans le fichier d'annotation d eréférence utilisé : Combined-annotation_Labrax-2014_Ordered.gtf que dans le fichier fatsa du génome. Cela donne donc : LG10 à LG19 puis LG1A, LG1B, LG2, LG20, LG22-25, LG24, puis LG3 à LG9, LGx, MT et enfin UN.</p>
+<p style="text-align:justify";>Info complémentaires sur les fichiers BAM : Le séquençage a été réalisé en paired-end 2x150bp. Les données ont été mettoyées avec trimmomatic et alignées sur le génome avec TopHat2. La suite a été faite avec cufflinks puis cuffmerge. Tout cela a été effectué en suivant l'ordre alphanumérique des chromosomes, aussi bien dans le fichier d'annotation de référence utilisé : Combined-annotation_Labrax-2014_Ordered.gtf que dans le fichier fasta du génome. Cela donne donc : LG10 à LG19 puis LG1A, LG1B, LG2, LG20, LG22-25, LG24, puis LG3 à LG9, LGx, MT et enfin UN.</p>
 
 <p style="text-align:justify";>Trimmomatic permet d'éliminer tous les reads correspondant aux séquences des adaptateurs illumina, des séquences avec des N et selon la qualité.
-TopHat est un algner de reads qui réalise aussi des analyses de "splice-jonction".</p>
+TopHat est un aligneur de reads qui réalise aussi des analyses de "splice-jonction".</p>
 <p style="text-align:justify";>Cufflinks : Cufflinks assembles transcripts, estimates their abundances, and tests for differential expression and regulation in RNA-Seq samples. It accepts aligned RNA-Seq reads and assembles the alignments into a parsimonious set of transcripts. Cufflinks then estimates the relative abundances of these transcripts based on how many reads support each one, taking into account biases in library preparation protocols.<http://cole-trapnell-lab.github.io/cufflinks/></p>
 <p style="text-align:justify";>Cuffmerge : Merge multiple Cufflinks assemblies.<http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/Cuffmerge/3></p>
 
@@ -567,7 +567,7 @@ Je n'ai pas touché à mon script python de la journée.</p>
 
 ## Jour 45 : 30/04/2018
 
-<p style="text-align:justify";>Aujourd'hui est un jour d'appui pour les grèves résultat il n'y a personne à la fac. Je ne l'ai jamais vu aussi vide. Même quand il y a eu la grève il y a vait plus de mond sur le campus et dans les couloirs. Bruno à reommander aux stagiaires et à Madoka de ne pas venir aujourd'hui car le travail isolé est interdit mais comme je ne suis pas UM il pensait que ça s'appliquait aussi à moi. Je ne savais donc pas quoi faire mais j'étais contente de pouvoir avoir un grand weekend. Mais c'était sans compter sur les réponses de Christelle la tutrice d'Olivia qui a dit être présente mais dont le bureau est fermé ainsi qu'Erick qui a dit qu'il serait présent et pas seul au sein du bâtiment 24.
+<p style="text-align:justify";>Aujourd'hui est un jour d'appui pour les grèves résultat il n'y a personne à la fac. Je ne l'ai jamais vu aussi vide. Même quand il y a eu la grève il y avait plus de monde sur le campus et dans les couloirs. Bruno à reommander aux stagiaires et à Madoka de ne pas venir aujourd'hui car le travail isolé est interdit mais comme je ne suis pas UM il pensait que ça s'appliquait aussi à moi. Je ne savais donc pas quoi faire mais j'étais contente de pouvoir avoir un grand weekend. Mais c'était sans compter sur les réponses de Christelle la tutrice d'Olivia qui a dit être présente mais dont le bureau est fermé ainsi qu'Erick qui a dit qu'il serait présent et pas seul au sein du bâtiment 24.
 Du coup dans le doute je suis venue ce matin mais je ne fais pas grand chose de très efficace.</p>
 
 <p style="text-align:justify";>J'ai relancé mon script python en faisant les modif dans le GTF des Nostop et des NoStart et des allongements des séquences (CDS Exons) jusqu'au stop ou au start trouvé.
@@ -575,8 +575,38 @@ Il faut maintenant que j'y ajoute la comptablisation de la longueur en bp qui s�
 
 <p style="text-align:justify";>Concernant mes scripts wdl, je me suis dit que comme mes BAM sont "corrompus" il devait y avoir un problème de compatibilité entre TopHat2 et MarkDuplicates. Hors en vérifiant c'est bien le cas. TopHat donne les niveau de qualité de 255 qui sont considérés par GATK comme des niveau de qualité null et les reads ayant cette qualité sont ignorés. Cf : <https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_engine_filters_ReassignOneMappingQualityFilter.php>. Donc j'ai lancé un changement de cette qualité mais pour ce faire il faut utiliser GATK3.5.0 et non GATK4.0.3.0. Sauf qu'ensuite un nouveau problème est apparu : Lordre des chromosomes n'est pas le même dans le bam et dans le fasta. Donc j'ai dû ajouté une nouvelle étape qui va réordrer les reads en fonction des contigs du fichier fasta. Cf : <https://software.broadinstitute.org/gatk/documentation/article.php?id=1328>. Il seront donc comptatibles. Je viens donc de lancer cela sur le cluster.</p>
 
+<p style="text-align:justify";>J'ai fait ma présentation au format ppt sur mon windows du bureau.</p>
 
 #Journal de bord - Mai
+
+## Jour 46 : 02/05/2018
+
+<p style="text-align:justify";>Aujourd'hui j'ai relancé mon script python avec la modif du calcul de longueur de l'ajout du codon stop.</p>
+
+<p style="text-align:justify";>J'ai également relancé mon script wdl de GATK. J'ai toujours mon problème avec GATK.</p>
+
+<p style="text-align:justify";>J'essaye maintenant de faire un présentation en Rmd ^^. Ça ne fonctionne pas. Je laisse tomber.
+
+<p style="text-align:justify";>Erick est passé en toute fin d'après-midi. On a discuté de mon outils python auquel je dois ajouter des NA pour ceux qui ne fonctionnent pas pour la recherche des codons strat et stop. Je dois également ajouter des NA dès qu'il rencontre un N lors de la recherche des codons start ou stop. Concernant la validation de ce que je fais: je dois dans un premier temps relancer snpEff et voir si j'ai mpoins ou plus d'erreur avec mes corrections. En suite je dois "Blaster" les protéines pour voir si certains d eleur domaine se retrouve également dans d'autres espèces.</p>
+<p style="text-align:justify";>Concernant mon pb entre GATK et TopHat2 il faut bien que je fasse la correction pour que les fichiers deviennent comptibles pour la suite de l'analyse.</p>
+<p style="text-align:justify";>Concernant ma présentation pour le Lundi 14 Mai, il faut que j'explique un peu mieux le pourquoi et le comment des différents choses que je dois faire et comment elles se sont manifestées. D'autre part, il faut que je sache bien ce que je vais dire lors de mon oral donc je suppose qu'il va vouloir que j'écrive un texte à dire et qu'il va vouloir le corriger. Cette semaine car il n'est pas là la semaine prochaine.</p>
+
+## Jour 47 : 03/05/2018
+
+Donc pour l'instant c'est-à-dire depuis que je suis arrivée (3h) je suis après résoudre mes problèmes avec GATK. Le réordrage des reads à l'air de fonctionner sans problème mais le changement de la valeur de qualité pose toujourts pb; Sauf que en regardant bien l'erreur que j'obtiens en fait j'utilise GATK 3.5.0 alors qu'il faut que j'utilise GATK 3.8.0. Donc j'ai téléchargé cette version de GATK, j'ai changé kle path dans le fichier jason et j'ai relancé tout ça sur le cluster. 
+Comme ça ne fonctionnait toujours pas après plusieurs lancement et changement j'ai décidé de changer mon fusil d'épaule et de chercher si 255 était la bonne valuer or je viens de trouver [ceci](https://gatkforums.broadinstitute.org/gatk/discussion/7227/mapq-60-is-compulsory-for-the-whole-of-gatk-pipeline) qui dit que TopHat2 donne une valeur de 50 et que cette valeur de 50 est prise en compte donc pas besoin de faire ce réassignement de score. J'ai donc modifié mon script "Data_PreProcessing.wdl" pour y ajouter l'étape de Réordrage. Et je l'ai ensuite lancé sur le cluster.
+
+Ensuite je me suis attelée à l'écriture du script de data_processing. Pour cela je me suis penchée sur le choix des filtres à appliquer et j'ai trouvé différents sites qui en parlent :
+
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=1255>    
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=3225>    
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=6925>    
+
+Puis je me suis lancée dans l'écriture du suivi des troubleshooting sur mon site web.
+
+Je viens d efaire un ticket pour savoir quelle est la taille de mon espace disque sur le cluster.
+
+Je vais tenter de refaire une analyse snpEff.
 
 #Bibliographie
 
