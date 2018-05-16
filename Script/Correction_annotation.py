@@ -57,9 +57,9 @@ if __name__ == "__main__":
 	pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
 	pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
 	pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
-	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_02_05_18.txt"
-	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_02_05_18.txt"
-	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_02_05_2018.gtf"
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_16_05_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_16_05_18.txt"
+	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_16_05_2018.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
 

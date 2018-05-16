@@ -1,0 +1,815 @@
+[2018-05-02 10:25:44,16] [info] Running with database db.url = jdbc:hsqldb:mem:b78f05f8-a44c-4e1a-b678-24da05267220;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 10:25:50,09] [info] Running migration RenameWorkflowOptionsInMetadata with a read batch size of 100000 and a write batch size of 100000
+[2018-05-02 10:25:50,11] [info] [RenameWorkflowOptionsInMetadata] 100%
+[2018-05-02 10:25:50,21] [info] Running with database db.url = jdbc:hsqldb:mem:06656a7e-9f65-4a9e-a521-8a6335d0488d;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 10:25:50,62] [info] Slf4jLogger started
+[2018-05-02 10:25:50,89] [info] Metadata summary refreshing every 2 seconds.
+[2018-05-02 10:25:50,93] [info] WriteMetadataActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 10:25:50,94] [info] KvWriteActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 10:25:50,94] [info] CallCacheWriteActor configured to flush with batch size 100 and process rate 3 seconds.
+[2018-05-02 10:25:51,78] [info] JobExecutionTokenDispenser - Distribution rate: 50 per 1 seconds.
+[2018-05-02 10:25:51,79] [info] SingleWorkflowRunnerActor: Submitting workflow
+[2018-05-02 10:25:51,83] [info] WDL (Unspecified version) workflow df0de44c-aec4-4468-a70b-d92869caf181 submitted
+[2018-05-02 10:25:51,83] [info] SingleWorkflowRunnerActor: Workflow submitted [38;5;2mdf0de44c-aec4-4468-a70b-d92869caf181[0m
+[2018-05-02 10:25:51,83] [info] 1 new workflows fetched
+[2018-05-02 10:25:51,84] [info] WorkflowManagerActor Starting workflow [38;5;2mdf0de44c-aec4-4468-a70b-d92869caf181[0m
+[2018-05-02 10:25:51,84] [info] WorkflowManagerActor Successfully started WorkflowActor-df0de44c-aec4-4468-a70b-d92869caf181
+[2018-05-02 10:25:51,84] [info] Retrieved 1 workflows from the WorkflowStoreActor
+[2018-05-02 10:25:53,17] [info] MaterializeWorkflowDescriptorActor [[38;5;2mdf0de44c[0m]: Call-to-Backend assignments: ReassignOneMappingQualityFilter.ReorderSam -> Local, ReassignOneMappingQualityFilter.PrintReads -> Local
+[2018-05-02 10:25:58,67] [info] WorkflowExecutionActor-df0de44c-aec4-4468-a70b-d92869caf181 [[38;5;2mdf0de44c[0m]: Starting ReassignOneMappingQualityFilter.ReorderSam (3 shards)
+[2018-05-02 10:25:59,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-1/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-18.bam \
+  O=Creche-18_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 10:25:59,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-2/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-6.bam \
+  O=Creche-6_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 10:25:59,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-0/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-11GB.bam \
+  O=Creche-11GB_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 10:25:59,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-1/execution/script
+[2018-05-02 10:25:59,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-0/execution/script
+[2018-05-02 10:25:59,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/df0de44c-aec4-4468-a70b-d92869caf181/call-ReorderSam/shard-2/execution/script
+[2018-05-02 10:26:00,96] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: job id: 141637
+[2018-05-02 10:26:00,96] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: job id: 141633
+[2018-05-02 10:26:00,96] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: job id: 141634
+[2018-05-02 10:26:00,98] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 10:26:00,98] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 10:26:00,98] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 10:45:25,31] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 10:45:26,44] [info] WorkflowExecutionActor-df0de44c-aec4-4468-a70b-d92869caf181 [[38;5;2mdf0de44c[0m]: Starting ReassignOneMappingQualityFilter.PrintReads
+[2018-05-02 10:45:26,87] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.withRetry(AsyncBackendJobExecutionActor.scala:61)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.cromwell$backend$async$AsyncBackendJobExecutionActor$$robustExecuteOrRecover(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor$$anonfun$receive$1.applyOrElse(AsyncBackendJobExecutionActor.scala:88)
+	at scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)
+	at scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:172)
+	at akka.actor.Actor.aroundReceive(Actor.scala:514)
+	at akka.actor.Actor.aroundReceive$(Actor.scala:512)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.aroundReceive(ConfigAsyncJobExecutionActor.scala:191)
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+	at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 42 common frames omitted
+[2018-05-02 10:45:26,90] [[38;5;220mwarn[0m] Couldn't find a suitable DSN, defaulting to a Noop one.
+[2018-05-02 10:45:26,91] [info] Using noop to send events.
+[2018-05-02 10:45:30,25] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:32,48] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:34,82] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:39,33] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:43,20] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:45,87] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:51,67] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:45:59,73] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:46:06,23] [[38;5;1merror[0m] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Error attempting to Execute
+java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 common frames omitted
+[2018-05-02 10:50:07,76] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 10:50:34,16] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mdf0de44c[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 10:50:34,51] [[38;5;1merror[0m] WorkflowManagerActor Workflow df0de44c-aec4-4468-a70b-d92869caf181 failed (during ExecutingWorkflowState): java.lang.Exception: Failed command instantiation
+cromwell.core.CromwellFatalException: java.lang.Exception: Failed command instantiation
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.applyOrElse(Retry.scala:46)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.applyOrElse(Retry.scala:37)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:414)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:37)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:81)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)
+	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: java.lang.Exception: Failed command instantiation
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:400)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand$(StandardAsyncExecutionActor.scala:340)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand$lzycompute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.instantiatedCommand(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents(StandardAsyncExecutionActor.scala:235)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.commandScriptContents$(StandardAsyncExecutionActor.scala:234)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.commandScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents(SharedFileSystemAsyncJobExecutionActor.scala:140)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.writeScriptContents$(SharedFileSystemAsyncJobExecutionActor.scala:139)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.cromwell$backend$sfs$BackgroundAsyncJobExecutionActor$$super$writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents(BackgroundAsyncJobExecutionActor.scala:12)
+	at cromwell.backend.sfs.BackgroundAsyncJobExecutionActor.writeScriptContents$(BackgroundAsyncJobExecutionActor.scala:11)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.writeScriptContents(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute(SharedFileSystemAsyncJobExecutionActor.scala:123)
+	at cromwell.backend.sfs.SharedFileSystemAsyncJobExecutionActor.execute$(SharedFileSystemAsyncJobExecutionActor.scala:121)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.execute(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.$anonfun$executeAsync$1(StandardAsyncExecutionActor.scala:451)
+	at scala.util.Try$.apply(Try.scala:209)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeAsync$(StandardAsyncExecutionActor.scala:451)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeAsync(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover(StandardAsyncExecutionActor.scala:744)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.executeOrRecover$(StandardAsyncExecutionActor.scala:736)
+	at cromwell.backend.impl.sfs.config.BackgroundConfigAsyncJobExecutionActor.executeOrRecover(ConfigAsyncJobExecutionActor.scala:191)
+	at cromwell.backend.async.AsyncBackendJobExecutionActor.$anonfun$robustExecuteOrRecover$1(AsyncBackendJobExecutionActor.scala:65)
+	at cromwell.core.retry.Retry$.withRetry(Retry.scala:37)
+	at cromwell.core.retry.Retry$$anonfun$withRetry$1.$anonfun$applyOrElse$3(Retry.scala:44)
+	at akka.pattern.FutureTimeoutSupport.liftedTree1$1(FutureTimeoutSupport.scala:25)
+	at akka.pattern.FutureTimeoutSupport.$anonfun$after$1(FutureTimeoutSupport.scala:25)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	... 6 more
+Caused by: common.exception.AggregatedMessageException: Error(s):
+Expression 'Reordereds' evaluated to an Array but no 'sep' was specified
+	at common.validation.Validation$ValidationTry$.toTry$extension1(Validation.scala:60)
+	at common.validation.Validation$ValidationTry$.toTry$extension0(Validation.scala:56)
+	at cromwell.backend.standard.StandardAsyncExecutionActor.instantiatedCommand(StandardAsyncExecutionActor.scala:398)
+	... 35 more
+
+[2018-05-02 10:50:34,55] [info] WorkflowManagerActor WorkflowActor-df0de44c-aec4-4468-a70b-d92869caf181 is in a terminal state: WorkflowFailedState
+[2018-05-02 10:51:44,48] [info] SingleWorkflowRunnerActor workflow finished with status 'Failed'.
+[2018-05-02 10:51:45,95] [info] Message [akka.actor.FSM$Transition] from Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor/ServiceRegistryActor/MetadataService/WriteMetadataActor#-384165590] to Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor#1692789640] was not delivered. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 10:51:45,95] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [2] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 10:51:45,95] [[38;5;1merror[0m] Outgoing request stream error
+akka.stream.AbruptTerminationException: Processor actor [Actor[akka://cromwell-system/user/StreamSupervisor-1/flow-47-0-mergePreferred#-675314663]] terminated abruptly
+[2018-05-02 10:51:45,95] [[38;5;1merror[0m] Outgoing request stream error
+akka.stream.AbruptTerminationException: Processor actor [Actor[akka://cromwell-system/user/StreamSupervisor-1/flow-43-0-mergePreferred#1684511841]] terminated abruptly
+[2018-05-02 10:51:45,95] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 10:51:45,95] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [4] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 10:51:45,99] [info] Automatic shutdown of the async connection
+[2018-05-02 10:51:45,99] [info] Gracefully shutdown sentry threads.
+[2018-05-02 10:51:45,99] [info] Shutdown finished.
+[2018-05-02 13:37:42,29] [info] Running with database db.url = jdbc:hsqldb:mem:d32cccc6-ed8c-4f3e-a083-cbf9742f54cf;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 13:37:47,83] [info] Running migration RenameWorkflowOptionsInMetadata with a read batch size of 100000 and a write batch size of 100000
+[2018-05-02 13:37:47,85] [info] [RenameWorkflowOptionsInMetadata] 100%
+[2018-05-02 13:37:47,94] [info] Running with database db.url = jdbc:hsqldb:mem:f3876a33-303d-47a6-934b-f39e64de1857;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 13:37:48,33] [info] Slf4jLogger started
+[2018-05-02 13:37:48,55] [info] Metadata summary refreshing every 2 seconds.
+[2018-05-02 13:37:48,57] [info] WriteMetadataActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 13:37:48,57] [info] CallCacheWriteActor configured to flush with batch size 100 and process rate 3 seconds.
+[2018-05-02 13:37:48,57] [info] KvWriteActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 13:37:49,24] [info] JobExecutionTokenDispenser - Distribution rate: 50 per 1 seconds.
+[2018-05-02 13:37:49,26] [info] SingleWorkflowRunnerActor: Submitting workflow
+[2018-05-02 13:37:49,31] [info] WDL (Unspecified version) workflow e9c96080-fb6c-40ff-8957-c0bb53e8604a submitted
+[2018-05-02 13:37:49,31] [info] SingleWorkflowRunnerActor: Workflow submitted [38;5;2me9c96080-fb6c-40ff-8957-c0bb53e8604a[0m
+[2018-05-02 13:37:49,31] [info] 1 new workflows fetched
+[2018-05-02 13:37:49,31] [info] WorkflowManagerActor Starting workflow [38;5;2me9c96080-fb6c-40ff-8957-c0bb53e8604a[0m
+[2018-05-02 13:37:49,32] [info] WorkflowManagerActor Successfully started WorkflowActor-e9c96080-fb6c-40ff-8957-c0bb53e8604a
+[2018-05-02 13:37:49,32] [info] Retrieved 1 workflows from the WorkflowStoreActor
+[2018-05-02 13:37:50,53] [info] MaterializeWorkflowDescriptorActor [[38;5;2me9c96080[0m]: Call-to-Backend assignments: ReassignOneMappingQualityFilter.ReorderSam -> Local, ReassignOneMappingQualityFilter.PrintReads -> Local
+[2018-05-02 13:37:56,01] [info] WorkflowExecutionActor-e9c96080-fb6c-40ff-8957-c0bb53e8604a [[38;5;2me9c96080[0m]: Starting ReassignOneMappingQualityFilter.ReorderSam (3 shards)
+[2018-05-02 13:37:56,73] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-1/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-18.bam \
+  O=Creche-18_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 13:37:56,73] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-0/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-11GB.bam \
+  O=Creche-11GB_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 13:37:56,73] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-2/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-6.bam \
+  O=Creche-6_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 13:37:56,76] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-0/execution/script
+[2018-05-02 13:37:56,76] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-2/execution/script
+[2018-05-02 13:37:56,76] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-1/execution/script
+[2018-05-02 13:37:58,66] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: job id: 5749
+[2018-05-02 13:37:58,66] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: job id: 5753
+[2018-05-02 13:37:58,66] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: job id: 5751
+[2018-05-02 13:37:58,67] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 13:37:58,67] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 13:37:58,69] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 13:56:33,02] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 13:56:34,91] [info] WorkflowExecutionActor-e9c96080-fb6c-40ff-8957-c0bb53e8604a [[38;5;2me9c96080[0m]: Starting ReassignOneMappingQualityFilter.PrintReads
+[2018-05-02 13:56:35,32] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.PrintReads:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-PrintReads/shard-1/inputs/home/egueret/tools/gatk-3.5.0/GenomeAnalysisTK.jar \
+  -T PrintReads \
+  -R /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-PrintReads/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  -I /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-PrintReads/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-ReorderSam/shard-1/execution/Creche-18_reordered.bam \
+  -o Creche-18_reassigned.bam \
+  -rf ReassignOneMappingQuality \
+  -RMQF 255 \
+  -RMQT 60[0m
+[2018-05-02 13:56:35,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.PrintReads:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-PrintReads/shard-1/execution/script
+[2018-05-02 13:56:38,59] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.PrintReads:1:1]: job id: 7071
+[2018-05-02 13:56:38,59] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 13:56:39,85] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 13:57:14,46] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 13:58:08,99] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2me9c96080[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-02 13:58:09,75] [[38;5;1merror[0m] WorkflowManagerActor Workflow e9c96080-fb6c-40ff-8957-c0bb53e8604a failed (during ExecutingWorkflowState): Job ReassignOneMappingQualityFilter.PrintReads:1:1 exited with return code 1 which has not been declared as a valid return code. See 'continueOnReturnCode' runtime attribute for more details.
+Check the content of stderr for potential additional information: /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/e9c96080-fb6c-40ff-8957-c0bb53e8604a/call-PrintReads/shard-1/execution/stderr
+[2018-05-02 13:58:09,75] [[38;5;220mwarn[0m] Couldn't find a suitable DSN, defaulting to a Noop one.
+[2018-05-02 13:58:09,76] [info] Using noop to send events.
+[2018-05-02 13:58:09,77] [info] WorkflowManagerActor WorkflowActor-e9c96080-fb6c-40ff-8957-c0bb53e8604a is in a terminal state: WorkflowFailedState
+[2018-05-02 13:58:53,97] [info] SingleWorkflowRunnerActor workflow finished with status 'Failed'.
+[2018-05-02 13:58:58,59] [[38;5;1merror[0m] Outgoing request stream error
+akka.stream.AbruptTerminationException: Processor actor [Actor[akka://cromwell-system/user/StreamSupervisor-1/flow-35-0-mergePreferred#73003300]] terminated abruptly
+[2018-05-02 13:58:58,60] [[38;5;1merror[0m] Outgoing request stream error
+akka.stream.AbruptTerminationException: Processor actor [Actor[akka://cromwell-system/user/StreamSupervisor-1/flow-39-0-mergePreferred#-1369566539]] terminated abruptly
+[2018-05-02 13:58:58,60] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 13:58:58,60] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [2] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 13:58:58,60] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 13:58:58,60] [info] Message [akka.actor.FSM$Transition] from Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor/ServiceRegistryActor/MetadataService/WriteMetadataActor#-1968683182] to Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor#225689715] was not delivered. [4] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-02 13:58:58,63] [info] Automatic shutdown of the async connection
+[2018-05-02 13:58:58,63] [info] Gracefully shutdown sentry threads.
+[2018-05-02 13:58:58,63] [info] Shutdown finished.
+[2018-05-02 14:10:57,83] [info] Running with database db.url = jdbc:hsqldb:mem:e580a32b-d60d-4196-b243-dc3be097921e;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 14:11:02,65] [info] Running migration RenameWorkflowOptionsInMetadata with a read batch size of 100000 and a write batch size of 100000
+[2018-05-02 14:11:02,66] [info] [RenameWorkflowOptionsInMetadata] 100%
+[2018-05-02 14:11:02,75] [info] Running with database db.url = jdbc:hsqldb:mem:864eec46-b9a1-4c86-ae82-e0cf6f147422;shutdown=false;hsqldb.tx=mvcc
+[2018-05-02 14:11:03,07] [info] Slf4jLogger started
+[2018-05-02 14:11:03,28] [info] Metadata summary refreshing every 2 seconds.
+[2018-05-02 14:11:03,31] [info] CallCacheWriteActor configured to flush with batch size 100 and process rate 3 seconds.
+[2018-05-02 14:11:03,31] [info] WriteMetadataActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 14:11:03,31] [info] KvWriteActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-02 14:11:03,94] [info] JobExecutionTokenDispenser - Distribution rate: 50 per 1 seconds.
+[2018-05-02 14:11:03,95] [info] SingleWorkflowRunnerActor: Submitting workflow
+[2018-05-02 14:11:03,98] [info] WDL (Unspecified version) workflow 5126b135-402d-4d34-9b85-aff1b635fb7a submitted
+[2018-05-02 14:11:03,98] [info] SingleWorkflowRunnerActor: Workflow submitted [38;5;2m5126b135-402d-4d34-9b85-aff1b635fb7a[0m
+[2018-05-02 14:11:03,99] [info] 1 new workflows fetched
+[2018-05-02 14:11:03,99] [info] WorkflowManagerActor Starting workflow [38;5;2m5126b135-402d-4d34-9b85-aff1b635fb7a[0m
+[2018-05-02 14:11:03,99] [info] WorkflowManagerActor Successfully started WorkflowActor-5126b135-402d-4d34-9b85-aff1b635fb7a
+[2018-05-02 14:11:03,99] [info] Retrieved 1 workflows from the WorkflowStoreActor
+[2018-05-02 14:11:04,86] [info] MaterializeWorkflowDescriptorActor [[38;5;2m5126b135[0m]: Call-to-Backend assignments: ReassignOneMappingQualityFilter.PrintReads -> Local, ReassignOneMappingQualityFilter.ReorderSam -> Local
+[2018-05-02 14:11:10,26] [info] WorkflowExecutionActor-5126b135-402d-4d34-9b85-aff1b635fb7a [[38;5;2m5126b135[0m]: Starting ReassignOneMappingQualityFilter.ReorderSam (3 shards)
+[2018-05-02 14:11:11,31] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-1/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-18.bam \
+  O=Creche-18_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 14:11:11,31] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-0/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-11GB.bam \
+  O=Creche-11GB_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 14:11:11,31] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-2/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-6.bam \
+  O=Creche-6_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-02 14:11:11,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-2/execution/script
+[2018-05-02 14:11:11,34] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-0/execution/script
+[2018-05-02 14:11:11,34] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/5126b135-402d-4d34-9b85-aff1b635fb7a/call-ReorderSam/shard-1/execution/script
+[2018-05-02 14:11:13,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: job id: 6171
+[2018-05-02 14:11:13,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: job id: 6170
+[2018-05-02 14:11:13,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: job id: 6174
+[2018-05-02 14:11:13,37] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 14:11:13,37] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-02 14:11:13,37] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m5126b135[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 09:47:28,93] [info] Running with database db.url = jdbc:hsqldb:mem:b4074162-38a8-4ad1-a5d0-1ff06be1cd98;shutdown=false;hsqldb.tx=mvcc
+[2018-05-03 09:47:33,68] [info] Running migration RenameWorkflowOptionsInMetadata with a read batch size of 100000 and a write batch size of 100000
+[2018-05-03 09:47:33,70] [info] [RenameWorkflowOptionsInMetadata] 100%
+[2018-05-03 09:47:33,78] [info] Running with database db.url = jdbc:hsqldb:mem:0795a812-35cf-4057-b1ff-8cce7c4b0683;shutdown=false;hsqldb.tx=mvcc
+[2018-05-03 09:47:34,11] [info] Slf4jLogger started
+[2018-05-03 09:47:34,29] [info] Metadata summary refreshing every 2 seconds.
+[2018-05-03 09:47:34,31] [info] WriteMetadataActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-03 09:47:34,31] [info] CallCacheWriteActor configured to flush with batch size 100 and process rate 3 seconds.
+[2018-05-03 09:47:34,31] [info] KvWriteActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-03 09:47:34,94] [info] JobExecutionTokenDispenser - Distribution rate: 50 per 1 seconds.
+[2018-05-03 09:47:34,95] [info] SingleWorkflowRunnerActor: Submitting workflow
+[2018-05-03 09:47:34,98] [info] WDL (Unspecified version) workflow b40572dc-a799-4f7f-ac1e-dedaeb6d3390 submitted
+[2018-05-03 09:47:34,99] [info] SingleWorkflowRunnerActor: Workflow submitted [38;5;2mb40572dc-a799-4f7f-ac1e-dedaeb6d3390[0m
+[2018-05-03 09:47:34,99] [info] 1 new workflows fetched
+[2018-05-03 09:47:34,99] [info] WorkflowManagerActor Starting workflow [38;5;2mb40572dc-a799-4f7f-ac1e-dedaeb6d3390[0m
+[2018-05-03 09:47:34,99] [info] WorkflowManagerActor Successfully started WorkflowActor-b40572dc-a799-4f7f-ac1e-dedaeb6d3390
+[2018-05-03 09:47:34,99] [info] Retrieved 1 workflows from the WorkflowStoreActor
+[2018-05-03 09:47:35,88] [info] MaterializeWorkflowDescriptorActor [[38;5;2mb40572dc[0m]: Call-to-Backend assignments: ReassignOneMappingQualityFilter.ReorderSam -> Local, ReassignOneMappingQualityFilter.PrintReads -> Local
+[2018-05-03 09:47:41,27] [info] WorkflowExecutionActor-b40572dc-a799-4f7f-ac1e-dedaeb6d3390 [[38;5;2mb40572dc[0m]: Starting ReassignOneMappingQualityFilter.ReorderSam (3 shards)
+[2018-05-03 09:47:42,34] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-0/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-11GB.bam \
+  O=Creche-11GB_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 09:47:42,34] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-1/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-18.bam \
+  O=Creche-18_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 09:47:42,34] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-2/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-6.bam \
+  O=Creche-6_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 09:47:42,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-1/execution/script
+[2018-05-03 09:47:42,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-0/execution/script
+[2018-05-03 09:47:42,36] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-2/execution/script
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: job id: 47403
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: job id: 47404
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: job id: 47401
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 09:47:44,38] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 10:02:53,20] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-03 10:02:55,20] [info] WorkflowExecutionActor-b40572dc-a799-4f7f-ac1e-dedaeb6d3390 [[38;5;2mb40572dc[0m]: Starting ReassignOneMappingQualityFilter.PrintReads
+[2018-05-03 10:02:56,00] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.PrintReads:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-PrintReads/shard-1/inputs/home/egueret/tools/gatk-3.8.0/GenomeAnalysisTK.jar \
+  -T PrintReads \
+  -R /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-PrintReads/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  -I /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-PrintReads/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-ReorderSam/shard-1/execution/Creche-18_reordered.bam \
+  -o Creche-18_reassigned.bam \
+  -rf ReassignOneMappingQuality \
+  -RMQF 255 \
+  -RMQT 60[0m
+[2018-05-03 10:02:56,01] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.PrintReads:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-PrintReads/shard-1/execution/script
+[2018-05-03 10:02:59,33] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.PrintReads:1:1]: job id: 48952
+[2018-05-03 10:02:59,42] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 10:03:00,14] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.PrintReads:1:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-03 10:04:08,39] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-03 10:05:44,71] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2mb40572dc[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from WaitingForReturnCodeFile to Done
+[2018-05-03 10:05:45,56] [[38;5;1merror[0m] WorkflowManagerActor Workflow b40572dc-a799-4f7f-ac1e-dedaeb6d3390 failed (during ExecutingWorkflowState): Job ReassignOneMappingQualityFilter.PrintReads:1:1 exited with return code 1 which has not been declared as a valid return code. See 'continueOnReturnCode' runtime attribute for more details.
+Check the content of stderr for potential additional information: /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/b40572dc-a799-4f7f-ac1e-dedaeb6d3390/call-PrintReads/shard-1/execution/stderr
+[2018-05-03 10:05:45,59] [[38;5;220mwarn[0m] Couldn't find a suitable DSN, defaulting to a Noop one.
+[2018-05-03 10:05:45,59] [info] Using noop to send events.
+[2018-05-03 10:05:45,60] [info] WorkflowManagerActor WorkflowActor-b40572dc-a799-4f7f-ac1e-dedaeb6d3390 is in a terminal state: WorkflowFailedState
+[2018-05-03 10:06:23,78] [info] SingleWorkflowRunnerActor workflow finished with status 'Failed'.
+[2018-05-03 10:06:24,33] [info] Message [akka.actor.FSM$Transition] from Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor/ServiceRegistryActor/MetadataService/WriteMetadataActor#-1205220509] to Actor[akka://cromwell-system/user/SingleWorkflowRunnerActor#-754302679] was not delivered. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-03 10:06:24,33] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [2] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-03 10:06:24,33] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [3] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-03 10:06:24,33] [info] Message [cromwell.core.actor.StreamActorHelper$StreamFailed] without sender to Actor[akka://cromwell-system/deadLetters] was not delivered. [4] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'.
+[2018-05-03 10:06:24,36] [info] Automatic shutdown of the async connection
+[2018-05-03 10:06:24,36] [info] Gracefully shutdown sentry threads.
+[2018-05-03 10:06:24,36] [info] Shutdown finished.
+[2018-05-03 14:40:16,00] [info] Running with database db.url = jdbc:hsqldb:mem:f1b68b8c-0e88-4780-8c4c-287338a5bd79;shutdown=false;hsqldb.tx=mvcc
+[2018-05-03 14:40:20,63] [info] Running migration RenameWorkflowOptionsInMetadata with a read batch size of 100000 and a write batch size of 100000
+[2018-05-03 14:40:20,65] [info] [RenameWorkflowOptionsInMetadata] 100%
+[2018-05-03 14:40:20,72] [info] Running with database db.url = jdbc:hsqldb:mem:b80893e8-651f-49a4-b330-ac130d995392;shutdown=false;hsqldb.tx=mvcc
+[2018-05-03 14:40:21,04] [info] Slf4jLogger started
+[2018-05-03 14:40:21,25] [info] Metadata summary refreshing every 2 seconds.
+[2018-05-03 14:40:21,27] [info] WriteMetadataActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-03 14:40:21,27] [info] CallCacheWriteActor configured to flush with batch size 100 and process rate 3 seconds.
+[2018-05-03 14:40:21,27] [info] KvWriteActor configured to flush with batch size 200 and process rate 5 seconds.
+[2018-05-03 14:40:21,87] [info] JobExecutionTokenDispenser - Distribution rate: 50 per 1 seconds.
+[2018-05-03 14:40:21,88] [info] SingleWorkflowRunnerActor: Submitting workflow
+[2018-05-03 14:40:21,91] [info] WDL (Unspecified version) workflow 0af52f8f-abfa-45a9-80a2-4e9ec482ad4a submitted
+[2018-05-03 14:40:21,91] [info] SingleWorkflowRunnerActor: Workflow submitted [38;5;2m0af52f8f-abfa-45a9-80a2-4e9ec482ad4a[0m
+[2018-05-03 14:40:21,91] [info] 1 new workflows fetched
+[2018-05-03 14:40:21,91] [info] WorkflowManagerActor Starting workflow [38;5;2m0af52f8f-abfa-45a9-80a2-4e9ec482ad4a[0m
+[2018-05-03 14:40:21,92] [info] WorkflowManagerActor Successfully started WorkflowActor-0af52f8f-abfa-45a9-80a2-4e9ec482ad4a
+[2018-05-03 14:40:21,92] [info] Retrieved 1 workflows from the WorkflowStoreActor
+[2018-05-03 14:40:22,76] [info] MaterializeWorkflowDescriptorActor [[38;5;2m0af52f8f[0m]: Call-to-Backend assignments: ReassignOneMappingQualityFilter.ReorderSam -> Local, ReassignOneMappingQualityFilter.PrintReads -> Local
+[2018-05-03 14:40:28,14] [info] WorkflowExecutionActor-0af52f8f-abfa-45a9-80a2-4e9ec482ad4a [[38;5;2m0af52f8f[0m]: Starting ReassignOneMappingQualityFilter.ReorderSam (3 shards)
+[2018-05-03 14:40:29,24] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-0/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-11GB.bam \
+  O=Creche-11GB_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-0/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 14:40:29,24] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-1/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-18.bam \
+  O=Creche-18_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-1/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 14:40:29,24] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: [38;5;5mjava -jar /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-2/inputs/home/egueret/tools/picard.jar \
+  ReorderSam \
+  I=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Creche-6.bam \
+  O=Creche-6_reordered.bam \
+  R=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-2/inputs/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa \
+  CREATE_INDEX=TRUE[0m
+[2018-05-03 14:40:29,26] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-2/execution/script
+[2018-05-03 14:40:29,26] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-0/execution/script
+[2018-05-03 14:40:29,26] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: executing: /bin/bash /home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell-executions/ReassignOneMappingQualityFilter/0af52f8f-abfa-45a9-80a2-4e9ec482ad4a/call-ReorderSam/shard-1/execution/script
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: job id: 73095
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: job id: 73097
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: job id: 73093
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:0:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:2:1]: Status change from - to WaitingForReturnCodeFile
+[2018-05-03 14:40:31,30] [info] BackgroundConfigAsyncJobExecutionActor [[38;5;2m0af52f8f[0mReassignOneMappingQualityFilter.ReorderSam:1:1]: Status change from - to WaitingForReturnCodeFile
