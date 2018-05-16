@@ -189,7 +189,7 @@ if __name__ == "__main__":
 					start = start + 2
 					start1 = start1 + 2
 
-				for i in range(start1,start-3,3): # Recherche des codons start en amont du gène
+				for i in range(start1,start-3,3): # Recherche d0es codons start en amont du gène
 					if sequence[i:i+3] == codonStart :
 						st = i
 						en = i+2
@@ -258,14 +258,14 @@ if __name__ == "__main__":
 				line = line.replace(elt[1],elt[3])
 				line = line.replace(elt[2],elt[4])
 			if  elt[5] == '+'  and  elt[0] in line:
-				if 'exon' in line and elt[2] in line  :
+				if 'exon' in line and '\t'+elt[2]+'\t' in line  :
 					line = line.replace(elt[2],elt[4])
-				elif 'CDS' in line and str(int(elt[2])-3) in line :
+				elif 'CDS' in line and '\t'+str(int(elt[2])-3)+'\t' in line :
 					line = line.replace(str(int(elt[2])-3),str(int(elt[4])-3))
 			if  elt[5] == '-' and  elt[0] in line : 
-				if 'exon' in line and elt[1] in line :
+				if 'exon' in line and '\t'+elt[1]+'\t' in line :
 					line = line.replace(elt[1],elt[3])
-				elif 'CDS' in line and str(int(elt[1])+3) in line:
+				elif 'CDS' in line and '\t'+str(int(elt[1])+3) +'\t' in line:
 					line = line.replace(str(int(elt[1])+3),str(int(elt[3])+3))
 		for elt in listeNoStart:
 			if elt[0] in line and '\t'+elt[1]+'\t' in line and 'start_codon' in line: 
