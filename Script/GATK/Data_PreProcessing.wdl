@@ -131,6 +131,7 @@ task SortSAM {
     java -jar ${PICARD} \
       SortSam \
       R=${RefFasta} \
+      CREATE_INDEX=true \
       I=${sep= "I=" MarkDups} \
       O=${sampleName}_marked_duplicates_sorted.bam \
       SORT_ORDER=coordinate 
@@ -152,6 +153,7 @@ task BaseRecalibrator {
       BaseRecalibrator \
       -I ${sep= "-I" BamSorteds} \
       -R ${RefFasta} \
+      -OBI true \
       --known-sites ${VariationSites} \
       -O ${sampleName}_marked_duplicates_sorted_recal_data.table
   }
@@ -171,6 +173,7 @@ task ApplyBQSR {
     java -jar ${GATK} \
       ApplyBQSR \
       -R ${RefFasta} \
+      -OBI true \
       -I ${sep= "-I" BamSorteds} \
       --bqsr-recal-file ${sep= "--bqsr-recal-file" BaseRecals} \
       -O ${sampleName}_marked_duplicates_sorted_recalibrated.bam

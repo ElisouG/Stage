@@ -635,7 +635,47 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 <p style="text-align:justify";>Aujourd'hui, pas grand chose de très productif. J'ai regardé où mon script wdl en était et j'ai découvert qu'il s'était arrêté à MarkDuplicates car  il n'y a plus assez d'espace disque. Si mes calculs sont corrects il devait s'arrêter ce soir vers 17h. Mais n'ayant plus d'espace disue il ne pouvait plus rien faire. Donc je l'ai arrêté. POur voir si toutes les étapes fonctionnent, je l'ai relancé mais avec un seul fichier BAM à traiter à la place de 3. Ça devrait prendre moins d'espace disque sur le serveur et pouvoir tourner jusqu'à la fin. En fin j'espère. J'aimerais que ça ait fini de tourner mercredi pour que je lance la suite du script et voir ce qui fonctionne et ce qui ne fonctionne pas. Ensuite pour le choix des filtres à appliquer à mes données ("hardfiltering") je pense que je vais produire un VariantsToTable pour voir les scores disponibles avant de choisir mes filtres. IL faut aussi que je sache exactement ce qu'ils veulent dire.</p>
 
-Comme j'ai pas trop envie de travailler sur mon script Python j'essaie de faire une digestion in silico du génome du bar via un Package R nommé SimRAD. Pour l'instant j'en suis seulement à l'installation des packages. J'ai réussi à faire fonctionner le package et là je suis après essayer de faire un Rmd avec cela pour en rendre compte à Erick plus tard. En disant que j'avais fait ça avant.
+<p style="text-align:justify";>Comme j'ai pas trop envie de travailler sur mon script Python j'essaie de faire une digestion in silico du génome du bar via un Package R nommé SimRAD. Pour l'instant j'en suis seulement à l'installation des packages. J'ai réussi à faire fonctionner le package et là je suis après essayer de faire un Rmd avec cela pour en rendre compte à Erick plus tard. En disant que j'avais fait ça avant. Sauf que je n'arrive pas à faire fonctionner knitr.</p>
+
+## Jour 50 : 09/05/2018
+
+<p style="text-align:justify";>J'ai relancé GATK, il a planté lundi soir car je n'avais pas mis le bon chemin pour aller jusqu'au fasta de référence. J'ai donc ajouté le fasta de référence dans le dossier d'inputs de GATK. Sinon l'étape SortSam a été réalisée et semble fonctionner correctement. En fait le problème ne venait pas de là mais surement du fait que les fichiers fasta et son index étaient exécutable au lieu de ne pas l'être. Mais j'ai toujours la même erreur même après ces changements. Je vais voir si j'ai encore une fois la même erreur. Si c'est le cas, il faudra que je vois pour ajouter la création d'un  fichier bai à cahcune des étapes précédentes et suivantes.</p>
+
+<p style="text-align:justify";>Lorsque je regarde les problèmes obtenus avec SnpEff, c'est-à-dire les problèmes de circularisation : ils se produisent avec des gènes que je n'ai pas traité avec mon outils python de recherche de codon strat et stop. La majeure partie des 14 problèmes (11) correspondent à des codons stop qui se trouvent avant la fin du dernier exon. Les 3 autres problèmes sont des problèmes plus importants. Il faut que je regarde si c'est la même chose dans le GTF initial que m'a donné Erick. Ensuite il va falloir que je regarde via IGV pour voir ce qu'il se passe visuellement.</p>
+
+<p style="text-align:justify";>Après il va falloir que je tape mon "discours" pour ma présentation de Lundi prochain pour rassurer Erick et Bruno. J'ai pas trop envie comme Bruno a dit que ça devait être simple vu qu'il s'agit d'une courte présentation afin de savoir qui on est, pourquoi on est là et ce que l'on fait.</p>
+
+<p style="text-align:justify";>Il faudrait aussi que je commence à rédiger mon introduction ainsi que le début de mon matériel et méthodes.</p>
+
+
+
+## Jour 51 : 14/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, mail pour demande à propos de ma gratification qui n'a toujours pas été versée. Bruno vient d'appuyer ma demande.</p>
+
+<p style="text-align:justify";>Demande d'augmentation de mon espace disque : demande à Erick et Bruno pour utiliser leur baie de stockage. Bruno va essayer de savoir ce qu'il a besoin de faire pour que j'y accède. Pensez à suivre le ticket de Bruno pour cela.</p>
+
+<p style="text-align:justify";>Mon étape de BaseRecalibrator fonctionne lorsqu'elle est seule mais pas lorsqu'elle est intégrée dans le pipeline. IL faut que je résolve ce problème. Création d'un ticket pour savoir comment cela fonctionne.</p>
+
+<p style="text-align:justify";>Réunion d'équipe pour que tous les stagiaires présentent leurs sujet de stage à l'ensemble de l'équipe ISEM.</p>
+
+
+
+## Jour 52 : 15/05/2018
+
+<p style="text-align:justify";>Ce matin transformation des fichiers GTF en fichiers BED. Mais j'ai une erreur qui apparaît: " Genomic end coordinate is less than (or equal to) start coordinate". Certaines de ces erreurs sont les mêmes que celles que SnpEff me donne mais certaines sont en plus (celles là je ne sais pas dire combien elles sont car gtf2bed ne me les donne que 1 par 1). Je pense que ces erreurs viennent du fait que  certaines de mes nouvelles coordonnées de nouveau start et stop sont comprises dans d'autre coordonnées (exemple : 86594 dans 32786594). Cela reste à prouver. Il y a une des erreurs que je dois vérifier sur IGV mais IGV ne veut pas fonctionner aujourd'hui. Je réessairai cet après-midi.</p>
+
+<p style="text-align:justify";>Je vais maintenant m'attaquer au Config file de GATK. Car l'erreur proviendrait du fait que GATK travaille dans des fichiers temporaires différents de ceux dans lesquels PICARD travaille et stocke ces données. Je ne trouve pas comment écrire un fichier config pour GATK. Dons je teste autre chose : Un script de nettoyage des données qui utilise PICARD puis un script de nettoyage bis qui utilise GATK. On va voir si ça fonctionne ainsi. Si ça fonctionne comme ça alors parfait. Je vais décomposer mes scripts en fonction de GATK ou de PICARD. Hier j'avaiss changé le nom de mon dossier pour y supprimer l'accent présent. Sauf que je n'ai pas modifié le fichier d'input.txt. Du coup il ne trouvait pas le dossier avec les accents. Je viens donc de remédier à ce problème. J'ai toujours le même problème qui est : BaseRecalibrator ne trouves pas de fa.fai alors qu'il y est. J'ai ajouté l'option -OBI true. Je vais voir si cela fonctionne mieux ainsi. Ça ne change strictement rien.</p>
+
+
+## Jour 53 : 16/05/2018
+
+<p style="text-align:justify";>Il faut absolument que je m'occupe des erreurs obtenues après snpEff. Car quand je veux transformer les fichiers GTF en fichiers BED je retrouve les erreurs que snpEff me donne. Je ne comprend pas pourquoi il y a des modif parasites d'une seule extrémité et que le changement de cette coordonnée ajoute une grande séquence. De plus ces erreurs sont absentes des fichiers NoStart et NoStop que j'ai créé. J'ai tout relancé ce matin pour voir d'où ça vient. Mais le script est super long alors qu'il doit âtre court. Je ne sais pas d'où ça vient.</p>
+
+<p style="text-align:justify";>Concernant BaseRecalibrator de GATK, je ne sais pas d'où vient le problème, j'ai rajouté le TMP_DIR de mon choix mais il n'y va pas. J'essaye de relancer le premier script avec la création d'un bam index à la fin de la dernière étape, peut-être que l'erreur vient de là même si il mentionne le fichier index du fichier fasta. On verra bien quand il aura fini.</p>
+
+<p style="text-align:justify";>Comme je ne sais aps travailler avec Python, j'ai lu deux articles cet après-midi sur les GWAS : Forester (RDA de Théo) et PLINK. Maintenant je vais tout copier sur mon disque dur pour essayer de résoudre les problèmes de git ce soir. Plus que 8 minutes à tenir. Je vais écrire un mail à Erick. Puis récupérer les datas et partir.</p>
+
 
 #Bibliographie
 

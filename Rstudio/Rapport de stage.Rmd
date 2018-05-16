@@ -21,7 +21,8 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 # Page de couverture 
 
 * les logos  
-* intitulé "Mémoire de stage de fin d'études" *Elise GUERET 
+* intitulé "Mémoire de stage de fin d'études" 
+* Elise GUERET 
 * Nom ds tuteurs
 * adresse de la fac
 * adresse du stage
@@ -44,9 +45,11 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 Question à se poser avant la rédaction du rapport :   
 * Quels étaient les objectifs de mon travail?  
 * Quel est le bilan de mon travail?  
-* Quelles osnt les informations essentielles et les informations secodaires (mais nécessaires) relatives à mon travail?  
+* Quelles sont les informations essentielles et les informations secodaires (mais nécessaires) relatives à mon travail?  
 * Comment organiser ces informations pour les rendre compréhensilble à un tier?    
 Definir le sujet en termes précis et concis, énoncer les objectifs du travail personnel et les moyens mis en oeuvre et présenter le plan adopté pour la suite du sujet d'étude.
+
+Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à quoi ils servent. Comment les données ont été obtenues? Pour CRECHE voir le rapport dan sles archives ifremer et pour RobustBass voir les dipos KoM.
 
 # Problématique
 
@@ -67,7 +70,7 @@ Discussion :
 * Mes résultats sont-ils pertinents?  
 * Quelle est leur signification?  
 * Quelle en est la portée?  
-* Peuvent-ils être utilez à d'autres?
+* Peuvent-ils être utile à d'autres?
 
 # Conclusion
 

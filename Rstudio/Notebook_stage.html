@@ -32,7 +32,7 @@
 <section class="page-header">
 <h1 class="title toc-ignore project-name">Notebook - Génotypage du Bar</h1>
 <h4 class="author project-author">Elise GUERET</h4>
-<h4 class="date project-date">03 mai 2018</h4>
+<h4 class="date project-date">16 mai 2018</h4>
 </section>
 
 
@@ -254,8 +254,8 @@ Pour la 40aine de minutes qu’il me reste je vais me renseigner sur les fichier
 Erick est pass? dans le bureau en fin de matin?e. Il est content que je me forme à l’?criture de script. D’autre part, il m’a parler d’une commande qui pourrait me permettre de lancer un job sur le cluster puis de récupérer la main. Ca serait bien que je la trouve pour l’utiliser ult?rieurement. D’autre part, j’ai accès à des formations online sur le cluster donc je pense que je vais y jeter un oeil pour voir ce que je sais faire et ce que je vais apprendre à faire. Je lui ai demané pour le choix des puces et de séquençage et pour l’instant, le premier verrou pour utiliser les puces est lev?. Il faut donc qu’on se voit la semaine prochaine avec Bruno pour éterminer notre méthode de géntotypage. Pour aider à faire le choix, il faut que les concentrations en ADN des échantillons extraits soit correct. Cependant, Eric n’arrive pas à voir quels sont les probl?mes car il à doser des échantillons avec une méthode de spectrophotom?trie et à obtenue une valeur puis il l’a refaite deux fois avec deux méthodes fluorim?trique et as obtenues deux autres valeurs qui ne concordent pas avec celles qu’il avait abtenu précédemment. J’esp?re qu’il va résoudre ce probl?me avant notre réunion de la semaine prochaine car cela pourra nous orienter sur le choix de notre méthode de génotypage. Pour les analyses j’aimerais queçasoit des données de la puce mais question manip’ j’esp?re queçasera du séquençage car commeçaje vais pouvoir participer à la fabrication des librairies. Il faut pas que j’oublies de lui proposer mon aide pour quantifier les ADN si il a besoin. Il m’a dit qu’il y avait de bon tutos Stacks à faire pour se former. Il m’a aussi dit que les bioinformaticiens préféraient utiliser GATK qui leur permet de choisir beaucoup plus d’option que Stacks et qui donc ?tait lus puissant pour obtenir des données correctes et exploitables. Je pense que je vais faire pareil parce que Stacks me semble encore indigeste pour le moment ^^. On verra siçava mieux quand j’aurai fait les tutos Stacks en entier et directement sur le serveur cette fois-ci pour gagner du temps peut-être.
 </p>
 </div>
-<div id="jour-11-13032018" class="section level2">
-<h2>Jour 11 : 13/03/2018</h2>
+<div id="jour-11-12032018" class="section level2">
+<h2>Jour 11 : 12/03/2018</h2>
 <p style="text-align:justify" ;>
 A près la RAD-seq, les puces maintenant l’epiGBS sera peut-être utilis?e pour séquencer mes échantillons et ainsi faire avec un même run de séquençage du génotypage et de l’épigéntique en même temps, c’estéch-dire sur les mêmes data. Le pipeline est dispo à l’adresse suivante : <a href="https://www.nature.com/articles/nmeth.3763/figures/12" class="uri">https://www.nature.com/articles/nmeth.3763/figures/12</a> .
 </p>
@@ -797,6 +797,95 @@ Je viens d efaire un ticket pour savoir quelle est la taille de mon espace disqu
 </p>
 <p style="text-align:justify" ;>
 Je vais tenter de refaire une analyse snpEff. Je ne sais plus combien de temps cela prenait. On verra bien. Du coup le temps est cours mais j’ai un problème avec 14 gènes car snpEff les circularise donc il faut que je traite cela demain en priorité.
+</p>
+<p>A la fin de mes scripts wdl il faut faire une évaluation de ce callset pour cela on peut choisir deux voies :</p>
+<ul>
+<li>CollectVariantCallingMetrics de Picard<br />
+</li>
+<li>et GenotypeConcordance de Picard<br />
+</li>
+<li>ou VariantEval de GATK<br />
+</li>
+<li>et GenotypeConcordance de GATK</li>
+</ul>
+<p>Comme dit <a href="https://gatkforums.broadinstitute.org/gatk/discussion/6308/evaluating-the-quality-of-a-variant-callset">ici</a>.</p>
+</div>
+<div id="jour-48-04052018" class="section level2">
+<h2>Jour 48 : 04/05/2018</h2>
+<p style="text-align:justify" ;>
+Dès que je suis arrivée j’ai retravaillé ma présentation pour en parler avec Erick et Bruno à la réunion de ce matin.
+</p>
+<p style="text-align:justify" ;>
+Réunion avec Erick et Bruno :
+</p>
+<p style="text-align:justify" ;>
+Concernant la présentation, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.
+</p>
+<p style="text-align:justify" ;>
+Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l’annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu’Érick m’a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c’est la cas c’est parfait. D’autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3’ ou 5’. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d’un BLAST pour trouver les protéines ou du moins les domaines similaires dans d’autres espèces.
+</p>
+<p style="text-align:justify" ;>
+Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.
+</p>
+<p style="text-align:justify" ;>
+Pour le run de GATK d’hier : J’avais laissé les runtime en actif et non en commentaire du coup ça ne lui a pas plu. Donc j’ai fait cette modif et j’ai relancé le script.
+</p>
+<p style="text-align:justify" ;>
+Je suis allée voir Théo pour qu’il me parle de son analyse RDA (redondance analysis).
+</p>
+</div>
+<div id="jour-49-07052018" class="section level2">
+<h2>Jour 49 : 07/05/2018</h2>
+<p style="text-align:justify" ;>
+Aujourd’hui, pas grand chose de très productif. J’ai regardé où mon script wdl en était et j’ai découvert qu’il s’était arrêté à MarkDuplicates car il n’y a plus assez d’espace disque. Si mes calculs sont corrects il devait s’arrêter ce soir vers 17h. Mais n’ayant plus d’espace disue il ne pouvait plus rien faire. Donc je l’ai arrêté. POur voir si toutes les étapes fonctionnent, je l’ai relancé mais avec un seul fichier BAM à traiter à la place de 3. Ça devrait prendre moins d’espace disque sur le serveur et pouvoir tourner jusqu’à la fin. En fin j’espère. J’aimerais que ça ait fini de tourner mercredi pour que je lance la suite du script et voir ce qui fonctionne et ce qui ne fonctionne pas. Ensuite pour le choix des filtres à appliquer à mes données (“hardfiltering”) je pense que je vais produire un VariantsToTable pour voir les scores disponibles avant de choisir mes filtres. IL faut aussi que je sache exactement ce qu’ils veulent dire.
+</p>
+<p style="text-align:justify" ;>
+Comme j’ai pas trop envie de travailler sur mon script Python j’essaie de faire une digestion in silico du génome du bar via un Package R nommé SimRAD. Pour l’instant j’en suis seulement à l’installation des packages. J’ai réussi à faire fonctionner le package et là je suis après essayer de faire un Rmd avec cela pour en rendre compte à Erick plus tard. En disant que j’avais fait ça avant. Sauf que je n’arrive pas à faire fonctionner knitr.
+</p>
+</div>
+<div id="jour-50-09052018" class="section level2">
+<h2>Jour 50 : 09/05/2018</h2>
+<p style="text-align:justify" ;>
+J’ai relancé GATK, il a planté lundi soir car je n’avais pas mis le bon chemin pour aller jusqu’au fasta de référence. J’ai donc ajouté le fasta de référence dans le dossier d’inputs de GATK. Sinon l’étape SortSam a été réalisée et semble fonctionner correctement. En fait le problème ne venait pas de là mais surement du fait que les fichiers fasta et son index étaient exécutable au lieu de ne pas l’être. Mais j’ai toujours la même erreur même après ces changements. Je vais voir si j’ai encore une fois la même erreur. Si c’est le cas, il faudra que je vois pour ajouter la création d’un fichier bai à cahcune des étapes précédentes et suivantes.
+</p>
+<p style="text-align:justify" ;>
+Lorsque je regarde les problèmes obtenus avec SnpEff, c’est-à-dire les problèmes de circularisation : ils se produisent avec des gènes que je n’ai pas traité avec mon outils python de recherche de codon strat et stop. La majeure partie des 14 problèmes (11) correspondent à des codons stop qui se trouvent avant la fin du dernier exon. Les 3 autres problèmes sont des problèmes plus importants. Il faut que je regarde si c’est la même chose dans le GTF initial que m’a donné Erick. Ensuite il va falloir que je regarde via IGV pour voir ce qu’il se passe visuellement.
+</p>
+<p style="text-align:justify" ;>
+Après il va falloir que je tape mon “discours” pour ma présentation de Lundi prochain pour rassurer Erick et Bruno. J’ai pas trop envie comme Bruno a dit que ça devait être simple vu qu’il s’agit d’une courte présentation afin de savoir qui on est, pourquoi on est là et ce que l’on fait.
+</p>
+<p style="text-align:justify" ;>
+Il faudrait aussi que je commence à rédiger mon introduction ainsi que le début de mon matériel et méthodes.
+</p>
+</div>
+<div id="jour-51-14052018" class="section level2">
+<h2>Jour 51 : 14/05/2018</h2>
+<p style="text-align:justify" ;>
+Aujourd’hui, mail pour demande à propos de ma gratification qui n’a toujours pas été versée. Bruno vient d’appuyer ma demande.
+</p>
+<p style="text-align:justify" ;>
+Demande d’augmentation de mon espace disque : demande à Erick et Bruno pour utiliser leur baie de stockage. Bruno va essayer de savoir ce qu’il a besoin de faire pour que j’y accède. Pensez à suivre le ticket de Bruno pour cela.
+</p>
+<p style="text-align:justify" ;>
+Mon étape de BaseRecalibrator fonctionne lorsqu’elle est seule mais pas lorsqu’elle est intégrée dans le pipeline. IL faut que je résolve ce problème. Création d’un ticket pour savoir comment cela fonctionne.
+</p>
+<p style="text-align:justify" ;>
+Réunion d’équipe pour que tous les stagiaires présentent leurs sujet de stage à l’ensemble de l’équipe ISEM.
+</p>
+</div>
+<div id="jour-52-15052018" class="section level2">
+<h2>Jour 52 : 15/05/2018</h2>
+<p style="text-align:justify" ;>
+Ce matin transformation des fichiers GTF en fichiers BED. Mais j’ai une erreur qui apparaît: &quot; Genomic end coordinate is less than (or equal to) start coordinate“. Certaines de ces erreurs sont les mêmes que celles que SnpEff me donne mais certaines sont en plus (celles là je ne sais pas dire combien elles sont car gtf2bed ne me les donne que 1 par 1). Je pense que ces erreurs viennent du fait que certaines de mes nouvelles coordonnées de nouveau start et stop sont comprises dans d’autre coordonnées (exemple : 86594 dans 32786594). Cela reste à prouver. Il y a une des erreurs que je dois vérifier sur IGV mais IGV ne veut pas fonctionner aujourd’hui. Je réessairai cet après-midi.
+</p>
+<p style="text-align:justify" ;>
+Je vais maintenant m’attaquer au Config file de GATK. Car l’erreur proviendrait du fait que GATK travaille dans des fichiers temporaires différents de ceux dans lesquels PICARD travaille et stocke ces données. Je ne trouve pas comment écrire un fichier config pour GATK. Dons je teste autre chose : Un script de nettoyage des données qui utilise PICARD puis un script de nettoyage bis qui utilise GATK. On va voir si ça fonctionne ainsi. Si ça fonctionne comme ça alors parfait. Je vais décomposer mes scripts en fonction de GATK ou de PICARD. Hier j’avaiss changé le nom de mon dossier pour y supprimer l’accent présent. Sauf que je n’ai pas modifié le fichier d’input.txt. Du coup il ne trouvait pas le dossier avec les accents. Je viens donc de remédier à ce problème. J’ai toujours le même problème qui est : BaseRecalibrator ne trouves pas de fa.fai alors qu’il y est. J’ai ajouté l’option -OBI true. Je vais voir si cela fonctionne mieux ainsi. Ça ne change strictement rien.
+</p>
+</div>
+<div id="jour-53-16052018" class="section level2">
+<h2>Jour 53 : 16/05/2018</h2>
+<p style="text-align:justify" ;>
+Il faut absolument que je m’occupe des erreurs obtenues après snpEff. Car quand je veux transformer les fichiers GTF en fichiers BED je retrouve les erreurs que snpEff me donne. Je ne comprend pas pourquoi il y a des modif parasites d’une seule extrémité et que le changement de cette coordonnée ajoute une grande séquence. De plus ces erreurs sont absentes des fichiers NoStart et NoStop que j’ai créé. J’ai tout relancé ce matin pour voir d’où ça vient.
 </p>
 </div>
 </div>
