@@ -7,7 +7,7 @@
 
 #################### Commande lancement sur le cluster ###########################
 
-# qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_sge_test_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage_UM_ISEM/script/Correction_annotation.py"
+# qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_test_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage_UM_ISEM/script/Correction_annotation.py"
 
 ##################### Importation Module #######################
 ## Python modules
@@ -272,10 +272,14 @@ if __name__ == "__main__":
 				line = line.replace(elt[1],elt[3])
 				line = line.replace(elt[2],elt[4])
 			if  elt[5] == '+'  and  elt[0] in line:
-				if elt[1] in line  :
+				if 'exon' in line and '\t'+elt[1]+'\t' in line  :
+					line = line.replace(elt[1],elt[3])
+				elif 'CDS' in line and '\t'+ +'\t' in line :
 					line = line.replace(elt[1],elt[3])
 			if  elt[5] == '-' and  elt[0] in line: 
-				if elt[2] in line :
+				if 'exon' in line and '\t'+elt[2]+'\t' in line :
+					line = line.replace(elt[2],elt[4])
+				elif 'CDS' in line and '\t'+ +'\t' in line :
 					line = line.replace(elt[2],elt[4])
 
 		newAnnotation.write(line)
