@@ -1,16 +1,16 @@
 ## Written by Elise GUERET in 2018
 
 
-## This WDL pipeline implements removing sequencing duplicates and base recalibration
+## This WDL pipeline implements removing sequencing duplicates and sorting reads by coordinate
 ## derived from the Best Practices for Variant Discovery in RNAseq (Mai 2015) 
-## and adapted to GATK 4 for preparing Dicentrarchus labrax RNA-seq data for variant analysis.
+## and adapted to GATK 4 for preparing Dicentrarchus labrax RNA-seq data for cleanup by GATK.
 
 
 Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
 
 # Workflow Definition
 
-workflow Data_PreProcessing {
+workflow Data_cleanup_picard {
   
   File picard
   File inputSamplesFile
@@ -18,7 +18,6 @@ workflow Data_PreProcessing {
   File refFasta
   File refIndex
   File refDict
-  File variationSites
 
   scatter (sample in inputSamples) {
     call ReorderSam {
@@ -106,6 +105,7 @@ task SortSAM {
     java -jar ${PICARD} \
       SortSam \
       R=${RefFasta} \
+      CREATE_INDEX=true \
       I=${sep= "I=" MarkDups} \
       O=${sampleName}_marked_duplicates_sorted.bam \
       SORT_ORDER=coordinate 
@@ -115,7 +115,3 @@ task SortSAM {
     File BamSorted = "${sampleName}_marked_duplicates_sorted.bam"
   }
 }
-
-
-
-
