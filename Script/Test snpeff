@@ -7,11 +7,17 @@ qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_databas
 # Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations et l'ancien fasta (last)
 qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
 
+######################### 17 Mai 2018 ##################################
 # Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations et les modifications des stop et l'ancien fasta (new)
 qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax_New -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
 
+######################### 17 Mai 2018 ##################################
 # Test snpeff et la puce (New)
-qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_Modif -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce_Modif.html Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_Modif.ann.vcf" 
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_Modif -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif.err -b y "java -Xmx4g -jar snpEff.jar -v -stats essai_puce_Modif2.html Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_Modif.ann.vcf" 
+
+######################### 17 Mai 2018 ##################################
+# Test snpeff et la puce (New)
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_Modif_debug -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif_debug.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_Modif_debug.err -b y "java -Xmx4g -jar snpEff.jar -d Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_Modif_debug.ann.vcf" 
 
 # Test snpeff et la puce (New debug)
 qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_snpEff_puce_New_debug -o /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New_debug.out -e /home/egueret/Stage_UM_ISEM/sge_test_snpEff_puce_New_debug.err -b y "java -Xmx4g -jar snpEff.jar -d Dicentrarchus_labrax /home/egueret/Stage_UM_ISEM/Puce_57K/VCF/Final_list_57907_SNPs.recode.vcf > Final_list_57907_SNPs.recode_New_debug.ann.vcf" 
