@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4229913492",
+    "hash" : "0",
     "id" : "29FA6C5E",
-    "lastKnownWriteTime" : 1524493203,
-    "last_content_update" : 1524493203,
+    "lastKnownWriteTime" : 1526541585,
+    "last_content_update" : 1526541585,
     "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/sequencing_methods.Rmd",
     "project_path" : "sequencing_methods.Rmd",
     "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
     },
     "relative_order" : 14,
     "source_on_save" : false,

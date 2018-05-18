@@ -676,6 +676,23 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 <p style="text-align:justify";>Comme je ne sais aps travailler avec Python, j'ai lu deux articles cet après-midi sur les GWAS : Forester (RDA de Théo) et PLINK. Maintenant je vais tout copier sur mon disque dur pour essayer de résoudre les problèmes de git ce soir. Plus que 8 minutes à tenir. Je vais écrire un mail à Erick. Puis récupérer les datas et partir.</p>
 
+## Jour 54 : 17/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, j'ai récupéré le fichier GTF qu'Erick a modifié je ne sais comment pour relancer snpEff. J'attends de voir les résultats de snpEff. Il reste 2  gène circulaires à explorer. Il a vérifié que l'extension était correct et en phase puis il a remis les coordonnées initiales.</p>
+
+<p style="text-align:justify";>J'ai lancé BaseRecalibrator seul en direct dans le cluster et ça fonctionne. Du coup je me suis dit que les chemin étaient en dur dans cette option de lancement. Alors pourquoi ça ne marcherait pas dans le script wdl. J'ai donc testé en mettant le chemin du fasta en dur. Résultat : plus de problème avec l'index de ce fichier. Par contre il rencontre le même problème avec le fichier des sites de variations connus. Donc j'ai décidé de le mettre en dur lui aussi. Et résultat : ça tourne de puis maintenant 12 min sans aucun message d'erreur. Je crois que j'ai résolu ce problème!!! Enfin!!!!!!!! Il me reste un problème avec les librairies R qu'utilise AnalyzeCovariate pour faire son plot.pdf pour voir les résultats avant et après la recalibration. Mais ce n'est pas grave car cette étape n'est pas nécessaire pour les étapes suivantes, elle permet juste de vérifier visuellement les recalibrartions qui ont été faites.</p>
+
+<p style="text-align:justify";>J'ai demandé mes vacances et Bruno me les a validées. Reste plus qu'à Erick de les valider. Et il les qa validées lui aussi.</p>
+
+## Jour 55 : 18/05/2018
+
+<p style="text-align:justify";>Sur le forum de GATK ils ont répondu. En fait il suffit de mentionner les fichiers RefIndex et RefDict dans la tâche et dans le call même si l'outils ne l'appelle pas car il va l'utiliser quand même. Je suis en train de tester ce qu'ils m'ont dit. J'espère que ça va marcher.</p>
+
+<p style="text-align:justify";>Dimitri est venu m'installer WinSCP pour que je puisse transférer mes données depuis mon ordinateur jusqu'à la baie de stockage. Sauf que je n'y ai pas encore accès. Normalement Rémy doit y remédier aujourd'hui. De toute façon ce n'est pas urgent mais ça va le devenir si le script fonctionne.</p>
+
+<p style="text-align:justify";>Ce matin j'ai lu 3 papiers sur les statistics des SNPs à savoir des test d'association de variant et des tests d'association d'haplotype.</p>
+
+<p style="text-align:justify";>J'ai essayé de configurer une connection VPN sur l'ordi ubuntu de Flo mais ça ne fonctionne pas car il y a un problème avec des packages R. J'imagine qu'ils ne sont pas à jour. On va voir ça ce soir avec Flo.</p>
 
 #Bibliographie
 
