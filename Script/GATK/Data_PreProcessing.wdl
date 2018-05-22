@@ -65,18 +65,19 @@ workflow Data_PreProcessing {
         GATK=gatk
         
     }
-    call AnalyseCovariate {
-    	input:
-    	  sampleName=sample[0],
-        BaseRecals=BaseRecalibrator.BaseRecal,
-    	  GATK=gatk
-    }
+    #call AnalyseCovariate {
+      #input:
+        #sampleName=sample[0],
+        #BaseRecals=BaseRecalibrator.BaseRecal,
+        #GATK=gatk
+    #}
   }
 }
 
 # Task Definition
 
-# Mets dans le même ordre les fichiers BAM que le fichier fasta du génome de référence.
+# This task calls Picard's tool, ReoderSam. This tool classes reads in the bam file in the same 
+# order of the reference genome. 
 task ReorderSam {
   File PICARD
   File bamFile
@@ -99,7 +100,8 @@ task ReorderSam {
   }
 }
    
-#
+# This task calls Picard's tool, Markduplicates. This tool marks duplicates and remove 
+# sequencing duplicates from a bam file to another bam file.
 task Markduplicates {
   File PICARD
   Array[File] Reordereds
@@ -122,6 +124,7 @@ task Markduplicates {
   }
 }
 
+# This task calls Picard's tool, SortSam. This tool permits to classify reads by coordinate.
 task SortSAM {
   File PICARD
   File RefFasta
@@ -142,6 +145,8 @@ task SortSAM {
   }
 }
 
+# This task calls GATK's tool, BaseRecalibrator. This tool create a table which contains
+# quality value to be change because sequencing duplicates were removed.
 task BaseRecalibrator {
   File GATK
   File RefFasta
@@ -152,17 +157,19 @@ task BaseRecalibrator {
     java -jar ${GATK} \
       BaseRecalibrator \
       -I ${sep= "-I" BamSorteds} \
-      -R ${RefFasta} \
-      -OBI true \
-      --known-sites ${VariationSites} \
+      -R /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta \
+      -OBI true \ 
+      --known-sites /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/Final_list_57907_SNPs.recode.vcf \
       -O ${sampleName}_marked_duplicates_sorted_recal_data.table
   }
   # runtime { sge_queue: "cemeb20.q" }
   output {
-    File BaseRecal = "${sampleName}_recal_data.table"
+    File BaseRecal = "${sampleName}_marked_duplicates_sorted_recal_data.table"
   }
 }
 
+# This task calls GATK's tool, ApplyBQSR. This tool applies the recalibration from the 
+# table created by BaseRecalibrator.
 task ApplyBQSR {
   File GATK
   File RefFasta
@@ -172,8 +179,7 @@ task ApplyBQSR {
   command {
     java -jar ${GATK} \
       ApplyBQSR \
-      -R ${RefFasta} \
-      -OBI true \
+      -R /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta \
       -I ${sep= "-I" BamSorteds} \
       --bqsr-recal-file ${sep= "--bqsr-recal-file" BaseRecals} \
       -O ${sampleName}_marked_duplicates_sorted_recalibrated.bam
@@ -184,20 +190,22 @@ task ApplyBQSR {
   }
 }
 
-task AnalyseCovariate {
-  File GATK
-  Array[File] BaseRecals
-  String sampleName
-  command {
-    java -jar ${GATK} \
-      AnalyzeCovariates \
-      -bqsr ${sep= "--bqsr-recal-file" BaseRecals} \
-      -plots ${sampleName}_recalibration.pdf  
-  }
+#task AnalyseCovariate {
+ # File GATK
+  #Array[File] BaseRecals
+  #String sampleName
+  #command {
+  #  java -jar ${GATK} \
+  #    AnalyzeCovariates \
+  #    -bqsr ${sep="-bqsr" BaseRecals} \
+  #    -plots ${sampleName}_recalibration.pdf \
+  #    -csv ${sampleName}_recalibration.csv
+  #}
   # runtime { sge_queue: "cemeb20.q" }
-  output {
-    File Plot = "${sampleName}_recalibration.pdf"
-  }
-}
+  #output {
+  #  File Plot = "${sampleName}_recalibration.pdf"
+  #  File Csv = "${sampleName}_recalibration.csv"
+  #}
+#}
 
 

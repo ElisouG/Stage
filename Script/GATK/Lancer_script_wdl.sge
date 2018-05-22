@@ -18,28 +18,42 @@
 #$ -cwd
 
 # Choose to run on a specific queue
-#$ -q cemeb20.q
+#$ -q cemeb.q
 
 # Job hardware time limit
 #$ -l h_rt=99:00:00
 
 # Job name
-#$ -N "run_gatk_"
+#$ -N "run_Data_PreProcessing"
 
 # Standard output (you can use the option '-j y' which add stderr with sdtout)
-#$ -o /home/egueret/Stage_UM_ISEM/Données_CRECHE/sge_lancer_PreProcessing.out
+#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Data_PreProcessing.out
 
 # Erreur output (don't use with the option '-j y')
-#$ -e /home/egueret/Stage_UM_ISEM/Données_CRECHE/sge_lancer_PreProcessing.err
+#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Data_PreProcessing.err
 
 #Modules à charger pour que le script fonctionne
 module load java1.8
 module load java1.8_jre
 
+# Valider le pipeline
+#java -jar /home/egueret/tools/wdltool.jar validate Data_cleanup_picard.wdl
+#java -jar /home/egueret/tools/wdltool.jar validate Data_cleanup_GATK.wdl
+
+# Créer l'input
+#java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_picard.wdl > Data_cleanup_picard_inputs.json
+#java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_GATK.wdl > Data_cleanup_GATK_inputs.json
 
 #Lancer le pipeline
 
 # Vérification de l'ordre et réassignment des valeurs de MAPQ : inutile CF stie web troubleshooting
-# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ReassignOneMappingQualityFilter.wdl -i ReassignOneMappingQualityFilter_inputs2.json
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ReassignOneMappingQualityFilter.wdl -i ReassignOneMappingQualityFilter_inputs2.json
 
-java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Données_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
+# Lancement du script contenant GATK  et PICARD
+java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
+
+# Lancement du script 1 avec PICARD seul : ce script fonctionne
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_picard.wdl -i Data_cleanup_picard_inputs.json
+
+# Lancement du script 2 avec GATK seul : ce script fonctionne
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_GATK.wdl -i Data_cleanup_GATK_inputs.json
