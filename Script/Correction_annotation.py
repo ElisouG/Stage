@@ -57,9 +57,9 @@ if __name__ == "__main__":
 	pathWarning = "/home/egueret/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
 	pathGTF = "/home/egueret/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
 	pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
-	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_16_05_18.txt"
-	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_16_05_18.txt"
-	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_16_05_2018.gtf"
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_18_05_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_18_05_18.txt"
+	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_18_05_2018.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
 
@@ -274,12 +274,12 @@ if __name__ == "__main__":
 			if  elt[5] == '+'  and  elt[0] in line:
 				if 'exon' in line and '\t'+elt[1]+'\t' in line  :
 					line = line.replace(elt[1],elt[3])
-				elif 'CDS' in line and '\t'+ +'\t' in line :
+				elif 'CDS' in line and '\t'+ elt[1] +'\t' in line :
 					line = line.replace(elt[1],elt[3])
 			if  elt[5] == '-' and  elt[0] in line: 
 				if 'exon' in line and '\t'+elt[2]+'\t' in line :
 					line = line.replace(elt[2],elt[4])
-				elif 'CDS' in line and '\t'+ +'\t' in line :
+				elif 'CDS' in line and '\t'+ elt[2] +'\t' in line :
 					line = line.replace(elt[2],elt[4])
 
 		newAnnotation.write(line)
