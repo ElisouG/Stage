@@ -686,13 +686,27 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 ## Jour 55 : 18/05/2018
 
-<p style="text-align:justify";>Sur le forum de GATK ils ont répondu. En fait il suffit de mentionner les fichiers RefIndex et RefDict dans la tâche et dans le call même si l'outils ne l'appelle pas car il va l'utiliser quand même. Je suis en train de tester ce qu'ils m'ont dit. J'espère que ça va marcher.</p>
+<p style="text-align:justify";>Sur le forum de GATK ils ont répondu. En fait il suffit de mentionner les fichiers RefIndex et RefDict dans la tâche et dans le call même si l'outils ne l'appelle pas car il va l'utiliser quand même. Je suis en train de tester ce qu'ils m'ont dit. J'espère que ça va marcher. Ce qu'il m'ont dit fonctionne donc je teste maintenant le script suivant qui n'est autre que le script de variant calling.</p>
 
 <p style="text-align:justify";>Dimitri est venu m'installer WinSCP pour que je puisse transférer mes données depuis mon ordinateur jusqu'à la baie de stockage. Sauf que je n'y ai pas encore accès. Normalement Rémy doit y remédier aujourd'hui. De toute façon ce n'est pas urgent mais ça va le devenir si le script fonctionne.</p>
 
-<p style="text-align:justify";>Ce matin j'ai lu 3 papiers sur les statistics des SNPs à savoir des test d'association de variant et des tests d'association d'haplotype.</p>
+<p style="text-align:justify";>Ce matin j'ai lu 3 papiers sur les statistics des SNPs à savoir des test d'association de variant et des tests d'association d'haplotype. Cet aprèm j'ai lu un papier sur la génétique des pops de *D.labrax*. Et je me suis renseignée sur l'outils GENETIX qu'ils utilisent leur étude. J'ai également fait les ajouts nécessaires sur mon site web.</p>
 
-<p style="text-align:justify";>J'ai essayé de configurer une connection VPN sur l'ordi ubuntu de Flo mais ça ne fonctionne pas car il y a un problème avec des packages R. J'imagine qu'ils ne sont pas à jour. On va voir ça ce soir avec Flo.</p>
+<p style="text-align:justify";>J'ai essayé de configurer une connection VPN sur l'ordi ubuntu de Flo mais ça ne fonctionne pas car il y a un problème avec des packages R. J'imagine qu'ils ne sont pas à jour. On va voir ça ce soir avec Flo. Il suffisait de faire apt-get update et ap-get upgrade pour tout mettre à jour sous un Ubuntu. Et en plus le logiciel était déjà présent sur son ordi donc je n'avais plus qu'à télécharger l fichier client vpn pour que cela fonctionne correctement.</p>
+
+## Jour 56 : 22/05/2018
+
+<p style="text-align:justify";>Je vais répondre au mail d'Erick cet aprèm comme ça si il passe juste après ça ne me dérangera pas. J'ai peur qu'en lui répondant maintenant il débarque rapidement et je n'ai pas fait grand chose pour ne pas dire rien.</p>
+
+<p style="text-align:justify";>Finalement, mon script python fonctionne. En fait c'est mieux quand on lance le bon script et pas son ancienne version.</p>
+
+<p style="text-align:justify";>Pour GATK, il a tourner pendant 1h50 mais il a rencontré un problème avec GenotypeGVCF car il ne reconnaissait pas l'argument pour la nombre de giga alloué pour cette étape à Java. J'ai donc enlevé les guillemets et relancé le script. Je vais pas tarder à lancer le script alternatif à celui que j'ai écrit pour savoir lequel fonctionne le mieux ^^. Mais il me semble que je dois d'abord finir de l'écrire. Je vais voir ça de suite. Effectivement, il faut que je la peaufine.</p>
+
+J'ai écrit un mail à Erick ainsi qu'un docx pour lui expliquer pourquoi et comment je compte choisir mes filtres pour mes SNPs et mes INDELs. Comme ça il arrêtera de ne pas comprendre de quoi je parle (enfin j'espère).
+
+A la suite de son mail je me suis dit que je pouvais lancer un script similaire sur le cluster qui me permet de récupérer les données pour le choix des filtres plus rapidement. Sauf que toutes les queues sont overbookés à cause de taubier et fgeoffroy qui prennent toutes les noeuds de toutes les queues qui fonctionnent.
+
+<p style="text-align:justify";>Rien à voir avec le taf mais j'ai fait une demande CAF pour savoir pourquoi je n'ai plus aucun droit, j'ai pris RDV pour la vidange, j'ai remboursé la CAF pour le mois de Février perçu en trop (Au moins j'aurai essayé).</p>
 
 #Bibliographie
 

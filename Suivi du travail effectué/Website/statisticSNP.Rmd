@@ -81,6 +81,9 @@ Future developments will also include options to do multivariate analyses, to re
 
 <p style="text-align:justify";>**GCTA is not limited to the analysis of data on human complex traits, but in this report we only use examples and specifications (e.g., the number of autosomes) for humans.**</p>
 
+# GENETIX a windows software, Belkhir et al., 1998-2005
+
+[Genetix](http://kimura.univ-montp2.fr/genetix/) est un logiciel qui fonctionne sous Windows et qui permet de calculer un certain nombre de paramètres utilisés en Génétique des populations. Il propose également de tester leur significativité en réalisant des test de ré-échantillonnage par permutations.
 
 # R-Packages
 
@@ -90,7 +93,7 @@ Future developments will also include options to do multivariate analyses, to re
 
 ## vegan
 
-Mentionned by Forester 2017.
+Mentionned by Forester 2017. Ce package permet de réaliser des analyses de rendondance.
 
 ## adegenet
 ## genetics
