@@ -1,5 +1,5 @@
 ---
-title: "Outils utilisés"
+title: "Scripts"
 output:
    html_document: 
     fig_caption: yes
@@ -11,15 +11,9 @@ output:
 ---
 
 * * * * *
+Quelques explications sur mes scripts : 
+* * * * *
 
-# snpEff
+# GATK : Découverte de Variants à partir de données de RNA-seq
 
-Annotation de la puce 
-
-# samtools
-
-faidx
-
-# picard
-
-CreateSequenceDictionary
+# Python : Correction du fichier d'annotation de *Dicentrarchus labrax*

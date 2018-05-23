@@ -710,6 +710,21 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 <p style="text-align:justify";>Rien à voir avec le taf mais j'ai fait une demande CAF pour savoir pourquoi je n'ai plus aucun droit, j'ai pris RDV pour la vidange, j'ai remboursé la CAF pour le mois de Février perçu en trop (Au moins j'aurai essayé).</p>
 
+## Jour 57 : 23/05/2018
+
+<p style="text-align:justify";>Erick est passé ce matin, on a parlé des filtres pour faire la sélection des véritables SNPs. C'est bien de faire ce que je compte faire même si il semble ne pas avoir tout compris ^^. Il faut absolument que je comprenne la génétique qui est derrière les filtres que je vais choisir pour ne pas choisir n'importe quoi. De plus, on aura un biais dans la répartition des SNPs car on trvaille avec des familles et non des individus totalement indépendants. Je continue de mettre en place le VariantCalling de GATK.
+Il faut que je résolve ce pb avec la baie de stockage pour pouvoir lancer des analyses à plus grande échelle (j'entends par là: sur plus de bam).
+Pour mon script python, il faut que j'examine les longueurs ajoutées peut-être sous forme de graph pour voir la taille ajoutée aussi bien en start qu'en stop. Il faut qu'on continue ce qu'on a commencé avec Flo. et il faut que je vois pour faire une traduction des CDS avec les ajouts pour voir si la protéines en entière ou tronquée par la présence de codon stop au milieu; Si il y a des codons stop au milieu cela signifiera que les "frame" prises en compte ne sont pas les bonnes. et qu'il faudra y remédier car il est nécessaire d'avoir le bon ORF (cadre de lecture) pour chaque CDS.
+Concernant le rapport, il faudrait que je teste différente chose pour voir si la méthodologie fonctionne bien. (avec de gros et de petits bam, avec des réplicas de manip) pour voir si toutes ces possibilités impactent le fonctionnement de GATK.</p>
+
+<p style="text-align:justify";>Pour mon script Python, je me suis occupée de commencer à écrire le script pour parser le fichier gtf du transcriptome que m'a donné Erick. Je vais demander à Flo pour récupérer le fichier au format tabular et non au format visuellement lisible pour pouvoir examiner la longueur que j'ajoute car ça fait plusieurs fois qu'érick me le demande et qu'à chaque fois j'oublies. Donc il faudrait que j'ai fait cela pour demain.</p>
+
+<p style="text-align:justify";>Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j'y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C'est celle que je vais choisir pour ne pas faire du doucle emploi quoi que, une page script et leur détail peut être utile.</p>
+
+<p style="text-align:justify";>Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu'il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.</p>
+
+<p style="text-align:justify";>Comme ma carte multi-services ne me permet plus d'ouvrir la porte de l'ISEM, j'ai écrit un mail à la logistique. J'y suis donc allée et elle m'a dit que mon numéro de carte était mentionné 2 fois et que cela venait peut-être de cela. En retournant au bâtiment 22, j'ai testé ma carte à nouveau mais cela n'a rien changé. Elle ne fonctionne toujours pas. J'ai donc écrit un second mail pour dire que ça ne fonctionne toujours afin qu'elle voit avec le service informatique d'où vient le problème.</p>
+
 #Bibliographie
 
 Sur Mendeley dans le dossier Stage ISEM et dans le menu : "Biblio".

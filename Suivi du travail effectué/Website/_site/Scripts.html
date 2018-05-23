@@ -11,7 +11,7 @@
 
 
 
-<title>Reunion du 06/04/2018</title>
+<title>Scripts</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
@@ -145,6 +148,101 @@ $(document).ready(function () {
 <!-- code folding -->
 
 
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -296,22 +394,79 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Reunion du 06/04/2018</h1>
+<h1 class="title toc-ignore">Scripts</h1>
 
 </div>
 
 
 <hr />
-<div id="reunion-avec-erick-bruno-et-pierre-alexandre" class="section level1">
-<h1>Réunion avec Erick, Bruno et Pierre-Alexandre:</h1>
+<p>Quelques explications sur mes scripts :</p>
+<hr />
+<div id="gatk-decouverte-de-variants-a-partir-de-donnees-de-rna-seq" class="section level1">
+<h1>GATK : Découverte de Variants à partir de données de RNA-seq</h1>
+<p>Voici les bonnes pratiques pour faire de la découverte de variants à partir de données de RNA-seq : <img src="BPDV.png" alt="Source : https://software.broadinstitute.org/gatk/documentation/article?id=4067" /></p>
 <p style="text-align:justify" ;>
-Il faut que je récupère les données de RNA-seq de <em>Morone saxatilis</em> dans le but de rechercher les CDS commun afin d’avoir une base d’ID identique pour ensuite trouver/étudier les problèmes de paralogie et d’homologie, cela nous donnera le nombre de comparaison à effectuer. Tout ceci va permettre de donner une mailleure annotation en amont et en aval des gènes. Pour cela il faut que je trouve des outils de transfert d’annotation à partir de données de RNA-seq. Sachant que j’ai à ma disposition les 3 transcriptome de <em>labrax</em>, <em>punctatus</em> et <em>saxatilis</em> ainsi que les génomes alignés de <em>labrax</em> et <em>saxatilis</em>. La meilleure stratégie serait de récupérer ces transcriptomes, de les aligner puis de faire un BLAT. Les meilleurs outils pour l’annotation seraient : <code>snpEff</code>, <code>VCFanno</code> et <code>ANNOVAR</code>. Pour les alignement il faut que je creuse <code>TopHat</code> et <code>Stream</code> et <code>Bowtie2</code>. Il faut que je lise les papiers sur les pipelines d’annotation de UCSC datant de 2003, du projet ENCODE et de regarder l’outils <code>MAKER2</code> dans BMC informatics. Pierre-Alexandre a utilisé les mots clés suivants : genome annotation mRNA (pipeline).
+Comme mentionné ci-dessus on ne peut pas filtrer les variants par la méthode de VSQR pour le moment. Cette méthode utilise du machine learning pour filtrer les données. Elle s’adapte donc aux données qu’on lui donne. Il faut donc passer par du “hard-filtering”. C’est-à-dire, un filtre sur critère strict défini comme des recommendations par l’équipe qui développe GATK. Les recommandations générales de l’équipe de GATK sont mentionnées <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3225">ici</a>. Dans cet article ils mentionnent différents seuils pour différents type de filtres à appliquer. Ceux qu’ils proposent sont les suivants :
 </p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Sigle du filtre utilisé</th>
+<th align="center">Valeur si SNPs</th>
+<th align="center">Valeur si INDELs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">QD</td>
+<td align="center">&lt;2.0</td>
+<td align="center">&lt;2.0</td>
+</tr>
+<tr class="even">
+<td align="center">FS</td>
+<td align="center">&gt;60.0</td>
+<td align="center">&gt;200.0</td>
+</tr>
+<tr class="odd">
+<td align="center">ReadPosRankSum</td>
+<td align="center">&lt;-8.0</td>
+<td align="center">&lt;20.0</td>
+</tr>
+<tr class="even">
+<td align="center">MQ</td>
+<td align="center">&lt;40.0</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">MQRankSum</td>
+<td align="center">&lt;-12.5</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">SOR</td>
+<td align="center">&gt;3.0</td>
+<td align="center">&gt;10.0</td>
+</tr>
+<tr class="odd">
+<td align="center">InbreedingCoeff</td>
+<td align="center"></td>
+<td align="center">&lt;-0.8</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align:justify" ;>
+Sur <a href="https://software.broadinstitute.org/gatk/documentation/article?id=6925">cette page</a>, ils présentent différents graphiques avec leur données et expliquent pourquoi ils ont choisis ces différents seuils. Ensuite il ne reste plus qu’à appliquer ces filtres aux données selon les recommendations <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=2806">suivantes</a>.
+</p>
+</div>
+<div id="python-correction-du-fichier-dannotation-de-dicentrarchus-labrax" class="section level1">
+<h1>Python : Correction du fichier d’annotation de <em>Dicentrarchus labrax</em></h1>
 </div>
 
 <p>Copyright &copy; 2018 | Elise GUERET</p>
 
 
+</div>
+</div>
 
 </div>
 

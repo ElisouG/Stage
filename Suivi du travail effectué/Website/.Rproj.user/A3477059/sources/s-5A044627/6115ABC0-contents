@@ -1,0 +1,40 @@
+---
+title: "Scripts"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+
+Quelques explications sur mes scripts : 
+
+* * * * *
+
+# GATK : Découverte de Variants à partir de données de RNA-seq
+
+Voici les bonnes pratiques pour faire de la découverte de variants à partir de données de RNA-seq :
+![Source : https://software.broadinstitute.org/gatk/documentation/article?id=4067](BPDV.png)
+
+<p style="text-align:justify";>Comme mentionné ci-dessus on ne peut pas filtrer les variants par la méthode de VSQR pour le moment. Cette méthode utilise du machine learning pour filtrer les données. Elle s'adapte donc aux données qu'on lui donne. Il faut donc passer par du "hard-filtering". C'est-à-dire un filtre sur critère strict, défini comme des recommendations par l'équipe qui développe GATK. Les recommandations générales de l'équipe de GATK sont mentionnées [ici](https://software.broadinstitute.org/gatk/documentation/article.php?id=3225). 
+Dans cet article ils mentionnent différents seuils pour différents type de filtres à appliquer. Ceux qu'ils proposent sont les suivants : </p>
+
+| Sigle du filtre utilisé | Valeur si SNPs | Valeur si INDELs |
+| :---------------------: | :------------: | :--------------: |
+| QD | <2.0 | <2.0 |
+| FS | >60.0 | >200.0 |
+| ReadPosRankSum | <-8.0 | <20.0 |
+| MQ | <40.0 |   |
+| MQRankSum | <-12.5 |   |
+| SOR | >3.0 | >10.0 |
+| InbreedingCoeff |   | <-0.8 |
+
+<p style="text-align:justify";>Sur [cette page](https://software.broadinstitute.org/gatk/documentation/article?id=6925), ils présentent différents graphiques avec leur données et expliquent pourquoi ils ont choisis ces différents seuils.
+Ensuite il ne reste plus qu'à appliquer ces filtres aux données selon les recommendations [suivantes](https://software.broadinstitute.org/gatk/documentation/article.php?id=2806).</p>
+
+# Python : Correction du fichier d'annotation de *Dicentrarchus labrax*

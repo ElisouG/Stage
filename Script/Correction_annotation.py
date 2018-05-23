@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
 #################### Path File Ordi bureau   ######################
 
-	# pathFasta = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax.fa"
+	# pathFasta = "/media/sf_DATA/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
 	# pathWarning = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/sge_test_snpEff_puce_last_debug.err"
 	# pathGTF = "/media/sf_DATA/Stage_UM_ISEM/Puce_57K/COMBINED_ANNOTATION_FUNCTION-2014.gtf"
 	# pathAnnotation = "/media/sf_DATA/Stage_UM-ISEM/Puce_57K/correction_annotation.gtf"
@@ -38,6 +38,8 @@ if __name__ == "__main__":
 	# pathF1 = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/NoStart_exo.txt"
 	# pathAnntotationNew = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
 	# PathGenomeR = ''
+	# pathTranscriptome = "/media/sf_DATA/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
+	# pathTranscrits = "/media/sf_DATA/Stage_UM_ISEM/SnpEff_last/Liste_transcrits.txt"
 
 	#################### Path File Ordi_portable   ######################
 
@@ -48,7 +50,7 @@ if __name__ == "__main__":
 	# pathF2 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStop_exo.txt"
 	# pathF1 = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/NoStart_exo.txt"
 	# pathAnntotationNew = "/mnt/c/Users/missl/Documents/Stage_UM-ISEM/SnpEff_last/New_Annotation_20_04_2018.gtf"
-	# PathGenomeR = '/mnt/c/Users/missl/Documents//Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	# PathGenomeR = '/mnt/c/Users/missl/Documents/Stage_UM-ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 	
 	
     #################### Path File Cluster    ######################
@@ -61,6 +63,8 @@ if __name__ == "__main__":
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_18_05_18.txt"
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_18_05_2018.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	pathTranscriptome = "/home/egueret/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
+	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Liste_transcrits.txt"
 
 
 	################### Récupération info #################
@@ -240,6 +244,29 @@ if __name__ == "__main__":
 	#################### Comparaison snpEff et GTF ########################
 	print('Création fichier NoStart/NoStop')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
+
+	######################## Vérification des Nostart et Nostop ######################
+
+	# Lecture du fichier transcriptome et sauvegarde des lignes dans linesTranscriptome
+	Transcriptome = open(pathTranscriptome)
+	linesTranscriptome = Transcriptome.readlines()
+	Transcriptome.close()
+
+	listeTranscrit = [] # Création d'une liste pour y stocker les transcrits
+	# Parsage du transcriptome
+	Transcrits = open(pathTranscrits, "w")
+	for line in linesTranscriptome:
+		K = line.split('\t')[0]
+		S = line.split('\t')[3]
+		E = line.split('\t')[4]
+		tID = line.split('\t')[8].split('"')[3]
+		if line.split('\t')[8].split('"')[3] != tID:
+			listeTranscrit.append([K,S,E,tID])
+		elif line.split('\t')[8].split('"')[3] == tID:
+			E = line.split('\t')[4]
+		Transcrits.write(listeTranscrit)
+	Transcrits.close()
+
 
 
 	###################### Modification du GTF #############################

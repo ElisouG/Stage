@@ -49,15 +49,16 @@ workflow ChoixFiltresTable {
 				type="INDEL", 
 				rawVCFs=HaplotypeCallerERC.rawVCF
 		}
-		call VariantsToTable {
-  			input:
-  	  			sampleName=sample[0],
-  	  			RefFasta=refFasta,
-  	  			GATK=gatk,
-  	  			rawSNPs=selectSNPs.rawSubset,
-  	  			rawIndels=selectIndels.rawSubset
-  		}
-  	}	
+	}
+	call VariantsToTable {
+  		input:
+  	  		sampleName=sample[0],
+  	  		RefFasta=refFasta,
+  	  		GATK=gatk,
+  	  		rawSNPs=selectSNPs.rawSubset,
+  	  		rawIndels=selectIndels.rawSubset
+  	}
+  		
 }
 
 # Task Definition
@@ -101,7 +102,7 @@ task select {
 		java -jar ${GATK} \
 			SelectVariants \
 			-R ${RefFasta} \
-			-V ${rawVCFs} \
+			-V ${sep="-V" rawVCFs} \
 			-select-type ${type} \
 			-O ${sampleName}_raw.${type}.vcf
 	}

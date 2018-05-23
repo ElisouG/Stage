@@ -7,12 +7,12 @@ navbar:
     href: index.html
   - text: "Bioinfo"
     menu:
-    - text: "Outils utilisés"
-      href: tools-used.html
     - text: "Description des outils"
       href: tools_description.html
     - text: "Tutoriaux suivis"
       href: tuto.html
+    - text: "Scripts"
+      href: Scripts.html
     - text: "Troubleshooting"
       href: Troubleshooting.html
   - text: "Manip'"

@@ -32,7 +32,7 @@
 <section class="page-header">
 <h1 class="title toc-ignore project-name">Notebook - Génotypage du Bar</h1>
 <h4 class="author project-author">Elise GUERET</h4>
-<h4 class="date project-date">16 mai 2018</h4>
+<h4 class="date project-date">23 mai 2018</h4>
 </section>
 
 
@@ -885,7 +885,79 @@ Je vais maintenant m’attaquer au Config file de GATK. Car l’erreur proviendr
 <div id="jour-53-16052018" class="section level2">
 <h2>Jour 53 : 16/05/2018</h2>
 <p style="text-align:justify" ;>
-Il faut absolument que je m’occupe des erreurs obtenues après snpEff. Car quand je veux transformer les fichiers GTF en fichiers BED je retrouve les erreurs que snpEff me donne. Je ne comprend pas pourquoi il y a des modif parasites d’une seule extrémité et que le changement de cette coordonnée ajoute une grande séquence. De plus ces erreurs sont absentes des fichiers NoStart et NoStop que j’ai créé. J’ai tout relancé ce matin pour voir d’où ça vient.
+Il faut absolument que je m’occupe des erreurs obtenues après snpEff. Car quand je veux transformer les fichiers GTF en fichiers BED je retrouve les erreurs que snpEff me donne. Je ne comprend pas pourquoi il y a des modif parasites d’une seule extrémité et que le changement de cette coordonnée ajoute une grande séquence. De plus ces erreurs sont absentes des fichiers NoStart et NoStop que j’ai créé. J’ai tout relancé ce matin pour voir d’où ça vient. Mais le script est super long alors qu’il doit âtre court. Je ne sais pas d’où ça vient.
+</p>
+<p style="text-align:justify" ;>
+Concernant BaseRecalibrator de GATK, je ne sais pas d’où vient le problème, j’ai rajouté le TMP_DIR de mon choix mais il n’y va pas. J’essaye de relancer le premier script avec la création d’un bam index à la fin de la dernière étape, peut-être que l’erreur vient de là même si il mentionne le fichier index du fichier fasta. On verra bien quand il aura fini.
+</p>
+<p style="text-align:justify" ;>
+Comme je ne sais aps travailler avec Python, j’ai lu deux articles cet après-midi sur les GWAS : Forester (RDA de Théo) et PLINK. Maintenant je vais tout copier sur mon disque dur pour essayer de résoudre les problèmes de git ce soir. Plus que 8 minutes à tenir. Je vais écrire un mail à Erick. Puis récupérer les datas et partir.
+</p>
+</div>
+<div id="jour-54-17052018" class="section level2">
+<h2>Jour 54 : 17/05/2018</h2>
+<p style="text-align:justify" ;>
+Aujourd’hui, j’ai récupéré le fichier GTF qu’Erick a modifié je ne sais comment pour relancer snpEff. J’attends de voir les résultats de snpEff. Il reste 2 gène circulaires à explorer. Il a vérifié que l’extension était correct et en phase puis il a remis les coordonnées initiales.
+</p>
+<p style="text-align:justify" ;>
+J’ai lancé BaseRecalibrator seul en direct dans le cluster et ça fonctionne. Du coup je me suis dit que les chemin étaient en dur dans cette option de lancement. Alors pourquoi ça ne marcherait pas dans le script wdl. J’ai donc testé en mettant le chemin du fasta en dur. Résultat : plus de problème avec l’index de ce fichier. Par contre il rencontre le même problème avec le fichier des sites de variations connus. Donc j’ai décidé de le mettre en dur lui aussi. Et résultat : ça tourne de puis maintenant 12 min sans aucun message d’erreur. Je crois que j’ai résolu ce problème!!! Enfin!!!!!!!! Il me reste un problème avec les librairies R qu’utilise AnalyzeCovariate pour faire son plot.pdf pour voir les résultats avant et après la recalibration. Mais ce n’est pas grave car cette étape n’est pas nécessaire pour les étapes suivantes, elle permet juste de vérifier visuellement les recalibrartions qui ont été faites.
+</p>
+<p style="text-align:justify" ;>
+J’ai demandé mes vacances et Bruno me les a validées. Reste plus qu’à Erick de les valider. Et il les qa validées lui aussi.
+</p>
+</div>
+<div id="jour-55-18052018" class="section level2">
+<h2>Jour 55 : 18/05/2018</h2>
+<p style="text-align:justify" ;>
+Sur le forum de GATK ils ont répondu. En fait il suffit de mentionner les fichiers RefIndex et RefDict dans la tâche et dans le call même si l’outils ne l’appelle pas car il va l’utiliser quand même. Je suis en train de tester ce qu’ils m’ont dit. J’espère que ça va marcher. Ce qu’il m’ont dit fonctionne donc je teste maintenant le script suivant qui n’est autre que le script de variant calling.
+</p>
+<p style="text-align:justify" ;>
+Dimitri est venu m’installer WinSCP pour que je puisse transférer mes données depuis mon ordinateur jusqu’à la baie de stockage. Sauf que je n’y ai pas encore accès. Normalement Rémy doit y remédier aujourd’hui. De toute façon ce n’est pas urgent mais ça va le devenir si le script fonctionne.
+</p>
+<p style="text-align:justify" ;>
+Ce matin j’ai lu 3 papiers sur les statistics des SNPs à savoir des test d’association de variant et des tests d’association d’haplotype. Cet aprèm j’ai lu un papier sur la génétique des pops de <em>D.labrax</em>. Et je me suis renseignée sur l’outils GENETIX qu’ils utilisent leur étude. J’ai également fait les ajouts nécessaires sur mon site web.
+</p>
+<p style="text-align:justify" ;>
+J’ai essayé de configurer une connection VPN sur l’ordi ubuntu de Flo mais ça ne fonctionne pas car il y a un problème avec des packages R. J’imagine qu’ils ne sont pas à jour. On va voir ça ce soir avec Flo. Il suffisait de faire apt-get update et ap-get upgrade pour tout mettre à jour sous un Ubuntu. Et en plus le logiciel était déjà présent sur son ordi donc je n’avais plus qu’à télécharger l fichier client vpn pour que cela fonctionne correctement.
+</p>
+</div>
+<div id="jour-56-22052018" class="section level2">
+<h2>Jour 56 : 22/05/2018</h2>
+<p style="text-align:justify" ;>
+Je vais répondre au mail d’Erick cet aprèm comme ça si il passe juste après ça ne me dérangera pas. J’ai peur qu’en lui répondant maintenant il débarque rapidement et je n’ai pas fait grand chose pour ne pas dire rien.
+</p>
+<p style="text-align:justify" ;>
+Finalement, mon script python fonctionne. En fait c’est mieux quand on lance le bon script et pas son ancienne version.
+</p>
+<p style="text-align:justify" ;>
+Pour GATK, il a tourner pendant 1h50 mais il a rencontré un problème avec GenotypeGVCF car il ne reconnaissait pas l’argument pour la nombre de giga alloué pour cette étape à Java. J’ai donc enlevé les guillemets et relancé le script. Je vais pas tarder à lancer le script alternatif à celui que j’ai écrit pour savoir lequel fonctionne le mieux ^^. Mais il me semble que je dois d’abord finir de l’écrire. Je vais voir ça de suite. Effectivement, il faut que je la peaufine.
+</p>
+<p style="text-align:justify" ;>
+J’ai écrit un mail à Erick ainsi qu’un docx pour lui expliquer pourquoi et comment je compte choisir mes filtres pour mes SNPs et mes INDELs. Comme ça il arrêtera de ne pas comprendre de quoi je parle (enfin j’espère).
+</p>
+<p style="text-align:justify" ;>
+A la suite de son mail je me suis dit que je pouvais lancer un script similaire sur le cluster qui me permet de récupérer les données pour le choix des filtres plus rapidement. Sauf que toutes les queues sont overbookés à cause de taubier et fgeoffroy qui prennent toutes les noeuds de toutes les queues qui fonctionnent. Donc je dois être patiente et attendre que mes jobs partent.
+</p>
+<p style="text-align:justify" ;>
+Madoka va avoir passé la journée entière au labo, ça m’arrange comme ça Erick ne peut pas passer au bureau me demander où j’en suis et ce que je faistout le temps.
+</p>
+<p style="text-align:justify" ;>
+Rien à voir avec le taf mais j’ai fait une demande CAF pour savoir pourquoi je n’ai plus aucun droit, j’ai pris RDV pour la vidange, j’ai remboursé la CAF pour le mois de Février perçu en trop (Au moins j’aurai essayé).
+</p>
+</div>
+<div id="jour-57-23052018" class="section level2">
+<h2>Jour 57 : 23/05/2018</h2>
+<p style="text-align:justify" ;>
+Erick est passé ce matin, on a parlé des filtres pour faire la sélection des véritables SNPs. C’est bien de faire ce que je compte faire même si il semble ne pas avoir tout compris ^^. Il faut absolument que je comprenne la génétique qui est derrière les filtres que je vais choisir pour ne pas choisir n’importe quoi. De plus, on aura un biais dans la répartition des SNPs car on trvaille avec des familles et non des individus totalement indépendants. Je continue de mettre en place le VariantCalling de GATK. Il faut que je résolve ce pb avec la baie de stockage pour pouvoir lancer des analyses à plus grande échelle (j’entends par là: sur plus de bam). Pour mon script python, il faut que j’examine les longueurs ajoutées peut-être sous forme de graph pour voir la taille ajoutée aussi bien en start qu’en stop. Il faut qu’on continue ce qu’on a commencé avec Flo. et il faut que je vois pour faire une traduction des CDS avec les ajouts pour voir si la protéines en entière ou tronquée par la présence de codon stop au milieu; Si il y a des codons stop au milieu cela signifiera que les “frame” prises en compte ne sont pas les bonnes. et qu’il faudra y remédier car il est nécessaire d’avoir le bon ORF (cadre de lecture) pour chaque CDS. Concernant le rapport, il faudrait que je teste différente chose pour voir si la méthodologie fonctionne bien. (avec de gros et de petits bam, avec des réplicas de manip) pour voir si toutes ces possibilités impactent le fonctionnement de GATK.
+</p>
+<p style="text-align:justify" ;>
+Pour mon script Python, je me suis occupée de commencer à écrire le script pour parser le fichier gtf du transcriptome que m’a donné Erick. Je vais demander à Flo pour récupérer le fichier au format tabular et non au format visuellement lisible pour pouvoir examiner la longueur que j’ajoute car ça fait plusieurs fois qu’érick me le demande et qu’à chaque fois j’oublies. Donc il faudrait que j’ai fait cela pour demain.
+</p>
+<p style="text-align:justify" ;>
+Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j’y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C’est celle que je vais choisir pour ne pas faire du doucle emploi quoi que, une page script et leur détail peut-être utile.
+</p>
+<p style="text-align:justify" ;>
+Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu’il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.
 </p>
 </div>
 </div>
