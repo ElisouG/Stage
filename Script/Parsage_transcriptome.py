@@ -40,14 +40,18 @@ if __name__ == "__main__":
 	listeTranscrit = [] # Création d'une liste pour y stocker les transcrits
 	# Parsage du transcriptome
 	Transcrits = open(pathTranscrits, "w")
+	tID = "none"
 	for line in linesTranscriptome:
-		K = line.split('\t')[0]
-		S = line.split('\t')[3]
-		E = line.split('\t')[4]
-		tID = line.split('\t')[8].split('"')[3]
-		if line.split('\t')[8].split('"')[3] != tID:
-			listeTranscrit.append([K,S,E,tID])
+		if line.split('\t')[8].split('"')[3] != tID :
+			if tID != "none" :
+				listeTranscrit.append([K,S,E,tID])
+				Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
+			S = line.split('\t')[3]
+			K = line.split('\t')[0]
+			E = line.split('\t')[4]
 		elif line.split('\t')[8].split('"')[3] == tID:
 			E = line.split('\t')[4]
-		Transcrits.write(listeTranscrit)
+		tID = line.split('\t')[8].split('"')[3]
+	listeTranscrit.append([K,S,E,tID])
+	Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
 	Transcrits.close()
