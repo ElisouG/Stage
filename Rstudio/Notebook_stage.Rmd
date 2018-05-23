@@ -719,7 +719,7 @@ Concernant le rapport, il faudrait que je teste différente chose pour voir si l
 
 <p style="text-align:justify";>Pour mon script Python, je me suis occupée de commencer à écrire le script pour parser le fichier gtf du transcriptome que m'a donné Erick. Je vais demander à Flo pour récupérer le fichier au format tabular et non au format visuellement lisible pour pouvoir examiner la longueur que j'ajoute car ça fait plusieurs fois qu'érick me le demande et qu'à chaque fois j'oublies. Donc il faudrait que j'ai fait cela pour demain.</p>
 
-<p style="text-align:justify";>Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j'y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C'est celle que je vais choisir pour ne pas faire du doucle emploi quoi que, une page script et leur détail peut être utile.</p>
+<p style="text-align:justify";>Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j'y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C'est celle que je vais choisir pour ne pas faire du double emploi quoi que, une page script et leur détail peut être utile. Finalement j'ai choisi de supprimer la page tools used pour la remplacer par Scripts dans le quel je décrit tout pour mes scripts.</p>
 
 <p style="text-align:justify";>Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu'il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.</p>
 
