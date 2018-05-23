@@ -702,9 +702,11 @@ Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evalu
 
 <p style="text-align:justify";>Pour GATK, il a tourner pendant 1h50 mais il a rencontré un problème avec GenotypeGVCF car il ne reconnaissait pas l'argument pour la nombre de giga alloué pour cette étape à Java. J'ai donc enlevé les guillemets et relancé le script. Je vais pas tarder à lancer le script alternatif à celui que j'ai écrit pour savoir lequel fonctionne le mieux ^^. Mais il me semble que je dois d'abord finir de l'écrire. Je vais voir ça de suite. Effectivement, il faut que je la peaufine.</p>
 
-J'ai écrit un mail à Erick ainsi qu'un docx pour lui expliquer pourquoi et comment je compte choisir mes filtres pour mes SNPs et mes INDELs. Comme ça il arrêtera de ne pas comprendre de quoi je parle (enfin j'espère).
+<p style="text-align:justify";>J'ai écrit un mail à Erick ainsi qu'un docx pour lui expliquer pourquoi et comment je compte choisir mes filtres pour mes SNPs et mes INDELs. Comme ça il arrêtera de ne pas comprendre de quoi je parle (enfin j'espère).</p>
 
-A la suite de son mail je me suis dit que je pouvais lancer un script similaire sur le cluster qui me permet de récupérer les données pour le choix des filtres plus rapidement. Sauf que toutes les queues sont overbookés à cause de taubier et fgeoffroy qui prennent toutes les noeuds de toutes les queues qui fonctionnent.
+<p style="text-align:justify";>A la suite de son mail je me suis dit que je pouvais lancer un script similaire sur le cluster qui me permet de récupérer les données pour le choix des filtres plus rapidement. Sauf que toutes les queues sont overbookés à cause de taubier et fgeoffroy qui prennent toutes les noeuds de toutes les queues qui fonctionnent. Donc je dois être patiente et attendre que mes jobs partent.</p>
+
+<p style="text-align:justify";>Madoka va avoir passé la journée entière au labo, ça m'arrange comme ça Erick ne peut pas passer au bureau me demander où j'en suis et ce que je faistout le temps.</p>
 
 <p style="text-align:justify";>Rien à voir avec le taf mais j'ai fait une demande CAF pour savoir pourquoi je n'ai plus aucun droit, j'ai pris RDV pour la vidange, j'ai remboursé la CAF pour le mois de Février perçu en trop (Au moins j'aurai essayé).</p>
 
