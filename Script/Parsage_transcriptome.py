@@ -30,7 +30,11 @@ if __name__ == "__main__":
 
 	pathTranscriptome = "/home/egueret/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
 	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Liste_transcrits.txt"
-	######################## Vérification des Nostart et Nostop ######################
+
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
+
+	######################## Parsage Transcriptome ######################
 
 	# Lecture du fichier transcriptome et sauvegarde des lignes dans linesTranscriptome
 	Transcriptome = open(pathTranscriptome)
@@ -38,7 +42,7 @@ if __name__ == "__main__":
 	Transcriptome.close()
 
 	listeTranscrit = [] # Création d'une liste pour y stocker les transcrits
-	# Parsage du transcriptome
+	
 	Transcrits = open(pathTranscrits, "w")
 	tID = "none"
 	for line in linesTranscriptome:
@@ -55,3 +59,37 @@ if __name__ == "__main__":
 	listeTranscrit.append([K,S,E,tID])
 	Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
 	Transcrits.close()
+
+	######################## Parsage NoStart ######################
+
+	NoStart = open(pathF1)
+	linesNoStart = NoStop.readlines()
+	NoStop.close()
+
+	listeNoStart = []
+
+	chr1 = "none"
+	st1 = "none"
+	en1 = "none"
+	for line in linesNoStop:
+		chr1 = line.split('|')[0]
+		st1 = line.split('|')[3]
+		en1 = line.split('|')[4]
+	listeNoStart.append([chr1,st1,en1])
+
+	######################## Parsage NoStop ######################
+	
+	NoStop = open(pathF2)
+	linesNoStop = NoStop.readlines()
+	NoStop.close()
+
+	listeNoStop = []
+
+	chr2 = "none"
+	st2 = "none"
+	en2 = "none"
+	for line in linesNoStop:
+		chr2 = line.split('|')[0]
+		st2 = line.split('|')[3]
+		en2 = line.split('|')[4]
+	listeNoStop.append([chr2,st2,en2])
