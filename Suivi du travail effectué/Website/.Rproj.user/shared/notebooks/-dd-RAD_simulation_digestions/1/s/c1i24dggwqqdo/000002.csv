@@ -1,8 +1,0 @@
-"0","wid.simseq3 <- size.select(simseq.sel3, min.size = 200, max.size = 400, graph=TRUE, verbose=TRUE)"
-"1","4579"
-"1"," fragments between "
-"1","200"
-"1"," and "
-"1","400"
-"1"," bp 
-"

@@ -1,2 +1,0 @@
-"0","FASTA.file <- ""/home/elise.gueret/labrax.fa"""
-"0","ref.DNAseq <- ref.DNAseq(FASTA.file, subselect.contigs = TRUE, prop.contigs = 0.1)"
