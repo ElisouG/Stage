@@ -99,11 +99,13 @@ if __name__ == "__main__":
 	for elt in listeNoStop:
 		for elt in listeTranscrit:
 			if elt[0] in listeNoStop == elt[0] in listeTranscrit: # Vérifier égalité des chromosomes
-				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2]:
+				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2] in listeTranscrit:
 
 
 	for elt[] in listeNoStart:
 		for elt[] in listeTranscrit:
+			if elt[0] in listeNoStop == elt[0] in listeTranscrit: # Vérifier égalité des chromosomes
+				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2] in listeTranscrit:
 
 
 
