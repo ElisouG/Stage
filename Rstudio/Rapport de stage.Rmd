@@ -1,7 +1,7 @@
 ---
 title: "essai-format"
 author: "Elise GUERET"
-date: "16 avril 2018"
+date: "25 Mai 2018"
 adress: "Institut des Sciences de l'Evolution de Montpellier (ISEM), Université de Montpellier, Campus Triolet, Place Eugène Bataillon, cc65, 34095 Montpellier"
 output: 
   word_document:
@@ -23,7 +23,7 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 * les logos  
 * intitulé "Mémoire de stage de fin d'études" 
 * Elise GUERET 
-* Nom ds tuteurs
+* Nom des tuteurs
 * adresse de la fac
 * adresse du stage
 * année universitaire en cours
@@ -39,7 +39,7 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 
 ## Liste des abbréviations
 
-# Résumé et mots-clés (en français et en anglais)
+# Résumé et mots-clés (en français et en anglais) en 4ème de couverture
 
 # Introduction
 Question à se poser avant la rédaction du rapport :   
@@ -51,7 +51,7 @@ Definir le sujet en termes précis et concis, énoncer les objectifs du travail 
 
 Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à quoi ils servent. Comment les données ont été obtenues? Pour CRECHE voir le rapport dan sles archives ifremer et pour RobustBass voir les dipos KoM.
 
-# Problématique
+# Problématique - Objectifs
 
 Replacer le sujet d'études dans un contexte plus général.
 Résumer l'état de l'art via une étude des travaux antérieurs.
@@ -61,6 +61,52 @@ Présentation du cahier des charges
 
 Mettre en valeur l'acquisition d'une technique, d'un savoir-faire enrichissant mes connaissances initiales.
 Décrire la méthode ou le logiciel
+
+## Design de l'étude
+
+Description des étapes
+Description des données : comment elles ont été obtenues?
+
+## Vue générale des pipelines
+
+Que font-ils ?
+Quels outils ou logiciels ils utilisent?
+
+## Description des pipelines
+
+A quoi ils servent?
+Mettre un schéma général des principales étapes.
+
+### Correction Annotation par Python
+
+Détails de chaque étape + Schéma
+
+### Data_PreProcessing
+
+Détails de chaque étape + Schéma
+
+### VariantCalling, genotyping and filtering
+
+Détails de chaque étape + Schéma
+
+### Annotation des SNPs
+
+Détails de chaque étape + Schéma
+
+## Liste des outils Picard et GATK
+
+Description de chacun des outils
+Quel outil est impliqué dans quelle étape?
+
+## Etude d'association
+
+### Design
+
+Description des étapes (PLINK, ... ) + Schéma
+
+### Population stratification
+
+Expliquer et définir les problèmes de stratification de la population.
 
 # Résultats - Discussion
 
@@ -72,29 +118,29 @@ Discussion :
 * Quelle en est la portée?  
 * Peuvent-ils être utile à d'autres?
 
+## Résultats du génotypage
+
+Parler de Picard et de GATK
+
+## Résultats de l'étude d'association
+
+### Fréquence allèlique et données manquantes
+### Estimation de l'"ancestry"
+### POpulation stratification
+### Top SNPs
+### Evaluation des top SNPs
+### Analyse fonctionnelle des top SNPs
+
 # Conclusion
 
 Résume le travail accompli et fait apparaître si les objectifs ont été atteints
 
 S'achève par des perspectives ou sur un bilan personnel
 
-* Que doiis-je retenir de ce travail?
+* Que dois-je retenir de ce travail?
 
-Mon rapport commence ici.
 
-# Titre 1 
 
-etblahblah [@Guinand2017]
-
-etblahblahblah [@Tine2014]
-
-## Titre 2
-
-etblahblah
-
-etblahblahblah [@Massault2010]
-
-### Titre 3
 
 etblahblah
  Pour la rédaction de doc en Rmd : 
