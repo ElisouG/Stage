@@ -93,3 +93,21 @@ if __name__ == "__main__":
 		st2 = line.split('|')[3]
 		en2 = line.split('|')[4]
 	listeNoStop.append([chr2,st2,en2])
+
+	######################## Vérification dans le trancriptome #########################
+
+	for elt in listeNoStop:
+		for elt in listeTranscrit:
+			if elt[0] in listeNoStop == elt[0] in listeTranscrit: # Vérifier égalité des chromosomes
+				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2]:
+
+
+	for elt[] in listeNoStart:
+		for elt[] in listeTranscrit:
+
+
+
+
+	######################## TRADUCTION DES CDS EN PROTÉINES #########################
+
+	prot = mySeq.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
