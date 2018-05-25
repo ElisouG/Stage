@@ -95,7 +95,7 @@ if __name__ == "__main__":
 	listeNoStop.append([chr2,st2,en2])
 
 	######################## Vérification dans le trancriptome #########################
-	A = "none"
+	a = "none"
 	listeNoStopTested = []
 	for elt in listeNoStop:
 		chr2 = elt[0]
@@ -112,6 +112,7 @@ if __name__ == "__main__":
 					a = "Not Valid"
 	listeNoStopTested.append([chr2,st2,en2,a])
 
+	b = "none"
 	listeNoStartTested = []
 	for elt[] in listeNoStart:
 		chr1 = elt[0]
@@ -123,10 +124,10 @@ if __name__ == "__main__":
 			E = elt[2]
 			if chr1 == K: # Vérifier égalité des chromosomes
 				if S > st1 > E and S > en1 < E:
-					a = "PASS"
+					b = "PASS"
 				elif S < st1 > E and S > en1 > E::
-					a = "Not Valid"
-	listeNoStopTested.append([chr2,st2,en2,a])
+					b = "Not Valid"
+	listeNoStopTested.append([chr1,st1,en1,b])
 
 
 
