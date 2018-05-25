@@ -9,7 +9,7 @@ qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentr
 
 ######################### 17 Mai 2018 ##################################
 # Essai build comme sur le site SnpEff avec un gtf avec plus d'annotations et les modifications des stop et l'ancien fasta (new)
-qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax_New -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
+qsub -cwd -V -S /bin/bash -M elise.gueret@gmail.com -m bes -N Test_build_Dicentrarchus_labrax_New -o /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif_25-05.out -e /home/egueret/Stage_UM_ISEM/sge_build_Dicentrarchus_labrax_Modif_25-05.err -b y "java -jar snpEff.jar build -gtf22 -v Dicentrarchus_labrax"
 
 ######################### 17 Mai 2018 ##################################
 # Test snpeff et la puce (New)
