@@ -95,17 +95,39 @@ if __name__ == "__main__":
 	listeNoStop.append([chr2,st2,en2])
 
 	######################## Vérification dans le trancriptome #########################
-
+	A = "none"
+	listeNoStopTested = []
 	for elt in listeNoStop:
+		chr2 = elt[0]
+		st2 = elt[1]
+		en2 = elt[2]
 		for elt in listeTranscrit:
-			if elt[0] in listeNoStop == elt[0] in listeTranscrit: # Vérifier égalité des chromosomes
-				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2] in listeTranscrit:
+			K = elt[0]
+			S = elt[1]
+			E = elt[2]
+			if chr2 == K: # Vérifier égalité des chromosomes
+				if S > st2 > E and S > en2 < E:
+					a = "PASS"
+				elif S < st2 > E and S > en2 > E::
+					a = "Not Valid"
+	listeNoStopTested.append([chr2,st2,en2,a])
 
-
+	listeNoStartTested = []
 	for elt[] in listeNoStart:
+		chr1 = elt[0]
+		st1 = elt[1]
+		en1 = elt[2]
 		for elt[] in listeTranscrit:
-			if elt[0] in listeNoStop == elt[0] in listeTranscrit: # Vérifier égalité des chromosomes
-				if elt[1] in listeTranscrit > elt[1] in listeNoStop > elt[2] in listeTranscrit and elt[1] in listeTranscrit > elt[2] in listeNoStop > elt[2] in listeTranscrit:
+			K = elt[0]
+			S = elt[1]
+			E = elt[2]
+			if chr1 == K: # Vérifier égalité des chromosomes
+				if S > st1 > E and S > en1 < E:
+					a = "PASS"
+				elif S < st1 > E and S > en1 > E::
+					a = "Not Valid"
+	listeNoStopTested.append([chr2,st2,en2,a])
+
 
 
 
