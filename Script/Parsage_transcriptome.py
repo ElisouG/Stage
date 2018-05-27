@@ -63,19 +63,17 @@ if __name__ == "__main__":
 	######################## Parsage NoStart ######################
 
 	NoStart = open(pathF1)
-	linesNoStart = NoStop.readlines()
-	NoStop.close()
+	linesNoStart = NoStart.readlines()
+	NoStart.close()
 
 	listeNoStart = []
 
-	chr1 = "none"
-	st1 = "none"
-	en1 = "none"
+
 	for line in linesNoStop:
 		chr1 = line.split('|')[0]
 		st1 = line.split('|')[3]
 		en1 = line.split('|')[4]
-	listeNoStart.append([chr1,st1,en1])
+		listeNoStart.append([chr1,st1,en1])
 
 	######################## Parsage NoStop ######################
 	
@@ -85,17 +83,14 @@ if __name__ == "__main__":
 
 	listeNoStop = []
 
-	chr2 = "none"
-	st2 = "none"
-	en2 = "none"
+
 	for line in linesNoStop:
 		chr2 = line.split('|')[0]
 		st2 = line.split('|')[3]
 		en2 = line.split('|')[4]
-	listeNoStop.append([chr2,st2,en2])
+		listeNoStop.append([chr2,st2,en2])
 
 	######################## Vérification dans le trancriptome #########################
-	a = "none"
 	listeNoStopTested = []
 	for elt in listeNoStop:
 		chr2 = elt[0]
@@ -106,13 +101,13 @@ if __name__ == "__main__":
 			S = elt[1]
 			E = elt[2]
 			if chr2 == K: # Vérifier égalité des chromosomes
-				if S > st2 > E and S > en2 < E:
-					a = "PASS"
-				elif S < st2 > E and S > en2 > E::
-					a = "Not Valid"
-	listeNoStopTested.append([chr2,st2,en2,a])
+				if S < st2 < E and S < en2 < E:
+					listeNoStopTested.append([chr2,st2,en2,"PASS"])
+				else :
+					listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
+	
 
-	b = "none"
+
 	listeNoStartTested = []
 	for elt[] in listeNoStart:
 		chr1 = elt[0]
@@ -123,11 +118,10 @@ if __name__ == "__main__":
 			S = elt[1]
 			E = elt[2]
 			if chr1 == K: # Vérifier égalité des chromosomes
-				if S > st1 > E and S > en1 < E:
-					b = "PASS"
-				elif S < st1 > E and S > en1 > E::
-					b = "Not Valid"
-	listeNoStopTested.append([chr1,st1,en1,b])
+				if S < st1 < E and S < en1 < E:
+					listeNoStartTested.append([chr1,st1,en1,"PASS"])
+				else :
+					listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
 
 
 
