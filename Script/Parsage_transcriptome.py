@@ -141,4 +141,4 @@ if __name__ == "__main__":
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
-	prot = mySeq.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
+	#prot = mySeq.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
