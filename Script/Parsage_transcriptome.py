@@ -34,6 +34,9 @@ if __name__ == "__main__":
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
 
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_28_05_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_28_05_18.txt"
+
 	######################## Parsage Transcriptome ######################
 
 	# Lecture du fichier transcriptome et sauvegarde des lignes dans linesTranscriptome
@@ -91,6 +94,8 @@ if __name__ == "__main__":
 		listeNoStop.append([chr2,st2,en2])
 
 	######################## Vérification dans le trancriptome #########################
+	
+	StopTested = open(pathStopTested, "w")
 	listeNoStopTested = []
 	for elt in listeNoStop:
 		chr2 = elt[0]
@@ -103,11 +108,14 @@ if __name__ == "__main__":
 			if chr2 == K: # Vérifier égalité des chromosomes
 				if S < st2 < E and S < en2 < E:
 					listeNoStopTested.append([chr2,st2,en2,"PASS"])
+					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"PASS"))
 				else :
 					listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
+					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"Not Valid"))
+	StopTested.close()
 	
 
-
+	StartTested = open(pathStartTested, "w")
 	listeNoStartTested = []
 	for elt[] in listeNoStart:
 		chr1 = elt[0]
@@ -120,8 +128,11 @@ if __name__ == "__main__":
 			if chr1 == K: # Vérifier égalité des chromosomes
 				if S < st1 < E and S < en1 < E:
 					listeNoStartTested.append([chr1,st1,en1,"PASS"])
+					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"PASS"))
 				else :
 					listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
+					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"Not Valid"))
+	StartTested.close()
 
 
 
