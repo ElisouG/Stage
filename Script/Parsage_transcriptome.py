@@ -7,7 +7,7 @@
 
 #################### Commande lancement sur le cluster ###########################
 
-# qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_parsage -o /home/egueret/Stage_UM_ISEM/sge_test_parsage.out -e /home/egueret/Stage_UM_ISEM/sge_test_parsage.err -b y "python3 /home/egueret/Stage/Script/Parsage_transcriptome.py"
+#qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_parsage -o /home/egueret/Stage_UM_ISEM/sge_test_parsage.out -e /home/egueret/Stage_UM_ISEM/sge_test_parsage.err -b y "python3 /home/egueret/Stage/Script/Parsage_transcriptome.py"
 
 ##################### Importation Module #######################
 ## Python modules
@@ -51,8 +51,9 @@ if __name__ == "__main__":
 	for line in linesTranscriptome:
 		if line.split('\t')[8].split('"')[3] != tID :
 			if tID != "none" :
-				listeTranscrit.append([K,S,E,tID])
 				Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
+				listeTranscrit.append([K,S,E,tID])
+				
 			S = line.split('\t')[3]
 			K = line.split('\t')[0]
 			E = line.split('\t')[4]
@@ -72,7 +73,7 @@ if __name__ == "__main__":
 	listeNoStart = []
 
 
-	for line in linesNoStop:
+	for line in linesNoStart:
 		chr1 = line.split('|')[0]
 		st1 = line.split('|')[3]
 		en1 = line.split('|')[4]
@@ -117,11 +118,11 @@ if __name__ == "__main__":
 
 	StartTested = open(pathStartTested, "w")
 	listeNoStartTested = []
-	for elt[] in listeNoStart:
+	for elt in listeNoStart:
 		chr1 = elt[0]
 		st1 = elt[1]
 		en1 = elt[2]
-		for elt[] in listeTranscrit:
+		for elt in listeTranscrit:
 			K = elt[0]
 			S = elt[1]
 			E = elt[2]
