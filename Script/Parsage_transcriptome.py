@@ -141,4 +141,11 @@ if __name__ == "__main__":
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
-	#prot = mySeq.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
+	#pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
+	#PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	#GenomeR = fasta2dict(PathGenomeR)
+	#Genome = fasta2dict(pathFasta) 
+	#sequence = Genome[chromosome].seq 
+	#sequenceR = GenomeR[chromosome].seq 
+	#prot = sequence.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
+	#prot = sequenceR.translate()
