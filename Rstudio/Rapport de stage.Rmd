@@ -74,6 +74,7 @@ Quels outils ou logiciels ils utilisent?
 
 ## Description des pipelines
 
+**Penser à impliquer la méthodo c'est-à-dire pour GATK : de comparer les réplicas ainsi que de voir la différence avec des petits bam (peu de reads) et des gros bam (bcp de reads) pour voir si on trouve les mêmes SNPs ou si il y a une différence notable.**
 A quoi ils servent?
 Mettre un schéma général des principales étapes.
 
