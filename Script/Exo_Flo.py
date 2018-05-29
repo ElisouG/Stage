@@ -39,7 +39,7 @@ if __name__ == "__main__":
 	Transcriptome = open(pathTranscriptome)
 	linesTranscriptome = Transcriptome.readlines()
 	Transcriptome.close()
-		
+	sousliste = []
 	Transcrits = open(pathTranscrits, "w")
 	tID = "none"
 	for line in linesTranscriptome:
@@ -47,26 +47,32 @@ if __name__ == "__main__":
 			tID = line.split('\t')[8].split('"')[3]
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
-			Transcrits.write("%15s | %15s:%15s" % (tID,S,E))
+			# Transcrits.write("%s | %s:%s" % (tID,S,E)) # Faux car tu vas avoir un ligne avec None a la place du nom de transcript
 		elif line.split('\t')[8].split('"')[3] != tID :
 			tID = line.split('\t')[8].split('"')[3]
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
-			Transcrits.write("\n %15s | %15s:%15s" % (tID,S,E))
+			Transcrits.write("\n %s | %s:%s" % (tID,S,E))
+			listeFinal.append(sousliste
+			sousliste = [tID,%s:%s% (S,E)] # Tu initialise la sous liste qui va juste prendre une fois le Tid 
+					               # et a chaque fois ajouté les positions
 		elif line.split('\t')[8].split('"')[3] == tID:
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
-			Transcrits.write("| %15s:%15s " % (S,E))
+			Transcrits.write(" | %s:%s " % (S,E))
+			sousliste.append(%s:%s% (S,E))  
 		tID = line.split('\t')[8].split('"')[3]
+	# Tu as oublié la dernière ligne comme (regarde le script que l'on a fait tous les deux, comme le 
+	# script récupère le transcript d'avant le dernier est pas récupéré :p
 	Transcrits.close()
 
 	Transcrits = open(pathTranscrits)
 	linesTranscrits = Transcrits.readlines()
 	Transcrits.close()
 
-	listeTranscrits = []
-	for line in linesTranscrits:
-		line = line.replace("|",",")
-		listeTranscrits.append([line])
+	#listeTranscrits = []
+	#for line in linesTranscrits:
+		#line = line.replace("|",",")
+		#listeTranscrits.append([line])
 
 
