@@ -67,9 +67,9 @@ if __name__ == "__main__":
 	# script récupère le transcript d'avant le dernier est pas récupéré :p
 	Transcrits.close()
 
-	Transcrits = open(pathTranscrits)
-	linesTranscrits = Transcrits.readlines()
-	Transcrits.close()
+	#Transcrits = open(pathTranscrits)
+	#linesTranscrits = Transcrits.readlines()
+	#Transcrits.close()
 
 	#listeTranscrits = []
 	#for line in linesTranscrits:
