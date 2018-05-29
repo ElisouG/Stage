@@ -53,7 +53,7 @@ if __name__ == "__main__":
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
 			Transcrits.write("\n %s | %s:%s" % (tID,S,E))
-			listeFinal.append(sousliste
+			listeFinal.append(sousliste)
 			sousliste = [tID,%s:%s% (S,E)] # Tu initialise la sous liste qui va juste prendre une fois le Tid 
 					               # et a chaque fois ajouté les positions
 		elif line.split('\t')[8].split('"')[3] == tID:
