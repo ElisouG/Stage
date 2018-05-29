@@ -40,6 +40,7 @@ if __name__ == "__main__":
 	linesTranscriptome = Transcriptome.readlines()
 	Transcriptome.close()
 	sousliste = []
+	listeFinal = []
 	Transcrits = open(pathTranscrits, "w")
 	tID = "none"
 	for line in linesTranscriptome:
