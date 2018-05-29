@@ -29,7 +29,7 @@ from module_seb import fasta2dict
 if __name__ == "__main__":
 
 	pathTranscriptome = "/home/egueret/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
-	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Liste_transcrits.txt"
+	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Liste_transcrits.txt"
 
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 	for line in linesTranscriptome:
 		if line.split('\t')[8].split('"')[3] != tID :
 			if tID != "none" :
-				Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
+				Transcrits.write("%s\t%s\t%s\t%s\n" % (K,S,E,tID))
 				listeTranscrit.append([K,S,E,tID])
 				
 			S = line.split('\t')[3]
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 			E = line.split('\t')[4]
 		tID = line.split('\t')[8].split('"')[3]
 	listeTranscrit.append([K,S,E,tID])
-	Transcrits.write("%s\t%s\t%s\t%s" % (K,S,E,tID))
+	Transcrits.write("%s\t%s\t%s\t%s\n" % (K,S,E,tID))
 	Transcrits.close()
 
 	######################## Parsage NoStart ######################
@@ -111,12 +111,12 @@ if __name__ == "__main__":
 			if chr2 == K: # Vérifier égalité des chromosomes
 				if S < st2 < E and S < en2 < E:
 					listeNoStopTested.append([chr2,st2,en2,"PASS"])
-					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"PASS"))
+					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,st2,en2,"PASS"))
 					Pass = True
 					break
 		if Pass == False :
 			listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
-			StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"Not Valid"))
+			StopTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,st2,en2,"Not Valid"))
 	StopTested.close()
 	
 
@@ -134,12 +134,12 @@ if __name__ == "__main__":
 			if chr1 == K: # Vérifier égalité des chromosomes
 				if S < st1 < E and S < en1 < E:
 					listeNoStartTested.append([chr1,st1,en1,"PASS"])
-					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"PASS"))
+					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,st1,en1,"PASS"))
 					Pass = True
 					break
 		if Pass == False :
 			listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
-			StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"Not Valid"))
+			StartTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,st1,en1,"Not Valid"))
 	StartTested.close()
 
 
