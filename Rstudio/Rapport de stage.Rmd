@@ -64,8 +64,8 @@ Décrire la méthode ou le logiciel
 
 ## Design de l'étude
 
-Description des étapes
 Description des données : comment elles ont été obtenues?
+Description des étapes (annotation de la puce : pourquoi?, GATK pour rechercher les SNPs, snpEff pour annoter les SNPs, PLINK pour faire calcul LD et Association)
 
 ## Vue générale des pipelines
 
