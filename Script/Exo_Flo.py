@@ -63,7 +63,7 @@ if __name__ == "__main__":
 			Transcrits.write(" | %s:%s " % (S,E))
 			sousliste.append(%s:%s% (S,E))  
 		tID = line.split('\t')[8].split('"')[3]
-	# Tu as oublié la dernière ligne comme (regarde le script que l'on a fait tous les deux, comme le 
+	# Tu as oublié la dernière ligne (regarde le script que l'on a fait tous les deux, comme le 
 	# script récupère le transcript d'avant le dernier est pas récupéré :p
 	Transcrits.close()
 
