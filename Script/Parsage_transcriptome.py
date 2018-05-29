@@ -74,9 +74,9 @@ if __name__ == "__main__":
 
 
 	for line in linesNoStart:
-		chr1 = line.split('|')[0]
-		st1 = line.split('|')[3]
-		en1 = line.split('|')[4]
+		chr1 = line.replace(' ','').split('|')[0]
+		st1 = line.replace(' ','').split('|')[3]
+		en1 = line.replace(' ','').split('|')[4]
 		listeNoStart.append([chr1,st1,en1])
 
 	######################## Parsage NoStop ######################
@@ -89,16 +89,18 @@ if __name__ == "__main__":
 
 
 	for line in linesNoStop:
-		chr2 = line.split('|')[0]
-		st2 = line.split('|')[3]
-		en2 = line.split('|')[4]
+		chr2 = line.replace(' ','').split('|')[0]
+		st2 = line.replace(' ','').split('|')[3]
+		en2 = line.replace(' ','').split('|')[4]
 		listeNoStop.append([chr2,st2,en2])
 
 	######################## Vérification dans le trancriptome #########################
 	
 	StopTested = open(pathStopTested, "w")
 	listeNoStopTested = []
+
 	for elt in listeNoStop:
+		Pass = False
 		chr2 = elt[0]
 		st2 = elt[1]
 		en2 = elt[2]
@@ -110,15 +112,18 @@ if __name__ == "__main__":
 				if S < st2 < E and S < en2 < E:
 					listeNoStopTested.append([chr2,st2,en2,"PASS"])
 					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"PASS"))
-				else :
-					listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
-					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"Not Valid"))
+					Pass = True
+					break
+		if Pass == False :
+			listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
+			StopTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr2,S,E,st2,en2,"Not Valid"))
 	StopTested.close()
 	
 
 	StartTested = open(pathStartTested, "w")
 	listeNoStartTested = []
 	for elt in listeNoStart:
+		Pass = False
 		chr1 = elt[0]
 		st1 = elt[1]
 		en1 = elt[2]
@@ -130,9 +135,11 @@ if __name__ == "__main__":
 				if S < st1 < E and S < en1 < E:
 					listeNoStartTested.append([chr1,st1,en1,"PASS"])
 					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"PASS"))
-				else :
-					listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
-					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"Not Valid"))
+					Pass = True
+					break
+		if Pass == False :
+			listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
+			StartTested.write("%s\t%s\t%s\t%s\t%s\t%s" % (chr1,S,E,st1,en1,"Not Valid"))
 	StartTested.close()
 
 
