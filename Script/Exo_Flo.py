@@ -39,7 +39,6 @@ if __name__ == "__main__":
 	Transcriptome = open(pathTranscriptome)
 	linesTranscriptome = Transcriptome.readlines()
 	Transcriptome.close()
-
 		
 	Transcrits = open(pathTranscrits, "w")
 	tID = "none"
@@ -60,3 +59,14 @@ if __name__ == "__main__":
 			Transcrits.write("| %15s:%15s " % (S,E))
 		tID = line.split('\t')[8].split('"')[3]
 	Transcrits.close()
+
+	Transcrits = open(pathTranscrits)
+	linesTranscrits = Transcrits.readlines()
+	Transcrits.close()
+
+	listeTranscrits = []
+	for line in linesTranscrits:
+		line = line.replace("|",",")
+		listeTranscrits.append([line])
+
+
