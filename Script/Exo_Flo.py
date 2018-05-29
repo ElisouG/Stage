@@ -48,7 +48,7 @@ if __name__ == "__main__":
 			tID = line.split('\t')[8].split('"')[3]
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
-			# Transcrits.write("%s | %s:%s" % (tID,S,E)) # Faux car tu vas avoir un ligne avec None a la place du nom de transcript
+			Transcrits.write("%s | %s:%s" % (tID,S,E)) # Faux car tu vas avoir un ligne avec None a la place du nom de transcript
 		elif line.split('\t')[8].split('"')[3] != tID :
 			tID = line.split('\t')[8].split('"')[3]
 			S = line.split('\t')[3]
