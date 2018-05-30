@@ -99,51 +99,51 @@ if __name__ == "__main__":
 	######################## Vérification dans le trancriptome #########################
 	
 	StopTested = open(pathStopTested, "w")
-	StopTested.write('%s\t%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_start','new_end','Filter'))
+	StopTested.write('%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_end','Filter'))
 	listeNoStopTested = []
 
 	for elt in listeNoStop:
 		Pass = False
 		chr2 = elt[0]
-		st2 = elt[1]
-		en2 = elt[2]
+		st2 = int(elt[1])
+		en2 = int(elt[2])
 		for elt in listeTranscrit:
 			K = elt[0]
-			S = elt[1]
-			E = elt[2]
+			S = int(elt[1])
+			E = int(elt[2])
 			if chr2 == K: # Vérifier égalité des chromosomes
-				if S < st2 < E and S < en2 < E:
+				if S < en2 <= E: # and S < st2 < E:
 					listeNoStopTested.append([chr2,st2,en2,"PASS"])
-					StopTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,st2,en2,"PASS"))
+					StopTested.write("%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,en2,"PASS"))
 					Pass = True
 					break
 		if Pass == False :
 			listeNoStopTested.append([chr2,st2,en2,"Not Valid"])
-			StopTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,st2,en2,"Not Valid"))
+			StopTested.write("%s\t%s\t%s\t%s\t%s\n" % (chr2,S,E,en2,"Not Valid"))
 	StopTested.close()
 	
 
 	StartTested = open(pathStartTested, "w")
-	StartTested.write('%s\t%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_start','new_end','Filter'))
+	StartTested.write('%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_start','Filter'))
 	listeNoStartTested = []
 	for elt in listeNoStart:
 		Pass = False
 		chr1 = elt[0]
-		st1 = elt[1]
-		en1 = elt[2]
+		st1 = int(elt[1])
+		en1 = int(elt[2])
 		for elt in listeTranscrit:
 			K = elt[0]
-			S = elt[1]
-			E = elt[2]
+			S = int(elt[1])
+			E = int(elt[2])
 			if chr1 == K: # Vérifier égalité des chromosomes
-				if S < st1 < E and S < en1 < E:
+				if S <= st1 < E: # and S < en1 < E:
 					listeNoStartTested.append([chr1,st1,en1,"PASS"])
-					StartTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,st1,en1,"PASS"))
+					StartTested.write("%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,st1,"PASS"))
 					Pass = True
 					break
 		if Pass == False :
 			listeNoStartTested.append([chr1,st1,en1,"Not Valid"])
-			StartTested.write("%s\t%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,st1,en1,"Not Valid"))
+			StartTested.write("%s\t%s\t%s\t%s\t%s\n" % (chr1,S,E,en1,"Not Valid"))
 	StartTested.close()
 
 
