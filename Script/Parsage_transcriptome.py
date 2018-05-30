@@ -34,8 +34,8 @@ if __name__ == "__main__":
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
 
-	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_28_05_18.txt"
-	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_28_05_18.txt"
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_30_05_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_30_05_18.txt"
 
 	######################## Parsage Transcriptome ######################
 
@@ -99,6 +99,7 @@ if __name__ == "__main__":
 	######################## Vérification dans le trancriptome #########################
 	
 	StopTested = open(pathStopTested, "w")
+	StopTested.write('%s\t%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_start','new_end','Filter'))
 	listeNoStopTested = []
 
 	for elt in listeNoStop:
@@ -123,6 +124,7 @@ if __name__ == "__main__":
 	
 
 	StartTested = open(pathStartTested, "w")
+	StartTested.write('%s\t%s\t%s\t%s\t%s\t%s\n' %('chromosome','CDS_start','CDS_end','new_start','new_end','Filter'))
 	listeNoStartTested = []
 	for elt in listeNoStart:
 		Pass = False
