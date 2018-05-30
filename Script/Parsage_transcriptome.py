@@ -1,7 +1,7 @@
 #!/home/egueret/miniconda3/bin/python3
 ##!/usr/bin/python3
 #-*- coding: utf-8 -*-
-# @package Correction_Annotation.py
+# @package Parsage_transcriptome.py
 # @author Elise GUERET
 
 
