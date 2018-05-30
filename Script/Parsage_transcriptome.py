@@ -69,6 +69,7 @@ if __name__ == "__main__":
 	NoStart = open(pathF1)
 	linesNoStart = NoStart.readlines()
 	NoStart.close()
+	linesNoStart = linesNoStart[2:len(linesNoStart)]
 
 	listeNoStart = []
 
@@ -84,6 +85,7 @@ if __name__ == "__main__":
 	NoStop = open(pathF2)
 	linesNoStop = NoStop.readlines()
 	NoStop.close()
+	linesNoStop = linesNoStop[2:len(linesNoStop)]
 
 	listeNoStop = []
 
