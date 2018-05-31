@@ -243,6 +243,7 @@ if __name__ == "__main__":
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
 	# Je ne sais pas comment compter les '*' présentent dans la séquence protéique 
+	# Changer la table pour == 'MT'
 
 	SequenceCDS = open(pathSequenceCDS)
 	linesSequenceCDS= SequenceCDS.readlines()
