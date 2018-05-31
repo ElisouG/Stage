@@ -40,6 +40,11 @@ if __name__ == "__main__":
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/New_Annotation_18_05_2018.gtf"
 	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_31_05_18.txt"
 
+	pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
+	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
+	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_31_05_18.txt"
+	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_31_05_18.txt"
+
 	######################## Parsage Transcriptome ######################
 
 	# Lecture du fichier transcriptome et sauvegarde des lignes dans linesTranscriptome
@@ -150,7 +155,7 @@ if __name__ == "__main__":
 	StartTested.close()
 
 
-	######################## Recherche des CDS #########################
+	######################## Recherche des positions des CDS #########################
 	
 	NewGTF = open(pathAnntotationNew)
 	linesNewGTF= NewGTF.readlines()
@@ -160,22 +165,25 @@ if __name__ == "__main__":
 	CDSFinaux = []
 
 	CDS = open(pathCDS, "w")
+	CDS.write("%s | %s | %s | %s | %s:%s\n" % ('Chromosome','geneID','brin','frame','CDS_start','CDS_end'))
 	geneID = "none"
 	for line in linesNewGTF:
 		if 'CDS' in line and geneID == "none":
 			K1 = line.split('\t')[0]
+			brin = line.split('\t')[6]
 			CDS_start = line.split('\t')[3]
 			CDS_end = line.split('\t')[4]
 			frame = line.split('\t')[7]
 			geneID = line.replace('"','').split('\t')[9]
-			CDS.write("%s | %s | %s | %s:%s" % (K1,geneID,frame,CDS_start,CDS_end)) 
+			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 		elif line.replace('"','').split('\t')[9] != geneID :
 			geneID = line.replace('"','').split('\t')[9]
 			K1 = line.split('\t')[0]
+			brin = line.split('\t')[6]
 			CDS_start = line.split('\t')[3]
 			CDS_end = line.split('\t')[4]
 			frame = line.split('\t')[7]
-			CDS.write("%s | %s | %s | %s:%s" % (K1,geneID,frame,CDS_start,CDS_end)) 
+			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 			CDSFinaux.append(listeCDS)
 			listeCDS = [K1,geneID,frame,%s:%s% (CDS_start,CDS_end)] 
 		elif line.replace('"','').split('\t')[9] == geneID :
@@ -186,15 +194,77 @@ if __name__ == "__main__":
 		geneID = line.replace('"','').split('\t')[9]
 	CDS.close()
 
+	######################## Recherche des séquences des CDS #########################
 
+	Genome = fasta2dict(pathFasta)
+	GenomeR = fasta2dict(PathGenomeR)
+
+	SequenceCDS = open(pathSequenceCDS, "w")
+	SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
+
+	for elt in CDSFinaux:
+		K1 = elt[0]
+		brin = elt[2]
+		CDS_start = elt[4]
+		CDS_end = elt[5]
+		frame = elt[1]
+		
+		if brin == '+':
+			sequence = Genome[chromosome].seq 
+			if frame == '1':
+				CDS_start = str(int(elt[4])+1)
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+			elif frame == '2':
+				CDS_start = str(int(elt[4])+2)
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+			elif frame == '0':
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+		
+		elif brin == '-':
+			sequence = GenomeR[chromosome].seq	
+			if frame == '1':
+				CDS_start = str(int(elt[4])+1)
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+			elif frame == '2':
+				CDS_start = str(int(elt[4])+2)
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+			elif frame == '0':
+				seqCDS = sequence[CDS_start,CDS_end]
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))	
+	SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
-	#pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
-	#PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
-	#GenomeR = fasta2dict(PathGenomeR)
-	#Genome = fasta2dict(pathFasta) 
-	#sequence = Genome[chromosome].seq 
-	#sequenceR = GenomeR[chromosome].seq 
-	#prot = sequence.translate() # http://www.python-simple.com/python-biopython/manipulation-sequences.php 
-	#prot = sequenceR.translate()
+	SequenceCDS = open(pathSequenceCDS)
+	linesSequenceCDS= SequenceCDS.readlines()
+	SequenceCDS.close()
+
+	ProteinesCDS = open(pathProteinesCDS, "w")
+	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
+
+	for line in linesSequenceCDS:
+		K1 = line.split('|')[0]
+		geneID = line.split('|')[1]
+		seqNt = line.split('|')[3]
+		if K1 != 'MT':
+			seqProt = seqNt.translate()
+			if nbre '*' in seqProt > 1:
+				Filtre = 'Plusieurs stop' 
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
+			elif nbre '*' in seqProt == 1:
+				Filtre = 'RAS'
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
+		elif K1 == 'MT':
+			seqProt = seqNt.translate()
+			if nbre '*' in seqProt > 1:
+				Filtre = 'Plusieurs stop' 
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
+			elif nbre '*' in seqProt == 1:
+				Filtre = 'RAS'
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
+	ProteinesCDS.close()
