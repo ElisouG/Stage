@@ -18,19 +18,19 @@
 #$ -cwd
 
 # Choose to run on a specific queue
-#$ -q cemeb.q
+# -q cemeb20.q
 
 # Job hardware time limit
 #$ -l h_rt=99:00:00
 
 # Job name
-#$ -N "run_Data_PreProcessing"
+#$ -N "run_Variant_Calling"
 
 # Standard output (you can use the option '-j y' which add stderr with sdtout)
-#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Data_PreProcessing.out
+#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Variant_Calling.out
 
 # Erreur output (don't use with the option '-j y')
-#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Data_PreProcessing.err
+#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Variant_Calling.err
 
 #Modules à charger pour que le script fonctionne
 module load java1.8
@@ -39,21 +39,31 @@ module load java1.8_jre
 # Valider le pipeline
 #java -jar /home/egueret/tools/wdltool.jar validate Data_cleanup_picard.wdl
 #java -jar /home/egueret/tools/wdltool.jar validate Data_cleanup_GATK.wdl
+#java -jar /home/egueret/tools/wdltool.jar validate Data_Variant_Calling.wdl
+#java -jar /home/egueret/tools/wdltool.jar validate ChoixFiltresTable.wdl 
 
 # Créer l'input
 #java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_picard.wdl > Data_cleanup_picard_inputs.json
 #java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_GATK.wdl > Data_cleanup_GATK_inputs.json
+#java -jar /home/egueret/tools/wdltool.jar inputs Data_Variant_Calling.wdl > Data_Variant_Calling_inputs.json
+#java -jar /home/egueret/tools/wdltool.jar inputs ChoixFiltresTable.wdl > ChoixFiltresTable_inputs2.json
 
 #Lancer le pipeline
 
-# Vérification de l'ordre et réassignment des valeurs de MAPQ : inutile CF stie web troubleshooting
+# Vérification de l'ordre et réassignment des valeurs de MAPQ : inutile CF site web troubleshooting
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ReassignOneMappingQualityFilter.wdl -i ReassignOneMappingQualityFilter_inputs2.json
 
-# Lancement du script contenant GATK  et PICARD
-java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
+# Lancement du script contenant GATK  et PICARD : ce script fonctionne
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
 
 # Lancement du script 1 avec PICARD seul : ce script fonctionne
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_picard.wdl -i Data_cleanup_picard_inputs.json
 
 # Lancement du script 2 avec GATK seul : ce script fonctionne
-# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_GATK.wdl -i Data_cleanup_GATK_inputs.json
+#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_GATK.wdl -i Data_cleanup_GATK_inputs.json
+
+# Lancement du script de VariantCalling :
+java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_Variant_Calling.wdl -i Data_Variant_Calling_inputs.json
+
+# Lancment du script pour pouvoir faire le choix des filtres ensuite :
+#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTable.wdl -i ChoixFiltresTable_inputs.json

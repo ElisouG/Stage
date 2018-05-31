@@ -69,13 +69,12 @@ workflow DataVariantCalling {
 		}
 		call VariantsToTable {
   			input:
-  	  			sampleName=name,
+  	  			sampleName=sample[0],
   	  			RefFasta=refFasta,
   	  			GATK=gatk,
-  	  			rawSNPs=selectSNPs.rawSubset,
-  	  			rawIndels=selectIndels.rawSubset
+  	  			rawSNPs=selectSNPs.rawSubset
   		}
-		call GenomicsDBImport {
+		call CombineGVCFs {
 			input:
 				sampleName=sample[0], 
 				RefFasta=refFasta, 
@@ -92,7 +91,7 @@ workflow DataVariantCalling {
 			RefFasta=refFasta, 
 			RefIndex=refIndex, 
 			RefDict=refDict
-			# GVCFs=HaplotypeCallerERC.GVCF
+			VariantCombined=CombineGVCFs.VariantCombined
 	}
 }
 
@@ -137,7 +136,7 @@ task select {
 		java -jar ${GATK} \
 			SelectVariants \
 			-R ${RefFasta} \
-			-V ${rawVCFs} \
+			-V ${sep="-V" rawVCFs} \
 			-select-type ${type} \
 			-O ${sampleName}_raw.${type}.vcf
 	}
@@ -145,25 +144,23 @@ task select {
 		File rawSubset = "${sampleName}_raw.${type}.vcf"
 	}
 }
-
+    
 task VariantsToTable {
 	File GATK
 	File RefFasta
   	String sampleName
 	Array[File] rawSNPs
-	Array[File] rawIndels
+
 	command {
 	java -jar ${GATK} \
 	  VariantsToTable \
-      -V ${filteredVCF} \
-      -F CHROM -F POS -F ID -F QUAL -F AC \
+      -V ${sep="-V" rawSNPs} \
       -O ${sampleName}.snps.indels.table
 	}
 	output {
 	File TableFilteredVCF = "${sampleName}.snps.indels.table"
 	}
 }
-
 #This task calls GATK's tool, VariantFiltration. It applies certain recommended filtering 
 #thresholds to the SNP-only vcf. VariantFiltration filters out any variant that is "TRUE" 
 #for any part of the filterExpression (i.e. if a variant has a QD of 1.3, it would be 
@@ -179,7 +176,7 @@ task hardFilterSNP {
 	command {
 		java -jar ${GATK} \
 			VariantFiltration \
-			-V ${rawSNPs} \
+			-V ${sep="-V" rawSNPs} \
 			--filter-expression "FS > 60.0" \
 			--filter-name "snp_filter" \
 			-O ${sampleName}.filtered.snps.vcf
@@ -202,9 +199,9 @@ task hardFilterIndel {
 	command {
 		java -jar ${GATK} \
 			VariantFiltration \
-			-V ${rawIndels} \
+			-V ${sep="-V" rawIndels} \
 			--filter-expression "FS > 200.0" \
-			--filter-sample[0] "indel_filter" \
+			--filter-name "indel_filter" \
 			-O ${sampleName}.filtered.indels.vcf
 	}
 	output {
@@ -212,9 +209,8 @@ task hardFilterIndel {
 	}
 }
 
-# This task calls GATK's tool, GenomicsDBImport. This tool imports GVCFs into a 
-# Genomics databse workspace to facilitate joint genotyping.
-task GenomicsDBImport {
+# This task calls GATK's tool, .
+task CombineGVCFs {
 	File GATK
 	File RefFasta
 	File RefIndex
@@ -224,12 +220,14 @@ task GenomicsDBImport {
 	Array[File] filteredSNPs
 	command {
 		java -jar ${GATK} \
-			--java-options "-Xmx4g -Xms4g" \
-			GenomicsDBImport \
-			-V ${filteredIndels} \
-			-V ${filteredSNPs} \
-			--genomicsDBWorkspace-path my_database \
-			--intervals
+			CombineGVCFs \
+			-V ${sep="-V" filteredIndels} \
+			-V ${sep="-V" filteredSNPs} \
+			-R ${RefFasta}\
+			-O Variants_Combined.vcf
+	}
+	output {
+		File VariantCombined = "Variants_Combined.vcf"
 	}
 }
 
@@ -241,14 +239,13 @@ task GenotypeGVCFs {
 	File RefFasta
 	File RefIndex
 	File RefDict
-	# Array[File] GVCFs
+	File VariantCombined
 
 	command {
-		java -jar ${GATK} \
-			--java-options -Xmx4g \
+		java --java-options -Xmx4g -jar ${GATK} \
 			GenotypeGVCFs \
 			-R ${RefFasta} \
-			-V gendb://my_database \
+			-V ${VariantCombined} \
 			-O Variants_final.vcf
 	}
 	output {

@@ -49,16 +49,14 @@ workflow ChoixFiltresTable {
 				type="INDEL", 
 				rawVCFs=HaplotypeCallerERC.rawVCF
 		}
-	}
-	call VariantsToTable {
-  		input:
-  	  		sampleName=sample[0],
-  	  		RefFasta=refFasta,
-  	  		GATK=gatk,
-  	  		rawSNPs=selectSNPs.rawSubset,
-  	  		rawIndels=selectIndels.rawSubset
-  	}
-  		
+		call VariantsToTable {
+  			input:
+  	  			sampleName=sample[0],
+  	  			RefFasta=refFasta,
+  	  			GATK=gatk,
+  	  			rawSNPs=selectSNPs.rawSubset
+  		}
+  	}	
 }
 
 # Task Definition
@@ -116,14 +114,12 @@ task VariantsToTable {
 	File RefFasta
   	String sampleName
 	Array[File] rawSNPs
-	Array[File] rawIndels
 	command {
 	java -jar ${GATK} \
 	  VariantsToTable \
-      -V ${rawSNPs} \
-      -V ${rawIndels} \
-      # -F CHROM -F POS -F QUAL -F QD -F FS -F SOR -F MQ -F MQRankSum -F ReadPosRankSum -F InbreedingCoeff  \
-      -O ${sampleName}.snps.indels.table
+      -V ${sep="-V" rawSNPs} \
+      -F CHROM -F POS -F QUAL -F QD -F FS -F SOR -F MQ -F MQRankSum -F ReadPosRankSum -F InbreedingCoeff  \
+      -O ${sampleName}.snps.indels.table     
 	}
 	output {
 	File TableFilteredVCF = "${sampleName}.snps.indels.table"
