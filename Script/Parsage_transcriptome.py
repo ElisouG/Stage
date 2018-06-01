@@ -196,8 +196,6 @@ if __name__ == "__main__":
 
 	######################## Recherche des séquences des CDS #########################
 
-	# Je ne sais pas comment récupérer les positions des exons autres que celle du premier exon
-
 	Genome = fasta2dict(pathFasta)
 	GenomeR = fasta2dict(PathGenomeR)
 
@@ -241,9 +239,6 @@ if __name__ == "__main__":
 	SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
-
-	# Je ne sais pas comment compter les '*' présentent dans la séquence protéique 
-	# Changer la table pour == 'MT'
 
 	SequenceCDS = open(pathSequenceCDS)
 	linesSequenceCDS= SequenceCDS.readlines()
