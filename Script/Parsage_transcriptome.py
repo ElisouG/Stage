@@ -185,7 +185,7 @@ if __name__ == "__main__":
 			frame = line.split('\t')[7]
 			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 			CDSFinaux.append(listeCDS)
-			listeCDS = [K1,geneID,frame,%s:%s% (CDS_start,CDS_end)] 
+			listeCDS = [K1,geneID,brin,frame,%s:%s% (CDS_start,CDS_end)] 
 		elif line.replace('"','').split('\t')[9] == geneID :
 			CDS_start = line.split('\t')[3]
 			CDS_end = line.split('\t')[4]
@@ -202,12 +202,13 @@ if __name__ == "__main__":
 	SequenceCDS = open(pathSequenceCDS, "w")
 	SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
 
+	positionCDS = []
+
 	for elt in CDSFinaux:
 		K1 = elt[0]
 		brin = elt[2]
-		CDS_start = elt[4]
-		CDS_end = elt[5]
-		frame = elt[1]
+		frame = elt[3]
+		
 		
 		if brin == '+':
 			sequence = Genome[chromosome].seq 
