@@ -199,73 +199,98 @@ if __name__ == "__main__":
 	Genome = fasta2dict(pathFasta)
 	GenomeR = fasta2dict(PathGenomeR)
 
-	SequenceCDS = open(pathSequenceCDS, "w")
-	SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
+	#SequenceCDS = open(pathSequenceCDS, "w")
+	#SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
 
-	positionCDS = []
+	seqFinale = ""
 
 	for elt in CDSFinaux:
 		K1 = elt[0]
+		geneID = elt[1]
 		brin = elt[2]
 		frame = elt[3]
-		
-		
-		if brin == '+':
-			sequence = Genome[chromosome].seq 
-			if frame == '1':
-				CDS_start = str(int(elt[4])+1)
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-			elif frame == '2':
-				CDS_start = str(int(elt[4])+2)
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-			elif frame == '0':
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-		
-		elif brin == '-':
-			sequence = GenomeR[chromosome].seq	
-			if frame == '1':
-				CDS_start = str(int(elt[4])+1)
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-			elif frame == '2':
-				CDS_start = str(int(elt[4])+2)
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-			elif frame == '0':
-				seqCDS = sequence[CDS_start,CDS_end]
-				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))	
-	SequenceCDS.close()
+		positionCDS=CDSFinaux[4:len(CDSFinaux)]
+		for elt in positionCDS:
+			if brin == '+':
+				sequence = Genome[chromosome].seq 
+				if frame == '1':
+					CDS_start = str(int((elt.split(':')[0]))+1)
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				elif frame == '2':
+					CDS_start = str(int((elt.split(':')[0]))+2)
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				elif frame == '0':
+					CDS_start = elt.split(':')[0]
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+			
+			elif brin == '-':
+				sequence = GenomeR[chromosome].seq	
+				if frame == '1':
+					CDS_start = str(int((elt.split(':')[0]))+1)
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				elif frame == '2':
+					CDS_start = str(int((elt.split(':')[0]))+2)
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				elif frame == '0':
+					CDS_start = elt.split(':')[0]
+					CDS_end = elt.split(':')[1]
+					seqCDS = sequence[CDS_start,CDS_end]
+					seqFinale = seqFinale+seqCDS
+					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+		seqFinale = seqFinale+seqCDS
+		CDSComplete.append(K1,geneID,brin,seqFinale)	
+	#SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
-	SequenceCDS = open(pathSequenceCDS)
-	linesSequenceCDS= SequenceCDS.readlines()
-	SequenceCDS.close()
+	# SequenceCDS = open(pathSequenceCDS)
+	# linesSequenceCDS= SequenceCDS.readlines()
+	# SequenceCDS.close()
 
-	ProteinesCDS = open(pathProteinesCDS, "w")
-	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
+	# ProteinesCDS = open(pathProteinesCDS, "w")
+	# ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 
-	for line in linesSequenceCDS:
-		K1 = line.split('|')[0]
-		geneID = line.split('|')[1]
-		seqNt = line.split('|')[3]
+	for lelt in CDSComplete:
+		K1 = elt[0]
+		geneID = elt[1]
+		seqNt = elt[4]
 		if K1 != 'MT':
-			seqProt = seqNt.translate()
-			if nbre '*' in seqProt > 1:
+			seqProt = str(seqNt.translate())
+			nbreStar = seqProt.count('*')
+			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
-			elif nbre '*' in seqProt == 1:
+			elif nnbreStar == 1:
 				Filtre = 'RAS'
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
+			elif nbreStar == 0:
+				Filtre = 'Pas de stop'
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
 		elif K1 == 'MT':
-			seqProt = seqNt.translate()
-			if nbre '*' in seqProt > 1:
+			seqProt = str(seqNt.translate())
+			nbreStar = seqProt.count('*')
+			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
-			elif nbre '*' in seqProt == 1:
+			elif nbreStar == 1:
 				Filtre = 'RAS'
+				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
+			elif nbreStar == 0:
+				Filtre = 'Pas de stop'
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
 	ProteinesCDS.close()
