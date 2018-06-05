@@ -262,8 +262,8 @@ if __name__ == "__main__":
 	# linesSequenceCDS= SequenceCDS.readlines()
 	# SequenceCDS.close()
 
-	# ProteinesCDS = open(pathProteinesCDS, "w")
-	# ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
+	ProteinesCDS = open(pathProteinesCDS, "w")
+	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 
 	for lelt in CDSComplete:
 		K1 = elt[0]
