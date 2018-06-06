@@ -723,7 +723,122 @@ Concernant le rapport, il faudrait que je teste différente chose pour voir si l
 
 <p style="text-align:justify";>Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu'il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.</p>
 
-<p style="text-align:justify";>Comme ma carte multi-services ne me permet plus d'ouvrir la porte de l'ISEM, j'ai écrit un mail à la logistique. J'y suis donc allée et elle m'a dit que mon numéro de carte était mentionné 2 fois et que cela venait peut-être de cela. En retournant au bâtiment 22, j'ai testé ma carte à nouveau mais cela n'a rien changé. Elle ne fonctionne toujours pas. J'ai donc écrit un second mail pour dire que ça ne fonctionne toujours afin qu'elle voit avec le service informatique d'où vient le problème.</p>
+<p style="text-align:justify";>Comme ma carte multi-services ne me permet plus d'ouvrir la porte de l'ISEM, j'ai écrit un mail à la logistique. J'y suis donc allée et elle m'a dit que mon numéro de carte était mentionné 2 fois et que cela venait peut-être de cela. En retournant au bâtiment 22, j'ai testé ma carte à nouveau mais cela n'a rien changé. Elle ne fonctionne toujours pas. J'ai donc écrit un second mail pour dire que ça ne fonctionne toujours afin qu'elle voit avec le service informatique d'où vient le problème. Comme ça ne vient pas du service informatique, j'ai envoyé un mail au responsable de la porte.</p>
+
+## Jour 58 : 24/05/2018
+
+<p style="text-align:justify";>Pour la porte, en fait il fallait que je demande à Yannick et pas à la logistique pour que l'accès fonctionne car Yannick s'occupe de la porte côté ISEM et son collègue de la porte côté Géosciences. Or celle qui ne fonctionne plus c'est celle de l'ISEM.</p>
+
+<p style="text-align:justify";>En fait, j'ai juste à l'ouvrir avec read.table() dans R pour que ça fonctionne. Maintenant il ne me reste plus qu'à faire les graphs. Mais il faut que je trouve comment faire. J'ai réussi à faire des barplot avec ggplot2. POur les Nostart il n'y a aucun problème de visualisation mais pour les Nostop c'est plus délicat car il y a beaucoup de valeurs différentes d'ajouts de longueurs.</p>
+
+<p style="text-align:justify";>Mon accès à la baie de stockage est résolu : j'ai les droits mais je n'ai plus qu'à trouver comment y accéder. Ensuite il faut que je vois comment y transférer mes données. Puis il faudra que je vois comment faire pour travailler sur les bam qui y seront stockés depuis le cluster.</p>
+
+<p style="text-align:justify";>J'ai également fait une demande d'accès au cluster depuis l'extérieur. Et j'ai reçu tout ce qu'il fallait pour le faire. Reste plus qu'à tester ça.</p>
+
+<p style="text-align:justify";>Une femme est venue me voir pour résoudre un de ses problèmes avec ces fichiers fastq qu'elle ne peut merger. Quand elle est venue, je ne savais pas pourquoi ni comment l'aider. Ensuite elle est repartie et j'ai fait une recherche sur Internet pour savoir comment faire. Et j'ai réussi à trouver 4 possibilités différentes. J'ai donc écrit un mail à Bruno pour qu'il lui transmette car je ne connait pas son nom.</p>
+
+## Jour 59 : 25/05/2018
+
+<p style="text-align:justify";>Mes scripts wdl ont plantés parce que Variants to table ne peut prendre qu'un seul fichier à la fois. Donc dans un premier temps je ne vais récupérer que les SNPs pour voir pour les filtres et plus tard je le referai avec les INDELs. J'espère que cette fois ça va marcher et que mes scripts vont partir rapidement.</p> 
+
+<p style="text-align:justify";>J'ai trouvé un rapport de stage sur internet ou quelqu'un fait quasiment la même chose que moi. Donc je vais m'inspirer de son rapport pour faire le miens de la même manière. J'ai donc écrit un plan ainsi que les consignes à respecter sur mon carnet pour m'en rappeler. Et j'ai ajouté tout ça à mon rapport.Rmd que j'avais déjà commencé en rassemblant des consignes de différents horizons comme nous n'avons que des consignes sur la quantité et l'écriture.</p>
+
+<p style="text-align:justify";>J'essaie de transformer mes données de NoStart et NoStop en "numérique" pour pouvoir faire les graphs en ordre croissant mais pour le moment ça me change mes valeurs au lieu de les transformer^^. Ça y est j'ai réussi avec l'aide de Flo en transformant mes données en string puis en numeric.</p>
+
+## Jour 60 : 28/05/2018
+
+<p style="text-align:justify";>Mes jobs sont partis à 22h vendredi soir. Heureusement que je ne les ai pas attendus. Mettre en commentaires les rawIndels n'a pas fonctionné pour la tâche VariantToTable. Je les ai donc supprimé des deux scripts.</p>
+
+<p style="text-align:justify";>Build snpEff s'est bien déroulé. Reste plus qu'à tester l'annotation de la puce avec les dernières modif d'Erick. Je ne suis pas sûre qu'il m'ai envoyé le bon fichier vu que j'ai toujours les deux même erreurs de cricularisation de snpEff.</p>
+
+<p style="text-align:justify";>Erick a téléphoné. Il faut que je continue mes scripts Python. Pour GATK, il faut que je continue de résoudre les différents problèmes avec VaraintToTable pour pouvoir sortir les graphs et choisir les bonnes valeurs pour les filtres et que ke labce en paralèlle le premier script qui c=fonctionne sur plusieurs bam. Il faut que je fasse le transfert des données sur la baie de stockage. Il faut que je vois avec Rémy comment communiquer entre le cluster et la baie de stockage. Pour R (graph des longueurs ajoutées), il faut que je mette en log les valeurs de mon axes des ordonnées ou que je fasse des groupements de classes. Et sur le fichier html il faut qu'il apparaisse différentes choses, par exemple, le nombre total de valeurs traitées ainsi que des phrases explicatives pour mieux comprendre.</p>
+
+<p style="text-align:justify";>J'ai modifié mon fichier html pour y mettre plus de détail et pour y ajouter des données. Je n'arrive pas à passer en log() mon graph des NoStop du coup je suis passée par le second graph pour passer les valeurs de count en log.</p>
+
+<p style="text-align:justify";>J'ai lancé mon script python de correction avec le transcriptome mais il me crée des fichiers vide. Apparemment, j'ai un problème dans mes NoStart NoStop.</p>
+
+## Jour 61 : 29/05/2018
+
+<p style="text-align:justify";>VariantToTable a planté parce que apparemment quand on mets un commentaires dans une ligne de commande il ne voit pas ce qu'il se passe après. Du coup, il pensait que je ne lui avait pas donné d'output. Et HardfilterIndels a planté parce que j'vais remplacé tous les name par samplename et du coup ça avait modifié  un argument de  la fonction. J'avais pourtant regardé pour tout corriger mais cela prouve s=que je n'avais pas tout vu.</p>
+
+<p style="text-align:justify";>Je suis retournée à l'appart rapidement parce qu'on  fait des modifications à mon script hier soir et on a oublié de faire git push. Du coup, j'ai pu récupéré le script faire quelques modifications et tout relancer sur le cluster. Mais mes jobs mettent 100 ans à partir en calcul.</p>
+
+<p style="text-align:justify";>Maintenant je vais m'occuper de l'exo que Flo m'a donné à faire pour m'occuper et lui faire plaisir. C'est fait et tout était quasiment parfait. Je n'ai plus qu'à me trouver qqch à faire pour cet aprèm.</p>
+
+<p style="text-align:justify";>Je vais peut-être leur parler de mon site web. Je vais peut-être creuser PLINK. Enfin bref il faut que je me trouve un truc à faire sinon l'aprèm va être super longue.</p>
+
+<p style="text-align:justify";>Finalement je n'ai rien foutu cet aprèm.</p>
+
+## Jour 62 : 30/05/2018
+
+<p style="text-align:justify";>Mes jobs partent lorsque je ne spécifie pas de queue.</p>
+
+<p style="text-align:justify";>ChoixFiltres a planté sûrement parce que je n'avais pas mis l'option -F qui permet de sélectionner les colonnes que l'on souhaite afficher.</p>
+
+<p style="text-align:justify";>VariantCalling a planté parce qu'il ne reconnaissait pas l'option --java-options. Du coup j'ai mis cette option au tout début juste après java et avant -jar.</p>
+
+<p style="text-align:justify";>On a un petit problème avec mon script python. Les filtres ne fonctionnent pas. Je ne sais pas pourquoi. Mais j'ai pensé à deux possibilités : soit il compare des lettres et non pas des chiffres du coup ça ne peut pas fonctionner soit il y a un problème d'indentation de  "$ if Pass == False". J'ai demandé à Flo, je vais voir ce qu'il en pense. Il pense que ça viens des lettres à la place des chiffres. J'ai donc ajouté la fonction 'int()' à chacune des variables que je déclare. Je me suis également demandé si il ne fallait pas mieux mettre =< à la place de <. Au cas où il serait égal.</p>
+
+<p style="text-align:justify";>J'ai fait un ticket pour demander plusieurs chose: accès à la baie, transfert de data sur la baie et communication entre la baie et le cluster.</p>
+
+<p style="text-align:justify";>J'ai fait une liste de chose que je voudrais que mon (mes) script(s) python fassent :
+
+* Lors de la recherche de codon start ou stop : afficher si il y a des N;       
+* A la place de la traduction faire une recherche de stop dans le CDS en fonction des frames;   
+* Pour les multiples stop : Noter le frame quelquepart et faire une recherche de stop avec toutes les frames possibles;   
+* Pour les non multiple de 3 : Faire une comparaison de la longueur avec le transcriptome et voir pour ajouter ou supprimer des nt en fonction;   
+* Modifier le gtf quand tous les tests ont été vérifiés et validés.</p>
+
+## Jour 63 : 31/05/2018
+
+<p style="text-align:justify";>Mon ticket a été résolu en partie. En effet, la connexion ne fonctionnait plus car ils ont eu une coupure de courant. De plus, pour le transfert : je n'étais pas dans le bon dossier mais pour ma défense on ne m'vait pas donné le bon chemin ^^. Pour les calculs sur le cluster avec la baie, je vais devoir réserver une machine big.mem pour pouvoir faire tourner GATK sur l'ensemble de mes Bam.</p>
+
+<p style="text-align:justify";>Pour mon script wdl de Variant_calling j'ai changé de stratégie et supprimer l'étape de GenomicsDBImport pour la remplacer par CombineGVCFs et GenotypeGVCFs. On va bien voir si ça fonctionne.</p>
+
+<p style="text-align:justify";>Erick est content de mon rapport html sur l'évaluation des longueurs ajoutées et la vérification par le transcriptome.</p>
+
+<p style="text-align:justify";>J'ai commencé le script pour vérifier qu'il n'y a pas de stop au sein des CDS que j'ai rallongé avec mon premier script python. Dans une première partie je récupère les positions et les séquences des CDS puis dans une sceonde je les traduit et évalue la présence de stop ou non dans la séquence protéique.</p>
+
+#Journal de bord - Juin
+
+## Jour 64 : 01/06/2018
+
+<p style="text-align:justify";>Erick doit passer ce matin. Du coup, si je trouve des erreurs en me basant sur les données du GTF initial c'est quelles viendront sûrement d'erreurs qu'il y avait déjà au sein de ce GTF initial. Erick prend 3 semaines de vacances en juillet (les 3 dernières semaines). Ca sera la période dans laquelle je devrais commencer à rédiger mon Rapport car il ne sera pas là pour me guider. (Même si au final il ne fait que me donner des pistes et non pas m'aider à programmer). Il vaut mieux que je fasse mon rapport en word car ERick déteste LaTeX qui est un langage que je ne connait pas.</p>
+
+<p style="text-align:justify";>Mon script choixfiltres a fonctionné sans erreur mais le fichier de sortie est vide . Donc je l'ai relancé sans sélection cette fois.</p>
+
+<p style="text-align:justify";>Mon script Variant calling a planté pour la même erreur qu'hier. Je ne sais pas d'où elle vient. J'essaye en sortant CombinedGVCFs de la boucle scatter-gather. Peut-être que le problème vient de là. L'erreur était expected Rbrace ConbinedGVCFs mais je ne sais pas ce que veut dire rbrace.</p>
+
+<p style="text-align:justify";>J'ai commencé un tuto LaTeX pour apprendre ce lana=gage mais c'est un pau complexe de se rappeler de toutes les possibilités.</p>
+
+
+## Jour 65 : 04/06/2018
+
+<p style="text-align:justify";>Mes scripts wdl ont fonctionné. J'ai rajouté des champs à variantstotable. Mes scripts wdl ne prennent plus que 3h à la place de 17h de temps de calcul.</p>
+
+<p style="text-align:justify";>J'essaye de faire des graphs pour le choix des filtres.</p>
+
+<p style="text-align:justify";>J'ai assisté à la présentation de Théo. C'était bien même si il a pas mal de chose à changer d'ici jeudi et que ça va être court et que Bruno n'est pas là pour l'aider à faire des choix.</p>
+
+## Jour 66 : 05/06/2018
+
+<p style="text-align:justify";>J'ai fait des graph avec les données que j'ai obtenu après haplotypecaller. J'obtiens des Mixed et des Symbolic. Donc ce n'est pas aussi simple qu'avec des SNPs et des INDELs.</p>
+
+<p style="text-align:justify";>Erick m'a envoyé la liste des individus à passer sur GATK en premier et j'ai fait une première sélection parmi ceux-là. Je suis en train de les transférer sur le cluster. Ensuite il faut que je produise le fichier d'index et que je prépare le fichier tsv. Les données ont fini d'être téléchargée mais je ne peux produire leur index car je ne sais pas utiliser samtools du cluster. Donc j'ai chargé les données sur mon disuque dur pour faire ce soir à l'appart. Mais cela ne m'empêche pas de faire le fichier TSV.</p>
+
+<p style="text-align:justify";>Je suis en train de sauvegarder les données que j'ai obtenu avec GATK pour Creche-11GB sur mon ordi pour ensuite les transférer sur la baie de stockage (tycho).</p>
+
+<p style="text-align:justify";>J'ai modifié mon script python pour faire ce que je n'arrivais pas à faire.</p>
+
+
+## Jour 67 : 06/06/2018
+
+<p style="text-align:justify";>J'ai fais les corrections à mon script python.</p>
+
+<p style="text-align:justify";>Hier soir, j'ai préparé les fichiers .bam.bai et j'ai pu lancer ce matin la préanalyse pour les 8 bam que j'ai sélectionné. J'espère que la mémoire de mon home sur le cluster est bien de 500Go comme il m'a dit sinon ça va planter.</p>
+
+<p style="text-align:justify";>Cet après-midi j'ai rndez-vous avec Erick et Bruno pour parler de l'avancée de mon stage. On se voit tous les 3 environ 1 fois par mois.</p>
+
 
 #Bibliographie
 

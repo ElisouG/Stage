@@ -32,7 +32,7 @@
 <section class="page-header">
 <h1 class="title toc-ignore project-name">Notebook - Génotypage du Bar</h1>
 <h4 class="author project-author">Elise GUERET</h4>
-<h4 class="date project-date">23 mai 2018</h4>
+<h4 class="date project-date">30 mai 2018</h4>
 </section>
 
 
@@ -954,12 +954,114 @@ Erick est passé ce matin, on a parlé des filtres pour faire la sélection des 
 Pour mon script Python, je me suis occupée de commencer à écrire le script pour parser le fichier gtf du transcriptome que m’a donné Erick. Je vais demander à Flo pour récupérer le fichier au format tabular et non au format visuellement lisible pour pouvoir examiner la longueur que j’ajoute car ça fait plusieurs fois qu’érick me le demande et qu’à chaque fois j’oublies. Donc il faudrait que j’ai fait cela pour demain.
 </p>
 <p style="text-align:justify" ;>
-Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j’y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C’est celle que je vais choisir pour ne pas faire du doucle emploi quoi que, une page script et leur détail peut-être utile.
+Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j’y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C’est celle que je vais choisir pour ne pas faire du double emploi quoi que, une page script et leur détail peut être utile. Finalement j’ai choisi de supprimer la page tools used pour la remplacer par Scripts dans le quel je décrit tout pour mes scripts.
 </p>
 <p style="text-align:justify" ;>
 Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu’il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.
 </p>
+<p style="text-align:justify" ;>
+Comme ma carte multi-services ne me permet plus d’ouvrir la porte de l’ISEM, j’ai écrit un mail à la logistique. J’y suis donc allée et elle m’a dit que mon numéro de carte était mentionné 2 fois et que cela venait peut-être de cela. En retournant au bâtiment 22, j’ai testé ma carte à nouveau mais cela n’a rien changé. Elle ne fonctionne toujours pas. J’ai donc écrit un second mail pour dire que ça ne fonctionne toujours afin qu’elle voit avec le service informatique d’où vient le problème. Comme ça ne vient pas du service informatique, j’ai envoyé un mail au responsable de la porte.
+</p>
 </div>
+<div id="jour-58-24052018" class="section level2">
+<h2>Jour 58 : 24/05/2018</h2>
+<p style="text-align:justify" ;>
+Pour la porte, en fait il fallait que je demande à Yannick et pas à la logistique pour que l’accès fonctionne car Yannick s’occupe de la porte côté ISEM et son collègue de la porte côté Géosciences. Or celle qui ne fonctionne plus c’est celle de l’ISEM.
+</p>
+<p style="text-align:justify" ;>
+En fait, j’ai juste à l’ouvrir avec read.table() dans R pour que ça fonctionne. Maintenant il ne me reste plus qu’à faire les graphs. Mais il faut que je trouve comment faire. J’ai réussi à faire des barplot avec ggplot2. POur les Nostart il n’y a aucun problème de visualisation mais pour les Nostop c’est plus délicat car il y a beaucoup de valeurs différentes d’ajouts de longueurs.
+</p>
+<p style="text-align:justify" ;>
+Mon accès à la baie de stockage est résolu : j’ai les droits mais je n’ai plus qu’à trouver comment y accéder. Ensuite il faut que je vois comment y transférer mes données. Puis il faudra que je vois comment faire pour travailler sur les bam qui y seront stockés depuis le cluster.
+</p>
+<p style="text-align:justify" ;>
+J’ai également fait une demande d’accès au cluster depuis l’extérieur. Et j’ai reçu tout ce qu’il fallait pour le faire. Reste plus qu’à tester ça.
+</p>
+<p style="text-align:justify" ;>
+Une femme est venue me voir pour résoudre un de ses problèmes avec ces fichiers fastq qu’elle ne peut merger. Quand elle est venue, je ne savais pas pourquoi ni comment l’aider. Ensuite elle est repartie et j’ai fait une recherche sur Internet pour savoir comment faire. Et j’ai réussi à trouver 4 possibilités différentes. J’ai donc écrit un mail à Bruno pour qu’il lui transmette car je ne connait pas son nom.
+</p>
+</div>
+<div id="jour-59-25052018" class="section level2">
+<h2>Jour 59 : 25/05/2018</h2>
+<p style="text-align:justify" ;>
+Mes scripts wdl ont plantés parce que Variants to table ne peut prendre qu’un seul fichier à la fois. Donc dans un premier temps je ne vais récupérer que les SNPs pour voir pour les filtres et plus tard je le referai avec les INDELs. J’espère que cette fois ça va marcher et que mes scripts vont partir rapidement.
+</p>
+<p style="text-align:justify" ;>
+J’ai trouvé un rapport de stage sur internet ou quelqu’un fait quasiment la même chose que moi. Donc je vais m’inspirer de son rapport pour faire le miens de la même manière. J’ai donc écrit un plan ainsi que les consignes à respecter sur mon carnet pour m’en rappeler. Et j’ai ajouté tout ça à mon rapport.Rmd que j’avais déjà commencé en rassemblant des consignes de différents horizons comme nous n’avons que des consignes sur la quantité et l’écriture.
+</p>
+<p style="text-align:justify" ;>
+J’essaie de transformer mes données de NoStart et NoStop en “numérique” pour pouvoir faire les graphs en ordre croissant mais pour le moment ça me change mes valeurs au lieu de les transformer^^. Ça y est j’ai réussi avec l’aide de Flo en transformant mes données en string puis en numeric.
+</p>
+</div>
+<div id="jour-60-28052018" class="section level2">
+<h2>Jour 60 : 28/05/2018</h2>
+<p style="text-align:justify" ;>
+Mes jobs sont partis à 22h vendredi soir. Heureusement que je ne les ai pas attendus. Mettre en commentaires les rawIndels n’a pas fonctionné pour la tâche VariantToTable. Je les ai donc supprimé des deux scripts.
+</p>
+<p style="text-align:justify" ;>
+Build snpEff s’est bien déroulé. Reste plus qu’à tester l’annotation de la puce avec les dernières modif d’Erick. Je ne suis pas sûre qu’il m’ai envoyé le bon fichier vu que j’ai toujours les deux même erreurs de cricularisation de snpEff.
+</p>
+<p style="text-align:justify" ;>
+Erick a téléphoné. Il faut que je continue mes scripts Python. Pour GATK, il faut que je continue de résoudre les différents problèmes avec VaraintToTable pour pouvoir sortir les graphs et choisir les bonnes valeurs pour les filtres et que ke labce en paralèlle le premier script qui c=fonctionne sur plusieurs bam. Il faut que je fasse le transfert des données sur la baie de stockage. Il faut que je vois avec Rémy comment communiquer entre le cluster et la baie de stockage. Pour R (graph des longueurs ajoutées), il faut que je mette en log les valeurs de mon axes des ordonnées ou que je fasse des groupements de classes. Et sur le fichier html il faut qu’il apparaisse différentes choses, par exemple, le nombre total de valeurs traitées ainsi que des phrases explicatives pour mieux comprendre.
+</p>
+<p style="text-align:justify" ;>
+J’ai modifié mon fichier html pour y mettre plus de détail et pour y ajouter des données. Je n’arrive pas à passer en log() mon graph des NoStop du coup je suis passée par le second graph pour passer les valeurs de count en log.
+</p>
+<p style="text-align:justify" ;>
+J’ai lancé mon script python de correction avec le transcriptome mais il me crée des fichiers vide. Apparemment, j’ai un problème dans mes NoStart NoStop.
+</p>
+</div>
+<div id="jour-61-29052018" class="section level2">
+<h2>Jour 61 : 29/05/2018</h2>
+<p style="text-align:justify" ;>
+VariantToTable a planté parce que apparemment quand on mets un commentaires dans une ligne de commande il ne voit pas ce qu’il se passe après. Du coup, il pensait que je ne lui avait pas donné d’output. Et HardfilterIndels a planté parce que j’vais remplacé tous les name par samplename et du coup ça avait modifié un argument de la fonction. J’avais pourtant regardé pour tout corriger mais cela prouve s=que je n’avais pas tout vu.
+</p>
+<p style="text-align:justify" ;>
+Je suis retournée à l’appart rapidement parce qu’on fait des modifications à mon script hier soir et on a oublié de faire git push. Du coup, j’ai pu récupéré le script faire quelques modifications et tout relancer sur le cluster. Mais mes jobs mettent 100 ans à partir en calcul.
+</p>
+<p style="text-align:justify" ;>
+Maintenant je vais m’occuper de l’exo que Flo m’a donné à faire pour m’occuper et lui faire plaisir. C’est fait et tout était quasiment parfait. Je n’ai plus qu’à me trouver qqch à faire pour cet aprèm.
+</p>
+<p style="text-align:justify" ;>
+Je vais peut-être leur parler de mon site web. Je vais peut-être creuser PLINK. Enfin bref il faut que je me trouve un truc à faire sinon l’aprèm va être super longue.
+</p>
+<p style="text-align:justify" ;>
+Finalement je n’ai rien foutu cet aprèm.
+</p>
+</div>
+<div id="jour-62-30052018" class="section level2">
+<h2>Jour 62 : 30/05/2018</h2>
+<p style="text-align:justify" ;>
+Mes jobs partent lorsque je ne spécifie pas de queue.
+</p>
+<p style="text-align:justify" ;>
+ChoixFiltres a planté sûrement parce que je n’avais pas mis l’option -F qui permet de sélectionner les colonnes que l’on souhaite afficher.
+</p>
+<p style="text-align:justify" ;>
+VariantCalling a planté parce qu’il ne reconnaissait pas l’option –java-options. Du coup j’ai mis cette option au tout début juste après java et avant -jar.
+</p>
+<p style="text-align:justify" ;>
+On a un petit problème avec mon script python. Les filtres ne fonctionnent pas. Je ne sais pas pourquoi. Mais j’ai pensé à deux possibilités : soit il compare des lettres et non pas des chiffres du coup ça ne peut pas fonctionner soit il y a un problème d’indentation de “$ if Pass == False”. J’ai demandé à Flo, je vais voir ce qu’il en pense. Il pense que ça viens des lettres à la place des chiffres. J’ai donc ajouté la fonction ‘int()’ à chacune des variables que je déclare. Je me suis également demandé si il ne fallait pas mieux mettre =&lt; à la place de &lt;. Au cas où il serait égal.
+</p>
+<p>J’ai fait un ticket pour demander plusieurs chose: accès à la baie, transfert de data sur la baie et communication entre la baie et le cluster.</p>
+<p style="text-align:justify" ;>
+<p>J’ai fait une liste de chose que je voudrais que mon (mes) script(s) python fassent :</p>
+<ul>
+<li>Lors de la recherche de codon start ou stop : afficher si il y a des N;<br />
+</li>
+<li>A la place de la traduction faire une recherche de stop dans le CDS en fonction des frames;<br />
+</li>
+<li>Pour les multiples stop : Noter le frame quelquepart et faire une recherche de stop avec toutes les frames possibles;<br />
+</li>
+<li>Pour les non multiple de 3 : Faire une comparaison de la longueur avec le transcriptome et voir pour ajouter ou supprimer des nt en fonction;<br />
+</li>
+<li>Modifier le gtf quand tous les tests ont été vérifier et valider.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="journal-de-bord---juin" class="section level1">
+<h1>Journal de bord - Juin</h1>
 </div>
 <div id="bibliographie" class="section level1">
 <h1>Bibliographie</h1>

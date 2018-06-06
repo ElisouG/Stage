@@ -405,7 +405,85 @@ div.tocify {
 <div id="comparing-methods-for-detecting-multilocus-adaptation-with-multivariate-genotype-environment-associations-forester-et-al.-2017-molecular-ecology" class="section level1">
 <h1>Comparing methods for detecting multilocus adaptation with multivariate genotype-environment associations, Forester et al., 2017, Molecular Ecology</h1>
 <p style="text-align:justify" ;>
-We found that constrained ordinations, in particular redundancy analysis (RDA), show a superior combination of low FPRs and high TPRs across weak, moderate and strong multilocus selection. These results were robust across the levels of population structure, demo- graphic histories, sampling designs and sample sizes tested here. Additionally, RDA outperformed an alternative ordination-based approach, cRDA, especially (and importantly) when the multilocus selection signature was completely derived from loci under weak selection. It is important to note that population structure was rela- tively low in these simulations. Results may differ for systems with strong population structure or metapopulation dynamics, where it can be important to correct for structure or combine detections with another GEA that accounts for structure. Continued testing of these promising methods is needed in simulation frameworks that include more population structure, multiple selection surfaces and genetic architectures that are more complex than the multilocus selection response modelled here. However, this study indicates that con- strained ordinations are an effective means of detecting adaptive processes that result in weak, multilocus molecular signatures, pro- viding a powerful tool for investigating the genetic basis of local adaptation and informing management actions to conserve the evo- lutionary potential of species of agricultural, forestry, fisheries and conservation consern.
+We found that constrained ordinations, in particular redundancy analysis (RDA), show a superior combination of low FPRs and high TPRs across weak, moderate and strong multilocus selection. These results were robust across the levels of population structure, demo- graphic histories, sampling designs and sample sizes tested here. Additionally, RDA outperformed an alternative ordination-based approach, cRDA, especially (and importantly) when the multilocus selection signature was completely derived from loci under weak selection. It is important to note that population structure was relatively low in these simulations. Results may differ for systems with strong population structure or metapopulation dynamics, where it can be important to correct for structure or combine detections with another GEA that accounts for structure. Continued testing of these promising methods is needed in simulation frameworks that include more population structure, multiple selection surfaces and genetic architectures that are more complex than the multilocus selection response modelled here. However, this study indicates that con- strained ordinations are an effective means of detecting adaptive processes that result in weak, multilocus molecular signatures, pro- viding a powerful tool for investigating the genetic basis of local adaptation and informing management actions to conserve the evo- lutionary potential of species of agricultural, forestry, fisheries and conservation consern.
+</p>
+</div>
+<div id="population-structure-and-cryptic-relatedness-in-genetic-association-astle-et-al.2010-statistical-science" class="section level1">
+<h1>Population Structure and Cryptic Relatedness in Genetic Association, Astle et al.,2010, Statistical science</h1>
+<p style="text-align:justify" ;>
+Abstract : We review the problem of confounding in genetic associa- tion studies, which arises principally because of population structure and cryptic relatedness. Many treatments of the problem consider only a simple “island” model of population structure. We take a broader approach, which views population structure and cryptic relatedness as different aspects of a single confounder: the unobserved pedigree defin- ing the (often distant) relationships among the study subjects. Kinship is therefore a central concept, and we reviewmethods of defining and es- timating kinship coefficients, both pedigree-based andmarker-based. In this unified framework we review solutions to the problemof population structure, including family-based study designs, genomic control, struc- tured association, regression control, principal components adjustment and linear mixed models. The last solution makes the most explicit use of the kinships among the study subjects, and has an established role in the analysis of animal and plant breeding studies. Recent computa- tional developments mean that analyses of human genetic association data are beginning to benefit from its powerful tests for association, which protect against population structure and cryptic kinship, as well as intermediate levels of confounding by the pedigree.
+</p>
+<p style="text-align:justify" ;>
+Genetic association studies (Clayton, 2007) are designed to identify genetic loci at which the allelic state is correlated with a phenotype of interest. The associations of interest are causal, arising at loci whose different alleles have different effects on phenotype.
+</p>
+<p style="text-align:justify" ;>
+We first introduce background material describing linkage and association studies, population structure and linkage disequilibrium, the problemof confounding by population structure and cryptic relatedness
+</p>
+<p style="text-align:justify" ;>
+Linkage studies (Thompson, 2007) form the other major class of study designs in genetic epidemiol- ogy. These seek loci at which there is correlation between the phenotype of interest and the pattern of transmission of DNA sequence over generations in a known pedigree.
+</p>
+<p style="text-align:justify" ;>
+<strong>In contrast, association stud- ies are used to search for loci at which there is a significant association between the phenotypes and genotypes of unrelated individuals. These associa- tions arise because of correlations in transmissions of phenotypes and genotypes overmany generations, but association analyses do not model these trans- missions directly, whereas linkage analyses do</strong>
+</p>
+<p style="text-align:justify" ;>
+Now, cost-effective technology for genotyping ∼106 single nucleotide polymorphism (SNP)markers distributed across the genome has made possible genome-wide association studies (GWAS) which investigate most of the common genetic variation in a population, and obtain orders of magnitude finer resolution than a comparable linkage study (Morris and Cardon, 2007; Altshuler, Daly and Lander, 2008). GWAS are preferred for detecting common causal variants (say, population fraction &gt; 0.05), which typically have only a weak effect on phenotype, whereas linkage studies remain superior for the detection of rare vari- ants of large effect (because these effects are more strongly concentrated within particular families).
+</p>
+<p style="text-align:justify" ;>
+Association studies are, how- ever, susceptible to genetic confounding, which is usually thought of as coming in two forms: popula- tion structure and cryptic relatedness.
+</p>
+<p style="text-align:justify" ;>
+Association studies are also susceptible to confounding if genotyping error rates vary with phenotype.
+</p>
+<p style="text-align:justify" ;>
+Informally, a population has structure when there are large-scale systematic differences in ancestry, for example, varying levels of immigrant ancestry, or groups of individuals with more recent shared ances- tors than one would expect in a panmictic (random- mating) population. Shared ancestry corresponds to relatedness, or kinship, and so population struc- ture can be defined in terms of patterns of kinship among groups of individuals. Population structure is often closely aligned with geography, and in the absence of genetic information, stratification by ge- ographic region may be employed to try to iden- tify homogeneous subpopulations.
+</p>
+<p style="text-align:justify" ;>
+Below we will focus on islandmodels of population structure, because these are simple and parsimo- nious models that facilitate discussion of the main ideas. Moreover, several popular statistical methods for detecting population structure and correcting as- sociation analysis for its effects have been based entirely on such models
+</p>
+<p style="text-align:justify" ;>
+The admixture model may be appropriate when the cur- rent population results from some intermixing fol- lowing large-scale migrations over large distances, such as in Brazil or the Caribbean.
+</p>
+<p style="text-align:justify" ;>
+Linkage Disequilibrium : In a large, panmictic population, and in the absence of selection, pairs of genetic loci that are not tightly linked (close together on a chromosome) are unassociated at the population level.
+</p>
+<p style="text-align:justify" ;>
+LD is a double- edged sword: the stronger the LD around a causal variant, the easier it is to detect, because the greater the probability it is in high LD with at least one genotypedmarker. To express this another way, many alleles across the genome are likely to be somewhat informative about an individual’s subpopulation of origin, and hence be predictive of any phenotype that varies across subpopulations. Under an islandmodel, one could potentially solve the problem of spurious associations by matching for ancestry, for example, by choosing for each case a control from the same subpopulation.
+</p>
+<p style="text-align:justify" ;>
+when the sample is large enough to pro- vide the required power, the most significant SNPs can have their p-values reduced by a factor of three because of population structure, thus exaggerating the significance of the association. Following Pritchard andRosenberg (1999) and Gorroochurn et al. (2004), Rosenberg and Nordborg (2006) considered a generalmodel for populations with con- tinuous and discrete structure and presented neces- sary and sufficient conditions for spurious associa- tion to occur at a given locus.
+</p>
+<p style="text-align:justify" ;>
+The probability that the two homologous alleles within an individual i are IBD is known as its inbreeding coefficient, fi.
+</p>
+<p style="text-align:justify" ;>
+CORRECTING ASSOCIATION ANALYSIS FOR CONFOUNDING : Many of these methods can be formulated within standard regres- sion models that express the expected value of yi, the phenotype of the ith individual, as a function of its genotype xi at the SNP of interest.
+</p>
+<p style="text-align:justify" ;>
+Family-Based Tests of Linkage and Association (FBTLA) : The archetypal FBTLA is the transmission disequilibrium test (TDT) (Spielman, McGinnis and Ewens, 1993) for systematic differences between the genotypes of affected children and those expected underMendelian randomization of the alleles of their unaffected parents. If an allele is directly risk-enhancing, it will be over-transmitted to cases. If not directly causal but in LD with a causal allele, it may also be over-transmitted, but in this case it must also be linked with the causal variant, since otherwise Mendelian randomization will eliminate the association between causal and tested alleles
+</p>
+<p style="text-align:justify" ;>
+<strong>the TDT is a test for both association and linkage. The linkage requirementmeans that the test is robust to population structure, while the associa- tion requirement allows for fine-scale localization</strong>. The TDT can be derived from the score test of a logistic re- gression model in which transmission is the out- come variable, and the parental genotypes are pre- dictors.
+</p>
+<p style="text-align:justify" ;>
+However, FBTLA designs (like other linkage designs) can also be used to in- vestigate parent-of-origin effect.
+</p>
+<p style="text-align:justify" ;>
+Genomic Control Genomic Control (GC) is an easy-to-apply and computationally fast method for reducing the infla- tion of test statistics caused by population structure or cryptic relatedness. It can be applied to data of any family structure or none. GC was developed (Devlin and Roeder, 1999) for the Armitage test statistic, which is asymptotically equivalent to a score statistic under logistic regression (Agresti, 2002) and, in the absence of confounding, has an asymptotic chi² null distribution.
+</p>
+<p style="text-align:justify" ;>
+However, the median is more robust to true positives than the mean.
+</p>
+<p style="text-align:justify" ;>
+Structured Association Structured
+</p>
+<p style="text-align:justify" ;>
+Principal Component Adjustment
+</p>
+<p style="text-align:justify" ;>
+For computational reasons the EIGENSTRATsoft- ware (Price et al., 2006), which implements PC ad- justment, does not include PCs as logistic regres- sion covariates, but instead uses a linear adjust- ment of both phenotypes and genotypes.
+</p>
+<p style="text-align:justify" ;>
+Mixed Regression Models
 </p>
 </div>
 <div id="plink-a-tool-set-for-whole-genome-association-and-population-based-linkage-analyses-purcell-etal.-2007-the-american-journal-of-human-genetics" class="section level1">

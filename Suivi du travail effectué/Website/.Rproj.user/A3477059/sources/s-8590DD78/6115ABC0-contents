@@ -74,3 +74,15 @@ This annotation can be used to evaluate confidence in a variant call and is a re
 Ensuite il ne reste plus qu'à appliquer ces filtres aux données selon les recommendations [suivantes](https://software.broadinstitute.org/gatk/documentation/article.php?id=2806).</p>
 
 # Python : Correction du fichier d'annotation de *Dicentrarchus labrax*
+
+## Correction.annotation.py
+
+### But de l'outils :
+
+Cet outils va permettre de corriger le fichier d'annotation du génome de *Dicentrarchus labrax* à partir des warnings mis en évidence par snpEff.
+
+## Parsage_transcriptome.py
+
+### But de l'outils :
+
+Faire une vérification des codons Start et Stop trouvés par l'outils précédent. Dans un premier temps, une vérification par le transcriptome disponible de *Dicentrarchus labrax* dans le but de voir si certains ajouts sont répertoriés dans le transcriptome. Dans un second temps, une vérification par traduction des gènes ayant subi un ajout pour vérifier la présence d'un cadre de lecture correct pour chaque gène.
