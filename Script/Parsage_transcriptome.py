@@ -266,7 +266,7 @@ if __name__ == "__main__":
 	ProteinesCDS = open(pathProteinesCDS, "w")
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 
-	for lelt in CDSComplete:
+	for elt in CDSComplete:
 		K1 = elt[0]
 		geneID = elt[1]
 		seqNt = elt[4]
