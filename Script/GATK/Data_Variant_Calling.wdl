@@ -74,24 +74,23 @@ workflow DataVariantCalling {
   	  			GATK=gatk,
   	  			rawSNPs=selectSNPs.rawSubset
   		}
-		call CombineGVCFs {
-			input:
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict,
-				filteredIndels=hardFilterIndel.filteredIndel,
-				filteredSNPs=hardFilterSNP.filteredSNP
-		}
+  	}
+	call CombineGVCFs {
+		input:
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict,
+			filteredIndels=hardFilterIndel.filteredIndel,
+			filteredSNPs=hardFilterSNP.filteredSNP
 	}
 	call GenotypeGVCFs {
 		input: 
 			GATK=gatk, 
 			RefFasta=refFasta, 
 			RefIndex=refIndex, 
-			RefDict=refDict
-			VariantCombined=CombineGVCFs.VariantCombined
+			RefDict=refDict,
+			VariantCombineds=CombineGVCFs.VariantCombined
 	}
 }
 
@@ -215,7 +214,6 @@ task CombineGVCFs {
 	File RefFasta
 	File RefIndex
 	File RefDict
-	String sampleName
 	Array[File] filteredIndels
 	Array[File] filteredSNPs
 	command {
@@ -239,13 +237,13 @@ task GenotypeGVCFs {
 	File RefFasta
 	File RefIndex
 	File RefDict
-	File VariantCombined
+	File VariantCombineds
 
 	command {
-		java --java-options -Xmx4g -jar ${GATK} \
+		java -Xmx4g -jar ${GATK} \
 			GenotypeGVCFs \
 			-R ${RefFasta} \
-			-V ${VariantCombined} \
+			-V ${VariantCombineds} \
 			-O Variants_final.vcf
 	}
 	output {

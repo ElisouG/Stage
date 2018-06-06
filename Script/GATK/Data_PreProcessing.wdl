@@ -35,14 +35,18 @@ workflow Data_PreProcessing {
     call Markduplicates {
       input: 
         sampleName=sample[0],
-        RefFasta=refFasta, 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
         PICARD=picard, 
         Reordereds=ReorderSam.Reordered
     }
     call SortSAM {
       input: 
         sampleName=sample[0], 
-        RefFasta=refFasta, 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
         PICARD=picard,
         MarkDups=Markduplicates.MarkDup 
         
@@ -50,7 +54,9 @@ workflow Data_PreProcessing {
     call BaseRecalibrator {
       input: 
         sampleName=sample[0], 
-        RefFasta=refFasta, 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
         GATK=gatk,
         VariationSites=variationSites,
         BamSorteds=SortSAM.BamSorted
@@ -59,7 +65,9 @@ workflow Data_PreProcessing {
     call ApplyBQSR {
       input: 
         sampleName=sample[0], 
-        RefFasta=refFasta, 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
         BaseRecals=BaseRecalibrator.BaseRecal,
         BamSorteds=SortSAM.BamSorted,
         GATK=gatk
@@ -106,9 +114,11 @@ task Markduplicates {
   File PICARD
   Array[File] Reordereds
   File RefFasta
+  File RefIndex
+  File RefDict
   String sampleName
   command {
-    java -jar ${PICARD} \
+    java -Xmx50g -jar ${PICARD} \
       MarkDuplicates \
       R=${RefFasta} \
       I=${sep= "I=" Reordereds} \
@@ -128,6 +138,8 @@ task Markduplicates {
 task SortSAM {
   File PICARD
   File RefFasta
+  File RefIndex
+  File RefDict
   Array[File] MarkDups
   String sampleName
   command {
@@ -150,15 +162,17 @@ task SortSAM {
 task BaseRecalibrator {
   File GATK
   File RefFasta
+  File RefIndex
+  File RefDict
   String sampleName
   Array[File] BamSorteds
   File VariationSites
   command {
     java -jar ${GATK} \
       BaseRecalibrator \
-      -I ${sep= "-I" BamSorteds} \
+      -I ${sep="-I" BamSorteds} \
       -R /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta \
-      -OBI true \ 
+      -OBI true \
       --known-sites /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/Final_list_57907_SNPs.recode.vcf \
       -O ${sampleName}_marked_duplicates_sorted_recal_data.table
   }
@@ -173,6 +187,8 @@ task BaseRecalibrator {
 task ApplyBQSR {
   File GATK
   File RefFasta
+  File RefIndex
+  File RefDict
   String sampleName
   Array[File] BamSorteds
   Array[File] BaseRecals
