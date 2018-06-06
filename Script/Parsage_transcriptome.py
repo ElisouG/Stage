@@ -176,7 +176,7 @@ if __name__ == "__main__":
 			frame = line.split('\t')[7]
 			geneID = line.replace('"','').split('\t')[9]
 			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
-			# tu crée pas la liste pour le premier ? 
+			listeCDS = [K1,geneID,brin,frame,%s:%s% (CDS_start,CDS_end)]
 		elif line.replace('"','').split('\t')[9] != geneID :
 			geneID = line.replace('"','').split('\t')[9]
 			K1 = line.split('\t')[0]
@@ -211,25 +211,25 @@ if __name__ == "__main__":
 		brin = elt[2]
 		frame = elt[3]
 		positionCDS=CDSFinaux[4:len(CDSFinaux)]
-		for elt in positionCDS:
+		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
 				sequence = Genome[chromosome].seq 
 				if frame == '1':
 					CDS_start = str(int((elt.split(':')[0]))+1)
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end] # CDS_start:CDS_end
+					seqCDS = sequence[CDS_start:CDS_end] 
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
 					CDS_start = str(int((elt.split(':')[0]))+2)
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end]
+					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
 					CDS_start = elt.split(':')[0]
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end]
+					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
@@ -238,19 +238,19 @@ if __name__ == "__main__":
 				if frame == '1':
 					CDS_start = str(int((elt.split(':')[0]))+1)
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end]
+					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
 					CDS_start = str(int((elt.split(':')[0]))+2)
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end]
+					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
 					CDS_start = elt.split(':')[0]
 					CDS_end = elt.split(':')[1]
-					seqCDS = sequence[CDS_start,CDS_end]
+					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 		seqFinale = seqFinale+seqCDS # + seqCDS ? 
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 		geneID = elt[1]
 		seqNt = elt[4]
 		if K1 != 'MT':
-			seqProt = str(seqNt.translate())
+			seqProt = str(seqNt.translate(cds=True))
 			nbreStar = seqProt.count('*')
 			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 
@@ -283,7 +283,7 @@ if __name__ == "__main__":
 				Filtre = 'Pas de stop'
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
 		elif K1 == 'MT':
-			seqProt = str(seqNt.translate())
+			seqProt = str(seqNt.translate(table="Vertebrate Mitochondrial",cds=True))
 			nbreStar = seqProt.count('*')
 			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 
