@@ -206,6 +206,7 @@ if __name__ == "__main__":
 	seqFinale = ""
 
 	for elt in CDSFinaux:
+		print(elt)
 		K1 = elt[0]
 		geneID = elt[1]
 		brin = elt[2]
