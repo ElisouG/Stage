@@ -2,7 +2,7 @@
 title: "essai-format"
 author: "Elise GUERET"
 date: "25 Mai 2018"
-adress: "Institut des Sciences de l'Evolution de Montpellier (ISEM), Université de Montpellier, Campus Triolet, Place Eugène Bataillon, cc65, 34095 Montpellier"
+address: "Institut des Sciences de l'Evolution de Montpellier (ISEM), Université de Montpellier, Campus Triolet, Place Eugène Bataillon, cc65, 34095 Montpellier"
 output: 
   word_document:
     toc: yes
@@ -49,7 +49,7 @@ Question à se poser avant la rédaction du rapport :
 * Comment organiser ces informations pour les rendre compréhensilble à un tier?    
 Definir le sujet en termes précis et concis, énoncer les objectifs du travail personnel et les moyens mis en oeuvre et présenter le plan adopté pour la suite du sujet d'étude.
 
-Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à quoi ils servent. Comment les données ont été obtenues? Pour CRECHE voir le rapport dan sles archives ifremer et pour RobustBass voir les dipos KoM.
+Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à quoi ils servent. Comment les données ont été obtenues? Pour CRECHE voir le rapport dans les archives ifremer et pour RobustBass voir les diapos KoM.
 
 # Problématique - Objectifs
 

@@ -118,12 +118,11 @@ task Markduplicates {
   File RefDict
   String sampleName
   command {
-    java -Xmx50g -jar ${PICARD} \
+    java -jar ${PICARD} \
       MarkDuplicates \
       R=${RefFasta} \
       I=${sep= "I=" Reordereds} \
       CREATE_INDEX=true \
-      REMOVE_SEQUENCING_DUPLICATES=true	\
       O=${sampleName}_marked_duplicates.bam \
       M=${sampleName}_marked_dup_metrics.txt
   }
@@ -171,9 +170,9 @@ task BaseRecalibrator {
     java -jar ${GATK} \
       BaseRecalibrator \
       -I ${sep="-I" BamSorteds} \
-      -R /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta \
+      -R ${RefFasta} \
       -OBI true \
-      --known-sites /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/Final_list_57907_SNPs.recode.vcf \
+      --known-sites ${VariationSites} \
       -O ${sampleName}_marked_duplicates_sorted_recal_data.table
   }
   # runtime { sge_queue: "cemeb20.q" }
@@ -195,7 +194,7 @@ task ApplyBQSR {
   command {
     java -jar ${GATK} \
       ApplyBQSR \
-      -R /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta \
+      -R ${RefFasta}\
       -I ${sep= "-I" BamSorteds} \
       --bqsr-recal-file ${sep= "--bqsr-recal-file" BaseRecals} \
       -O ${sampleName}_marked_duplicates_sorted_recalibrated.bam

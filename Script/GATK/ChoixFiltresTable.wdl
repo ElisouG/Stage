@@ -29,14 +29,30 @@ workflow ChoixFiltresTable {
 				bamFile=sample[1], 
 				bamIndex=sample[2]
 		}
-		call VariantsToTable {
-  			input:
-  	  			sampleName=sample[0],
-  	  			RefFasta=refFasta,
-  	  			GATK=gatk,
-  	  			rawVCFs=HaplotypeCallerERC.rawVCF
-  		}
-  	}	
+  	}
+	call CombineGVCFs {
+		input:
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict,
+			rawVCFs=HaplotypeCallerERC.rawVCF
+	}
+	call GenotypeGVCFs {
+		input: 
+			GATK=gatk, 
+			RefFasta=refFasta, 
+			RefIndex=refIndex, 
+			RefDict=refDict,
+			VariantCombined=CombineGVCFs.VariantCombined
+	}
+	call VariantsToTable {
+  		input:
+  	  		sampleName=sample[0],
+  	  		RefFasta=refFasta,
+  	  		GATK=gatk,
+  	  		finalVCF=GenotypeGVCFs.finalVCF
+  	}
 }
 
 # Task Definition
@@ -55,9 +71,10 @@ task HaplotypeCallerERC {
 	command {
 		java -jar ${GATK} \
 			HaplotypeCaller \
-			-ERC GVCF \
+			-ERC BP_RESOLUTION \
 			-R ${RefFasta} \
 			-stand-call-conf 10.0 \
+			--output-mode EMIT_ALL_SITES \
 			--dont-use-soft-clipped-bases true \
 			-I ${bamFile} \
 			-O ${sampleName}_rawLikelihoods.g.vcf 
@@ -67,15 +84,56 @@ task HaplotypeCallerERC {
 	}
 }
 
+# This task calls GATK's tool, .
+task CombineGVCFs {
+	File GATK
+	File RefFasta
+	File RefIndex
+	File RefDict
+	Array[File] rawVCFs
+	command {
+		java -jar ${GATK} \
+			CombineGVCFs \
+			-V ${sep="-V" rawVCFs} \
+			-R ${RefFasta}\
+			-O Variants_Combined.vcf
+	}
+	output {
+		File VariantCombined = "Variants_Combined.vcf"
+	}
+}
+
+# This task calls GATK's tool, GenotypeGVCFs. This tool performs joint genotyping on samples pre-called 
+# by HaplotypeCaller in ERC mode from e GenomicsDB workspace created by GenomicsDBImport.
+task GenotypeGVCFs {
+
+	File GATK
+	File RefFasta
+	File RefIndex
+	File RefDict
+	File VariantCombined
+
+	command {
+		java -Xmx4g -jar ${GATK} \
+			GenotypeGVCFs \
+			-R ${RefFasta} \
+			-V ${VariantCombined} \
+			-O Variants_final.vcf
+	}
+	output {
+		File finalVCF = "Variants_final.vcf"
+	}
+}
+
 task VariantsToTable {
 	File GATK
 	File RefFasta
   	String sampleName
-	Array[File] rawVCFs
+	File finalVCF
 	command {
 	java -jar ${GATK} \
 	  VariantsToTable \
-      -V ${sep="-V" rawVCFs} \
+      -V ${finalVCF} \
       -F CHROM -F POS -F REF -F ALT -F TYPE -F QUAL -F DP -F MLEAC -F MLEAF -F QD -F FS -F SOR -F MQ -F MQRankSum -F ReadPosRankSum -F InbreedingCoeff -F GT -F GQ -F MIN_DP -F PL -F SB -F RAW_MQ -F AD -F ExcessHet -F BaseQRankSum -F ClippingRankSum \
       -O ${sampleName}.snps.indels.table     
 	}
