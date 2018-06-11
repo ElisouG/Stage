@@ -174,11 +174,11 @@ if __name__ == "__main__":
 			CDS_start = line.split('\t')[3]
 			CDS_end = line.split('\t')[4]
 			frame = line.split('\t')[7]
-			geneID = line.replace('"','').split(' ')[1]
+			geneID = line.replace('"','').split()[1]
 			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
-		elif line.replace('"','').split(' ')[1] != geneID :
-			geneID = line.replace('"','').split(' ')[1]
+		elif line.replace('"','').split()[1] != geneID :
+			geneID = line.replace('"','').split()[1]
 			K1 = line.split('\t')[0]
 			brin = line.split('\t')[6]
 			CDS_start = line.split('\t')[3]
@@ -192,7 +192,7 @@ if __name__ == "__main__":
 			CDS_end = line.split('\t')[4]
 			CDS.write(" | %s:%s " % (CDS_start,CDS_end))
 			listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
-		geneID = line.replace('"','').split(' ')[1]
+			geneID = line.replace('"','').split(' ')[1]
 	CDS.close()
 
 	######################## Recherche des séquences des CDS #########################
@@ -203,9 +203,9 @@ if __name__ == "__main__":
 	#SequenceCDS = open(pathSequenceCDS, "w")
 	#SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
 
-	seqFinale = ""
-
+	CDSComplete = []
 	for elt in CDSFinaux:
+		seqFinale = ""
 		print(elt)
 		K1 = elt[0]
 		geneID = elt[1]
@@ -254,8 +254,8 @@ if __name__ == "__main__":
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
 					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-		seqFinale = seqFinale+seqCDS
-		CDSComplete.append(K1,geneID,brin,seqFinale)	
+					seqFinale = seqFinale+seqCDS
+	CDSComplete.append(K1,geneID,brin,seqFinale)	
 	#SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
