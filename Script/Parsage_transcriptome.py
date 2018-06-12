@@ -169,31 +169,32 @@ if __name__ == "__main__":
 	geneID = "none"
 	for line in linesNewGTF:
 		print(line.replace('"','').split()[9])
-		if 'CDS' in line and geneID == "none":
-			K1 = line.split('\t')[0]
-			brin = line.split('\t')[6]
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			frame = line.split('\t')[7]
-			geneID = line.replace('"','').split()[9]
-			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
-			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
-		elif line.replace('"','').split()[9] != geneID :
-			geneID = line.replace('"','').split()[9]
-			K1 = line.split('\t')[0]
-			brin = line.split('\t')[6]
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			frame = line.split('\t')[7]
-			CDS.write("%s | %s | %s | %s | %s:%s\n" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
-			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
-			CDSFinaux.append(listeCDS)
-		elif line.replace('"','').split()[9] == geneID :
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			CDS.write(" | %s:%s " % (CDS_start,CDS_end))
-			listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
-			geneID = line.replace('"','').split()[9]
+		if '\tCDS\t' in line :
+			if geneID == "none":
+				K1 = line.split('\t')[0]
+				brin = line.split('\t')[6]
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				frame = line.split('\t')[7]
+				geneID = line.split('"').split('|')[9]
+				CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
+				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
+			elif line.split('"').split('|')[9] != geneID :
+				geneID = line.split('"').split('|')[9]
+				K1 = line.split('\t')[0]
+				brin = line.split('\t')[6]
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				frame = line.split('\t')[7]
+				CDS.write("\n%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
+				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
+				CDSFinaux.append(listeCDS)
+			elif line.split('"').split('|')[9] == geneID :
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				CDS.write(" | %s:%s " % (CDS_start,CDS_end))
+				listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
+				geneID = line.split('"').split('|')[9]
 	CDS.close()
 
 	######################## Recherche des séquences des CDS #########################
