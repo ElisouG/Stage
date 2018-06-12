@@ -220,19 +220,19 @@ if __name__ == "__main__":
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end] 
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
 					CDS_start = str(int((elt.split(':')[0]))+2)
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
 					CDS_start = elt.split(':')[0]
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
 			elif brin == '-':
 				sequence = GenomeR[chromosome].seq	
@@ -241,22 +241,22 @@ if __name__ == "__main__":
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
 					CDS_start = str(int((elt.split(':')[0]))+2)
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
 					CDS_start = elt.split(':')[0]
 					CDS_end = elt.split(':')[1]
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 					seqFinale = seqFinale+seqCDS
 	CDSComplete.append(K1,geneID,brin,seqFinale)	
-	#SequenceCDS.close()
+	SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
