@@ -34,16 +34,16 @@ if __name__ == "__main__":
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
 
-	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_30_05_18.txt"
-	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_30_05_18.txt"
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_12_06_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_12_06_18.txt"
 
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/New_Annotation_18_05_2018.gtf"
-	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_31_05_18.txt"
+	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_12_06_18.txt"
 
 	pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
-	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_06_06_18.txt"
-	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_06_06_18.txt"
+	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_12_06_18.txt"
+	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_12_06_18.txt"
 
 	######################## Parsage Transcriptome ######################
 
@@ -184,7 +184,7 @@ if __name__ == "__main__":
 			CDS_start = line.split('\t')[3]
 			CDS_end = line.split('\t')[4]
 			frame = line.split('\t')[7]
-			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
+			CDS.write("%s | %s | %s | %s | %s:%s\n" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 			CDSFinaux.append(listeCDS)
 			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
 		elif line.replace('"','').split(' ')[1] == geneID :
