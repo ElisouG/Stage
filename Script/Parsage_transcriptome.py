@@ -168,7 +168,6 @@ if __name__ == "__main__":
 	CDS.write("%s | %s | %s | %s | %s:%s\n" % ('Chromosome','geneID','brin','frame','CDS_start','CDS_end'))
 	geneID = "none"
 	for line in linesNewGTF:
-		print(line.split('"')[1].split('|')[0])
 		if '\tCDS\t' in line :
 			if geneID == "none":
 				K1 = line.split('\t')[0]
@@ -208,12 +207,11 @@ if __name__ == "__main__":
 	CDSComplete = []
 	for elt in CDSFinaux:
 		seqFinale = ""
-		print(elt)
 		K1 = elt[0]
 		geneID = elt[1]
 		brin = elt[2]
 		frame = elt[3]
-		positionCDS=CDSFinaux[4:len(CDSFinaux)]
+		positionCDS=elt[4:len(CDSFinaux)]
 		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
 				sequence = Genome[K1].seq 
