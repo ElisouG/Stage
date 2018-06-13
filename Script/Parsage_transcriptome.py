@@ -34,16 +34,16 @@ if __name__ == "__main__":
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
 
-	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_12_06_18.txt"
-	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_12_06_18.txt"
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_13_06_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_13_06_18.txt"
 
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/New_Annotation_18_05_2018.gtf"
-	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_12_06_18.txt"
+	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_13_06_18.txt"
 
 	pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
-	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_12_06_18.txt"
-	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_12_06_18.txt"
+	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_13_06_18.txt"
+	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_13_06_18.txt"
 
 	######################## Parsage Transcriptome ######################
 
@@ -168,7 +168,7 @@ if __name__ == "__main__":
 	CDS.write("%s | %s | %s | %s | %s:%s\n" % ('Chromosome','geneID','brin','frame','CDS_start','CDS_end'))
 	geneID = "none"
 	for line in linesNewGTF:
-		print(line.replace('"','').split()[9])
+		print(line.split('"')[1].split('|')[0])
 		if '\tCDS\t' in line :
 			if geneID == "none":
 				K1 = line.split('\t')[0]
@@ -176,11 +176,11 @@ if __name__ == "__main__":
 				CDS_start = line.split('\t')[3]
 				CDS_end = line.split('\t')[4]
 				frame = line.split('\t')[7]
-				geneID = line.split('"').split('|')[9]
+				geneID = line.split('"')[1].split('|')[0]
 				CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
-			elif line.split('"').split('|')[9] != geneID :
-				geneID = line.split('"').split('|')[9]
+			elif line.split('"')[1].split('|')[0] != geneID :
+				geneID = line.split('"')[1].split('|')[0]
 				K1 = line.split('\t')[0]
 				brin = line.split('\t')[6]
 				CDS_start = line.split('\t')[3]
@@ -189,12 +189,12 @@ if __name__ == "__main__":
 				CDS.write("\n%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
 				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
 				CDSFinaux.append(listeCDS)
-			elif line.split('"').split('|')[9] == geneID :
+			elif line.split('"')[1].split('|')[0] == geneID :
 				CDS_start = line.split('\t')[3]
 				CDS_end = line.split('\t')[4]
 				CDS.write(" | %s:%s " % (CDS_start,CDS_end))
 				listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
-				geneID = line.split('"').split('|')[9]
+				geneID = line.split('"')[1].split('|')[0]
 	CDS.close()
 
 	######################## Recherche des séquences des CDS #########################
@@ -216,7 +216,7 @@ if __name__ == "__main__":
 		positionCDS=CDSFinaux[4:len(CDSFinaux)]
 		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
-				sequence = Genome[chromosome].seq 
+				sequence = Genome[K1].seq 
 				if frame == '1':
 					CDS_start = str(int((elt.split(':')[0]))+1)
 					CDS_end = elt.split(':')[1]
@@ -237,7 +237,7 @@ if __name__ == "__main__":
 					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
 			elif brin == '-':
-				sequence = GenomeR[chromosome].seq	
+				sequence = GenomeR[K1].seq	
 				if frame == '1':
 					CDS_start = str(int((elt.split(':')[0]))+1)
 					CDS_end = elt.split(':')[1]
