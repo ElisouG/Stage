@@ -73,8 +73,6 @@ task HaplotypeCallerERC {
 			-ERC GVCF \
 			-R ${RefFasta} \
 			-stand-call-conf 10.0 \
-			-bamout  ${sampleName}_rawLikelihoods.bam \
-			--bam-writer-type CALLED_HAPLOTYPES \
 			--output-mode EMIT_ALL_SITES \
 			--dont-use-soft-clipped-bases true \
 			-I ${bamFile} \
@@ -82,7 +80,6 @@ task HaplotypeCallerERC {
 	}
 	output {
 		File rawVCF = "${sampleName}_rawLikelihoods.g.vcf"
-		File BamVCF =  "${sampleName}_rawLikelihoods.bam"
 	}
 }
 
@@ -96,7 +93,7 @@ task CombineGVCFs {
 	command {
 		java -jar ${GATK} \
 			CombineGVCFs \
-			-V ${sep="-V" rawVCFs} \
+			-V ${sep=" -V " rawVCFs} \
 			-R ${RefFasta}\
 			-O Variants_Combined.vcf
 	}
