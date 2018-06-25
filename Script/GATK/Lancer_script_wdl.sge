@@ -38,7 +38,7 @@
 # Erreur output (don't use with the option '-j y')
 #$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_ChoixFiltresTable.err
 
-#Modules à charger pour que le script fonctionne
+#Modules à charger pour que le script fonctionne sur le cluster mbb
 module load java1.8
 module load java1.8_jre
 
@@ -60,7 +60,7 @@ module load java1.8_jre
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ReassignOneMappingQualityFilter.wdl -i ReassignOneMappingQualityFilter_inputs2.json
 
 # Lancement du script contenant GATK  et PICARD : ce script fonctionne
-#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
+#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs.json
 
 # Lancement du script 1 avec PICARD seul : ce script fonctionne
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_picard.wdl -i Data_cleanup_picard_inputs.json
