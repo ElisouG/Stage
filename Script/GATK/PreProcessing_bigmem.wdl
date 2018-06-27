@@ -1,0 +1,271 @@
+## Written by Elise GUERET in 2018
+
+
+## This WDL pipeline implements removing sequencing duplicates and base recalibration
+## derived from the Best Practices for Variant Discovery in RNAseq (Mai 2015) 
+## and adapted to GATK 4 for preparing Dicentrarchus labrax RNA-seq data for variant analysis.
+
+
+Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
+
+# Workflow Definition
+
+workflow Data_PreProcessing {
+  
+  File gatk
+  File picard
+  File inputSamplesFile
+  Array[Array[File]] inputSamples = read_tsv(inputSamplesFile)
+  File refFasta
+  File refIndex
+  File refDict
+  File variationSites
+
+  scatter (sample in inputSamples) {
+    call ReorderSam {
+      input:
+        sampleName=sample[0],
+        bamFile=sample[1], 
+        bamIndex=sample[2], 
+        RefFasta=refFasta, 
+        PICARD=picard,
+        RefIndex=refIndex ,
+        RefDict=refDict
+    }
+    call Markduplicates {
+      input: 
+        sampleName=sample[0],
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        PICARD=picard, 
+        Reordereds=ReorderSam.Reordered
+    }
+    call SortSAM {
+      input: 
+        sampleName=sample[0], 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        PICARD=picard,
+        MarkDups=Markduplicates.MarkDup 
+        
+    }
+    call BaseRecalibratorBefore {
+      input: 
+        sampleName=sample[0], 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        GATK=gatk,
+        VariationSites=variationSites,
+        BamSorteds=SortSAM.BamSorted
+        
+    }
+    call ApplyBQSR {
+      input: 
+        sampleName=sample[0], 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        BaseRecals=BaseRecalibratorBefore.BaseRecalBefore,
+        BamSorteds=SortSAM.BamSorted,
+        GATK=gatk
+        
+    }
+    call BaseRecalibratorAfter {
+      input: 
+        sampleName=sample[0], 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        GATK=gatk,
+        VariationSites=variationSites,
+        BamRecals=ApplyBQSR.BamRecal
+        
+    }
+    call AnalyseCovariate {
+      input:
+        sampleName=sample[0], 
+        RefFasta=refFasta,
+        RefDict=refDict,
+        RefIndex=refIndex, 
+        GATK=gatk,
+        BamRecalBefores=BaseRecalibratorBefore.BaseRecalBefore,
+        BamREcalAfters=BaseRecalibratorAfter.BaseRecalAfter
+    }
+  }
+}
+
+# Task Definition
+
+# This task calls Picard's tool, ReoderSam. This tool classes reads in the bam file in the same 
+# order of the reference genome. 
+task ReorderSam {
+  File PICARD
+  File bamFile
+  File bamIndex
+  File RefFasta
+  File RefIndex
+  String sampleName
+  File RefDict
+  command {
+    java -jar ${PICARD} \
+      ReorderSam \
+      I=${bamFile} \
+      O=${sampleName}_reordered.bam \
+      R=${RefFasta} \
+      CREATE_INDEX=TRUE
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File Reordered = "${sampleName}_reordered.bam"
+  }
+}
+   
+# This task calls Picard's tool, Markduplicates. This tool marks duplicates and remove 
+# sequencing duplicates from a bam file to another bam file.
+task Markduplicates {
+  File PICARD
+  Array[File] Reordereds
+  File RefFasta
+  File RefIndex
+  File RefDict
+  String sampleName
+  command {
+    java -jar ${PICARD} \
+      MarkDuplicates \
+      R=${RefFasta} \
+      I=${sep= "I=" Reordereds} \
+      CREATE_INDEX=true \
+      O=${sampleName}_marked_duplicates.bam \
+      M=${sampleName}_marked_dup_metrics.txt
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File MarkDup = "${sampleName}_marked_duplicates.bam"
+    File Metrics = "${sampleName}_marked_dup_metrics.txt"
+  }
+}
+
+# This task calls Picard's tool, SortSam. This tool permits to classify reads by coordinate.
+task SortSAM {
+  File PICARD
+  File RefFasta
+  File RefIndex
+  File RefDict
+  Array[File] MarkDups
+  String sampleName
+  command {
+    java -jar ${PICARD} \
+      SortSam \
+      R=${RefFasta} \
+      CREATE_INDEX=true \
+      I=${sep= "I=" MarkDups} \
+      O=${sampleName}_marked_duplicates_sorted.bam \
+      SORT_ORDER=coordinate 
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File BamSorted = "${sampleName}_marked_duplicates_sorted.bam"
+  }
+}
+
+# This task calls GATK's tool, BaseRecalibrator. This tool create a table which contains
+# quality value to be change because sequencing duplicates were removed.
+task BaseRecalibratorBefore {
+  File GATK
+  File RefFasta
+  File RefIndex
+  File RefDict
+  String sampleName
+  Array[File] BamSorteds
+  File VariationSites
+  command {
+    java -jar ${GATK} \
+      BaseRecalibrator \
+      -I ${sep="-I" BamSorteds} \
+      -R ${RefFasta} \
+      -OBI true \
+      --known-sites ${VariationSites} \
+      -O ${sampleName}_marked_duplicates_sorted_recal_data_before.table
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File BaseRecalBefore = "${sampleName}_marked_duplicates_sorted_recal_data_before.table"
+  }
+}
+
+# This task calls GATK's tool, ApplyBQSR. This tool applies the recalibration from the 
+# table created by BaseRecalibrator.
+task ApplyBQSR {
+  File GATK
+  File RefFasta
+  File RefIndex
+  File RefDict
+  String sampleName
+  Array[File] BamSorteds
+  Array[File] BaseRecals
+  command {
+    java -jar ${GATK} \
+      ApplyBQSR \
+      -R ${RefFasta}\
+      -I ${sep= "-I" BamSorteds} \
+      --bqsr-recal-file ${sep= "--bqsr-recal-file" BaseRecals} \
+      -O ${sampleName}_marked_duplicates_sorted_recalibrated.bam
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File BamRecal = "${sampleName}_marked_duplicates_sorted_recalibrated.bam"
+  }
+}
+
+# This task calls GATK's tool, BaseRecalibrator. This tool create a table which contains
+# quality value to be change because sequencing duplicates were removed.
+task BaseRecalibratorAfter {
+  File GATK
+  File RefFasta
+  File RefIndex
+  File RefDict
+  String sampleName
+  Array[File] BamRecals
+  File VariationSites
+  command {
+    java -jar ${GATK} \
+      BaseRecalibrator \
+      -I ${sep="-I" BamRecals} \
+      -R ${RefFasta} \
+      -OBI true \
+      --known-sites ${VariationSites} \
+      -O ${sampleName}_marked_duplicates_sorted_recal_data_after.table
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File BaseRecalAfter = "${sampleName}_marked_duplicates_sorted_recal_data_after.table"
+  }
+}
+
+task AnalyseCovariate {
+  File GATK
+  Array[File] BaseRecalAfters
+  Array[File] BaseRecalBefores
+  File RefFasta
+  File RefIndex
+  File RefDict
+  String sampleName
+  command {
+    java -jar ${GATK} \
+      AnalyzeCovariates \
+      -before ${sep="-before" BaseRecalBefores} \
+      -after ${sep="-after" BaseRecalAfters} \
+      -plots ${sampleName}_recalibration.pdf \
+      -csv ${sampleName}_recalibration.csv
+  }
+  # runtime { sge_queue: "cemeb20.q" }
+  output {
+    File Plot = "${sampleName}_recalibration.pdf"
+    File Csv = "${sampleName}_recalibration.csv"
+  }
+}
+
+
