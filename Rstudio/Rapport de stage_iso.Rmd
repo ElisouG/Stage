@@ -18,6 +18,7 @@ header includes = Pour avoir des noms automatiques d???éléments en français lors
 knitr::opts_chunk$set(echo = TRUE)
 ```
 Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-insert-page-breaks-in-a-ms-word-document/>
+
 # Page de couverture 
 
 * les logos  
@@ -108,7 +109,7 @@ A quoi ils servent?
 
 Mettre un schéma général des principales étapes.
 
-Les avancées technologiques en séquençage à haut-débit et les outils bioinformatiques qui en découlent rendent l'identification et la quantification de variants de plus en plus facile. Cependant, le génotypage de ces variants reste un challenge car chaque outils de recherche de variants est basé sur son propre algorithme de détection de variants. Pour un même jeu de données, il est donc possible d'obtenir des variants différents en fonction de l'algorithme choisi. Il faut donc que l'utilisateur soit conscient que les variants obtenus par un outils peuvent ne pas être retrouvé lors de l'utilisation d'un autre outils. Ceci a été pris en compte lors de l'ecriture de pipeline de découverte de variants utilisant GATK, par le respect des [bonnes pratiques de découverte de variants à partir de RNA-seq](https://software.broadinstitute.org/gatk/documentation/article?id=4067) suggérer par l'équipe développant GATK au Broad Institute.
+Les avancées technologiques en séquençage à haut-débit et les outils bioinformatiques qui en découlent rendent l'identification et la quantification de variants de plus en plus facile. Cependant, le génotypage de ces variants reste un challenge car chaque outils de recherche de variants est basé sur son propre algorithme de détection de variants. Pour un même jeu de données, il est donc possible d'obtenir des variants différents en fonction de l'algorithme choisi. Il faut donc que l'utilisateur soit conscient que les variants obtenus par un outils peuvent ne pas être retrouvé lors de l'utilisation d'un autre outils. Ceci a été pris en compte lors de l'écriture de pipeline de découverte de variants utilisant GATK, par le respect des [bonnes pratiques de découverte de variants à partir de RNA-seq](https://software.broadinstitute.org/gatk/documentation/article?id=4067) suggérer par l'équipe développant GATK au Broad Institute.
 
 ### Correction Annotation par Python
 
@@ -191,9 +192,9 @@ Cette quatrième et dernière phase permet donc d'évaluer les variants en terme d'
 
 La dernière étape de GATK ("hardfiltering") produit deux VCFs (un par type de variations : SNPs et INDELs) qui sont les fihciers d'entrée pour les différents logiciels ou outils mentionnés précédemment.
 
-La première étape consiste à une annotation fonctionnelle par la prédiction des effets des SNPs potentiels trouvés. Cette étape est réalisée par le logiciel snpEff qui analyse le fichier d'entrée, annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
+La première étape consiste à une annotation fonctionnelle par la prédiction des effets des SNPs potentiels trouvés. Cette étape est réalisée par le logiciel snpEff [@Hoff2015] qui analyse le fichier d'entrée, annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
 
-La seconde étape consiste à une analyse d'association par famille. Cette étape est consitituée de sous étape. En effet, PLINK a besoin de fichier au format ped et au format map pour procéder aux associations. Or, GATK produit des fichiers au format VCF. L'outils VCFtools est donc nécessaire pour produire les fichiers ped et map à partir de fichiers VCF. 
+La seconde étape consiste à une analyse d'association par famille. Cette étape est consitituée de sous-étapes. En effet, PLINK a besoin de fichier au format ped et au format map pour procéder aux associations. Or, GATK produit des fichiers au format VCF. L'outils VCFtools est donc nécessaire pour produire les fichiers ped et map à partir de fichiers VCF. 
 
 La troisième étape consiste à une analyse d'association génotype/phénotype.
 
