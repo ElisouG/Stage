@@ -7,7 +7,7 @@
 
 #################### Commande lancement sur le cluster ###########################
 
-# qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage/Script/Correction_annotation.py"
+#qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage/Script/Correction_annotation.py"
 
 ##################### Importation Module #######################
 ## Python modules
@@ -151,7 +151,7 @@ if __name__ == "__main__":
 	f3.write('%15s | %15s | %15s | %15s | %15s | %15s  | ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
 	f4 = open(pathF4,"w") # Création d'un nouveau fichier
 	f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | brin \n' %('chromosome','start','end','first_frame','last_frame','brin')) # Nomme les colonnes du fichier
-	f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
+	f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,))
 	codonStop = ['TAA','TAG','TGA'] # Liste des différents codons stop existants
 	codonStart = 'ATG' # Nomme le codon start
 	codonStart2 = 'AAG' # Nomme le codon start alternatif
@@ -291,9 +291,10 @@ if __name__ == "__main__":
 		tID = line.split('\t')[8].split('"')[3]
 		if line.split('\t')[8].split('"')[3] != tID:
 			listeTranscrit.append([K,S,E,tID])
+			Transcrits.write(K,S,E,tID)
 		elif line.split('\t')[8].split('"')[3] == tID:
 			E = line.split('\t')[4]
-		Transcrits.write(listeTranscrit)
+			Transcrits.write(K,S,E,tID)
 	Transcrits.close()
 
 
