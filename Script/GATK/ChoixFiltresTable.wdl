@@ -48,7 +48,6 @@ workflow ChoixFiltresTable {
 	}
 	call VariantsToTable {
   		input:
-  	  		sampleName=sample[0],
   	  		RefFasta=refFasta,
   	  		GATK=gatk,
   	  		finalVCF=GenotypeGVCFs.finalVCF
@@ -71,7 +70,7 @@ task HaplotypeCallerERC {
 	command {
 		java -jar ${GATK} \
 			HaplotypeCaller \
-			-ERC BP_RESOLUTION \
+			-ERC GVCF \
 			-R ${RefFasta} \
 			-stand-call-conf 10.0 \
 			--output-mode EMIT_ALL_SITES \
@@ -94,7 +93,7 @@ task CombineGVCFs {
 	command {
 		java -jar ${GATK} \
 			CombineGVCFs \
-			-V ${sep="-V" rawVCFs} \
+			-V ${sep=" -V " rawVCFs} \
 			-R ${RefFasta}\
 			-O Variants_Combined.vcf
 	}
@@ -128,17 +127,16 @@ task GenotypeGVCFs {
 task VariantsToTable {
 	File GATK
 	File RefFasta
-  	String sampleName
-	File finalVCF
+  	File finalVCF
 	command {
 	java -jar ${GATK} \
 	  VariantsToTable \
       -V ${finalVCF} \
       -F CHROM -F POS -F REF -F ALT -F TYPE -F QUAL -F DP -F MLEAC -F MLEAF -F QD -F FS -F SOR -F MQ -F MQRankSum -F ReadPosRankSum -F InbreedingCoeff -F GT -F GQ -F MIN_DP -F PL -F SB -F RAW_MQ -F AD -F ExcessHet -F BaseQRankSum -F ClippingRankSum \
-      -O ${sampleName}.snps.indels.table     
+      -O snps_indels.table     
 	}
 	output {
-	File TableFilteredVCF = "${sampleName}.snps.indels.table"
+	File TableFilteredVCF = "snps_indels.table"
 	}
 }
 

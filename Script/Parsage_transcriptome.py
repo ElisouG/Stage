@@ -34,16 +34,16 @@ if __name__ == "__main__":
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/NoStart_exo_18_05_18.txt"
 
-	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_30_05_18.txt"
-	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_30_05_18.txt"
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_13_06_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_13_06_18.txt"
 
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_17-05-18/New_Annotation_18_05_2018.gtf"
-	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_31_05_18.txt"
+	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_13_06_18.txt"
 
 	pathFasta = "/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax.fa"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
-	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_06_06_18.txt"
-	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_06_06_18.txt"
+	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_13_06_18.txt"
+	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_13_06_18.txt"
 
 	######################## Parsage Transcriptome ######################
 
@@ -168,31 +168,32 @@ if __name__ == "__main__":
 	CDS.write("%s | %s | %s | %s | %s:%s\n" % ('Chromosome','geneID','brin','frame','CDS_start','CDS_end'))
 	geneID = "none"
 	for line in linesNewGTF:
-		if 'CDS' in line and geneID == "none":
-			K1 = line.split('\t')[0]
-			brin = line.split('\t')[6]
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			frame = line.split('\t')[7]
-			geneID = line.replace('"','').split(' ')[1]
-			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
-			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
-		elif line.replace('"','').split(' ')[1] != geneID :
-			geneID = line.replace('"','').split(' ')[1]
-			K1 = line.split('\t')[0]
-			brin = line.split('\t')[6]
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			frame = line.split('\t')[7]
-			CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
-			CDSFinaux.append(listeCDS)
-			listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
-		elif line.replace('"','').split(' ')[1] == geneID :
-			CDS_start = line.split('\t')[3]
-			CDS_end = line.split('\t')[4]
-			CDS.write(" | %s:%s " % (CDS_start,CDS_end))
-			listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
-		geneID = line.replace('"','').split(' ')[1]
+		if '\tCDS\t' in line :
+			if geneID == "none":
+				K1 = line.split('\t')[0]
+				brin = line.split('\t')[6]
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				frame = line.split('\t')[7]
+				geneID = line.split('"')[1].split('|')[0]
+				CDS.write("%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
+				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)]
+			elif line.split('"')[1].split('|')[0] != geneID :
+				geneID = line.split('"')[1].split('|')[0]
+				K1 = line.split('\t')[0]
+				brin = line.split('\t')[6]
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				frame = line.split('\t')[7]
+				CDS.write("\n%s | %s | %s | %s | %s:%s" % (K1,geneID,brin,frame,CDS_start,CDS_end)) 
+				listeCDS = [K1,geneID,brin,frame,'%s:%s'% (CDS_start,CDS_end)] 
+				CDSFinaux.append(listeCDS)
+			elif line.split('"')[1].split('|')[0] == geneID :
+				CDS_start = line.split('\t')[3]
+				CDS_end = line.split('\t')[4]
+				CDS.write(" | %s:%s " % (CDS_start,CDS_end))
+				listeCDS.append('%s:%s'% (CDS_start,CDS_end))  
+				geneID = line.split('"')[1].split('|')[0]
 	CDS.close()
 
 	######################## Recherche des séquences des CDS #########################
@@ -200,63 +201,62 @@ if __name__ == "__main__":
 	Genome = fasta2dict(pathFasta)
 	GenomeR = fasta2dict(PathGenomeR)
 
-	#SequenceCDS = open(pathSequenceCDS, "w")
-	#SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
+	SequenceCDS = open(pathSequenceCDS, "w")
+	SequenceCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','brin','Sequence'))
 
-	seqFinale = ""
-
+	CDSComplete = []
 	for elt in CDSFinaux:
-		print(elt)
+		seqFinale = ""
 		K1 = elt[0]
 		geneID = elt[1]
 		brin = elt[2]
 		frame = elt[3]
-		positionCDS=CDSFinaux[4:len(CDSFinaux)]
+		positionCDS=elt[4:len(CDSFinaux)]
 		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
-				sequence = Genome[chromosome].seq 
+				sequence = Genome[K1].seq 
 				if frame == '1':
-					CDS_start = str(int((elt.split(':')[0]))+1)
-					CDS_end = elt.split(':')[1]
+					CDS_start = int((elt.split(':')[0]))+1
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end] 
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
-					CDS_start = str(int((elt.split(':')[0]))+2)
-					CDS_end = elt.split(':')[1]
+					CDS_start = int((elt.split(':')[0]))+2
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
-					CDS_start = elt.split(':')[0]
-					CDS_end = elt.split(':')[1]
+					CDS_start = int(elt.split(':')[0])
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
 			elif brin == '-':
-				sequence = GenomeR[chromosome].seq	
+				sequence = GenomeR[K1].seq	
 				if frame == '1':
-					CDS_start = str(int((elt.split(':')[0]))+1)
-					CDS_end = elt.split(':')[1]
+					CDS_start = int((elt.split(':')[0]))+1
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '2':
-					CDS_start = str(int((elt.split(':')[0]))+2)
-					CDS_end = elt.split(':')[1]
+					CDS_start = int((elt.split(':')[0]))+2
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				elif frame == '0':
-					CDS_start = elt.split(':')[0]
-					CDS_end = elt.split(':')[1]
+					CDS_start = int(elt.split(':')[0])
+					CDS_end = int(elt.split(':')[1])
 					seqCDS = sequence[CDS_start:CDS_end]
 					seqFinale = seqFinale+seqCDS
-					#SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-		seqFinale = seqFinale+seqCDS
-		CDSComplete.append(K1,geneID,brin,seqFinale)	
-	#SequenceCDS.close()
+					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+					seqFinale = seqFinale+seqCDS
+	CDSComplete.append([K1,geneID,brin,seqFinale])	
+	SequenceCDS.close()
 
 	######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
@@ -270,9 +270,9 @@ if __name__ == "__main__":
 	for elt in CDSComplete:
 		K1 = elt[0]
 		geneID = elt[1]
-		seqNt = elt[4]
+		seqNt = elt[3]
 		if K1 != 'MT':
-			seqProt = str(seqNt.translate(cds=True))
+			seqProt = str(seqNt.translate())
 			nbreStar = seqProt.count('*')
 			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 
@@ -284,7 +284,7 @@ if __name__ == "__main__":
 				Filtre = 'Pas de stop'
 				ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))
 		elif K1 == 'MT':
-			seqProt = str(seqNt.translate(table="Vertebrate Mitochondrial",cds=True))
+			seqProt = str(seqNt.translate(table="Vertebrate Mitochondrial",))
 			nbreStar = seqProt.count('*')
 			if nbreStar > 1:
 				Filtre = 'Plusieurs stop' 

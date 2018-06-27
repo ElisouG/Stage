@@ -1,9 +1,9 @@
 {
-  "Data_PreProcessing.refFasta": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa",
-  "Data_PreProcessing.variationSites": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Combined-Annotation_Labrax-2014_Ordered.gtf",
-  "Data_PreProcessing.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/inputsTSV.txt",
-  "Data_PreProcessing.refIndex": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa.fai",
-  "Data_PreProcessing.refDict": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.dict",
+  "Data_PreProcessing.refFasta": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta",
+  "Data_PreProcessing.variationSites": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/Final_list_57907_SNPs.recode.vcf",
+  "Data_PreProcessing.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/inputsTSV.txt",
+  "Data_PreProcessing.refIndex": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta.fai",
+  "Data_PreProcessing.refDict": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.dict",
   "Data_PreProcessing.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar",
   "Data_PreProcessing.picard": "/home/egueret/tools/picard.jar"
 }
