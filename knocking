@@ -1,0 +1,73 @@
+#!/bin/bash
+
+KNOCK=`which knock`
+SSH=`which ssh`
+SCP=`which scp`
+GATEWAY="162.38.181.3"
+PORT1="1194"
+PORT2="41"
+PORT3="1723"
+
+
+usage="
+$0 [login|send|receive|--help] <options>\n
+\n
+  $0 login <username>\n
+  \tIf 'login <username>', is present this script will try to ssh to the remote system (gateway) using <username>. If no username is given, the script will use the current username.\n
+  $0 send </path/to/local/file> <username> <IP.IP.IP.IP> </remote/path/> [r]\n
+\tif 'send' is present as argument, it will try to transfer datas using scp. All the arguments are required, except 'r'.\n
+\tLast argument 'r' must be used when transferring recursive datas (directory)\n
+  $0 receive </path/to/local/> <username> <IP.IP.IP.IP> </remote/path/file> [r]\n
+\tif 'receive' is present as argument, it will try to transfer datas using scp. All the arguments are required, except 'r'.\n
+\tLast argument 'r' must be used when transferring recursive datas (directory)\n
+  $0 --help | -h \n
+\tprint this help and exit.\n
+  $0\n
+\tWithout any argument, it will just try to knock the system and exit.\n
+"
+
+
+if [ -z "$SSH" ]; then
+  echo "ssh client must be present... Exiting..."
+  exit 1;
+fi
+if [ -z "$KNOCK" ]; then
+  echo "knock client must be present... Use telnet instead. Exiting..."
+  exit 1;
+fi
+if [ -z "$SCP" ]; then
+  echo "scp client must be present for the transfer."
+fi
+
+$KNOCK $GATEWAY $PORT1
+$KNOCK $GATEWAY $PORT2
+$KNOCK $GATEWAY $PORT3
+
+if [[ "$1" == "login" ]]; then
+  if [ -n "$2" ]; then
+    $SSH -YC $2@$GATEWAY
+  else
+    $SSH -YC $GATEWAY
+  fi
+elif [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+  echo -e $usage
+  exit 1;
+elif [[ "$1" == "send" ]]; then
+  if [ "$#" -eq 6 ]; then
+    $SCP -r -oProxyCommand="$SSH -W %h:%p $3@$GATEWAY" $2 $3@$4:$5
+  elif [ "$#" -eq 5 ]; then
+    $SCP -oProxyCommand="$SSH -W %h:%p $3@$GATEWAY" $2 $3@$4:$5
+  else
+    echo -e $usage
+    exit 1
+  fi
+elif [[ "$1" == "receive" ]]; then
+  if [ "$#" -eq 6 ]; then
+    $SCP -r -oProxyCommand="$SSH -W %h:%p $3@$GATEWAY" $3@$4:$5 $2
+  elif [ "$#" -eq 5 ]; then
+    $SCP -oProxyCommand="$SSH -W %h:%p $3@$GATEWAY" $3@$4:$5 $2
+  else
+    echo -e $usage
+    exit 1
+  fi
+fi

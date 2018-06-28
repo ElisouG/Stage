@@ -830,15 +830,138 @@ Concernant le rapport, il faudrait que je teste différente chose pour voir si l
 
 <p style="text-align:justify";>J'ai modifié mon script python pour faire ce que je n'arrivais pas à faire.</p>
 
-
 ## Jour 67 : 06/06/2018
 
 <p style="text-align:justify";>J'ai fais les corrections à mon script python.</p>
 
-<p style="text-align:justify";>Hier soir, j'ai préparé les fichiers .bam.bai et j'ai pu lancer ce matin la préanalyse pour les 8 bam que j'ai sélectionné. J'espère que la mémoire de mon home sur le cluster est bien de 500Go comme il m'a dit sinon ça va planter.</p>
+<p style="text-align:justify";>Hier soir, j'ai préparé les fichiers .bam.bai et j'ai pu lancer ce matin la préanalyse pour les 8 bam que j'ai sélectionné. J'espère que la mémoire de mon home sur le cluster est bien de 500Go comme il m'a dit sinon ça va planter.^Ca plante parce que je ne lui donne pas assez de ram.</p>
 
-<p style="text-align:justify";>Cet après-midi j'ai rndez-vous avec Erick et Bruno pour parler de l'avancée de mon stage. On se voit tous les 3 environ 1 fois par mois.</p>
+<p style="text-align:justify";>Cet après-midi j'ai rendez-vous avec Erick et Bruno pour parler de l'avancée de mon stage. On se voit tous les 3 environ 1 fois par mois. Bon bah on ne s'est pas vu ^^</p>
 
+<p style="text-align:justify";>A mon fichier rmd j'ai ajouté quelques graphs pour le choix des filtres. Mais erick pense que ça vient de HaplotypeCaller qui ne trouve pas de SNP mais que des mixed ou des symbolic.</p>
+
+## Jour 68 : 07/06/2018
+
+<p style="text-align:justify";>Aujourd'hui c'est mon anniversaire et le cluster de calcul n'est pas accessible donc je ne vais pas pouvoir travailler tant que le disque ne sera pas installé. Et R ne veut pas ouvrir mon projet annotation. Ca y est maintenant il veut bien ^^ . Je ne sais pas pourquoi il ne voulait pas mais maintenant sans que je n'ai rien changé il veut bien, encore un mystère de l'informatique.</p>
+
+<p style="text-align:justify";>Je teste le Pre-processing avec 4 fichiers à la place de 8, pour voir si il peut allouer de la mémoire. Il peut !!!!!!! Du coup c'est trop bien. Je les lance 4/4. Je suis en train de sauvegarder la première partie sur mon ordi. Après je pourrais tout envoyer sur Tycho.</p>
+
+<p style="text-align:justify";>Je teste le choix des filtres avec --output-mode EMIT_ALL_SITES, pour voir si il peut nommer des SNPs.</p>
+
+<p style="text-align:justify";>Sur tycho il n'y a plus le dossier /export/poolz3/bguinand/elise ... J'espère que je n'ai pas fait une fausse manip'. Normalement tout est revenu. Je ne sais pas où tout était parti mais bon, encore un mystère de l'informatique.</p>
+
+<p style="text-align:justify";>J'ai fait ma distribution de gâteaux ausein de l'isem epoiss et au bâtiment 24 pour en donner à la plate-forme. J'en ai profité pour en distribuer aux responsables du cluster. Du coup, j'ai enfin découvert qui était Rémy : il est super jeunne alors que je m'attendais à quelqu'un de plus âgé. En plus, je l'avais déjà croisé plusieurs fois dans les couloirs sans savoir qui c'était. Mais maintenant je le sais et je peux mettre un visage dessus.</p>
+
+<p style="text-align:justify";>J'ai fait un ticket au SR2i pour qu'ils m'installent R et Rstudio sur mon windows car j'aurai accès à 32Go de RAM et au 2To de stockage. Donc ça devrait être plus simple pour moi de travailler mes filtres sur Windows quand ils auront fini bien sûr. Du coup, Dimitri est passé vite fait pour me les installer ppour mon anniversaire sinon je crois qu'il ne serait venu que demain ou plus tard à un moment de creux.</p>
+
+
+## Jour 69 : 08/06/2018
+
+<p style="text-align:justify";>Hier j'ai testé HaplotypeCaller avec une autre option pour voir si je trouve des SNPs simple sauf que je me suis trompée dans un chemin d'accès à un fichier du coup il n'a pas pu travailler correctement. Donc j'ai fait la correction ce matin et je l'ai relancé. D'autre part, j'avais lancé le PreProcessing sur 4 autres fihciers. Ils ont terminé hier en fin d'aprèm du coup je suis en train de les transférer sur mon ordi. Et après je pourrais les envoyer sur Tycho.</p>
+
+<p style="text-align:justify";>Madoka n'est pas là aujourd'hui ni lundi car elle a pris des jours pour aller en Allemeagne voir sa soeur et son bébé.</p>
+
+## Jour 70 : 11/06/2018
+
+<p style="text-align:justify";>j'ai réservé un bigmem pour mon retour de vacances.</p>
+
+<p style="text-align:justify";>Je ne pouvais plus rien sauvegarder sur le cluster. En fait j'avais plus de place dans mon home (501/500Go) du coup il ne voulais plus rien que je fasse. D'où le temps d'attente super long de mon script. En fait, je crois qu'il n'aurait jamais fini. J'ai tout récupérer grâce à git.</p>
+
+<p style="text-align:justify";>Je ne comprends pas pourquoi Erick ne comprend pas que c'est en log10.</p>
+
+<p style="text-align:justify";>J'ai changer mon script wdl selon les consignes d'ERick. C'est-à-dire produire un fichier bam et faire la soartie des variants lorsque le génotype calling a été réalisé, pour voir d'une part d'où viennent les problèmes d'alignement et d'autre part pour voir si HaplotypeCaller ne sort pas quelquechose de généralisé et que GenotypeGVCF faitle véritable calling final. Ce job est en train de tourner de puis tout à l'heure. J'espère que ça ne va pas être trop long.</p>
+
+<p style="text-align:justify";>J'ai envie d'écrire. Pour assouvir cette envie, je pourrais commencer mon rapport de stage mais je ne suis pas très inspirée pour le moment. Par contre, si jamais je bosse depuis Doué il va falloir que je pense à tout sauvegarder sur mon disque dur si j'en ai besoin jeudi soir avant de partir.</p>
+
+<p style="text-align:justify";>Je ne fais qu'attendre que le temps passe et il ne passe pas vite du coup. J'ai décidé de faire mon sport à l'aide de l'appli que j'ai téléchargé l'autre soir histoire de passer le temps. Du coup, j'ai bien chaud et bien soif. Quand j'aurai fini j'irai chercher de l'eau à la fontaine. Je dois tenir 1 mois. Pour retrouver la forme que j'ai perdu et surtout pour perdre monb petit ventre et mes petites hanches. On va bien voir si ça fait effet ou non.</p>
+
+## Jour 71 : 12/06/2018
+
+<p style="text-align:justify";>Le script wdl a fonctionné : le problème venait bien du fait que les calling d'HaplotypeCaller sont aléatoire et non filtré. Il faut donc faire la sélection des SNPs et INDELs après avoir fait le CombineGVCFs et le GenotypeGVCFs. J'ai fait les graphiques pour l'individus 11GB. Et j'ai lancé l'analyse pour les 4 premiers individus (18, 17, 4, 20B). Quand ça aura terminé je pourrais transférer les données sur Tycho et lancer la suite sur les 4 autres individus (27, 17B, 52, 77).</p>
+
+<p style="text-align:justify";>J'aimerais bien que l'on choisisse les valeurs des filtres avant jeudi soir comme ça je pourrai les appliquer sur toutes les données dès que je rentre de mes vacances sur la big-mem que j'ai réservé et qui me sera attribuée pour 3 semaines entières. J'espère que tout va aller comme sur des roulettes pour la fin de mon stage. En plus pendant 3 semaines voir 4 en juillet je serai libre de faire ce que je veux car Erick sera en vacances et ça sera trop cool. Il veut juste que le premier jet de mon rapport soit dans sa boîte mail avant qu'il ne revienne de vacances pour qu'il n'ai plus que ça à le lire et le corriger en rentant de ses vacances.</p> 
+
+<p style="text-align:justify";>Suite à cette modification du script de choix des filtres, j'ai modifié deux choses: la flowchart sur mon google drive et le script de Variant calling.</p>
+
+<p style="text-align:justify";>D'autre part concernant mon script Python: il produit bien le fichier avec les CDS mais il ne faisait pas de retour à la ligne. J'ai fait ce changement. et J'ai oublié ce que Flo m'avait demandé de faire ensuite. C'était de vérifier que ma condition était bonne et elle ne l'était pas vraiment vu qu'il confondait les tabs avec les espaces. J'ai tout mis sur mon disque dur comme ça on pourra tout regarder ensemble ce soir.</p>
+
+## Jour 72 : 13/06/2018
+
+<p style="text-align:justify";>Erick m'a demandé où j'en était de toutes mes affaires. Donc je lui ai dit que j'avais réservé la bigmem pour mon retour de vacances et sue je pourrais lancer toutes les analyse depuis là-bas dès mon retour de vacances. Je lui ai aussi dit que j'avais quasiment fini de faire la traduction. Et je lui ai également dit ce que je comptait faire avec les autres problèmes de la correction du génome. Je ne sais pas si je vais réussir à faire tout cela en 2 jours seulement.</p>
+
+<p style="text-align:justify";>D'autre part mes script wdl ont planté cette nuit car le séparateur ne séparait pas bien les fichiers si j'ai bien compris. Sinon il faudra que je mette cette étape dans le scatter-gather et peut-être que ça fonctionnera. Mais ça je ne le saurai surement que demain.</p>
+
+<p style="text-align:justify";>Je vais créer tous les bai de tous mes bam à l'aide de mon ordi. Ensuite je vais faire le transfert sur Tycho de tous ça.</p>
+
+<p style="text-align:justify";>J'ai fais une liste de tous ce dont j'aurai besoin pour travailler sur la big-mem. Ainsi qu'une question à poser. Me demande de réservation est toujours en cours de modérartion. Du coup j'ai fait un changement en mettent mon nom comme titrecomme tous le monde.</p>
+
+<p style="text-align:justify";>J'ai fait des recherches sur tout les packeges R que j'avais trouvé</p>
+
+## Jour 73 : 14/06/2018
+
+<p style="text-align:justify";>Vivement ce soir car c'est les vacances !!!!!!!!</p>
+
+<p style="text-align:justify";>Mon wdl a fonctionne trop bien! J'ai donc transférer toutes les données sur mon ordi puis sur Tycho. Je vais pouvoir charger le fichier dans R et voir si il y a beaucoup de différence à les faire seuls ou à plusieurs. J'ai lancé la suite des analyses sur les autres bam que j'avais choisi. Cette analyse s'est terminé rapidement et j'ai donc tout transférer sur mon ordi puis sur Tycho comme d'hab. Ça change quelques trucs mais surtout les MLEAC et MLEAF.</p>
+
+<p style="text-align:justify";>J'ai créé 2 fichier .map et.ped à l'aide de VCFtools pour pouvoir utiliser PLINK. PLINK produit des fichier text séparé par des espaces et ces fichiers sont ouvrables par R ou HaploView. J'ai ensuite rer-regarder le pipeline d'association du rapport que j'avais trouvé et j'ai noter son pipeline sur mon carnet. Et j'ai également regarder le tuto PLINK et notamment les lignes de commandes utilisées. J'ai créé un script sge avec toutes les commandes dedans et je l'ai lancé sur le cluster. Je ne sais pas ce que ça va donner surtout que je n'ai pas ajouté les phénotypes^^.</p>
+
+<p style="text-align:justify";>si pendant mes vacs je dois faire un ticket pour mon ordi : http://help.isem.intra/index.php?redirect=ticket_1124 .</p>
+
+## Jour 74 : 25/06/2018
+
+<p style="text-align:justify";>Aujourd'hui retour de vacances et je suis déjà KO.</p>
+
+<p style="text-align:justify";>J'ai eu les infos que je voulais concernant l'utilisation de la big-mem. J'ai plus qu'à tout transférer pour tous lancer ensuite. J'ai quasiment tout préparé. Je ne vais avoir plus qu'à installer java8 pour faire fonctionner GATK.</p>
+
+<p style="text-align:justify";>Erick est passé me voir pendant près d'1h pour discuter d'où j'en était dans mon taf et de ce que je prevois de faire avant qu'il ne parte en vacances le 6 Juillet au soir. Il faut que je lance GATK par lignée afin de ne pas perdre les snps qui ne seraient supportés que par une seule lignée et éliminé lors du joint calling (GenotypeGVCFs). Puis je lancerai GATK sur l'ensemble des données pour faire une comparariosn avec le lancement pare lignée.
+Pour l'annotation du génome : Il faut que je fasse en parallèlle la recherche d'orf (cadre de lecture) et la recherche de start et stop pour faire d'une pierre deux coups. Et pour ceux qui ne fonctionnerait pas il faudrait que j'ajoute un start artificiel pour qu'il mle fasse la traduction en fonction de différents frame.
+Pouyr mon rapport, il ne faut pas que j'oublie d'inclure les chiffres prouvant mon avancée avec le nombre d'erreyurs au départ puis à chaque étape pour voir l'évolution de mon travail.
+Il faudrait que je preprenne des vacs pour m'aérer la tête avant d'entamer la rédaction d emon rapport.
+Pour GATK comme il n'auront surement pas les données avant que je parte (du projet initail) il va falloir que j'écrive un tuto - mode d'emploi de l'utilisation des mes différents scripts pour qu'ils puissent l'utiliser après mon départ sans gros problèmes d'organisation.</p>
+
+<p style="text-align:justify";>D'autre part Madoka n'est pas là de la semaine car elle est à Perpignan pour se former à l'analyse des données épigénétique et l'obtention de données de dd-RAD. Elle ne rvient que la semaine prochaine; Donc j'ai le bureau rien que pour moi toute la semaine pour faire tout ce que je veux !!!!</p>
+
+<p style="text-align:justify";>J'ai fait un schéma de la vue générale de mon pipeline pour la découverte de variants à partir de données de RNA-seq.</p>
+
+<p style="text-align:justify";>J'ai tout transférer sur la big-mem et j'ai lancé mon job mais je ne sais pas comment faire pour qu'il me rende la main.</p>
+
+## Jour 75 : 26/06/2018
+
+<p style="text-align:justify";>J'ai trouvé comment faire pour qu'il me rende la main : c'est "nohup ... &". Il écrit tout ce qui sort dans un fichier nohup.out mais reste à savoir où il le met. Je n'ai pas encore testé mais je vais le faire cet aprèm quand mon script aura fini. Du coup ça ne me rned pas la main.</p>
+
+<p style="text-align:justify";>Comme le script a planté à 20h50 hier soir à cause de la mémoire, j'ai ajouté un argument à ma commande qui est -d64 pour qu'il utilise une JavaVM de 64 bit. Je vais bien voir si ça fonctionne en début d'aprèm. Sinon il va falloir que je joue avec les options -Xms et -Xmx. Le seul pb c'est que je ne sais pas comment faire pour bien choisir les valeurs. Du coup j'ai mis -Xmx4g pour Markduplicates. Et ça fonctionne. Ensuite nouvelle erreur : pas d'index pour le fichier des snps de la puce. Donc je l'ai produit. Et ça m'a donné le même que celui qui était présent. Si ça ne fonctionne pas avec ce petit changement, je l'ajouterai au json et aux task et call du script wdl. En espérant que ça fonctionne sans que j'ai besoin de faire ça.</p>
+
+<p style="text-align:justify";>J'ai fait quelques modifications de mon script pour avoir les tables de recalibration avant et après la recalibration pour voir la différence et l'impact de cette recalibration pour chacun des individus impliqués dans mon étude. Pour l'instant, j'ai lancé mon job avec tous les individus sélectionnés par Erick. Par contre il semblerait que pour faire le joint Calling (GenotypeGVCFs) je doivent le faire par lignée et non tous les individus ensemble.</p>
+
+<p style="text-align:justify";>Je vais attaquer la rédaction de mon rapport, notamment tout ce qui est matériel et méthode ainsi que l'obtention de mes données. Cet aprèm je bosse Python avec l'aide de Flo car il aura fini son oral et sera moins stressé mais pas forcément plus disponible.</p>
+
+## Jour 76 : 27/06/2018
+
+<p style="text-align:justify";>Bon bah mon script wdl a planté pour le même erreur du coup j'ai ajouté le path de ce fichier dans le json et dans mon script wdl. La dernière solution si ça ne fonctionne pas est de mettre le chemin de ce fichier en dur. J'avais fait un oubli et erreur de frappe du coup ça ne lançait pas le job. J'ai fait les modif nécessaires et le job est parti. J'espère que ça va fonctionner cette fois.</p>
+
+<p style="text-align:justify";>Finalement je n'ai pas bossé python de l'aprèm. Je vais faire cela cet aprèm. Pour de vrai cette fois car Flo ne sera pas dispo demain pour m'aider. Il faut que je visualise mentalement ce que je veux faire et comment je compte le faire. Puis j'en parle à Flo et il m'aide et demain je fais tout ce qu'il m'aura dit de faire.</p>
+
+<p style="text-align:justify";>Hier j'ai fait un ticket pour qu'ils viennent m'installer les périphériques d'imprimantes sur mon ordi pour que je puisse imprimer le rapport CRECHE 2016 et avancer plus vite sur la rédaction de mon rapport de stage. Pour mon rapport, j'ai pas beaucoup avancé. J'ai fait le mat etmeth que pour GATK et pour le 1er wdl seulement. Je vais donc m'occuper du second wdl.</p>
+
+<p style="text-align:justify";>Donc PLINK semble fonctionner mais il n'a pas de phénotype et notamment pas de sexe donc c'est difficile pour lui de travailler. Aucun des fichiers ne semble contenir qqch de pertinent car tout est dans nosex.</p>
+
+
+## Jour 77 : 28/06/2018
+
+<p style="text-align:justify";>Data_PreProcessing a fonctionné. C'est trop cool. Je suis en train de le relancer avec mon script R dans le PATH, j'aimerais bien que ça fonctionne. Je l'ai lancé sans avoir installé les packages nécessaires du coup je les installe. J'espère que ce n'est pas trop tard. Je pense que du coup ça n'a pas été pris en compte car il me dit qu'il ne trouve pas les packages que j'ai installé. Du coup, j'ai ajouté le chemin de la librairy pour qu'il les trouve. au cas où ça ne fonctionnerait pas j'ai ajouté -l DEBUG et je lancerait le script manuellement. Et d'autre part je transfert les données obtenues sur mon ordi. Pour pouvoir ensuite les transférer sur TYCHO. Mais je sens que ça va prendre du temps car le dossier fait dans les 800Go. Oui oui autant !!!!</p>
+
+<p style="text-align:justify";>Il ne faut pas que j'oublie d'aller voir la présentation d'Olivia sur les Gobies au 2ème étage. Bruno avait 11h15 du coup je me suis pointée à 11h05 et Olivia était déjà en train de faire ça présentation. Du coup je n'ai pas pu assister à sa présentation. En plus elle n'a même pas pensé à moi avant de partir manger. Surtout que je l'ai vu à la cafèt mais ils sont tout de suite parti je ne sais où du coup j'ai mangé toute seule dans mon bureau.</p>
+
+<p style="text-align:justify";>Dimitri vient de passer pour m'installer R 3.5.0 et non  3.4.4 car il ne l'a pas et cele là n'est pas dispo pour Ubuntu ^^. Il m'a aussi paramétré l'imprimante mais je ne peux pas imprimer en recto verso du coup ça va faire du gaspillage donc je vais imprimer à l'appart. Et en plus ça sera en couleur.</p>
+
+Pour mettre R à jour:   
+* $sudo su   
+* $echo "deb http://www.stats.bris.ac.uk/R/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list   
+* $apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9   
+* $apt-get update   
+* $apt-get upgrade   
+
+<p style="text-align:justify";></p>
 
 #Bibliographie
 

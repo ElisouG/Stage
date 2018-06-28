@@ -1,0 +1,199 @@
+---
+title: "Résultats obtenus par GATK"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+```{r chargement_packages, include=FALSE}
+library(ggplot2)
+library(kableExtra)
+```
+
+#Visualiser les données produites par HaplotypeCaller, CombineGVCFs et GenotypeGVCFs (GATK)
+## Importation des données
+
+HaplotypeCaller produit un fichier au format vcf (Variant Calling Format). Afin de visualiser les données qui y sont inscrites, un second outil : VariantsToTable est utilisé. Cet outil crée un fichier tabulé qui contient tous les champs choisi par l'utilisateur. Pour visualiser cette table sous forme de différents graphiques il est donc nécessaire d'importer les données dans R sous la forme d'une DataFrame.
+
+```{r chargement_Geno_Data, echo=FALSE}
+Genotypes <- read.table("/media/sf_DATA/Stage/Suivi du travail effectué/Website/snps.indels.table", header = TRUE, sep = "\t")
+```
+
+Selon les bonnes pratiques de découverte de Variants à partir de données de RNA-seq données sur le site web de GATK, il faut réaliser un "hard-filtering". C'est-à-dire choisir des valeurs seuils qui définissent quelles données sont considérées comme correcte de celles qui ne le sont pas. Pour cela, ils recommandent différentes valeurs pour différents champs en fonction de la variation (SNPs ou Indels). Ces valeurs sont présentées dans le tableau suivant :
+
+| Sigle du champs utilisé | Valeur si SNPs | Valeur si INDELs |
+| :---------------------: | :------------: | :--------------: |
+| QD | <2.0 | <2.0 |
+| FS | >60.0 | >200.0 |
+| SOR | >3.0 | >10.0 |
+| ReadPosRankSum | <-8.0 | <20.0 |
+| MQ | <40.0 |   |
+| MQRankSum | <-12.5 |   |
+| InbreedingCoeff |   | <-0.8 |
+
+## Quelques graphiques
+
+Tout d'abord, il faut savoir que HaplotypeCaller peut identifier 5 types de variant différents. [Source1](https://software.broadinstitute.org/gatk/documentation/article?id=3682) Il s'agit des SNPs, MNPs, INDELs, Mixed, et Symbolic. Les SNPs représentent des "single nucleotide polymorphism". Les MNPs représentent les "multi-nucleotide polymorphism". Les INDELs représentent des évènements d'insertions ou de délétions de nucléotides. Les Mixed représentent une combinaison de SNPs et d'INDELs à une seule et même position. Les Symbolic montrent qu'il se passe quelque chose à cette position mais qu'on ne sait pas exactement ce qu'il représente. Parfois, HaplotypeCaller utilise l'allèle "non ref" ou * pour signifier la présence d'une suppression étendue ou des évènements indéfinis comme un trés grand allèle, la perte d'un seul allèle, la perte de deux allèles, etc. [Source 2](https://software.broadinstitute.org/gatk/documentation/article.php?id=6926)
+
+La première question est donc : **quels types de Variants a-t-il trouvé dans nos données ?**
+
+```{r tableau_variants, echo=FALSE}
+tableau4 <- as.data.frame(table(unlist(Genotypes$TYPE)))
+"Variants" -> names(tableau4)[1]
+"Count" -> names(tableau4)[2]
+
+kable(tableau4, caption="Génotypes Individu 11GB")
+```
+
+Ce tableau montre que trois types de variants sont trouvés au sein des données. Il s'agit de SNPs, d'INDELs et de Variants Mixed.
+
+Parmi les filtres proposés (uniquement pour les SNPs ou les INDELs) : **quels sont ceux qui sont représentables pour l'individu 11GB ?**
+
+```{r graph_MQ, echo=FALSE}
+p0 <- ggplot(Genotypes, aes(x=Genotypes$MQ)) + geom_density()
+p0
+```
+
+La valeur seuil pour RMSMappingQuality, si il s'agit de SNPs, est de 40. Ici, on prendrait donc tous les variants si on se base sur leur seuil pour les SNPs.    
+**Remarque** : Ce champs représente la racine carré de la qualité moyenne de l'alignement.
+
+```{r graph_QD, echo=FALSE}
+p7 <- ggplot(Genotypes, aes(x=Genotypes$QD)) + geom_density()
+p7
+```
+
+La valeur seuil pour QD, si il s'agit de SNPs, est de 2. Ici, on 3 pics à 12, 22 et 32. Il faudrait donc prendre tous les SNPs ayant une QD supérieur à 2.    
+**Remarque** : Ce champs représente la "Variant Confidence". Il s'agit de la normalisation de la qualité par la profondeur pour limiter l'inflation lorsqu'il y a une profonde couverture.
+
+```{r graph_FS, echo=FALSE}
+# Récupérartion des valeurs de qualité et comptage du nombre d'occurence
+tableau_FS <- as.data.frame(table(unlist(Genotypes$FS)))
+"FS" -> names(tableau_FS)[1]
+"Count" -> names(tableau_FS)[2]
+# Passage en log des occurrences
+tableau_FS$FS <- sapply(tableau_FS$FS,toString)
+tableau_FS$FS <- as.numeric(tableau_FS$FS)
+log_FS <- log10(tableau_FS$FS)
+tableau_FS <- cbind(tableau_FS,log_FS)
+head(tableau_FS)
+#Graph initial
+#p13 <- ggplot(Genotypes, aes(x=Genotypes$FS)) + geom_density()
+#p13
+# Graph axe des abscisses en log
+p13b<-ggplot(data=tableau_FS, aes(x=tableau_FS$log_FS)) + geom_density()
+p13b
+```
+
+La valeur seuil pour FischerStrand, si il s'agit de SNPs, est 60. Ici, on prendrait donc les variants ayant un FS inférieur à log10(60)=1.78.    
+**Remarque** : Ce champs est la probabilité (en Phred-Scaled) d'avoir un biais dû au brin.
+
+```{r graph_SOR, echo=FALSE}
+p12 <- ggplot(Genotypes, aes(x=Genotypes$SOR)) + geom_density()
+p12
+```
+
+La valeur seuil pour StrandOddsRatio, si il s'agit de SNPs, est 3. Ici, on prendrait donc les variants ayant un SOR inférieur à 3.    
+**Remarque** : Ce champs estime le biais dû au brin. Ce champs a été créé car le FS tend à pénaliser les variants situé en fin d'exon.
+
+
+
+```{r graph_ReadPosRankSum, echo=FALSE}
+p5 <- ggplot(Genotypes, aes(x=Genotypes$ReadPosRankSum)) + geom_density()
+p5
+```
+
+La valeur seuil pour ReadPosRankSum, si il s'agit de SNPs, est -8 ou 20,0 si il s'agit d'INDELs. Ici, on prendrait donc tous les variants supérieur à -8 si on se base sur leur seuil pour les SNPs.    
+**Remarque** : Ce champs vérifie que les variants ne se trouve pas uniquement en fin de reads, car c'est là où les séquenceurs font le plus d'erreur.
+
+```{r graph_MQRankSum, echo=FALSE}
+p6 <- ggplot(Genotypes, aes(x=Genotypes$MQRankSum)) + geom_density()
+p6
+```
+
+La valeur seuil pour MQRankSum, si il s'agit de SNPs, est -12,5. Ici, on prendrait donc tous les variants si on se base sur leur seuil pour les SNPs.    
+**Remarque** : Ce champs vérifie que les variants et la référence ont une qualité d'alignement similaire afin de limiter tous biais dû à l'alignement.
+
+Autres filtres _**"représentables"**_ :
+
+```{r graph_BaseQRankSum, echo=FALSE}
+p8 <- ggplot(Genotypes, aes(x=Genotypes$BaseQRankSum)) + geom_density()
+p8
+```
+
+La valeur idéale est de 0. Si la valeur est supérieur à 0 cela signifie que la qualité des données est supérieur pour l'allèle alternatif et inversement pour une valeur inférieur à 0.     
+**Remarque** : Ce champs compare la qualité en base des données supportant l'allèle de référence et l'allèle alternatif.
+
+```{r graph_Excess_Het, echo=FALSE}
+p9 <- ggplot(Genotypes, aes(x=Genotypes$ExcessHet)) + geom_density()
+p9
+```
+
+En abscisse il s'agit de la "phred-scale p-value".    
+**Remarque** : Ce champs donne la probabilité d'avoir le même nombre ou plus d'hétérozygote qu'attendu sous l'équilibre de Hardy Weinberg.
+
+
+```{r graph_QUAL, echo=FALSE}
+# Récupérartion des valeurs de qualité et comptage du nombre d'occurence
+tableau_QUAL <- as.data.frame(table(unlist(Genotypes$QUAL)))
+"QUAL" -> names(tableau_QUAL)[1]
+"Count" -> names(tableau_QUAL)[2]
+# Passage en log des occurrences
+tableau_QUAL$QUAL <- sapply(tableau_QUAL$QUAL,toString)
+tableau_QUAL$QUAL <- as.numeric(tableau_QUAL$QUAL)
+log_QUAL <- log10(tableau_QUAL$QUAL)
+tableau_QUAL <- cbind(tableau_QUAL,log_QUAL)
+head(tableau_QUAL)
+par(mfrow=c(1,2))
+# Graph initial
+p10 <- ggplot(Genotypes, aes(x=Genotypes$QUAL)) + geom_density()
+p10
+# Graph axe des abscisses en log
+p10b<-ggplot(data=tableau_QUAL, aes(x=tableau_QUAL$log_QUAL)) + geom_density()
+p10b
+```
+
+**Remarque** : Ce champs représente la "Variant confidence".
+
+```{r graph_DP, echo=FALSE}
+tableau_DP <- as.data.frame(table(unlist(Genotypes$QUAL)))
+"DP" -> names(tableau_DP)[1]
+"Count" -> names(tableau_DP)[2]
+# Passage en log des occurrences
+tableau_DP$DP <- sapply(tableau_DP$DP,toString)
+tableau_DP$DP <- as.numeric(tableau_DP$DP)
+log_DP <- log10(tableau_DP$DP)
+tableau_DP <- cbind(tableau_DP,log_DP)
+head(tableau_DP)
+par(mfrow=c(1,2))
+# Graph initial
+p11 <- ggplot(Genotypes, aes(x=Genotypes$DP)) + geom_density()
+p11
+# Graph axe des abscisses en log
+p11b<-ggplot(data=tableau_DP, aes(x=tableau_DP$log_DP)) + geom_density()
+p11b
+```
+
+**Remarque** : Ce champs représente la profondeur de couverture totale.
+
+```{r graph_MLEAC, echo=FALSE}
+p14 <- ggplot(Genotypes, aes(x=Genotypes$MLEAC)) + geom_bar(stat = "count")
+p14
+```
+
+**Remarque** : Ce champs représente le Maximum de vraisemblance attendu pour les allèles en nombre d'occurence.
+
+```{r graph_MLEAF, echo=FALSE}
+p14 <- ggplot(Genotypes, aes(x=Genotypes$MLEAF)) + geom_bar(stat = "count")
+p14
+```
+
+**Remarque** : Ce champs représente le Maximum de vraisemblance attendu pour les allèles en fréquence.

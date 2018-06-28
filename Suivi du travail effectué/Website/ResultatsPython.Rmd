@@ -1,0 +1,159 @@
+---
+title: "Résultats de la correction du génome"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+```{r chargement_packages, include=FALSE}
+library(ggplot2)
+library(kableExtra)
+```
+
+# Visualiser les longueurs ajoutées
+## Importation des données NoStart et NoStop
+
+Les données de NoStart et NoStop ont été obtenues à l'aide d'un script Python maison. Ce script récupère, à partir des erreurs warnings donnés par le logiciel snpEff, les différents gènes qui n'ont pas de codon start et/ou de codon stop. Puis il réalise une recherche de motif (codon start ou codon stop) à jusqu'à 100bp en amont d'un gène et jusqu'à 1000bp en aval du gène. En parallèle, il note tout cela au sein de deux fichiers au format texte.
+Il est donc nécessaire d'importer et d'ouvrir ces fichiers pour pouvoir examiner les longueurs ajoutées aux gènes pour qu'ils aient un codon start et codon stop.
+
+Le fichier NoStart regroupe **1239** observations de 8 variables. Le fichier NoStop, quant à lui, regroupe **3830** observations de 8 variables.
+
+Les observations (lignes du tableau) représentent le nombre de codons Start ou Stop qui ont été cherchés et trouvés par le script Python. Les variables (colonnes du tableau) représentent différentes choses : le chromosome (Groupe de liaison : LG), la position des anciens codons start ou stop, la nouvelle position des codons start ou stop, la longueur qui a été ajoutée ainsi que le brin sur lequel se situe le gène.
+
+```{r chargement_longueurs_ajoutees, echo=FALSE}
+# Importation des données sous forme de dataframe
+NoStart_Data <- read.table("/media/sf_DATA/Stage/Suivi du travail effectué/Website/NoStart_exo_18_05_18.txt",header = TRUE, sep = "|")
+NoStop_Data <- read.table("/media/sf_DATA/Stage/Suivi du travail effectué/Website/NoStop_exo_18_05_18.txt",header = TRUE, sep = "|")
+
+# Transformation de la colonne Length.add en "numérique"
+NoStart_Data$Length.add <- sapply(NoStart_Data$Length.add,toString)
+NoStart_Data$Length.add <- as.numeric(NoStart_Data$Length.add)
+NoStop_Data$Length.add <- sapply(NoStop_Data$Length.add,toString)
+NoStop_Data$Length.add <- as.numeric(NoStop_Data$Length.add)
+```
+__*Tableau présentant le nombre de codon start (ATG) trouvés*__
+```{r tableau_start, echo=FALSE}
+a <- as.data.frame(summary(NoStart_Data$chromosome))
+b <- as.data.frame(summary(NoStart_Data$codon))
+b
+```
+__*Tableau présentant le nombre de codon stop (TAA, TGA, TAG) trouvés*__
+```{r tableau_stop, echo=FALSE}
+c <- as.data.frame(summary(NoStart_Data$brin))
+d <- as.data.frame(summary(NoStop_Data$chromosome))
+e <- as.data.frame(summary(NoStop_Data$codon))
+e
+```
+__*Tableau présentant le nombre de codon start ou stop trouvés par chromosome*__
+```{r tableau_stop_start_chromosome, echo=FALSE}
+f <- as.data.frame(summary(NoStop_Data$brin))
+g <- cbind.data.frame(a,d)
+g
+```
+__*Tableau présentant le nombre de codon start ou stop trouvés par brin (+ ou -)*__
+```{r tableau_stop_start_brin, echo=FALSE}
+h <- cbind(c,f)
+h
+```
+
+## Création de graphiques
+
+__*Représentation des longueurs ajoutées pour les codons start.*__ L'axe des abscisses représente la longueur ajoutée en pb en fonction du brin. L'axe des ordonnées représente le nombre d'occurence de la longueur ajoutée en fonction du brin. Les couleurs permettent de visualiser la répartition des différentes longueurs ajoutées au sein des chromosomes (une couleur par chromosome).
+
+```{r graph_longueurs_ajoutees_start, echo=FALSE}
+#par(mfrow = c(2,1))
+p<-ggplot(data=NoStart_Data, aes(x=Length.add,fill=chromosome)) +
+  geom_bar(stat="count") + facet_grid(brin ~ .)#+ theme(legend.position="bottom")
+p
+```
+
+__*Représentation des longueurs ajoutées pour les  codons stop.*__ L'axe des abscisses représente la longueur ajoutée en pb. L'axe des ordonnées représente le nombre d'occurence de la longueur ajoutée. Les couleurs permettent de visualiser la répartition des différentes longueurs ajoutées au sein des chromosomes (une couleur par chromosome).
+
+```{r graph_longueurs_ajoutees_stop, echo=FALSE, fig.width=16 , fig.height=9}
+# https://stackoverflow.com/questions/9502003/ggplot-scale-y-log10-issue
+# Pour voir en log ^^
+p1<-ggplot(NoStop_Data, aes(x=Length.add, fill=chromosome)) +
+  geom_bar(stat="count") #+ facet_grid(brin ~ .)#+ theme(legend.position="bottom") #+ coord_flip()
+p1
+```
+
+**Remarque :** Ce graphique ne peut être transformé en log car il existe des valeurs (Count) égales à 0. Or log(0) n'existe pas et ne peut donc pas être "dessiné" sur le graphique. Le graphique ci-dessous est en log mais on perd l'information des chromosomes.
+
+Voici un extrait du __*Tableau présentant le nombre d'occurrence (Count) en fonction de la longueur ajoutée (Length.add).*__
+```{r tableau_longueurs_ajoutees_stop, echo=FALSE}
+tableau <- as.data.frame(table(unlist(NoStop_Data$Length.add)))
+"Length.add" -> names(tableau)[1]
+"Count" -> names(tableau)[2]
+head(tableau)
+```
+__*Représentation des longueurs ajoutées pour les  codons stop.*__ L'axe des abscisses représente la longueur ajoutée en pb. L'axe des ordonnées représente le log du nombre d'occurence de la longueur ajoutée. 
+```{r graph_longueurs_ajoutees_stop_log, echo=FALSE}
+tableau$Count <- sapply(tableau$Count,toString)
+tableau$Count <- as.numeric(tableau$Count)
+log_Count <- log10(tableau$Count)
+tableau <- cbind(tableau,log_Count)
+p2<-ggplot(data=tableau, aes(x=Length.add,y=log_Count)) +
+  geom_bar(stat="Identity") + scale_x_discrete(breaks=c("50","100","200","300","400","500","600","700","800","900"),
+        labels=c("50","100","200","300","400","500","600","700","800","900"))
+p2
+```
+
+#Visualiser la validation par le transcriptome
+## Importation des données NoStart et NoStop testées
+
+Les données de NoStart et NoStop testées ont été obtenues à l'aide d'un script Python maison. Ce script récupère, à partir des deux fichiers au format texte, les coordonnées des nouveaux CDS et les compare aux coordonnées des CDS du transcriptome de  *D. labrax*. Ce script rajoute un "filtre" (PASS ou Not valid) en fonction du résultat du test (comparaison). Si les nouvelles coordonnées sont comprises "dans" les coordonnées du transcriptome alors le "filtre" écrit est PASS, sinon il écrit Not valid.
+Il est donc nécessaire d'importer et d'ouvrir ces fichiers pour pouvoir examiner les filtres appliqués pour chaque longueur ajoutée précédement.
+
+*"Si tu veux utiliser ce texte pour ton rapport, il faudrait que tu explicites plus ce que tu veux dire par "et les compare aux coordonnées des CDS du transcriptome de D. labrax". En fait, il faut que tu précises que des nouvelles données de séquençage de transcrits, plus complètes que celles utilisées lors de l'annotation initiale du transcriptome, ont été utilisées pour assembler un nouveau transcriptome. Et c'est au coordonnées de ces nouveaux transcrits que tu confrontes les modifications d'annotations que tu proposes. Il faut aussi savoir que ce test n'est que relatif car il est tout à fait possible que certains transcrits n'aient pas encore été séquencés jusqu'au bout ou soient carrément absents du séquençage. En effet l'expression de certains gènes est soit spécifique du tissu ou du stade de développement et on ne les a pas trouvé dans ce qu'on a séquencé. Ce contrôle par la taille n'est donc valable que pour une partie des corrections que tu as effectuées. Le test le plus complet mais aussi probablement le plus long est celui qui sera fait par une traduction des nouveau CDS obtenus."* - __*Erick*__
+
+Le fichier NoStart testé regroupe **1239** observations de 6 variables. Le fichier NoStop testé, quant à lui, regroupe **3830** observations de 6 variables.
+
+Les observations (lignes du tableau) représentent le nombre de codons Start ou Stop qui ont été testés par le script Python. Les variables (colonnes du tableau) représentent différentes choses : le chromosome (Groupe de liaison : LG), les coordonnées du CDS du transcriptome, les nouvelles coordonnées du CDS ainsi que le "filtre" qui a été ajouté.
+
+```{r chargement_verif_transcriptome, echo=FALSE}
+# Importation des données sous forme de dataframe
+NoStart_Tested <- read.table("/media/sf_DATA/Stage/Suivi du travail effectué/Website/NoStart_Tested_30_05_18.txt",header = TRUE, sep = "\t")
+NoStop_Tested <- read.table("/media/sf_DATA/Stage/Suivi du travail effectué/Website/NoStop_Tested_30_05_18.txt",header = TRUE, sep = "\t")
+```
+
+## Création de graphiques
+
+__*Représentation des "filtres" pour les  codons start.*__ L'axe des abscisses représente les filtres. L'axe des ordonnées représente le nombre d'occurence de chaque "filtre". Les couleurs permettent de visualiser la répartition des différents "filtres" au sein des chromosomes (une couleur par chromosome).
+```{r graph_start_testes, echo=FALSE}
+p3<-ggplot(data=NoStart_Tested, aes(x=Filter,fill=chromosome)) +
+  geom_bar(stat="count") 
+p3
+```
+
+__*Tableau présentant le nombre d'occurrence (Count) en fonction du filtre (Filter) pour les NoStop testés.*__
+```{r graph_stop_testes, echo=FALSE}
+tableau2 <- as.data.frame(table(unlist(NoStart_Tested$Filter)))
+"Filter" -> names(tableau2)[1]
+"Count" -> names(tableau2)[2]
+tableau2
+```
+
+
+__*Représentation des "filtres" pour les  codons stop.*__ L'axe des abscisses représente les filtres. L'axe des ordonnées représente le nombre d'occurence de chaque "filtre". Les couleurs permettent de visualiser la répartition des différents "filtres" au sein des chromosomes (une couleur par chromosome).
+```{r graph_filtre_stop, echo=FALSE}
+p4<-ggplot(data=NoStop_Tested, aes(x=Filter,fill=chromosome)) +
+  geom_bar(stat="count")
+p4
+```
+
+__*Tableau présentant le nombre d'occurrence (Count) en fonction du filtre (Filter) pour les NoStart testés.*__
+```{r graph_filtre_start, echo=FALSE}
+tableau3 <- as.data.frame(table(unlist(NoStop_Tested$Filter)))
+"Filter" -> names(tableau3)[1]
+"Count" -> names(tableau3)[2]
+tableau3
+```

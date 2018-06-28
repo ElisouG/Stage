@@ -1,7 +1,0 @@
-{
-  "Data_cleanup_picard.refFasta": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta",
-  "Data_cleanup_picard.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/inputTSV_picard.txt",
-  "Data_cleanup_picard.refIndex": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta.fai",
-  "Data_cleanup_picard.refDict": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.dict",
-  "Data_cleanup_picard.picard": "/home/egueret/tools/picard.jar"
-}

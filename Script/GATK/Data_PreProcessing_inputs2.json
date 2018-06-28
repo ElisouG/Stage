@@ -1,9 +1,0 @@
-{
-  "Data_PreProcessing.refFasta": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa",
-  "Data_PreProcessing.variationSites": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/Combined-Annotation_Labrax-2014_Ordered.gtf",
-  "Data_PreProcessing.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/inputTSV.txt",
-  "Data_PreProcessing.refIndex": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa.fai",
-  "Data_PreProcessing.refDict": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.dict",
-  "Data_PreProcessing.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar",
-  "Data_PreProcessing.picard": "/home/egueret/tools/picard.jar"
-}
