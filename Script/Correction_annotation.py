@@ -291,10 +291,10 @@ if __name__ == "__main__":
 		tID = line.split('\t')[8].split('"')[3]
 		if line.split('\t')[8].split('"')[3] != tID:
 			listeTranscrit.append([K,S,E,tID])
-			Transcrits.write(K,S,E,tID)
+			Transcrits.write('%s\t%s\t%s\t%s\n' %(K,S,E,tID))
 		elif line.split('\t')[8].split('"')[3] == tID:
 			E = line.split('\t')[4]
-			Transcrits.write(K,S,E,tID)
+			Transcrits.write('%s\t%s\t%s\t%s\n' %(K,S,E,tID))
 	Transcrits.close()
 
 
