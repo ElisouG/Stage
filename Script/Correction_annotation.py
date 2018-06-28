@@ -7,7 +7,7 @@
 
 #################### Commande lancement sur le cluster ###########################
 
-# qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage/Script/Correction_annotation.py"
+#qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_modification_gtf -o /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.out -e /home/egueret/Stage_UM_ISEM/sge_test_modification_gtf.err -b y "python3 /home/egueret/Stage/Script/Correction_annotation.py"
 
 ##################### Importation Module #######################
 ## Python modules
@@ -61,6 +61,8 @@ if __name__ == "__main__":
 	pathAnnotation = "/home/egueret/Stage_UM_ISEM/Puce_57K/correction_annotation.gtf"
 	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_18_05_18.txt"
 	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_18_05_18.txt"
+	pathF3 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/MultipleStop_13_06_18.txt"
+	pathF4 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Incomplete_13_06_18.txt"
 	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_18_05_2018.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 	pathTranscriptome = "/home/egueret/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
@@ -144,6 +146,12 @@ if __name__ == "__main__":
 	f2 = open(pathF2,"w") # Création d'un nouveau fichier
 	f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  | brin \n' %('chromosome','old_start','old_end','new_start','new_end','codon','Length add')) # Nomme les colonnes du fichier
 	f2.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
+	f3 = open(pathF3,"w") # Création d'un nouveau fichier
+	f3.write('%15s | %15s | %15s | %15s | %15s | %15s  | brin \n' %('chromosome','start','end','first_frame','last_frame','brin')) # Nomme les colonnes du fichier
+	f3.write('%15s | %15s | %15s | %15s | %15s | %15s  | ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15))
+	f4 = open(pathF4,"w") # Création d'un nouveau fichier
+	f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | brin \n' %('chromosome','start','end','first_frame','last_frame','brin')) # Nomme les colonnes du fichier
+	f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | ---------- \n' %('-'*15,'-'*15,'-'*15,'-'*15,'-'*15,'-'*15,))
 	codonStop = ['TAA','TAG','TGA'] # Liste des différents codons stop existants
 	codonStart = 'ATG' # Nomme le codon start
 	codonStart2 = 'AAG' # Nomme le codon start alternatif
@@ -164,7 +172,7 @@ if __name__ == "__main__":
 		frame2 = elt[6] # Récupération du dernier cadre de lecture
 
 
-#################################################Sens #######################################
+################################################ Sens #######################################
 
 		if brin == 'sens':
 			sequence = Genome[chromosome].seq # Si le brin est sens alors il prend le fichier "sens"
@@ -205,6 +213,16 @@ if __name__ == "__main__":
 					f1.close() # Fermer le fichier 	
 					listeNoStart.append([chromosome,str(int(startGTF)+1),str(int(startGTF)+3),str(st+1),str(en+1),'+'])
 		
+			elif pb == 'Multiple Stop':
+				f3 = open(pathF3,"a") # Ouverture du fichier "No Stop"
+				f3.write('%15s | %15s | %15s | %15s | %15s | %15s  |  +\n' %(chromosome,startGTF,endGTF,frame1,frame2,brin)) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+				f3.close()
+
+			elif pb == 'Incomplet':
+				f4 = open(pathF4,"a") # Ouverture du fichier "No Stop"
+				f4.write('%15s | %15s | %15s | %15s | %15s | %15s  |  +\n' %(chromosome,startGTF,endGTF,frame1,frame2,brin)) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+				f4.close()
+
 
 ############################# Anti sens ##############################################
 		elif brin == 'anti-sens':
@@ -241,6 +259,16 @@ if __name__ == "__main__":
 					f1.write('%15s | %15s | %15s | %15s | %15s | %15s  | %15s  |  -\n' %(chromosome,endGTF-1,endGTF+1,length-(en),length-(st),sequence[st:en+1],str(Longueur))) # Ecrire dans ce fichier les codons start trouvés ainsi que leur position
 					f1.close() # Fermer le fichier 
 					listeNoStart.append([chromosome,str(int(endGTF)-1),str(int(endGTF)+1),str(length-(en)),str(length-(st)),'-'])
+
+			elif pb == 'Multiple Stop':
+				f3 = open(pathF3,"a") # Ouverture du fichier "No Stop"
+				f3.write('%15s | %15s | %15s | %15s | %15s | %15s |  +\n' %(chromosome,startGTF,endGTF,frame1,frame2,brin)) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+				f3.close()
+
+			elif pb == 'Incomplet':
+				f4 = open(pathF4,"a") # Ouverture du fichier "No Stop"
+				f4.write('%15s | %15s | %15s | %15s | %15s | %15s  | +\n' %(chromosome,startGTF,endGTF,frame1,frame2,brin)) # Ecrire dans ce fichier les codons stop trouvés ainsi que leur position
+				f4.close()
 				
 	#################### Comparaison snpEff et GTF ########################
 	print('Création fichier NoStart/NoStop')
@@ -263,9 +291,10 @@ if __name__ == "__main__":
 		tID = line.split('\t')[8].split('"')[3]
 		if line.split('\t')[8].split('"')[3] != tID:
 			listeTranscrit.append([K,S,E,tID])
+			Transcrits.write(K,S,E,tID)
 		elif line.split('\t')[8].split('"')[3] == tID:
 			E = line.split('\t')[4]
-		Transcrits.write(listeTranscrit)
+			Transcrits.write(K,S,E,tID)
 	Transcrits.close()
 
 

@@ -17,6 +17,12 @@
 # Using current working directory
 #$ -cwd
 
+# Ram to use
+# -l mf=30G
+
+# Inform scheduler how many Ram are used
+# -l h_vmem=30G
+
 # Choose to run on a specific queue
 # -q cemeb20.q
 
@@ -24,15 +30,15 @@
 #$ -l h_rt=99:00:00
 
 # Job name
-#$ -N "run_Variant_Calling"
+#$ -N "run_ChoixFiltresTable"
 
 # Standard output (you can use the option '-j y' which add stderr with sdtout)
-#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Variant_Calling.out
+#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_ChoixFiltresTable.out
 
 # Erreur output (don't use with the option '-j y')
-#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_Variant_Calling.err
+#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_ChoixFiltresTable.err
 
-#Modules à charger pour que le script fonctionne
+#Modules à charger pour que le script fonctionne sur le cluster mbb
 module load java1.8
 module load java1.8_jre
 
@@ -54,7 +60,7 @@ module load java1.8_jre
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ReassignOneMappingQualityFilter.wdl -i ReassignOneMappingQualityFilter_inputs2.json
 
 # Lancement du script contenant GATK  et PICARD : ce script fonctionne
-# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs2.json
+#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_PreProcessing.wdl -i Data_PreProcessing_inputs.json
 
 # Lancement du script 1 avec PICARD seul : ce script fonctionne
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_picard.wdl -i Data_cleanup_picard_inputs.json
@@ -63,7 +69,10 @@ module load java1.8_jre
 #java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_cleanup_GATK.wdl -i Data_cleanup_GATK_inputs.json
 
 # Lancement du script de VariantCalling :
-java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_Variant_Calling.wdl -i Data_Variant_Calling_inputs.json
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_Variant_Calling.wdl -i Data_Variant_Calling_inputs.json
 
 # Lancment du script pour pouvoir faire le choix des filtres ensuite :
-#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTable.wdl -i ChoixFiltresTable_inputs.json
+java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTable.wdl -i ChoixFiltresTable_inputs.json
+
+# Lancment du script pour pouvoir faire le choix des filtres BAM ensuite :
+# java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTableBam.wdl -i ChoixFiltresTable_inputs.json

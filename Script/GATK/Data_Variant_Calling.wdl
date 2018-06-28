@@ -29,70 +29,64 @@ workflow DataVariantCalling {
 				bamFile=sample[1], 
 				bamIndex=sample[2]
 		}
-		call select as selectSNPs {
-			input:
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict, 
-				type="SNP",
-				rawVCFs=HaplotypeCallerERC.rawVCF
-		}
-		call hardFilterSNP {
-			input: 
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict, 
-				rawSNPs=selectSNPs.rawSubset
-		}
-		call select as selectIndels {
-			input: 
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict, 
-				type="INDEL", 
-				rawVCFs=HaplotypeCallerERC.rawVCF
-		}
-		call hardFilterIndel {
-			input: 
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict, 
-				rawIndels=selectIndels.rawSubset
-		}
-		call VariantsToTable {
-  			input:
-  	  			sampleName=sample[0],
-  	  			RefFasta=refFasta,
-  	  			GATK=gatk,
-  	  			rawSNPs=selectSNPs.rawSubset
-  		}
-		call CombineGVCFs {
-			input:
-				sampleName=sample[0], 
-				RefFasta=refFasta, 
-				GATK=gatk, 
-				RefIndex=refIndex, 
-				RefDict=refDict,
-				filteredIndels=hardFilterIndel.filteredIndel,
-				filteredSNPs=hardFilterSNP.filteredSNP
-		}
+	}
+	call CombineGVCFs {
+		input:
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict,
+			rawVCFs=HaplotypeCallerERC.rawVCF
 	}
 	call GenotypeGVCFs {
 		input: 
 			GATK=gatk, 
 			RefFasta=refFasta, 
 			RefIndex=refIndex, 
-			RefDict=refDict
-			VariantCombined=CombineGVCFs.VariantCombined
+			RefDict=refDict,
+			VariantCombineds=CombineGVCFs.VariantCombined
 	}
+	call select as selectSNPs {
+		input:
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict, 
+			type="SNP",
+			rawVCFs=CombineGVCFs.rawVCF
+	}
+	call hardFilterSNP {
+		input: 
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict, 
+			rawSNPs=selectSNPs.rawSubset
+	}
+	call select as selectIndels {
+		input:  
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict, 
+			type="INDEL", 
+			rawVCFs=CombineGVCFs.rawVCF
+	}
+	call hardFilterIndel {
+		input: 
+			RefFasta=refFasta, 
+			GATK=gatk, 
+			RefIndex=refIndex, 
+			RefDict=refDict, 
+			rawIndels=selectIndels.rawSubset
+	}
+	call VariantsToTable {
+		input:
+	  		RefFasta=refFasta,
+	  		GATK=gatk,
+	  		filteredSNP=hardFilterSNP.filteredSNP
+	}
+	
 }
 
 # Task Definition
@@ -121,108 +115,17 @@ task HaplotypeCallerERC {
 	}
 }
 
-#This task calls GATK's tool, SelectVariants, in order to separate indel calls from SNPs in
-#the raw variant vcf produced by HaplotypeCaller. The type can be set to "INDEL"
-#or "SNP".
-task select {
-	File GATK
-	File RefFasta
-	File RefIndex
-	File RefDict
-	String sampleName
-	String type
-	Array[File] rawVCFs
-	command {
-		java -jar ${GATK} \
-			SelectVariants \
-			-R ${RefFasta} \
-			-V ${sep="-V" rawVCFs} \
-			-select-type ${type} \
-			-O ${sampleName}_raw.${type}.vcf
-	}
-	output {
-		File rawSubset = "${sampleName}_raw.${type}.vcf"
-	}
-}
-    
-task VariantsToTable {
-	File GATK
-	File RefFasta
-  	String sampleName
-	Array[File] rawSNPs
-
-	command {
-	java -jar ${GATK} \
-	  VariantsToTable \
-      -V ${sep="-V" rawSNPs} \
-      -O ${sampleName}.snps.indels.table
-	}
-	output {
-	File TableFilteredVCF = "${sampleName}.snps.indels.table"
-	}
-}
-#This task calls GATK's tool, VariantFiltration. It applies certain recommended filtering 
-#thresholds to the SNP-only vcf. VariantFiltration filters out any variant that is "TRUE" 
-#for any part of the filterExpression (i.e. if a variant has a QD of 1.3, it would be 
-#filtered out). The variant calls remain in the file, but they are tagged as not passing.
-#GATK tools downstream in the pipeline will ignore filtered calls by default
-task hardFilterSNP {
-	File GATK
-	File RefFasta
-	File RefIndex
-	File RefDict
-	String sampleName
-	Array[File] rawSNPs
-	command {
-		java -jar ${GATK} \
-			VariantFiltration \
-			-V ${sep="-V" rawSNPs} \
-			--filter-expression "FS > 60.0" \
-			--filter-name "snp_filter" \
-			-O ${sampleName}.filtered.snps.vcf
-	}
-	output {
-		File filteredSNP = "${sampleName}.filtered.snps.vcf"
-	}
-}
-
-#As above, this task calls GATK's tool, VariantFiltration. However, this one applied filters
-#meant for indels only.
-# Choix des filtres: https://software.broadinstitute.org/gatk/documentation/article.php?id=1255
-task hardFilterIndel {
-	File GATK
-	File RefFasta
-	File RefIndex
-	File RefDict
-	String sampleName
-	Array[File] rawIndels
-	command {
-		java -jar ${GATK} \
-			VariantFiltration \
-			-V ${sep="-V" rawIndels} \
-			--filter-expression "FS > 200.0" \
-			--filter-name "indel_filter" \
-			-O ${sampleName}.filtered.indels.vcf
-	}
-	output {
-		File filteredIndel = "${sampleName}.filtered.indels.vcf"
-	}
-}
-
 # This task calls GATK's tool, .
 task CombineGVCFs {
 	File GATK
 	File RefFasta
 	File RefIndex
 	File RefDict
-	String sampleName
-	Array[File] filteredIndels
-	Array[File] filteredSNPs
+	Array[File] rawVCFs
 	command {
 		java -jar ${GATK} \
 			CombineGVCFs \
-			-V ${sep="-V" filteredIndels} \
-			-V ${sep="-V" filteredSNPs} \
+			-V ${sep="-V" rawVCFs} \
 			-R ${RefFasta}\
 			-O Variants_Combined.vcf
 	}
@@ -239,16 +142,105 @@ task GenotypeGVCFs {
 	File RefFasta
 	File RefIndex
 	File RefDict
-	File VariantCombined
+	File VariantCombineds
 
 	command {
-		java --java-options -Xmx4g -jar ${GATK} \
+		java -Xmx4g -jar ${GATK} \
 			GenotypeGVCFs \
 			-R ${RefFasta} \
-			-V ${VariantCombined} \
+			-V ${VariantCombineds} \
 			-O Variants_final.vcf
 	}
 	output {
 		File finalVCF = "Variants_final.vcf"
+	}
+}
+
+#This task calls GATK's tool, SelectVariants, in order to separate indel calls from SNPs in
+#the raw variant vcf produced by HaplotypeCaller. The type can be set to "INDEL"
+#or "SNP".
+task select {
+	File GATK
+	File RefFasta
+	File RefIndex
+	File RefDict
+	String type
+	File finalVCF
+	command {
+		java -jar ${GATK} \
+			SelectVariants \
+			-R ${RefFasta} \
+			-V ${finalVCF} \
+			-select-type ${type} \
+			-O raw.${type}.vcf
+	}
+	output {
+		File rawSubset = "raw.${type}.vcf"
+	}
+}
+    
+#This task calls GATK's tool, VariantFiltration. It applies certain recommended filtering 
+#thresholds to the SNP-only vcf. VariantFiltration filters out any variant that is "TRUE" 
+#for any part of the filterExpression (i.e. if a variant has a QD of 1.3, it would be 
+#filtered out). The variant calls remain in the file, but they are tagged as not passing.
+#GATK tools downstream in the pipeline will ignore filtered calls by default
+task hardFilterSNP {
+	File GATK
+	File RefFasta
+	File RefIndex
+	File RefDict
+	String sampleName
+	File rawSNPs
+	command {
+		java -jar ${GATK} \
+			VariantFiltration \
+			-V ${rawSNPs} \
+			--filter-expression "FS > 60.0" \
+			--filter-name "snp_filter" \
+			-O filtered.snps.vcf
+	}
+	output {
+		File filteredSNP = "filtered.snps.vcf"
+	}
+}
+
+#As above, this task calls GATK's tool, VariantFiltration. However, this one applied filters
+#meant for indels only.
+# Choix des filtres: https://software.broadinstitute.org/gatk/documentation/article.php?id=1255
+task hardFilterIndel {
+	File GATK
+	File RefFasta
+	File RefIndex
+	File RefDict
+	String sampleName
+	File rawIndels
+	command {
+		java -jar ${GATK} \
+			VariantFiltration \
+			-V ${rawIndels} \
+			--filter-expression "FS > 200.0" \
+			--filter-name "indel_filter" \
+			-O iltered.indels.vcf
+	}
+	output {
+		File filteredIndel = "filtered.indels.vcf"
+	}
+}
+
+task VariantsToTable {
+	File GATK
+	File RefFasta
+  	String sampleName
+	File filteredSNP
+
+	command {
+	java -jar ${GATK} \
+	  VariantsToTable \
+      -V ${filteredSNP} \
+      -F CHROM -F POS -F REF -F ALT -F TYPE -F QUAL -F DP -F MLEAC -F MLEAF -F QD -F FS -F SOR -F MQ -F MQRankSum -F ReadPosRankSum -F InbreedingCoeff -F GT -F GQ -F MIN_DP -F PL -F SB -F RAW_MQ -F AD -F ExcessHet -F BaseQRankSum -F ClippingRankSum \
+      -O snps.indels.table
+	}
+	output {
+	File TableFilteredVCF = "snps.table"
 	}
 }

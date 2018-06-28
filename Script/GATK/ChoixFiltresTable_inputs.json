@@ -1,0 +1,7 @@
+{
+  "ChoixFiltresTable.refFasta": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta",
+  "ChoixFiltresTable.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/inputs2TSV_VariantCalling.txt",
+  "ChoixFiltresTable.refIndex": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta.fai",
+  "ChoixFiltresTable.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar",
+  "ChoixFiltresTable.refDict": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.dict"
+}
