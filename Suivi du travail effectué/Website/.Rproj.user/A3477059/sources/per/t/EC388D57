@@ -1,21 +1,21 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1524818651368.000,
+    "created" : 1524818383745.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
-    "id" : "CB6AF3BB",
+    "hash" : "3220555851",
+    "id" : "EC388D57",
     "lastKnownWriteTime" : 1526541585,
     "last_content_update" : 1526541585,
-    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/tuto.Rmd",
-    "project_path" : "tuto.Rmd",
+    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/about.Rmd",
+    "project_path" : "about.Rmd",
     "properties" : {
-        "cursorPosition" : "0,0",
+        "cursorPosition" : "13,273",
         "scrollLine" : "0"
     },
-    "relative_order" : 21,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_markdown"

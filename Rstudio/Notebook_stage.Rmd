@@ -948,11 +948,11 @@ Pour GATK comme il n'auront surement pas les données avant que je parte (du pro
 
 ## Jour 77 : 28/06/2018
 
-<p style="text-align:justify";>Data_PreProcessing a fonctionné. C'est trop cool. Je suis en train de le relancer avec mon script R dans le PATH, j'aimerais bien que ça fonctionne. Je l'ai lancé sans avoir installé les packages nécessaires du coup je les installe. J'espère que ce n'est pas trop tard. Je pense que du coup ça n'a pas été pris en compte car il me dit qu'il ne trouve pas les packages que j'ai installé. Du coup, j'ai ajouté le chemin de la librairy pour qu'il les trouve. au cas où ça ne fonctionnerait pas j'ai ajouté -l DEBUG et je lancerait le script manuellement. Et d'autre part je transfert les données obtenues sur mon ordi. Pour pouvoir ensuite les transférer sur TYCHO. Mais je sens que ça va prendre du temps car le dossier fait dans les 800Go. Oui oui autant !!!!</p>
+<p style="text-align:justify";>Data_PreProcessing a fonctionné. C'est trop cool. Je suis en train de le relancer avec mon script R dans le PATH, j'aimerais bien que ça fonctionne. Je l'ai lancé sans avoir installé les packages nécessaires du coup je les installe. J'espère que ce n'est pas trop tard. Je pense que du coup ça n'a pas été pris en compte car il me dit qu'il ne trouve pas les packages que j'ai installé. Du coup, j'ai ajouté le chemin de la library pour qu'il les trouve. au cas où ça ne fonctionnerait pas j'ai ajouté -l DEBUG et je lancerait le script manuellement. Et d'autre part je transfert les données obtenues sur mon ordi. Pour pouvoir ensuite les transférer sur TYCHO. Mais je sens que ça va prendre du temps car le dossier fait dans les 800Go. Oui oui autant !!!!</p>
 
 <p style="text-align:justify";>Il ne faut pas que j'oublie d'aller voir la présentation d'Olivia sur les Gobies au 2ème étage. Bruno avait 11h15 du coup je me suis pointée à 11h05 et Olivia était déjà en train de faire ça présentation. Du coup je n'ai pas pu assister à sa présentation. En plus elle n'a même pas pensé à moi avant de partir manger. Surtout que je l'ai vu à la cafèt mais ils sont tout de suite parti je ne sais où du coup j'ai mangé toute seule dans mon bureau.</p>
 
-<p style="text-align:justify";>Dimitri vient de passer pour m'installer R 3.5.0 et non  3.4.4 car il ne l'a pas et cele là n'est pas dispo pour Ubuntu ^^. Il m'a aussi paramétré l'imprimante mais je ne peux pas imprimer en recto verso du coup ça va faire du gaspillage donc je vais imprimer à l'appart. Et en plus ça sera en couleur.</p>
+<p style="text-align:justify";>Dimitri vient de passer pour m'installer R 3.5.0 et non  3.4.4 car il ne l'a pas et cele là n'est pas dispo pour Ubuntu ^^. Il m'a aussi paramétré l'imprimante mais je ne peux pas imprimer en recto verso du coup ça va faire du gaspillage donc je vais l'imprimer à l'appart. Et en plus ça sera en couleur.</p>
 
 Pour mettre R à jour:   
 * $sudo su   
@@ -960,6 +960,18 @@ Pour mettre R à jour:
 * $apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9   
 * $apt-get update   
 * $apt-get upgrade   
+
+## JOur 78 : 29/06/2018
+
+<p style="text-align:justify";>Hier j'ai tenté de lancer le script avec -l DEBUG sauf que ce n'est pas une option reconnue. Du coup je l'ai enlevé et j'espère que ça va fonctionner cette fois sinon je laisse tomber. Je suis un peu têtue du coup je pense qu'il y a un truc que je n'avais pas compris. J'imagines qu'il fallait remplacer le fichie .pdf par le fichier .csv et non mettre les deux. En fait l'erreur est le chargement des librairies qui ne peut-être fait. Je ne sais pas d'où vient ce pb car quand je tape mon script R dans R de la big-mem il "fontionne". De plus, j'ai lancé le job avec nohup &. J'espère que cette fois ça va fonctionner et dans le doute je ne vais pas éteindre mon ordi du week-end même si je sais que ce n'est pas bien.</p>
+
+[site mal compris dans un 1er temps](https://gatkforums.broadinstitute.org/gatk/discussion/4294/analyzecovariates-fails-with-error-message-rscript-exited-with-1)
+
+<p style="text-align:justify";>Je viens de préparer un mail pour l'envoyer à Erick avant de partir. J'espère que ce que j'ai fait cette semaine va lui convenir parce que c'est mon unique mail de la semaine. Vivement qu'il soit en vacances pour ne plus me sentir inutile et fénéante ur mon trvail. Surtout que par rapport à Flo j'ai rien fait. Mais pour ma défense j'ai pas de bioinformaticien pour m'aider dans l'écriture de mes scripts ou l'utilisation des outils que j'emploi. Ce qui m'énerve le plus c'est qu'il fait genre qu'il sait tout mais en fait il sait juste que ça existe et pas comment faire. En fait il ne connait que la partie biologie.</p>
+
+<p style="text-align:justify";>J'ai également corriger les erreurs de traduction de la signification des sigles des filtres que je vais employer aussi bien sur le rapport que sur le mode d'emploi de mes scripts. J'ai aussi ajouté quelques trucs au sein de mon matériel et méthode pour étoffer mon rapport.</p>
+
+<p style="text-align:justify";>J'ai de nouveau écrit ce que je veux faire avec mon script Python pour faire la correction de l'annotation en prennnat en compte ce que Erick m'a dit Lunid dernier. J'espère qu'avec Flo on ourra bosser samedi aprèm sur ça. Entre le coiffeur et la préparation de la quiche.</p>
 
 <p style="text-align:justify";></p>
 

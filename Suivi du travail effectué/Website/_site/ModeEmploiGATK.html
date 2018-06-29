@@ -429,7 +429,17 @@ div.tocify {
 </div>
 <div id="important" class="section level1">
 <h1>Important</h1>
-<p>Changer les mails dans le début du script sge.</p>
+<ul>
+<li>Changer les mails dans le début du script sge.<br />
+</li>
+<li>Vérifier tous les chemins inscrits au sein de tous les fichiers.<br />
+</li>
+<li>Vérifier que vous avez tous les fichiers et l’architecture suivante:</li>
+</ul>
+<div class="figure">
+<img src="Architecture_files_cluster_GATK.PNG" alt="Architecture de fichiers nécessaire" />
+<p class="caption">Architecture de fichiers nécessaire</p>
+</div>
 </div>
 <div id="les-donnees" class="section level1">
 <h1>Les données</h1>
@@ -437,11 +447,16 @@ div.tocify {
 </div>
 <div id="les-scripts-pipeline-de-genotypage" class="section level1">
 <h1>Les scripts : Pipeline de génotypage</h1>
-<p>Ce pipeline est décomposé en 4 phases distinctes qui utilisent différentes resources et qui permettent de faire de la parallèlisation pour optimiser les temps de calculs. Ces 4 phases sont les suivantes :<br />
-* Alignement des données (réalisé par l’équipe de la plateforme MBB);<br />
-* Nettoyage des données;<br />
-* Découverte des variants;<br />
-* Evaluation des variants.</p>
+<p>Ce pipeline est décomposé en 4 phases distinctes qui utilisent différentes resources et qui permettent de faire de la parallèlisation pour optimiser les temps de calculs. Ces 4 phases sont les suivantes :</p>
+<ul>
+<li>Alignement des données (réalisé par l’équipe de la plateforme MBB);<br />
+</li>
+<li>Nettoyage des données;<br />
+</li>
+<li>Découverte des variants;<br />
+</li>
+<li>Evaluation des variants.</li>
+</ul>
 <div class="figure">
 <img src="vue%20g%C3%A9n%C3%A9rale%20phases.PNG" alt="Vue générale du pipeline de génotypage" />
 <p class="caption">Vue générale du pipeline de génotypage</p>
@@ -457,7 +472,8 @@ div.tocify {
 </div>
 <div id="explications" class="section level3">
 <h3>Explications</h3>
-<p>Le nettoyage des données est une phase nécessaire pour pouvoir réaliser la suite des analyses. En effet, elle permet d’obtenir des reads calibrés nécessaire à la phase 3. Cette phase comprend des étapes réalisées par Picard ou par GATK. <img src="NettoyageDonnees.PNG" alt="Phase de nettoyage des donnees" /></p>
+<p>Le nettoyage des données est une phase nécessaire pour pouvoir réaliser la suite des analyses. En effet, elle permet d’obtenir des reads calibrés nécessaire à la phase 3. Cette phase comprend des étapes réalisées par Picard ou par GATK.<br />
+<img src="NettoyageDonnees.PNG" alt="Phase de nettoyage des donnees" /></p>
 <p>La première étape de cette phase appelée “ReorderSam” est réalisée par Picard. Cette étape range les reads en fonction de leur appartenance à un groupe de liaison dans l’ordre des contigs du génome de référence. En effet, si les contigs ne sont pas rangés dans le même ordre cela pose problème à GATK. C’est pour pallier à ce problème que l’on réalise cette étape. Elle est notamment nécessaire lorsque l’alignement a utilisé un ordre différents des groupes de liaisons.</p>
 <p>La seconde étape nommée “Markduplicates” utilise Picard. Cette étape est importante car elle marque puis élimine les duplicats de séquençage. Ces duplicas sont des artéfacts dû à la PCR d’enrichissement des banques qui est réalisée en amont du séquençage. Ils sont retirés pour éviter que ces reads soient considérés comme des morceaux de transcrits plus représentés que d’autres.</p>
 <p>La troisième étape intitulée “SortSam” est également réalisée par Picard. Cette étape range de nouveau les reads car certains ont été supprimés (masqués) par l’étape précédente. Cela permet d eles mettre en fin de fichier pour ne pas qu’il soit pris en compte dans l’étape qui suit.</p>
@@ -469,6 +485,7 @@ div.tocify {
 <h2>Data Variant Calling : Découverte de variants</h2>
 <div id="lancement-du-script-1" class="section level3">
 <h3>Lancement du script</h3>
+<p>Enlever le # avant la ligne contenant java . Enregister. Taper dans le terminal : qsub LancerScript.sge</p>
 </div>
 <div id="explications-1" class="section level3">
 <h3>Explications</h3>
