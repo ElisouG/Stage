@@ -971,7 +971,7 @@ Pour mettre R à jour:
 
 <p style="text-align:justify";>J'ai également corriger les erreurs de traduction de la signification des sigles des filtres que je vais employer aussi bien sur le rapport que sur le mode d'emploi de mes scripts. J'ai aussi ajouté quelques trucs au sein de mon matériel et méthode pour étoffer mon rapport.</p>
 
-<p style="text-align:justify";>J'ai de nouveau écrit ce que je veux faire avec mon script Python pour faire la correction de l'annotation en prennnat en compte ce que Erick m'a dit Lunid dernier. J'espère qu'avec Flo on ourra bosser samedi aprèm sur ça. Entre le coiffeur et la préparation de la quiche.</p>
+<p style="text-align:justify";>J'ai de nouveau écrit ce que je veux faire avec mon script Python pour faire la correction de l'annotation en prennnat en compte ce que Erick m'a dit Lundi dernier. J'espère qu'avec Flo on ourra bosser samedi aprèm sur ça. Entre le coiffeur et la préparation de la quiche.</p>
 
 <p style="text-align:justify";></p>
 
