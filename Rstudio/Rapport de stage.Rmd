@@ -28,9 +28,19 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 * adresse de la fac
 * adresse du stage
 * année universitaire en cours
-* titre du mémoire
+* titre du mémoire : __Mise en place d'un pipeline bioinformatique pour la recherche de variants à partir de données de séquençage de *Dicentrarchus labrax* et correction de l'annotation du génome de *Dicentrarchus labrax*__
 
 # Remerciements
+
+Erick pour tous les conseils et la rédaction du rapport
+Bruno pour m'avoir confié ce sujet
+Madoka pour avoir continuer ce que j'avais commencé niveau manip
+Flo pour toutes ses pistes concernant python
+Les stagiaires ISEM et Darwin pour les repas qu'on a partagé
+L'équipe ISEM pour leur conseil sur le fond et la forme de ma présentation
+L'équipe S2i pour tous les pbs que j'ai eu avec mon ordi
+L'équipe mbb pour avoir répondu à mes questions cluster et m'avoir permis d'utiliser la big-mem
+
 
 # Avant-propos
 
@@ -48,16 +58,19 @@ Question à se poser avant la rédaction du rapport :
 * Quel est le bilan de mon travail?  
 * Quelles sont les informations essentielles et les informations secodaires (mais nécessaires) relatives à mon travail?  
 * Comment organiser ces informations pour les rendre compréhensible à un tier?    
-Definir le sujet en termes précis et concis, énoncer les objectifs du travail personnel et les moyens mis en oeuvre et présenter le plan adopté pour la suite du sujet d'étude.
+Définir le sujet en termes précis et concis, énoncer les objectifs du travail personnel et les moyens mis en oeuvre et présenter le plan adopté pour la suite du sujet d'étude.
 
 Replacer le sujet d'études dans un contexte plus général.
 Résumer l'état de l'art via une étude des travaux antérieurs.
 
 Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à quoi ils servent. Comment les données ont été obtenues? Pour CRECHE voir le rapport dans les archives ifremer et pour RobustBass voir les diapos KoM.
 
-Commencer par parler de Dicentrarchus labrax, de l'aquaculture et du projet CRECHE 2016.
+Commencer par parler de Dicentrarchus labrax (MORONIDÉ, TÉLÉOSTÉEN), de l'aquaculture et du projet CRECHE 2016. **Papier : Impact of selective breeding on European aquaculture**
+
 Parler ensuite des SNPs et des GWAS (définition et existants).
-Parler des NGS et plus particulièrement du RNA-seq.
+
+Parler des NGS et plus particulièrement du RNA-seq. **papier : Variant callers for Next-Generation Sequencing Data: A Comparison Study**
+[GATK parralèlisme](https://software.broadinstitute.org/gatk/documentation/article?id=11059)
 
 # Problématique - Objectifs
 
@@ -172,31 +185,51 @@ La cinquième étape "hardfilterSNPs" ou "hardfilterINDELs" est l'application de
 
 Ces différents sigles représentent différentes annotation qui signifient :
 
-+ **Quality by depth (QD)** :  Cette annotation met en perspective le score QUAL de la variante en la normalisant pour la quantité de couverture disponible. Parce que chaque lecture contribue un peu au score QUAL, les variantes dans les régions avec une couverture profonde peuvent avoir des scores QUAL artificiellement gonflés, donnant l'impression que l'appel est soutenu par plus de preuves qu'il ne l'est réellement. Pour compenser cela, nous normalisons la confiance de la variante par la profondeur, ce qui nous donne une image plus objective de la qualité de l'appel.    
-+ **Fischer's Strand bias (FS)** : Le biais de brin est un type de biais de séquençage dans lequel un brin d'ADN est favorisé par rapport à l'autre, ce qui peut entraîner une évaluation incorrecte de la quantité de preuve observée pour un allèle par rapport à l'autre. L'annotation FisherStrand est l'une de plusieurs méthodes qui vise à évaluer s'il y a un biais de brin dans les données. Il utilise le test exact de Fisher pour déterminer s'il existe un biais de brin entre les brins aller et retour pour l'allèle de référence ou l'allèle alternatif. La sortie est une valeur p de Phred. Plus la valeur de sortie est élevée, plus il y a de risque de biais. Plus de biais indique des faux positifs.    
-+ **Strand Odds Ratio (SOR)** : C'est une autre façon d'estimer le biais de brin en utilisant un test similaire au test de rapport de cotes symétrique. SOR a été créé parce que FS tend à pénaliser les variantes qui se produisent aux extrémités des exons. Les lectures aux extrémités des exons tendent à n'être couvertes que par des lectures dans une direction et FS donne un mauvais score à ces variantes. SOR prendra en compte les ratios de lectures qui couvrent les deux allèles.    
-+ **ReadPosRankSum Rank Sum Test for relative positioning of REF versus ALT alleles within reads (ReadPosRankSum)** : Cette annotation au niveau des variantes teste s'il existe des preuves de biais dans la position des allèles dans les lectures qui les supportent, entre les allèles de référence et les allèles alternatifs. Voir un allèle seulement près des extrémités des lectures indique une erreur, car c'est là que les séquenceurs ont tendance à faire le plus d'erreurs. Cependant, certaines variantes situées près des bords des régions séquencées seront nécessairement couvertes par les extrémités des lectures, donc nous ne pouvons pas simplement définir un seuil absolu de «distance minimale à partir de la fin de la lecture». C'est pourquoi nous utilisons un test de somme de rang pour évaluer s'il y a une différence dans la façon dont l'allèle de référence et l'allèle alternatif sont supportés. Le résultat idéal est une valeur proche de zéro, ce qui indique qu'il y a peu ou pas de différence dans la localisation des allèles par rapport à la fin des lectures. Une valeur négative indique que l'allèle alternatif se trouve aux extrémités des lectures plus souvent que l'allèle de référence. Inversement, une valeur positive indique que l'allèle de référence se trouve plus souvent à l'extrémité des lectures que l'allèle alternatif.    
-+ **Root Mean Square of the mapping quality of reads across all samples (MQ)** : Cette annotation fournit une estimation de la qualité de mappage globale des lectures prenant en charge un appel de variante. Il produit à la fois des données brutes (somme des carrés et nombre de lectures totales) et le carré moyen calculé. Les données brutes sont utilisées pour calculer avec précision le carré moyen en combinant plus d'un échantillon.   
-+ **MappingQualityRankSum Rank Sum Test for mapping qualities of REF versus ALT reads (MQRankSum)**: Cette annotation au niveau des variants compare les qualités de cartographie des lectures supportant l'allèle de référence avec celles supportant l'allèle alternatif. Le résultat idéal est une valeur proche de zéro, ce qui indique qu'il y a peu ou pas de différence. Une valeur négative indique que les lectures supportant l'allèle alternatif ont des scores de qualité de cartographie inférieurs à ceux supportant l'allèle de référence. Inversement, une valeur positive indique que les lectures supportant l'allèle alternatif ont des scores de qualité de cartographie plus élevés que ceux supportant l'allèle de référence. Cette annotation peut être utilisée pour évaluer la confiance dans un appel de variante et est une covariable recommandée pour le recalibrage de variante (VQSR). Trouver une différence de qualité statistiquement significative suggère que le processus de séquençage et / ou de cartographie peut avoir été biaisé ou affecté par un artefact. En pratique, nous ne filtrons que les valeurs négatives faibles lors de l'évaluation de la qualité des variants car l'idée est de filtrer les variants pour lesquels la qualité des données supportant l'allèle alternatif est relativement faible. Le cas inverse, où c'est la qualité des données supportant l'allèle de référence qui est le plus bas (résultant en des scores de rangs positifs), n'est pas vraiment informatif pour les variantes de filtrage.  
-+ **Inbreeding Coefficient (InbreedingCoeff)**: Cette annotation évalue s'il existe des preuves de consanguinité dans une population. Plus le score est élevé, plus le risque de consanguinité est élevé. Le calcul est une généralisation continue du test de Hardy-Weinberg pour le déséquilibre qui fonctionne bien avec une couverture limitée par échantillon. La sortie est la statistique F de l'exécution du test HW pour le déséquilibre avec les valeurs PL.
++ **Quality by depth (QD)** :  Cette annotation met en perspective le score QUAL du variant en la normalisant par la couverture disponible. Comme chaque reads contribue un peu au score QUAL, les variants dans les régions avec une couverture profonde peuvent avoir des scores QUAL artificiellement gonflés, donnant l'impression que cette variation est soutenue par plus de preuves qu'elle ne l'est réellement. Pour compenser cela, une normalisation de la qualité par la profondeur est effectué, ce qui donne une image plus objective de la qualité de la variation.    
++ **Fischer's Strand bias (FS)** : Le biais de brin est un type de biais de séquençage dans lequel un brin d'ADN est favorisé par rapport à l'autre, ce qui peut entraîner une évaluation incorrecte de la quantité de preuve observée pour un allèle par rapport à l'autre. L'annotation Fisher's Strand est l'une des méthodes qui vise à évaluer s'il y a un biais de brin dans les données. Il utilise le test exact de Fisher pour déterminer s'il existe un biais de brin entre les brins sens et anti-sens pour l'allèle de référence ou l'allèle alternatif. La sortie est une p-valeur en Phred. Plus la valeur obtenue est élevée, plus il y a un risque de biais. Et si il y a un biais cela indique la présence de faux positifs.    
++ **Strand Odds Ratio (SOR)** : C'est une autre façon d'estimer le biais de brin en utilisant un test similaire. Le SOR a été créé parce que le FS tend à pénaliser les variations qui se produisent aux extrémités des exons. Les reads issus des extrémités des exons tendent à n'être couverts que par des reads d'une seule direction et le FS donne un mauvais score à ces variations. Le SOR  quantt à lui prend en compte les ratios de reads qui couvrent les deux allèles.    
++ **ReadPosRankSum Rank Sum Test for relative positioning of REF versus ALT alleles within reads (ReadPosRankSum)** : Cette annotation teste s'il existe des preuves de biais dans la position des allèles dans les reads qui les supportent, entre les allèles de référence et les allèles alternatifs. Voir un allèle seulement près des extrémités des reads indique une erreur, car c'est là que les séquenceurs ont tendance à faire le plus d'erreurs. Cependant, certaines variations situées près des bords des régions séquencées seront nécessairement couvertes par les extrémités des lectures, donc il n'est pas possible de simplement définir un seuil absolu de «distance minimale à partir de la fin de la lecture». C'est pourquoi un test de somme de rang est utilisé pour évaluer s'il y a une différence dans la façon dont l'allèle de référence et l'allèle alternatif sont supportés. Le résultat idéal est une valeur proche de zéro, ce qui indique qu'il y a peu ou pas de différence dans la localisation des allèles par rapport à la fin des reads. Une valeur négative indique que l'allèle alternatif se trouve aux extrémités des reads plus souvent que l'allèle de référence. Inversement, une valeur positive indique que l'allèle de référence se trouve plus souvent à l'extrémité des reads que l'allèle alternatif.    
++ **Root Mean Square of the mapping quality of reads across all samples (MQ)** : Cette annotation fournit une estimation de la qualité de cartographie globale des reads prenant en charge une varaitions. Il produit à la fois des données brutes (somme des carrés et nombre de reads totaux) et le carré moyen calculé. Les données brutes sont utilisées pour calculer avec précision le carré moyen en combinant plusieurs échantillons.   
++ **MappingQualityRankSum Rank Sum Test for mapping qualities of REF versus ALT reads (MQRankSum)**: Cette annotation compare les qualités de cartographie des reads supportant l'allèle de référence avec celles supportant l'allèle alternatif. Le résultat idéal est une valeur proche de zéro, ce qui indique qu'il y a peu ou pas de différence. Une valeur négative indique que les reads supportant l'allèle alternatif ont des scores de qualité de cartographie inférieurs à ceux supportant l'allèle de référence. Inversement, une valeur positive indique que les reads supportant l'allèle alternatif ont des scores de qualité de cartographie plus élevés que ceux supportant l'allèle de référence. Cette annotation peut être utilisée pour évaluer la confiance d'une variation et est une covariable recommandée pour le recalibrage de variante (VQSR). Trouver une différence de qualité statistiquement significative suggère que le processus de séquençage et / ou de cartographie peut avoir été biaisé ou affecté par un artefact. En pratique, seules les valeurs négatives faibles sont filtrées lors de l'évaluation de la qualité des variants car l'idée est de filtrer les variants pour lesquels la qualité des données supportant l'allèle alternatif est relativement faible.        
++ **Inbreeding Coefficient (InbreedingCoeff)**: Cette annotation évalue s'il existe des preuves de consanguinité dans une population. Plus le score est élevé, plus le risque de consanguinité est élevé. Le calcul est une généralisation continue du test de Hardy-Weinberg pour le déséquilibre.
 
 
 #### Evaluation des variants et études d'association
 
-Une fois que les variants ont été annotés , il reste à vérifier que ce ne sont pas des artéfacts. Cette phase est nécessaire avant d'accepter un variant comme spécifique d'une lignée. Dans cette phases, une annotation fonctionnelle aisni que des contrôles qualités additionnels sont réalisés.
+Les phases précédentes ont permis de faire la découverte de variants, d'éliminer les variations les moins soutenues par les données  et de produire un fichier VCF. Théoriquement, ce fichier est prêt à être utilisé pour la suite de l'étude. Cependant, il reste à vérifier que ce ne sont pas des artéfacts. Pour cela, il est recommandé d'effectuer des analyses complémentaires pour évaluer la qualité des variants trouvés. 
+
+Il faut donc faire la différence entre un jeu de variants considérés comme "bon" d'un jeu de variants considérés comme "mauvais". Pour cela il existe différente méthodes qui peuvent être appliquer afin de trouver la vérité biologique la plus probable. La méthode la plus fiable est sans doute de faire un séquençage de Sanger des régions proches des variants trouvés. Cependant cette méthode n'est pas envisageable dans cette étude en terme de coût notamment au vu du nombre de variations trouvés. Un autre méthode consiste à évaluer la concordance par rapport aux résultats obtenus à partir d'une puce de génotypage réalisée sur les mêmes échantilllons. cEpendant cette méthode ne permet de travailler que sur les variants qui la composent. Mais elle donne tout de même une bonne indication de la sensibilité et de la spécificité. Cette méthode, elle non plus ne peut-être réalisée sur les individus de cette étude car aucune puce de génotypage n'est actuellement sur le marché pour l'espèce *Dicentrarchus labrax*.  Une troisième méthode pourrait être de faire une évaluation des variants trouvés en faisant une comparaison de ces variants avec des variants issus d'un autre séquençage sur des individus différents en considérant ce dernier jeu de variants comme étant la vérité. Cependant, cette méthode non plus n'est pas envisagée car aucun jeu de variants issus de séquençage n'est disponible actuellement.
+
+La méthode envisagée ici est donc dans un premier temps d'estimer la qualité globale du jeu de variants obtenus en regardant différentes valeurs. Ces valeurs sont : le nombre de SNPs et d'INDELs obtenus, le ratio Ti/Tv (Transition/Transversion) et le ratio d'INDELs (Insertion/Délétion). Ces valeurs sont calculés par l'outils Picard CollectVAriantsCallingMetrics. Cet outils produit 2 fichiers (Summary et detail) qui sont lus à l'aide du logiciel R.
+[Source des paragraphes précédents](https://software.broadinstitute.org/gatk/documentation/article.php?id=6308)
+
+
+Nombre de SNPs et d'INDELs
+Cet outil recueille le nombre de SNP (polymorphismes mononucléotidiques) et d'indels (insertions et suppressions) tels qu'ils se trouvent dans le fichier variants. Il ne compte que les sites bialléliques et filtre les sites multialléliques. De nombreux facteurs influent sur ces chiffres, notamment la taille de la cohorte, la parenté entre les échantillons, la rigueur du filtrage, l'origine ethnique des échantillons et même l'amélioration de l'algorithme due à la mise à jour du logiciel. Bien que cette métrique soit insuffisante pour évaluer vos variantes, elle fournit une bonne base de référence. Il est rassurant de constater que, parmi les trois échantillons connexes, nous avons observé des nombres très similaires de SNP et d'indels. Il pourrait être préoccupant si un échantillon particulier avait significativement plus ou moins de variantes que le reste.
+
+Indel Ratio
+Le rapport indel est déterminé comme étant le nombre total d'insertions divisé par le nombre total de suppressions; cet outil n'inclut pas les variantes filtrées dans ce calcul. Habituellement, le rapport indel est d'environ 1, car les insertions se produisent généralement aussi souvent que les suppressions. Cependant, dans les études de variantes rares, le ratio indel devrait être d'environ 0,2-0,5. Nos échantillons ont un rapport d'indel de ~ 0,95, indiquant que ces variantes ne sont pas susceptibles d'avoir un biais affectant leur rapport d'insertion / suppression.
+
+Rapport TiTv
+Cette métrique est le rapport entre les mutations de transition (Ti) et de transversion (Tv). Pour les données de séquençage du génome entier, TiTv devrait être ~ 2.0-2.1, tandis que les données de séquençage de l'exome entier auront un rapport TiTv de ~ 3.0-3.31. Dans le cas du trio d'échantillons de CEU, les TiTv de ~ 2,08 et ~ 1,91 sont raisonnables, et il est peu probable que cette variante d'appel ait un biais affectant son rapport de transition / transversion.
+[Source des 3 paragraphes ci-dessus](https://gatkforums.broadinstitute.org/gatk/discussion/6186/howto-evaluate-a-callset-with-collectvariantcallingmetrics#latest)
+
+Dans un second temps une annotation fonctionnelle des variations trouvés est réalisée ainsi que des études d'asociation (famille et génotype/phénotype).
 
 ##### Design
 
-Cette quatrième et dernière phase permet donc d'évaluer les variants en terme d'effet prédit, d'association par famille ou par phénotype/génotype. Cette dernière phase fait appel à différents outils et logiciels : SnpEff pour prédire les effets des SNPs trouvés, PLINK pour réaliser l'étude d'association par famille, le package R vegan pour réaliser l'analyse d'association génotype/phénotype, etc.
+Cette quatrième et dernière phase permet donc d'évaluer les variants en terme de qualité, d'effet prédit, d'association par famille ou par phénotype/génotype. Cette dernière phase fait appel à différents outils et logiciels : Picard pour obtenir les différentes valeurs mentionnées ci-dessus, SnpEff pour prédire les effets des SNPs trouvés, PLINK pour réaliser l'étude d'association par famille, le package R vegan pour réaliser l'analyse d'association génotype/phénotype, etc.
 ![Phase d'évaluation des variants](EvaluationVariants.PNG)
 
 La dernière étape de GATK ("hardfiltering") produit deux VCFs (un par type de variations : SNPs et INDELs) qui sont les fihciers d'entrée pour les différents logiciels ou outils mentionnés précédemment.
 
-La première étape consiste à une annotation fonctionnelle par la prédiction des effets des SNPs potentiels trouvés. Cette étape est réalisée par le logiciel snpEff [@Hoff2015] qui analyse le fichier d'entrée, annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
+La première étape consiste donc à obtenir le nombre de SNPs et d'INDELs obtenus, le ratio Ti/Tv (Transition/Transversion) et le ratio d'INDELs (Insertion/Délétion) via l'utilisation de CollectVAriantsCallingMetrics (Picard) puis d'analyser ces données à l'aide du logiciel R et son interface graphique RStudio.
 
-La seconde étape consiste à une analyse d'association par famille. Cette étape est consitituée de sous-étapes. En effet, PLINK a besoin de fichier au format ped et au format map pour procéder aux associations. Or, GATK produit des fichiers au format VCF. L'outils VCFtools est donc nécessaire pour produire les fichiers ped et map à partir de fichiers VCF. 
+La seconde étape consiste à réaliser une annotation fonctionnelle des SNPs potentiels trouvés par la prédiction des effets. Cette étape est réalisée par le logiciel snpEff [@Hoff2015] qui analyse le fichier d'entrée, annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
 
-La troisième étape consiste à une analyse d'association génotype/phénotype.
+La troisième étape consiste à une analyse d'association par famille. Cette étape est consitituée de sous-étapes. En effet, PLINK a besoin de fichier au format ped et au format map pour procéder aux associations. Or, GATK produit des fichiers au format VCF. L'outils VCFtools est donc nécessaire pour produire les fichiers ped et map à partir de fichiers VCF. 
+
+La quatrième étape consiste à une analyse d'association génotype/phénotype.
 
 ##### Population stratification
 
@@ -218,9 +251,15 @@ Parler de Picard et de GATK
 
 ## Résultats de l'étude d'association
 
+Une étude de 2013 a permis de comparer différents outils de découverte de variants. Les outils testés étaient GATK, SAMtools, glftools et Atlas2. Ces différents outils ont été testés sur des données de séquençage d'exome en mode multi-échantillon et en mode échantillon par échantillon. Les auteurs concluent que GATK a le taux de redécouverte (0.9969) et la spécificité (0.99996) les plus élevés. D'autre part son ratio transition-transversion (Ti/Tv) proche de la valeur attendue (3.02 pour des données d'exome). Suite à cette étude, la stratégie GATK a donc été choisie.
+
+
 ### Fréquence allèlique et données manquantes
+
+Dans le but d'obtenir les fréquences allèliques ainsi que les données manquantes, PLINK a été utilisé.
+
 ### Estimation de l'"ancestry"
-### POpulation stratification
+### Population stratification
 ### Top SNPs
 ### Evaluation des top SNPs
 ### Analyse fonctionnelle des top SNPs
