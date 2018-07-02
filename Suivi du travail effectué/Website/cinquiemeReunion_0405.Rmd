@@ -1,0 +1,18 @@
+---
+title: "Reunion du 04/05/2018"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+---
+
+* * * * *
+
+# Réunion avec Erick et  Bruno :
+
+<p style="text-align:justify";>Concernant la présentation devant l'ISEM du 14 Mai prochain, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.</p>
+
+<p style="text-align:justify";>Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l'annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu'Érick m'a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c'est la cas c'est parfait. D'autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3' ou 5'. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d'un BLAST pour trouver les protéines ou du moins les domaines similaires dans d'autres espèces.</p>
+
+<p style="text-align:justify";>Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GATK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.</p>

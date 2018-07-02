@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Analyse statistiques des SNPs</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Analyse statistiques des SNPs</h1>
+
+</div>
+
+
+<hr />
+<p>Some interesting extracts from papers :</p>
+<hr />
+<div id="comparing-methods-for-detecting-multilocus-adaptation-with-multivariate-genotype-environment-associations-forester-et-al.-2017-molecular-ecology" class="section level1">
+<h1>Comparing methods for detecting multilocus adaptation with multivariate genotype-environment associations, Forester et al., 2017, Molecular Ecology</h1>
+<p style="text-align:justify" ;>
+We found that constrained ordinations, in particular redundancy analysis (RDA), show a superior combination of low FPRs and high TPRs across weak, moderate and strong multilocus selection. These results were robust across the levels of population structure, demo- graphic histories, sampling designs and sample sizes tested here. Additionally, RDA outperformed an alternative ordination-based approach, cRDA, especially (and importantly) when the multilocus selection signature was completely derived from loci under weak selection. It is important to note that population structure was relatively low in these simulations. Results may differ for systems with strong population structure or metapopulation dynamics, where it can be important to correct for structure or combine detections with another GEA that accounts for structure. Continued testing of these promising methods is needed in simulation frameworks that include more population structure, multiple selection surfaces and genetic architectures that are more complex than the multilocus selection response modelled here. However, this study indicates that con- strained ordinations are an effective means of detecting adaptive processes that result in weak, multilocus molecular signatures, pro- viding a powerful tool for investigating the genetic basis of local adaptation and informing management actions to conserve the evo- lutionary potential of species of agricultural, forestry, fisheries and conservation consern.
+</p>
+</div>
+<div id="population-structure-and-cryptic-relatedness-in-genetic-association-astle-et-al.2010-statistical-science" class="section level1">
+<h1>Population Structure and Cryptic Relatedness in Genetic Association, Astle et al.,2010, Statistical science</h1>
+<p style="text-align:justify" ;>
+Abstract : We review the problem of confounding in genetic association studies, which arises principally because of population structure and cryptic relatedness. Many treatments of the problem consider only a simple “island” model of population structure. We take a broader approach, which views population structure and cryptic relatedness as different aspects of a single confounder: the unobserved pedigree defining the (often distant) relationships among the study subjects. Kinship is therefore a central concept, and we reviewmethods of defining and estimating kinship coefficients, both pedigree-based andmarker-based. In this unified framework we review solutions to the problem of population structure, including family-based study designs, genomic control, structured association, regression control, principal components adjustment and linear mixed models. The last solution makes the most explicit use of the kinships among the study subjects, and has an established role in the analysis of animal and plant breeding studies. Recent computational developments mean that analyses of human genetic association data are beginning to benefit from its powerful tests for association, which protect against population structure and cryptic kinship, as well as intermediate levels of confounding by the pedigree.
+</p>
+<p style="text-align:justify" ;>
+Genetic association studies (Clayton, 2007) are designed to identify genetic loci at which the allelic state is correlated with a phenotype of interest. The associations of interest are causal, arising at loci whose different alleles have different effects on phenotype.
+</p>
+<p style="text-align:justify" ;>
+We first introduce background material describing linkage and association studies, population structure and linkage disequilibrium, the problem of confounding by population structure and cryptic relatedness
+</p>
+<p style="text-align:justify" ;>
+Linkage studies (Thompson, 2007) form the other major class of study designs in genetic epidemiology. These seek loci at which there is correlation between the phenotype of interest and the pattern of transmission of DNA sequence over generations in a known pedigree.
+</p>
+<p style="text-align:justify" ;>
+<strong>In contrast, association studies are used to search for loci at which there is a significant association between the phenotypes and genotypes of unrelated individuals. These associations arise because of correlations in transmissions of phenotypes and genotypes overmany generations, but association analyses do not model these transmissions directly, whereas linkage analyses do</strong>
+</p>
+<p style="text-align:justify" ;>
+Now, cost-effective technology for genotyping ∼106 single nucleotide polymorphism (SNP)markers distributed across the genome has made possible genome-wide association studies (GWAS) which investigate most of the common genetic variation in a population, and obtain orders of magnitude finer resolution than a comparable linkage study (Morris and Cardon, 2007; Altshuler, Daly and Lander, 2008). GWAS are preferred for detecting common causal variants (say, population fraction &gt; 0.05), which typically have only a weak effect on phenotype, whereas linkage studies remain superior for the detection of rare variants of large effect (because these effects are more strongly concentrated within particular families).
+</p>
+<p style="text-align:justify" ;>
+Association studies are, however, susceptible to genetic confounding, which is usually thought of as coming in two forms: population structure and cryptic relatedness.
+</p>
+<p style="text-align:justify" ;>
+Association studies are also susceptible to confounding if genotyping error rates vary with phenotype.
+</p>
+<p style="text-align:justify" ;>
+Informally, a population has structure when there are large-scale systematic differences in ancestry, for example, varying levels of immigrant ancestry, or groups of individuals with more recent shared ancestors than one would expect in a panmictic (randommating) population. Shared ancestry corresponds to relatedness, or kinship, and so population structure can be defined in terms of patterns of kinship among groups of individuals. Population structure is often closely aligned with geography, and in the absence of genetic information, stratification by geographic region may be employed to try to identify homogeneous subpopulations.
+</p>
+<p style="text-align:justify" ;>
+Below we will focus on islandmodels of population structure, because these are simple and parsimonious models that facilitate discussion of the main ideas. Moreover, several popular statistical methods for detecting population structure and correcting association analysis for its effects have been based entirely on such models
+</p>
+<p style="text-align:justify" ;>
+The admixture model may be appropriate when the current population results from some intermixing following large-scale migrations over large distances, such as in Brazil or the Caribbean.
+</p>
+<p style="text-align:justify" ;>
+Linkage Disequilibrium : In a large, panmictic population, and in the absence of selection, pairs of genetic loci that are not tightly linked (close together on a chromosome) are unassociated at the population level.
+</p>
+<p style="text-align:justify" ;>
+LD is a double-edged sword: the stronger the LD around a causal variant, the easier it is to detect, because the greater the probability it is in high LD with at least one genotypedmarker. To express this another way, many alleles across the genome are likely to be somewhat informative about an individual’s subpopulation of origin, and hence be predictive of any phenotype that varies across subpopulations. Under an islandmodel, one could potentially solve the problem of spurious associations by matching for ancestry, for example, by choosing for each case a control from the same subpopulation.
+</p>
+<p style="text-align:justify" ;>
+when the sample is large enough to provide the required power, the most significant SNPs can have their p-values reduced by a factor of three because of population structure, thus exaggerating the significance of the association. Following Pritchard andRosenberg (1999) and Gorroochurn et al. (2004), Rosenberg and Nordborg (2006) considered a generalmodel for populations with con- tinuous and discrete structure and presented neces- sary and sufficient conditions for spurious association to occur at a given locus.
+</p>
+<p style="text-align:justify" ;>
+The probability that the two homologous alleles within an individual i are IBD is known as its inbreeding coefficient, fi.
+</p>
+<p style="text-align:justify" ;>
+CORRECTING ASSOCIATION ANALYSIS FOR CONFOUNDING : Many of these methods can be formulated within standard regression models that express the expected value of yi, the phenotype of the ith individual, as a function of its genotype xi at the SNP of interest.
+</p>
+<p style="text-align:justify" ;>
+Family-Based Tests of Linkage and Association (FBTLA) : The archetypal FBTLA is the transmission disequilibrium test (TDT) (Spielman, McGinnis and Ewens, 1993) for systematic differences between the genotypes of affected children and those expected underMendelian randomization of the alleles of their unaffected parents. If an allele is directly risk-enhancing, it will be over-transmitted to cases. If not directly causal but in LD with a causal allele, it may also be over-transmitted, but in this case it must also be linked with the causal variant, since otherwise Mendelian randomization will eliminate the association between causal and tested alleles
+</p>
+<p style="text-align:justify" ;>
+<strong>the TDT is a test for both association and linkage. The linkage requirement means that the test is robust to population structure, while the association requirement allows for fine-scale localization</strong>. The TDT can be derived from the score test of a logistic regression model in which transmission is the outcome variable, and the parental genotypes are predictors.
+</p>
+<p style="text-align:justify" ;>
+However, FBTLA designs (like other linkage designs) can also be used to investigate parent-of-origin effect.
+</p>
+<p style="text-align:justify" ;>
+Genomic Control Genomic Control (GC) is an easy-to-apply and computationally fast method for reducing the inflation of test statistics caused by population structure or cryptic relatedness. It can be applied to data of any family structure or none. GC was developed (Devlin and Roeder, 1999) for the Armitage test statistic, which is asymptotically equivalent to a score statistic under logistic regression (Agresti, 2002) and, in the absence of confounding, has an asymptotic chi² null distribution.
+</p>
+<p style="text-align:justify" ;>
+However, the median is more robust to true positives than the mean.
+</p>
+<p style="text-align:justify" ;>
+Structured Association Structured
+</p>
+<p style="text-align:justify" ;>
+Principal Component Adjustment
+</p>
+<p style="text-align:justify" ;>
+For computational reasons the EIGENSTRATsoftware (Price et al., 2006), which implements PC adjustment, does not include PCs as logistic regression covariates, but instead uses a linear adjustment of both phenotypes and genotypes.
+</p>
+<p style="text-align:justify" ;>
+Mixed Regression Models
+</p>
+</div>
+<div id="plink-a-tool-set-for-whole-genome-association-and-population-based-linkage-analyses-purcell-et-al.-2007-the-american-journal-of-human-genetics" class="section level1">
+<h1>PLINK : A Tool Set for Whole-Genome Association and Population-Based Linkage Analyses, Purcell et al., 2007, The American Journal of Human Genetics</h1>
+<p style="text-align:justify" ;>
+whole-genome association studies (WGAS).
+</p>
+<p style="text-align:justify" ;>
+A typical WGAS, currently with hundreds of thousands of SNPs genotyped for thousands of individuals, represents a data set that is several orders of magnitude larger than previous linkage and association studies. For example, if 500 individuals are needed to test a single SNP with adequate power, ∼2,000 individuals will be required to test 500,000 SNPs, even after Bonferroni correction. When a relatively small WGAS data set of 100,000 SNPs genotyped for 350 individuals is considered, for example, PLINK takes ∼10 s to load, filter, and perform association analysis for all SNPs; straightforward handling of much larger data sets is also possible. Because normal screening procedures based on measures such as overall genotyping rate and Hardy-Weinberg equilibrium will often not detect these biased SNPs, it is important to look closely at patterns of genotyping failure for nonrandom effects (as well as to visually inspect the raw data before calling genotypes). In PLINK, genotyping failure can be examined with respect to both phenotype and (potentially unobserved) genotype. In summary, given the issues raised above, we designed the PLINK WGAS tool set to meet the following requirements: (a) to provide a simple way to handle large WGAS data sets, (b) to assess confounding due to stratification and nonrandom genotyping failure and to produce a range of other summary statistics, (c) to perform a variety of standard association tests efficiently on very large data sets (in populations or families, for disease or quantitative outcomes, allowing for covariates, haplotypic tests, etc.), and (d) to provide a means of assaying rare variation with the use of common SNP panels, thereby providing amap- ping method that might perform better when the MRV model holds.
+</p>
+<p style="text-align:justify" ;>
+Data management.
+</p>
+<p style="text-align:justify" ;>
+Summary statistics.—Standard summary measures are available: genotyping rates, allele and genotype frequen- cies, Hardy-Weinberg equilibrium tests using asymptotic and exact procedures, and single-SNP Mendelian error summaries for family data. PLINK also estimates individual heterozygosity rates.
+</p>
+<p style="text-align:justify" ;>
+Population stratification.—On the basis of the genome- wide average proportion of alleles shared identical by state (IBS) between any two individuals, PLINK offers tools to (a) cluster individuals into homogeneous subsets, (b) perform classical multidimensional scaling (MDS) to visualize substructure and provide quantitative indices of population genetic variation, and (c) identify outlying individuals. PLINK uses complete-linkage hierarchical clustering to assess population stratification, with the use of whole-genome SNP data. PLINK also provides an alternate way to look at population stratification: rather than clustering into discrete groups, it can use the data-reduction technique of classical MDS to produce a k-dimensional representation of any substructure. PLINK also supports an IBS-based “nearest- neighbor” analysis to detect outlying individuals who do not belong with any major cluster in the sample. For each individual, the distance to its nearest neighbor is calculated; this distribution is standardized (by the sample mean and variance of nearest-neighbor distances) and can be inspected for outliers. The same procedure can also be applied to individuals’ nth-nearest neighbor.
+</p>
+<p style="text-align:justify" ;>
+Association analysis.—As well as the standard case/con- trol allelic test, PLINK offers a Cochran-Armitage trend test, Fisher’s exact test, genotypic tests (general,dominant, and recessive models), and Cochran-Mantel-Haenszeltests for stratified tables, which allow for tests of association conditional on any cluster solution or other categorization of samples. The Breslow-Day and homogeneity of odds ratio tests are supported, as are tests for quantitative traits that use a standard linear regression of phenotypeonallele dosage. For family data, the standard transmission/disequilibrium test (TDT) is provided. The permutation procedure applied to the TDT flips the transmitted and untransmitted alleles of all individuals in a nuclear family for all SNPs per permutation, thereby preserving in each permuted data set the possible nonindependence of transmissions across SNPs and across multiple offspring due to LD and linkage A range of multiple-test corrections are also available, including those based on Bonferroni correction and false-discovery rate. IBD estimation : One requirement of this approach is that SNPs are in approximate linkage equilibrium in the population; otherwise, many small regions of high LD will be called as shared IBD segments. One approach is to prune the SNP panel to a reduced subset of approximately independent SNPs.
+</p>
+<p style="text-align:justify" ;>
+Performance.—Very large WGAS data sets can be analyzed using fairly standard hardware, and there are no fixed limits on the number of samples or SNPs.
+</p>
+<p style="text-align:justify" ;>
+Graphical user interface.—We have also developed a separate, optional Java-based graphical user interface, gPLINK, to initiate, track, and record PLINK jobs.
+</p>
+</div>
+<div id="shesis-a-powerful-software-platform-for-analyses-of-linkage-disequilibrium-haplotype-construction-and-genetic-association-at-polymorphism-loci-she-et-al.-2005-cell-research" class="section level1">
+<h1>SHEsis : a powerful software platform for analyses of linkage disequilibrium, haplotype construction, and genetic association at polymorphism loci, she et al., 2005, Cell research</h1>
+<p style="text-align:justify" ;>
+ABSTRACT : In multiloci-based genetic association studies of complex diseases, a powerful and high efficient tool for analyses of linkage disequilibrium (LD) between markers, haplotype distributions and many chi-square/p values with a large number of samples has been sought for long. In order to achieve the goal of obtaining meaningful results directly from raw data, we developed a robust and user-friendly software platform with a series of tools for analysis in association study with high efficiency. The platform has been well evaluated by several sets of real data.
+</p>
+<p style="text-align:justify" ;>
+In order to detect the reliability of our platform, we evaluated it with several published scientific papers[2-6] and obtained exactly the same result but very robust rate. Compared with the tools used in cited papers[2-6], our platform shows the advantage of easier handling and the capability of analyzing complicated data. Therefore, it could become a powerful and useful tool for studies of complex diseases in the near future. The SHEsis software platform is now available for free at the above website address. And we also will go on updating its power and capacity.
+</p>
+</div>
+<div id="mapchart-software-for-the-graphical-presentation-of-linkage-maps-and-qtls-voorips-et-al.-2002-journal-of-heredity" class="section level1">
+<h1>MapChart : Software for the Graphical Presentation of Linkage Maps and QTLs, Voorips et al., 2002, Journal of heredity</h1>
+<p style="text-align:justify" ;>
+These charts can easily be exported to word processing or presentation software. The charts are exported as vector graphics (Windows enhanced metafiles) rather than bitmaps, which makes them easy to rescale and to edit further if desired.
+</p>
+<p style="text-align:justify" ;>
+MapChart has a standard Windows interface, with a main menu, toolbar, and pop-up menus.
+</p>
+<p style="text-align:justify" ;>
+MapChart imports linkage data from map files, produced by software for linkage analysis. Map files are composed of a se- quence of linkage groups, each with a header line specifying the linkage group title, followed by a sequence of lines with locus names and map positions.
+</p>
+</div>
+<div id="gcta-a-tool-for-genome-wide-complex-trait-analysis-yang-et-al.-2011-the-american-journal-of-human-genetics" class="section level1">
+<h1>GCTA : A tool for genome-wide complex trait analysis, Yang et al., 2011, The American Journal of Human Genetics</h1>
+<p style="text-align:justify" ;>
+ABSTRACT : For most human complex diseases and traits, SNPs identified by genome-wide association studies (GWAS) explain only a small fraction of the heritability. Here we report a user-friendly software tool called genome-wide complex trait analysis (GCTA), which was developed based on a method we recently developed to address the ‘‘missing heritability’’ problem. GCTA estimates the variance explained by all the SNPs on a chromosome or on the whole genome for a complex trait rather than testing the association of any particular SNP to the trait. We introduce GCTA’s five main functions: data management, estimation of the genetic relationships from SNPs, mixed linear model analysis of variance explained by the SNPs, estimation of the linkage disequilibrium structure, and GWAS simulation. The GCTA software is a versatile tool to estimate and partition complex trait variation with large GWAS data sets.
+</p>
+<p style="text-align:justify" ;>
+There has not been any consensus on the explanation of the ‘‘missing heritability.’’ Possible explanations include a large number of common variants with small effects, rare variants with large effects, and DNA structural variation. Here we report a versatile tool called genome-wide complex trait analysis (GCTA), which implements the method of estimating variance explained by all SNPs, and extend the method to partition the genetic variance onto each of the chromosomes and also to estimate the variance explained by the X chromosome and test for dosage compensation in females. We developed GCTAin five function domains: data management, estimation of the GRM from a set of SNPs, estimation of the vari- ance explained by all the SNPs on a single chromosome or the whole genome, estimation of linkage disequilibrium (LD) structure, and simulation.
+</p>
+<p style="text-align:justify" ;>
+Estimation of the Genetic Relationship from Genome-wide SNPs One of the core functions of GCTA is to estimate the genetic relationships between individuals from the SNPs. As a by-product, we provide a function in GCTA to calculate the eigenvectors of the GRM, which is asymptotically equivalent to those from the PCA implemented in EIGENSTRAT because the GRM (Ajk) defined in GCTA is approximately half of the covariance matrix (Jjk) used in EIGENSTRAT. The only purpose of developing this function is to calculate eigenvectors and then include them in the model as covariates to capture variance due to population structure. More sophisticated analyses of the population structure can be found in programs such as EIGENSTRAT11 and STRUCTURE.
+</p>
+<p style="text-align:justify" ;>
+In GCTA, we provide flexible options to specify different genetic models : To estimate the variance of genotype-environment interaction effects. <strong>From the REML analysis, GCTA has an option to provide the best linear unbiased prediction (BLUP) of the total genetic effect for all individuals. BLUP is widely used by plant and animal breeders to quantify the breeding value of individuals in artificial selection programs14 and also by evolutionary geneticists.</strong> <strong>For example, GCTA could be used to predict SNP effects in a discovery set, and the SNP effects could be used in PLINK to predict whole-genome profiles via the scoring approach in a validation set.</strong>
+</p>
+<p style="text-align:justify" ;>
+In a standard GWAS, particularly with a large sample size, the mean (lmean) or median (lmedian) of the test statistics for single-SNP associations often deviates from its expected value under the null hypothesis of no association between any SNP and the phenotype, which is usually interpreted as the effect due to population stratification and/or cryptic relatedness. Given a causal variant, we use simple regression to test for SNPs in LD with the causal variant within dMbdistance in either direction. <strong>PLINK has an option (‘‘show targets’’) to select SNPs in LDwith a set of target SNPs with LD r2 larger than a user-specified cutoff value. This function is very useful to distinguish independent association signals but less suited to predict lmean and lmedian, because the test statistics of the SNPs in modest LD with causal variants (SNPs at Mb distance with low r2) will also be inflated to a certain extent, and these test statistics will contribute to the genomic inflation factors.</strong>
+</p>
+<p style="text-align:justify" ;>
+We chose the PLINK compact binary file format (.bed, .bim,and .fam) as the input data format for GCTA because of its popularity in the genetics community and its efficiency of data storage. However,wedo not provide functions for a thorough quality control (QC) of the data, such as Hardy-Weinberg equilibrium test and missingness, because these functions have been well developed in many other genetic analysis packages, e.g., PLINK. <strong>We assume that the data have been cleaned by a standard QC process before entering into GCTA.</strong> When the sample size is small, e.g., n &lt; 3000, both GCTA and ASREML take a few minutes to run. When the sample size is large, e.g., n&gt;10,000, especially when fitting multiple GRMs, it takes days for ASREML to finish the analysis, whereas GCTA needs only a few hours. The estimate of variance captured by all of the SNPs obtained in GCTA is directly comparable to the heritability estimated from pedigree analysis in family and twin studies, as well as the variance explained by GWAS hits, so that missing and hiding heritability can be quantified. Other sources of genetic variations such as dominance, gene-gene interaction, and gene-environment interaction are also important for complex trait variation but are less relevant to the ‘‘missing heritability’’ problem if the total heritability refers to the narrow-sense heritability, i.e., the proportion of phenotypic variance due to additive genetic variance. <strong>The current version of GCTA only provides functions to estimate and partition the variances of additive and additive-environment interaction effects. It is technically feasible to extend the analysis to include dominance and/or gene-gene interaction effects in the future</strong>. Future developments will also include options to do multivariate analyses, to read genotype or imputed probability data in different formats, and to implement other applications of whole-genome or chromosome segment approaches.
+</p>
+<p style="text-align:justify" ;>
+<strong>GCTA is not limited to the analysis of data on human complex traits, but in this report we only use examples and specifications (e.g., the number of autosomes) for humans.</strong>
+</p>
+</div>
+<div id="genetix-a-windows-software-belkhir-et-al.-1998-2005" class="section level1">
+<h1>GENETIX a windows software, Belkhir et al., 1998-2005</h1>
+<p><a href="http://kimura.univ-montp2.fr/genetix/">Genetix</a> est un logiciel qui fonctionne sous Windows et qui permet de calculer un certain nombre de paramètres utilisés en Génétique des populations. Il propose également de tester leur significativité en réalisant des test de ré-échantillonnage par permutations.</p>
+</div>
+<div id="r-packages" class="section level1">
+<h1>R-Packages</h1>
+<div id="gwastools" class="section level2">
+<h2>GWASTools</h2>
+<p><a href="http://bioconductor.org/packages/release/bioc/html/GWASTools.html" class="uri">http://bioconductor.org/packages/release/bioc/html/GWASTools.html</a> Réalise un nettoyage des données avant de faire une GWAS. On peut lui donner des données provenant d’Affymetrix. Il peut faire des analyse d’association préliminaire. Il peut prendre en entrée des fichier issus de Plink et peut sortir des matrices compatible avec le package SNPStats.</p>
+</div>
+<div id="vegan" class="section level2">
+<h2>vegan</h2>
+<p>Mentionned by Forester 2017. Ce package permet de réaliser des analyses de rendondance phénotype/génotype sur les SNPs en définissant un seuil pour détecter les SNPs candidats.</p>
+</div>
+<div id="adegenet" class="section level2">
+<h2>adegenet</h2>
+<p>Prend en entrée les fichiers de sorties des logiciels suivants : GENETIX, STRUCTURE, FSTAT et Genepop. Il peut prendre aussi une dataFrame avec les individus en ligne et les markers en colonne. Il peut prendre aussi une dataFrame avec les génotypes en ligne et les SNPloci en colonne.</p>
+</div>
+<div id="genetics" class="section level2">
+<h2>genetics</h2>
+<p>Classes and methods for handling genetic data. Includes classes to represent genotypes and haplotypes at single markers up to multiple markers on multiple chromosomes. Function include allele frequencies, flagging homo/heterozygotes, flagging carriers of certain alleles, estimating and testing for Hardy-Weinberg disequilibrium, estimating and testing for linkage disequilibrium, …</p>
+</div>
+<div id="haplo.stats" class="section level2">
+<h2>haplo.stats</h2>
+<p>Routines for the analysis of indirectly measured haplotypes. The statistical methods assume that all subjects are unrelated and that haplotypes are ambiguous (due to unknown linkage phase of the genetic markers).</p>
+</div>
+<div id="gap" class="section level2">
+<h2>gap</h2>
+<p>It is designed as an integrated package for genetic data analysis of both population and family data. Currently, it contains functions for sample size calculations of both population-based and family-based designs, probability of familial disease aggregation, kinship calculation, statistics in linkage analysis, and association analysis involving genetic markers including haplotype analysis with or without environmental covariates.</p>
+</div>
+<div id="genepop" class="section level2">
+<h2>genepop</h2>
+<p>Il prend en entrée des fihiers au format genepop. On peut réaliser les tests suivants:<br />
+<em>test_HW : Tests of Hardy-Weinberg genotypic proportions<br />
+</em>test_LD : Tables and exact test for genotypic linkage disequilibrium<br />
+<em>test_diff : Tests of genic and genotypic differentiation<br />
+</em>struc : Exact test on a single contingency table<br />
+<em>Nm_private : Private allele method<br />
+</em>basic_info : Allele and genotype frequencies<br />
+<em>genedivFis : Gene diversities and Fis (or rho_IS)<br />
+</em>Fst : Fst (or rho_ST) estimation<br />
+*ibd : Isolation by distance</p>
+</div>
+<div id="asmap" class="section level2">
+<h2>ASMap</h2>
+<p>Linkage Map Construction using the MSTmap Algorithm</p>
+</div>
+<div id="hwde" class="section level2">
+<h2>hwde</h2>
+<p>Models and Tests for Departure from Hardy-Weinberg Equilibrium and Independence Between Loci</p>
+</div>
+<div id="multic" class="section level2">
+<h2>multic</h2>
+<p>Calculate the polygenic and major gene models for quantitative trait linkage analysis using variance components approach.</p>
+</div>
+<div id="ldheatmap" class="section level2">
+<h2>LDheatmap</h2>
+<p>Il permt de mettre en forme des matrices de LD pairwise.</p>
+</div>
+<div id="snpassoc" class="section level2">
+<h2>SNPassoc</h2>
+<p>This package carries out most common analysis when performing whole genome association studies. These analyses include descriptive statistics and exploratory analysis of missing values, calculation of Hardy-Weinberg equilibrium, analysis of association based on generalized linear models (either for quantitative or binary traits), and analysis of multiple SNPs (haplotype and epistasis analysis). Permutation test and related tests (sum statistic and truncated product) are also implemented. Max-statistic and genetic risk-allele score exact distributions are also possible to be estimated.</p>
+<p>Il permet de réaliser des GWAS</p>
+</div>
+<div id="snpmatrix" class="section level2">
+<h2>snpMatrix</h2>
+<p>idem snpStats + HWE et clustering</p>
+</div>
+<div id="genabel" class="section level2">
+<h2>GenABEL</h2>
+<p>Il peut convertir des fichiers au format Illumina, PLINK(tped), linkage-like files, MACH files et text files. Il réalise des GWAS de traits binaire ou quantitatif</p>
+</div>
+<div id="snpstats" class="section level2">
+<h2>SNPStats</h2>
+<p>Il est disponible sur Bioconductor. Il peut prendre en entrée des fichiers ped, plink ou des vcf (grâce à GGtools). Il peut réaliser des TDT, des PCA et des LD.</p>
+</div>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

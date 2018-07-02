@@ -1,0 +1,30 @@
+---
+title: "Reunion du 27/02/2018"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+---
+
+* * * * * 
+
+# Réunion de stage avec Bruno et Erick
+
+<p style="text-align:justify";>Le stage fait parti d'un consortium européen piloté par un chercheur grec, aidé par une équipe suédoise et de l'équipe évolution des  poissons dont je fais partie.</p>
+
+<p style="text-align:justify";>J'ai à ma disposition 62 familles de 9 ou 10 individus dont j'ai les parents et les descendants. Cela représente entre 700 et 800 échantillons. Tous les ADN ont été extraits et sont disponibles. Une première évaluation de la qualité et de la quantité a été faite par Erick.  Une quantification plus précise a été effectuée par fluorescence  (bien plus précise) sur une partie des échantillons (160 environs) prévu au départ pour le RAD-seq. Cette mesure a été faite en plaque 96 puits mais n'a pas été approuvée. Il faut donc vérifier qu'ellle fonctionne bien en repassant ces mêmes extraits avec cette fois-ci la méthode générale approuvée mais qui passe les échantillons 1 par 1 [Qubit].</p>
+
+<p style="text-align:justify";>Cependant un autre consortium le 'genesis' a mis au point une puce à ADN avec Affymetrix contenant tous les SNP du bar, on souhaiterait donc utiliser cette puce dans le but de traiter l'esemble de nos échantillons pour trouver les SNP impliqués dans la réponse au stress via une mesure du taux de cortisol dans le sang des individus dont le sang a été prélevé. Il faudrait voir également pour faire de l'épigénétique sur ces mêmes échantillons pour étudier les profils de méthylation des gènes et de voir si les SNP sont influencés ou non par la méthylation. Pour cela deux méthodes de traitements sont envisagées : une RRBS ou une digestion double par 2 enzymes de restriction ( 1 sensible à la méthylation et une résistante à la méthylation).</p>
+
+<p style="text-align:justify";>Objectif du stage est de faire une analyse SNP par famille (tolérante ou non au stress). De donner la position des SNP liés à la tolérance ou à l'intolérance au stress.</p>  
+
+<p style="text-align:justify";>Le génome du bar (loup) est disponible mais n'est pas parfait. Il existe sous la forme d'une vingtaine de groupe de liaison dont 1 groupe n'est pas sûr (dans le sens ou les contigs sont assemblés mais l'assemblage des contigs n'a pas été performant, concluant) mais une annotation de se groupe de liaison est disponible.</p
+  
+<p style="text-align:justify";>Il serait bien de faire un génome browser avec dessus le génome du bar, les annotations, tous les SNP, la répartition des marqueurs génétique en fonction du taux de recombinaison du génome et y ajouter des données de variants issus de RNA-seq (donc touchant uniquement les gènes et non les zones intergéniques). Pour cela, différentes possibilités : utiliser Geneious (logiciel payant mais une bonne partie des données y sont déjà présentes), UCSC qui serait plus léger (donc moins gourmand en ressource informatique), Ensembl voir IGV.</p>
+  
+# Discussion avec Erick et Pierre-Alexandre
+
+<p style="text-align:justify";>Il est donc possible d'utiliser IGV pour visualiser tout ce qui a ?t? mentionn? ci-dessus. Le problème d'IGV est qu'il faut toujours recharger toutes les "séquences nécessaires" pour la visualisation. C'est-à-dire le génome de référence, les annotaions, les SNPs de la puce et ceux que l'on va trouver. Il faudrait donc voir pour rendre disponible IGV (car gratuit) avec les "séquences stockées" déjà dessus pour s'y connecter via une page web à distance. Il serait peut-être plus simple de télécharger UCSC genome browser ou Ensembl.</p>  
+
+<p style="text-align:justify";>L'utilisation de la puce sera très probablement possible si Bruno et Erick font un courrier expliquant ce qu'ils ont l'intention de faire avec les data qui sortiront de la puce (pas en compétition avec l'autre consortium).</p>

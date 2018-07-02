@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524132544254.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "76AF00B2",
+    "lastKnownWriteTime" : 1524493263,
+    "last_content_update" : 1524493256093,
+    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/statisticSNP.Rmd",
+    "project_path" : "statisticSNP.Rmd",
+    "properties" : {
+        "cursorPosition" : "15,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 19,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

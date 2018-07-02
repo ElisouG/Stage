@@ -1,0 +1,19 @@
+---
+title: "Scripts"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+Quelques explications sur mes scripts : 
+* * * * *
+
+# GATK : Découverte de Variants à partir de données de RNA-seq
+
+# Python : Correction du fichier d'annotation de *Dicentrarchus labrax*

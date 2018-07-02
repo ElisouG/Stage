@@ -1,0 +1,5 @@
+"0","library(ggplot2)"
+"0","library(kableExtra)"
+"2","Error in library(kableExtra) : 
+  aucun package nommé ‘kableExtra’ n'est trouvé
+"

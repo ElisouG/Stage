@@ -1,0 +1,79 @@
+name: "Stage : Génotypage du bar"
+navbar:
+  title: "Génotypage du bar"
+  left:
+  - text: "Home"
+    icon: fa-home
+    href: index.html
+  - text: "Bioinfo"
+    menu:
+    - text: "Description des outils"
+      href: tools_description.html
+    - text: "Tutoriaux suivis"
+      href: tuto.html
+    - text: "Scripts"
+      href: Scripts.html
+    - text: "Troubleshooting"
+      href: Troubleshooting.html
+  - text: "Mode d'emploi"
+    href: ModeEmploiGATK.html
+  - text: "Manip'"
+    menu:
+    - text: "Semaine 1"
+      href: LaboSemaine1.html
+    - text: "Semaine 2"
+      href: LaboSemaine2.html
+    - text: "Semaine 3"
+      href: LaboSemaine3.html
+  - text: "Résultats"
+    menu:
+    - text: "Annotation du génome"
+      href: ResultatsPython.html
+    - text: "GATK"
+      href: ResultatsGATK.html
+  - text: "Réunions"
+    menu:
+    - text: "Réunion du 27/02/2018"
+      href: premiereReunion_2702.html
+    - text: "Réunion du 14/03/2018"
+      href: deuxiemeReunion_1403.html
+    - text: "Réunion du 03/04/2018"
+      href: troisiemeReunion_0304.html
+    - text: "Réunion du 06/04/2018"
+      href: quatriemeReunion_0604.html
+    - text: "Réunion du 04/05/2018"
+      href: cinquiemeReunion_0405.html
+  - text: "Séminaires"
+    menu:
+    - text: "Séminaires CNRS"
+      href: Seminaires_CNRS.html
+  - text: "Biblio"
+    icon: fa-newspaper-o
+    menu:
+    - text: "Dicentrarchus labax"
+      href: Seabass.html
+    - text: "Méthodes de séquençage"
+      href: sequencing_methods.html
+    - text: "Annotation des SNPs"
+      href: SNP_annotation.html
+    - text: "Analyse statistiques des SNPs"
+      href: statisticSNP.html
+    - text: "GWAS Stress Fish"
+      href: GWAS_Stress_Fish.html
+    - text: "Annotation d'un génome"
+      href: genome_annotation.html
+    - text: "Managing Affymetrix Data"
+      href: ManagingAffyData.html
+    - text: "Pipeline tools"
+      href: pipeline_tools.html
+  right:
+  - text: "About"
+    icon: fa-info
+    href: about.html
+
+output_dir: "_site"
+
+output:
+  html_document:
+    include:
+      after_body: footer.html

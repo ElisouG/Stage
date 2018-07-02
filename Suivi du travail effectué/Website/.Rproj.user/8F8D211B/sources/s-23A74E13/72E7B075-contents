@@ -1,0 +1,47 @@
+---
+title: "Méthodes de séquençage"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+
+Some interesting extracts from papers :
+
+* * * * * 
+
+# RAD-seq and ddRAD-seq
+
+## Double digest RADseq: An inexpensive method for de novo SNP discovery and genotyping in model and non-model species, Peterson et al., 2010, PloS ONE.
+
+<p style="text-align:justify";>RADseq derivatives [9,20,21]). Instead, we use a double restriction enzyme (RE) digest (i.e., a restriction digest with two enzymes simultaneously) that results in at least five-fold reduction in library production cost-complete ddRADseq libraries</p>
+
+<p style="text-align:justify";>permits construction of ddRAD libraries from 100 ng or less of starting DNA</p>
+
+<p style="text-align:justify";>By combining precise and repeatable size selection with sequence-specific fragmentation, double digest Restriction-Site Associated DNA sequencing (ddRADseq)</p>
+
+<p style="text-align:justify";>unique sequences depending on enzyme choice, genome size and size- selection strategy. Thus, we have developed a de novo analysis strategy, which leverages this inherent reduction in data complex- ity to perform reference-free variant discovery and genotyping from ddRAD data.</p>
+
+<p style="text-align:justify";>read trimming, ortholog inference, and paralog/repeat pruning, we employ a graph-based distance clustering approach to recover groups of maximally similar sequences followed by a novel ''ploidy-aware'' quality filter. We first compute pairwise distances between all unique sequences using BLAT</p>
+
+<p style="text-align:justify";>employ the MCL (Markov Cluster Learning) graph clustering algorithm to discover groups of unusually similar sequences, analogous to the OrthoMCL phylogenetic ortholog finding approach</p>
+
+<p style="text-align:justify";>Per- base error rates on the Illumina platform are generally 0.1-1.0%, therefore we expect $31*0.001-31*0.01=3.1-31%$ of 31 bp reads to contain an error</p>
+
+<p style="text-align:justify";>we perform multiple alignments of all sequences in a group using MUSCLE</p>
+
+<p style="text-align:justify";>Alignments are then written as reference-ordered SAM/BAM files</p>
+
+<p style="text-align:justify";>Converting ddRADseq clusters to SAM/BAM with preserved individual and sample metadata facilitates popu- lation-aware variant detection and genotyping on virtually all modern short-read analysis platforms, including samtools mpileup [18] and the Genome Analysis Toolkit (GATK)</p>
+
+# EpiGBS 
+
+## EpiGBS: Reference-free reduced representation bisulfite sequencing, Van Gurp et al., 2016, Nature Methods.
+
+<p style="text-align:justify";>epiGBS, a reduced representation bisulfite sequencing method for cost-effective exploration and comparative analysis of DNA methylation and genetic variation in hundreds of samples de novo. This method uses genotyping by sequencing of bisulfite-converted DNA followed by reliable de novo reference construction, mapping, variant calling, and distinction of single-nucleotide polymorphisms (SNPs) versus methylation variation (software is available at <https://github.com/thomasvangurp/epiGBS>). The output can be loaded directly into a genome browser for visualization and into RnBeads for analysis</p>

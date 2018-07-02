@@ -1,0 +1,2 @@
+"0","boxplot(list(width(simseq.sel3), width(wid.simseq3), width(nar.simseq3)), names=c(""All fragments"","
+"0","""Wide size selection"", ""Narrow size selection""), ylab=""Locus size (bp)"")"

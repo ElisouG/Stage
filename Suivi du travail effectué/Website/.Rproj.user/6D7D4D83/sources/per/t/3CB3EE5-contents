@@ -1,0 +1,39 @@
+---
+title: "Description des outils"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * * 
+
+
+
+# Snakemake
+
+C'est un "outil" qui permet de gérer des outils et de les combiner dans un seul et m?me script pour ensuite en lancer un seul qui va tous les lancer un ? un les uns ? la suites des autres.
+
+# GATK - wdl
+
+GATK est un logiciel ?crit en langage java. On peut l'utiliser en direct ou via des scripts ?crit en langage wdl.
+
+# Stacks
+
+Il s'agit d'un pipeline d'analyse complet compos? de diff?rents scripts. Il n'y a plus qu'? cr?e l'arborescence n?cessaire au bon fonctionnement des scripts et de lancer ceux-ci.
+
+# snpEff
+
+Cet outils permet d'annoter des fichiers au format VCF (Vriant Call Format) ? partir d'une base de donn?es. Ici la base de donn?es a ?t? cr?e de toute pi?ce avec la commande build ? l'aide du g?nome du loup (bar).
+
+# samtools
+
+faidx : Cette commande permet de cr?? l'index d'un fichier fasta.
+
+# picard
+
+CreateSequenceDictionary : Cet ouils (commande) permet de cr?e un dictionnaire ? partir d'une s?quence au format fasta.

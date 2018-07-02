@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Mode d’emploi des scripts GATK</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Mode d’emploi des scripts GATK</h1>
+
+</div>
+
+
+<hr />
+<div id="liste-des-necessites-pour-faire-fonctionner-les-scripts" class="section level1">
+<h1>Liste des nécessités pour faire fonctionner les scripts</h1>
+<p>Il est nécessaire d’avoir les logiciels suivants : gatk.jar, cromwell.jar et wdltool.jar. Pour les faire tourner il est également nécessaire d’avoir Java 8. Cromwell a besoin d’1 fichier config pour tourner correctement.</p>
+</div>
+<div id="pre-requis" class="section level1">
+<h1>Pré-requis</h1>
+<p>Pour obtenir les fichiers d’index des fichiers bam, il est nécessaire d’installer la suite d’outils Samtools. Il faut ensuite taper la commande suivante dans un terminal, là où se situe les fichier bam : $ samtools index fichier.bam fichier.bam.bai .</p>
+<p>Pour écrire le fichier d’input au format texte, il faut taper le nom de l’individus (ou de l’échantillon) puis faire tab puis taper le chemin d’accès du fichier bam puis faire tab puis taper le chemin d’accès du fichier bam.bai en faisant un individu par ligne.</p>
+</div>
+<div id="important" class="section level1">
+<h1>Important</h1>
+<ul>
+<li>Changer les mails dans le début du script sge.<br />
+</li>
+<li>Vérifier tous les chemins inscrits au sein de tous les fichiers.<br />
+</li>
+<li>Vérifier que vous avez tous les fichiers et l’architecture suivante:</li>
+</ul>
+<div class="figure">
+<img src="Architecture_files_cluster_GATK.PNG" alt="Architecture de fichiers nécessaire" />
+<p class="caption">Architecture de fichiers nécessaire</p>
+</div>
+</div>
+<div id="les-donnees" class="section level1">
+<h1>Les données</h1>
+<p>Les données proviennent d’un séquençage suivi d’un alignement sur le génome qui produit des fichiers bam.</p>
+</div>
+<div id="les-scripts-pipeline-de-genotypage" class="section level1">
+<h1>Les scripts : Pipeline de génotypage</h1>
+<p>Ce pipeline est décomposé en 4 phases distinctes qui utilisent différentes resources et qui permettent de faire de la parallèlisation pour optimiser les temps de calculs. Ces 4 phases sont les suivantes :</p>
+<ul>
+<li>Alignement des données (réalisé par l’équipe de la plateforme MBB);<br />
+</li>
+<li>Nettoyage des données;<br />
+</li>
+<li>Découverte des variants;<br />
+</li>
+<li>Evaluation des variants.</li>
+</ul>
+<div class="figure">
+<img src="vue%20g%C3%A9n%C3%A9rale%20phases.PNG" alt="Vue générale du pipeline de génotypage" />
+<p class="caption">Vue générale du pipeline de génotypage</p>
+</div>
+<p>Ce pipeline est une collection de script wdl, bash et json à exécuter dans l’ordre sur une machine Linux avec une gestion des jobs de type gridengine comme un cluster de calcul. Il est également exécutable sur une machine Linux sans gestion des jobs tels qu’une station de travail.</p>
+<p>Pour rendre les données analysables pour la découverte de variants quelques étapes des phases précédentes nécessaires sont détaillées ci-après.</p>
+<p>Il existe un script qui lance les jobs sur le cluster mbb. “LancerScript.sge”</p>
+<div id="data-pre-processing-nettoyage-des-donnees" class="section level2">
+<h2>Data Pre-processing : Nettoyage des données</h2>
+<div id="lancement-du-script" class="section level3">
+<h3>Lancement du script</h3>
+<p>Enlever le # avant la ligne contenant java . Enregister. Taper dans le terminal : qsub LancerScript.sge</p>
+</div>
+<div id="explications" class="section level3">
+<h3>Explications</h3>
+<p>Le nettoyage des données est une phase nécessaire pour pouvoir réaliser la suite des analyses. En effet, elle permet d’obtenir des reads calibrés nécessaire à la phase 3. Cette phase comprend des étapes réalisées par Picard ou par GATK.<br />
+<img src="NettoyageDonnees.PNG" alt="Phase de nettoyage des donnees" /></p>
+<p>La première étape de cette phase appelée “ReorderSam” est réalisée par Picard. Cette étape range les reads en fonction de leur appartenance à un groupe de liaison dans l’ordre des contigs du génome de référence. En effet, si les contigs ne sont pas rangés dans le même ordre cela pose problème à GATK. C’est pour pallier à ce problème que l’on réalise cette étape. Elle est notamment nécessaire lorsque l’alignement a utilisé un ordre différents des groupes de liaisons.</p>
+<p>La seconde étape nommée “Markduplicates” utilise Picard. Cette étape est importante car elle marque puis élimine les duplicats de séquençage. Ces duplicas sont des artéfacts dû à la PCR d’enrichissement des banques qui est réalisée en amont du séquençage. Ils sont retirés pour éviter que ces reads soient considérés comme des morceaux de transcrits plus représentés que d’autres.</p>
+<p>La troisième étape intitulée “SortSam” est également réalisée par Picard. Cette étape range de nouveau les reads car certains ont été supprimés (masqués) par l’étape précédente. Cela permet d eles mettre en fin de fichier pour ne pas qu’il soit pris en compte dans l’étape qui suit.</p>
+<p>Les deux étapes qui vont suivre sont nécessaires car les algorithmes de découverte de variants utilisent la qualité des bases de chaque reads pour déterminer s’il s’agit bel et bien d’une variation ou d’un artéfact. En effet, les scores de qualité sont dépendants du nombre de reads présents. Or certains reads considérés comme des duplicats de séquençage ont été retirés. Il ne faut donc plus les prendre en compte. D’autre part, à ces scores de qualité sont appliqués des erreurs systématiques qui doivent être recalibrés. POur faire cela GATK utilise un algorithmle de “machine-learning” pour modeller empiriquement ces erreurs et ajuster les scores de qualité. Ces deux étapes sont “BaseRecalibrator”et “ApplyBQSR”. La première est réalisée 2 fois afin de visualiser l’efficacité de la recalibration des reads. Cette étape crée une table qui sera utilisée pour la recalibration. La seconde (“ApplyBQSR”) utilise donc la table de recalibration produite par l’étape précédente pour effectuer la recalibration de chacune des bases de chaque reads.</p>
+<p>La dernière étape nommée “AnalyzeCovariates” eégalement effectuée par GATK, produit des graphiques montrant l’efficacité de cette recalibration.</p>
+</div>
+</div>
+<div id="data-variant-calling-decouverte-de-variants" class="section level2">
+<h2>Data Variant Calling : Découverte de variants</h2>
+<div id="lancement-du-script-1" class="section level3">
+<h3>Lancement du script</h3>
+<p>Enlever le # avant la ligne contenant java . Enregister. Taper dans le terminal : qsub LancerScript.sge</p>
+</div>
+<div id="explications-1" class="section level3">
+<h3>Explications</h3>
+<p>Cette phase est entièrement réalisée par GATK et est la phase clé puisque c’est elle qui extrait les génotypes de chacun des individus. Le succès de cette phase dépend à la fois de la minimisation des Faux positifs et à la fois des Faux négatifs. POur faire cela, GATK procède en plusieurs étapes: la découverte de variants (étape “HaplotypeCaller”) par individus, la fusion des génotypes de chaque individus (étapes “CombineGVCFs” et “GenotypeGVCFs”) par lignée puis la filtration des variants par type de variations (SNPs ou INDELs). Les deux premières étapes ont été designés pour maximiser la sensibilité alors que la filtration permet de maximiser la spécificité par un choix de filtre adaptables à chaque jeu de données. Bien entendu, la découverte de variants dépends du type de données (Whole genome, transcriptome, exome, etc.) mais aussi de d’autres paramètres provenant du séquençage comme la couverture ou la profondeur de séquençage. <img src="DecouverteVariants.PNG" alt="Phase de découverte de variants" /></p>
+<p>La première étape “HaplotypeCaller” réalise en même temps la recherche de SNPs et d’INDELs par un ré-assemblage <em>de novo</em> des haplotypes des séquences actives de la région ciblée. Cet outils est capable de détecter 5 types de variations différentes. <a href="https://software.broadinstitute.org/gatk/documentation/article?id=3682">Source1</a> Il s’agit des SNPs, MNPs, INDELs, Mixed, et Symbolic. Les SNPs représentent des “single nucleotide polymorphism”. Les MNPs représentent les “multi-nucleotide polymorphism”. Les INDELs représentent des évènements d’insertions ou de délétions de nucléotides. Les Mixed représentent une combinaison de SNPs et d’INDELs à une seule et même position. Les Symbolic montrent qu’il se passe quelque chose à cette position mais qu’on ne sait pas exactement ce qu’il représente. Parfois, HaplotypeCaller utilise l’allèle “non ref” ou * pour signifier la présence d’une suppression étendue ou des évènements indéfinis comme un trés grand allèle, la perte d’un seul allèle, la perte de deux allèles, etc. <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=6926">Source 2</a> HaplotypeCaller produit un fichier au format gVCF (Variant Calling Format) pour chaque individus.</p>
+<p>La seconde étape “CombineGVCFs” combine en un seul fichier VCF tous les gVCFs produits dans l’étape précédente.</p>
+<p>La troisième étape “GenotypeGVCFs” utilise le fichier VCF de tous les gVCFs combinés de chaque individus pour faire un recalibrage des scores de qualité des variants. Cette analyse réalisée par lignée permet la détection de variants au niveau des locus complexes. Il s’agit d’une aggrégation conjointe multi-échantillons qui fusionnent les enregistrement de manière sophistiquée : pour chaque position du fichier VCF (gVCFs combinés), cet outils combinent tous les enregistrment couvrant le même position, produit des probabilités de génotype correct, re-génotype l’enregistrement nouvellement fusionné puis le ré-annote.</p>
+<p>La quatrième étape “SelectSNPs” ou “SelectINDELs” est la sélection des variations selon leur type (SNPs ou INDELs). Cette étape va permettre de séparer les variants afin de leur appliquer des filtres.</p>
+<p>La cinquième étape “hardfilterSNPs” ou “hardfilterINDELs” est l’application de filtres.En effet, selon les bonnes pratiques de découverte de Variants à partir de données de RNA-seq, il faut réaliser un “hard-filtering”. C’est-à-dire choisir des valeurs seuils qui définissent quelles données sont considérées comme correcte de celles qui ne le sont pas. Pour cela, ils recommandent différentes valeurs pour différents champs en fonction du type de variation (SNPs ou Indels). Ces valeurs sont présentées dans le tableau suivant :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Sigle du champs utilisé</th>
+<th align="center">Valeur si SNPs</th>
+<th align="center">Valeur si INDELs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">QD</td>
+<td align="center">&lt;2.0</td>
+<td align="center">&lt;2.0</td>
+</tr>
+<tr class="even">
+<td align="center">FS</td>
+<td align="center">&gt;60.0</td>
+<td align="center">&gt;200.0</td>
+</tr>
+<tr class="odd">
+<td align="center">SOR</td>
+<td align="center">&gt;3.0</td>
+<td align="center">&gt;10.0</td>
+</tr>
+<tr class="even">
+<td align="center">ReadPosRankSum</td>
+<td align="center">&lt;-8.0</td>
+<td align="center">&lt;20.0</td>
+</tr>
+<tr class="odd">
+<td align="center">MQ</td>
+<td align="center">&lt;40.0</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">MQRankSum</td>
+<td align="center">&lt;-12.5</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">InbreedingCoeff</td>
+<td align="center"></td>
+<td align="center">&lt;-0.8</td>
+</tr>
+</tbody>
+</table>
+<p>Ces différents sigles représentent différentes annotation qui signifient :</p>
+<ul>
+<li><strong>Quality by depth (QD)</strong> : Cette annotation met en perspective le score QUAL de la variante en la normalisant pour la quantité de couverture disponible. Parce que chaque lecture contribue un peu au score QUAL, les variantes dans les régions avec une couverture profonde peuvent avoir des scores QUAL artificiellement gonflés, donnant l’impression que l’appel est soutenu par plus de preuves qu’il ne l’est réellement. Pour compenser cela, nous normalisons la confiance de la variante par la profondeur, ce qui nous donne une image plus objective de la qualité de l’appel.<br />
+</li>
+<li><strong>Fischer’s Strand bias (FS)</strong> : Le biais de brin est un type de biais de séquençage dans lequel un brin d’ADN est favorisé par rapport à l’autre, ce qui peut entraîner une évaluation incorrecte de la quantité de preuve observée pour un allèle par rapport à l’autre. L’annotation FisherStrand est l’une de plusieurs méthodes qui vise à évaluer s’il y a un biais de brin dans les données. Il utilise le test exact de Fisher pour déterminer s’il existe un biais de brin entre les brins aller et retour pour l’allèle de référence ou l’allèle alternatif. La sortie est une valeur p de Phred. Plus la valeur de sortie est élevée, plus il y a de risque de biais. Plus de biais indique des faux positifs.<br />
+</li>
+<li><strong>Strand Odds Ratio (SOR)</strong> : C’est une autre façon d’estimer le biais de brin en utilisant un test similaire au test de rapport de cotes symétrique. SOR a été créé parce que FS tend à pénaliser les variantes qui se produisent aux extrémités des exons. Les lectures aux extrémités des exons tendent à n’être couvertes que par des lectures dans une direction et FS donne un mauvais score à ces variantes. SOR prendra en compte les ratios de lectures qui couvrent les deux allèles.<br />
+</li>
+<li><strong>ReadPosRankSum Rank Sum Test for relative positioning of REF versus ALT alleles within reads (ReadPosRankSum)</strong> : Cette annotation au niveau des variantes teste s’il existe des preuves de biais dans la position des allèles dans les lectures qui les supportent, entre les allèles de référence et les allèles alternatifs. Voir un allèle seulement près des extrémités des lectures indique une erreur, car c’est là que les séquenceurs ont tendance à faire le plus d’erreurs. Cependant, certaines variantes situées près des bords des régions séquencées seront nécessairement couvertes par les extrémités des lectures, donc nous ne pouvons pas simplement définir un seuil absolu de «distance minimale à partir de la fin de la lecture». C’est pourquoi nous utilisons un test de somme de rang pour évaluer s’il y a une différence dans la façon dont l’allèle de référence et l’allèle alternatif sont supportés. Le résultat idéal est une valeur proche de zéro, ce qui indique qu’il y a peu ou pas de différence dans la localisation des allèles par rapport à la fin des lectures. Une valeur négative indique que l’allèle alternatif se trouve aux extrémités des lectures plus souvent que l’allèle de référence. Inversement, une valeur positive indique que l’allèle de référence se trouve plus souvent à l’extrémité des lectures que l’allèle alternatif.<br />
+</li>
+<li><strong>Root Mean Square of the mapping quality of reads across all samples (MQ)</strong> : Cette annotation fournit une estimation de la qualité de mappage globale des lectures prenant en charge un appel de variante. Il produit à la fois des données brutes (somme des carrés et nombre de lectures totales) et le carré moyen calculé. Les données brutes sont utilisées pour calculer avec précision le carré moyen en combinant plus d’un échantillon.<br />
+</li>
+<li><strong>MappingQualityRankSum Rank Sum Test for mapping qualities of REF versus ALT reads (MQRankSum)</strong>: Cette annotation au niveau des variants compare les qualités de cartographie des lectures supportant l’allèle de référence avec celles supportant l’allèle alternatif. Le résultat idéal est une valeur proche de zéro, ce qui indique qu’il y a peu ou pas de différence. Une valeur négative indique que les lectures supportant l’allèle alternatif ont des scores de qualité de cartographie inférieurs à ceux supportant l’allèle de référence. Inversement, une valeur positive indique que les lectures supportant l’allèle alternatif ont des scores de qualité de cartographie plus élevés que ceux supportant l’allèle de référence. Cette annotation peut être utilisée pour évaluer la confiance dans un appel de variante et est une covariable recommandée pour le recalibrage de variante (VQSR). Trouver une différence de qualité statistiquement significative suggère que le processus de séquençage et / ou de cartographie peut avoir été biaisé ou affecté par un artefact. En pratique, nous ne filtrons que les valeurs négatives faibles lors de l’évaluation de la qualité des variants car l’idée est de filtrer les variants pour lesquels la qualité des données supportant l’allèle alternatif est relativement faible. Le cas inverse, où c’est la qualité des données supportant l’allèle de référence qui est le plus bas (résultant en des scores de rangs positifs), n’est pas vraiment informatif pour les variantes de filtrage.<br />
+</li>
+<li><strong>Inbreeding Coefficient (InbreedingCoeff)</strong>: Cette annotation évalue s’il existe des preuves de consanguinité dans une population. Plus le score est élevé, plus le risque de consanguinité est élevé. Le calcul est une généralisation continue du test de Hardy-Weinberg pour le déséquilibre qui fonctionne bien avec une couverture limitée par échantillon. La sortie est la statistique F de l’exécution du test HW pour le déséquilibre avec les valeurs PL.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

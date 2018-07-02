@@ -1,0 +1,45 @@
+---
+title: "Deuxieme semaine au labo"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * * 
+
+Pour avoir plus de détail : lisez mon cahier de labo.
+
+* * * * * 
+
+# 26/03/2018
+
+<p style="text-align:justify";>Migration des digestion de vendredi. Résultats peu concluant : les bandes semblent tassées, comme si quelquechose intervenait et empêchait la migration. Pour essayer de palier à cela : digestion double sur la nuit entière puis purification.</p>
+![Gel d'agarose à 0,6% coloré par du BET des produits de digestion](Gel18-03-26.png)
+
+# 27/03/2018
+
+<p style="text-align:justify";>Purification sur billes des produits de digestion.</p>
+<p style="text-align:justify";>Migration sur gel d'agarose.</p>
+![Gel d'agarose à 0,6% coloré par du BET](Gel18-03-27.png)
+
+# 28/03/2018
+
+<p style="text-align:justify";>Ligation des adaptateurs et purification à l'aide de billes. On a mis 10 fois plus d'adaptateurs en Y. Préparation des amorces PCR à 10µM.</p>
+
+# 29/03/2018
+
+<p style="text-align:justify";>PCR d'enrichissement</p>
+<p style="text-align:justify";>Test de digestion avec différentes enzyme de restriction (*EcoRI*/*MseI* ; *ApekI* ; *PstI*)</p>
+<p style="text-align:justify";>Récupération de l'éluat des billes 1 de la double SPRI</p>
+<p style="text-align:justify";>Purification des produits de PCR</p>
+
+# 30/03/2018
+
+<p style="text-align:justify";>Passage au fragment analyser des différentes fraction obtenu lors des purification et des derni?res digestion avec les enzymes de la plate-forme.</p>
+![Passage au Fragment Analyzer des produits de digestion](Gel18-03-30.png)
+

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Résultats de la correction du génome</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Résultats de la correction du génome</h1>
+
+</div>
+
+
+<div id="visualiser-les-longueurs-ajoutees" class="section level1">
+<h1>Visualiser les longueurs ajoutées</h1>
+<div id="importation-des-donnees-nostart-et-nostop" class="section level2">
+<h2>Importation des données NoStart et NoStop</h2>
+<p>Les données de NoStart et NoStop ont été obtenues à l’aide d’un script Python maison. Ce script récupère, à partir des erreurs warnings donnés par le logiciel snpEff, les différents gènes qui n’ont pas de codon start et/ou de codon stop. Puis il réalise une recherche de motif (codon start ou codon stop) à jusqu’à 100bp en amont d’un gène et jusqu’à 1000bp en aval du gène. En parallèle, il note tout cela au sein de deux fichiers au format texte. Il est donc nécessaire d’importer et d’ouvrir ces fichiers pour pouvoir examiner les longueurs ajoutées aux gènes pour qu’ils aient un codon start et codon stop.</p>
+<p>Le fichier NoStart regroupe <strong>1239</strong> observations de 8 variables. Le fichier NoStop, quant à lui, regroupe <strong>3830</strong> observations de 8 variables.</p>
+<p>Les observations (lignes du tableau) représentent le nombre de codons Start ou Stop qui ont été cherchés et trouvés par le script Python. Les variables (colonnes du tableau) représentent différentes choses : le chromosome (Groupe de liaison : LG), la position des anciens codons start ou stop, la nouvelle position des codons start ou stop, la longueur qui a été ajoutée ainsi que le brin sur lequel se situe le gène.</p>
+<p><strong><em>Tableau présentant le nombre de codon start (ATG) trouvés</em></strong></p>
+<pre><code>##                    summary(NoStart_Data$codon)
+##              ATG                          1239</code></pre>
+<p><strong><em>Tableau présentant le nombre de codon stop (TAA, TGA, TAG) trouvés</em></strong></p>
+<pre><code>##                    summary(NoStop_Data$codon)
+##              TAA                         1295
+##              TAG                          772
+##              TGA                         1763</code></pre>
+<p><strong><em>Tableau présentant le nombre de codon start ou stop trouvés par chromosome</em></strong></p>
+<pre><code>##                  summary(NoStart_Data$chromosome)
+##            LG10                                34
+##            LG11                                27
+##            LG12                                42
+##            LG13                                41
+##            LG14                                48
+##            LG15                                41
+##            LG16                                52
+##            LG17                                29
+##         LG18-21                                13
+##            LG19                                43
+##            LG1A                                54
+##            LG1B                                30
+##             LG2                                32
+##            LG20                                47
+##         LG22-25                                43
+##            LG24                                23
+##             LG3                                16
+##             LG4                                45
+##             LG5                                54
+##             LG6                                34
+##             LG7                                56
+##             LG8                                49
+##             LG9                                38
+##             LGx                                30
+##              UN                               318
+##                  summary(NoStop_Data$chromosome)
+##            LG10                              127
+##            LG11                              106
+##            LG12                              110
+##            LG13                              118
+##            LG14                              118
+##            LG15                               89
+##            LG16                              110
+##            LG17                               90
+##         LG18-21                               61
+##            LG19                              112
+##            LG1A                              134
+##            LG1B                               92
+##             LG2                              127
+##            LG20                              130
+##         LG22-25                              126
+##            LG24                               47
+##             LG3                               52
+##             LG4                              103
+##             LG5                              118
+##             LG6                              121
+##             LG7                              153
+##             LG8                              137
+##             LG9                               91
+##             LGx                               71
+##              UN                             1287</code></pre>
+<p><strong><em>Tableau présentant le nombre de codon start ou stop trouvés par brin (+ ou -)</em></strong></p>
+<pre><code>##     summary(NoStart_Data$brin) summary(NoStop_Data$brin)
+##   -                        634                      1949
+##   +                        605                      1881</code></pre>
+</div>
+<div id="creation-de-graphiques" class="section level2">
+<h2>Création de graphiques</h2>
+<p><strong><em>Représentation des longueurs ajoutées pour les codons start.</em></strong> L’axe des abscisses représente la longueur ajoutée en pb en fonction du brin. L’axe des ordonnées représente le nombre d’occurence de la longueur ajoutée en fonction du brin. Les couleurs permettent de visualiser la répartition des différentes longueurs ajoutées au sein des chromosomes (une couleur par chromosome).</p>
+<p><img src="ResultatsPython_files/figure-html/graph_longueurs_ajoutees_start-1.png" width="672" /></p>
+<p><strong><em>Représentation des longueurs ajoutées pour les codons stop.</em></strong> L’axe des abscisses représente la longueur ajoutée en pb. L’axe des ordonnées représente le nombre d’occurence de la longueur ajoutée. Les couleurs permettent de visualiser la répartition des différentes longueurs ajoutées au sein des chromosomes (une couleur par chromosome).</p>
+<p><img src="ResultatsPython_files/figure-html/graph_longueurs_ajoutees_stop-1.png" width="1536" /></p>
+<p><strong>Remarque :</strong> Ce graphique ne peut être transformé en log car il existe des valeurs (Count) égales à 0. Or log(0) n’existe pas et ne peut donc pas être “dessiné” sur le graphique. Le graphique ci-dessous est en log mais on perd l’information des chromosomes.</p>
+<p>Voici un extrait du <strong><em>Tableau présentant le nombre d’occurrence (Count) en fonction de la longueur ajoutée (Length.add).</em></strong></p>
+<pre><code>##   Length.add Count
+## 1          2  1596
+## 2          3  1474
+## 3          5     7
+## 4          6     7
+## 5          8     5
+## 6          9     6</code></pre>
+<p><strong><em>Représentation des longueurs ajoutées pour les codons stop.</em></strong> L’axe des abscisses représente la longueur ajoutée en pb. L’axe des ordonnées représente le log du nombre d’occurence de la longueur ajoutée. <img src="ResultatsPython_files/figure-html/graph_longueurs_ajoutees_stop_log-1.png" width="672" /></p>
+</div>
+</div>
+<div id="visualiser-la-validation-par-le-transcriptome" class="section level1">
+<h1>Visualiser la validation par le transcriptome</h1>
+<div id="importation-des-donnees-nostart-et-nostop-testees" class="section level2">
+<h2>Importation des données NoStart et NoStop testées</h2>
+<p>Les données de NoStart et NoStop testées ont été obtenues à l’aide d’un script Python maison. Ce script récupère, à partir des deux fichiers au format texte, les coordonnées des nouveaux CDS et les compare aux coordonnées des CDS du transcriptome de <em>D. labrax</em>. Ce script rajoute un “filtre” (PASS ou Not valid) en fonction du résultat du test (comparaison). Si les nouvelles coordonnées sont comprises “dans” les coordonnées du transcriptome alors le “filtre” écrit est PASS, sinon il écrit Not valid. Il est donc nécessaire d’importer et d’ouvrir ces fichiers pour pouvoir examiner les filtres appliqués pour chaque longueur ajoutée précédement.</p>
+<p><em>“Si tu veux utiliser ce texte pour ton rapport, il faudrait que tu explicites plus ce que tu veux dire par”et les compare aux coordonnées des CDS du transcriptome de D. labrax“. En fait, il faut que tu précises que des nouvelles données de séquençage de transcrits, plus complètes que celles utilisées lors de l’annotation initiale du transcriptome, ont été utilisées pour assembler un nouveau transcriptome. Et c’est au coordonnées de ces nouveaux transcrits que tu confrontes les modifications d’annotations que tu proposes. Il faut aussi savoir que ce test n’est que relatif car il est tout à fait possible que certains transcrits n’aient pas encore été séquencés jusqu’au bout ou soient carrément absents du séquençage. En effet l’expression de certains gènes est soit spécifique du tissu ou du stade de développement et on ne les a pas trouvé dans ce qu’on a séquencé. Ce contrôle par la taille n’est donc valable que pour une partie des corrections que tu as effectuées. Le test le plus complet mais aussi probablement le plus long est celui qui sera fait par une traduction des nouveau CDS obtenus.”</em> - <strong><em>Erick</em></strong></p>
+<p>Le fichier NoStart testé regroupe <strong>1239</strong> observations de 6 variables. Le fichier NoStop testé, quant à lui, regroupe <strong>3830</strong> observations de 6 variables.</p>
+<p>Les observations (lignes du tableau) représentent le nombre de codons Start ou Stop qui ont été testés par le script Python. Les variables (colonnes du tableau) représentent différentes choses : le chromosome (Groupe de liaison : LG), les coordonnées du CDS du transcriptome, les nouvelles coordonnées du CDS ainsi que le “filtre” qui a été ajouté.</p>
+</div>
+<div id="creation-de-graphiques-1" class="section level2">
+<h2>Création de graphiques</h2>
+<p><strong><em>Représentation des “filtres” pour les codons start.</em></strong> L’axe des abscisses représente les filtres. L’axe des ordonnées représente le nombre d’occurence de chaque “filtre”. Les couleurs permettent de visualiser la répartition des différents “filtres” au sein des chromosomes (une couleur par chromosome). <img src="ResultatsPython_files/figure-html/graph_start_testes-1.png" width="672" /></p>
+<p><strong><em>Tableau présentant le nombre d’occurrence (Count) en fonction du filtre (Filter) pour les NoStop testés.</em></strong></p>
+<pre><code>##      Filter Count
+## 1 Not Valid   683
+## 2      PASS   556</code></pre>
+<p><strong><em>Représentation des “filtres” pour les codons stop.</em></strong> L’axe des abscisses représente les filtres. L’axe des ordonnées représente le nombre d’occurence de chaque “filtre”. Les couleurs permettent de visualiser la répartition des différents “filtres” au sein des chromosomes (une couleur par chromosome). <img src="ResultatsPython_files/figure-html/graph_filtre_stop-1.png" width="672" /></p>
+<p><strong><em>Tableau présentant le nombre d’occurrence (Count) en fonction du filtre (Filter) pour les NoStart testés.</em></strong></p>
+<pre><code>##      Filter Count
+## 1 Not Valid  2213
+## 2      PASS  1617</code></pre>
+</div>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

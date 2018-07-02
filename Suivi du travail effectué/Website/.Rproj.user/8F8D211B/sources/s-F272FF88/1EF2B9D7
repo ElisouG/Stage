@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524483866621.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1EF2B9D7",
+    "lastKnownWriteTime" : 1524493108,
+    "last_content_update" : 1524493102290,
+    "path" : "/media/sf_DATA/Stage/Rstudio/Notebook_stage.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "523,321",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 25,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,8 @@
+"0","nar.simseq3 <- size.select(simseq.sel3, min.size = 210, max.size = 260, graph=TRUE, verbose=TRUE)"
+"1","1693"
+"1"," fragments between "
+"1","210"
+"1"," and "
+"1","260"
+"1"," bp 
+"

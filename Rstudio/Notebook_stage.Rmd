@@ -1,0 +1,993 @@
+---
+title: "Notebook - Génotypage du Bar"
+author : Elise GUERET
+date : '`r format(Sys.time(), "%d %B %Y")`'
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: vignette
+  incremental: true
+---
+
+
+#Objectif du stage
+
+<p style="text-align:justify";>Faire une analyse SNP par famille (tolérante ou non au stress en donnant la position des SNP liés à la tolérance ou à l'intolérance au stress = > donc faire une GWAS.(association des SNP avec la tolérance ou l'intolérance au stress)</p>
+
+
+#Journal de bord - Février
+
+## Jour 1 : 26/02/2018
+
+<p style="text-align:justify";>Visite des différents bâtiments (22 là où sera mon bureau, 24 là où je vais faire les manip' et 21 l'administration de l'ISEM).</p>
+
+<p style="text-align:justify";>Sur kimura demande de tickets : 
+
+* accès au cluster de calcul : 9QW-N69-2R6V        
+* accès au logiciel d'analyses de données : ESL-4NH-4N8X        
+* accès au site de MBB : 2D9-58Q-GRPB       
+
+RQE: Le MBB est la plate-forme bioinformatique de l'université de Montpellier 2</p>
+
+<p style="text-align:justify";>dépôt des conventions de stage sur le bureau de Monique SALTEL.</p>
+
+<p style="text-align:justify";>Se renseigner sur Researchgate</p>
+
+## Jour 2 : 27/02/2018
+
+<p style="text-align:justify";>Récupération du protocole pour le RAD-seq</p>
+
+<p style="text-align:justify";>Réunion de stage avec Bruno et Erick :
+  - Le stage fait parti d'un consortium européen piloté par un chercheur grec, aié par une équipe suédoise et de l'équipe volution des poissons dont je fais partie.
+  - J'ai a ma disposition 62 familles de 9 ou 10 individus dont j'ai les parents et les descendants.
+  - Cela représente entre 700 et 800 échantillons.
+  - Tous les ADN ont été extraits et sont disponibles.
+  - une première évaluation de la qualité et de la quantité a été faite par Erick.
+  - Une quantification plus précise a été effectuée par fluorescence (bien plus précise) sur une partie des échantillons (160 environs) pr?vu au épart pour le RAD-seq.
+  - Cette mesure a été faite en plaque 96 puits mais n'a pas été approuvée. Il faut donc vérifier qu'ellle fonctionne bien en repassant ces mêmes extraits avec cette fois-ci la méthode générale approuvée mais qui passe les échantillons 1 par 1.
+  - Cependant un autre consortium le 'genesis' a mis au point une puce à ADN avec Affymetrix contenant tous les SNP du bar, on souhaiterait donc utiliser cette puce dans le but de traiter l'esemble de nos échantillons pour trouver les SNP impliqués dans la réponse au stress via une mesure du tausx de cortisols dans le sang des individus dont le sang a été extrait.
+  - Il faudrait voir également pour faire de l'épigéntique sur ces mêmes échantillons pour ?tudier les profils de méthylation des gènes et de voir si les SNP sont influenc?s ou non par la méthylation. Pour cela deux méthodes de traitements sont envisag?es : une RRBS ou une digestion double par 2 enzymes de restriction ( 1 sensible à la méthylation et une résistante à la méthylation).
+  - Objectif du stage est de faire une analyse SNP par famille (tolérante ou non au stress).
+  - Donner la position des SNP liés à la tolérance ou à l'intolérance au stress.
+  - Le génome du bar (loup) est disponible mais n'est pas parfait. Il existe sous la forme d'une dizaine de groupe de liaison dont 1 groupe n'est pas s?r (dans le sens ou les contigs sont assembl?s mais l'assemblage des contigs n'a pas été performant, concluant) mais une annotation de se groupe de liaison est disponible.
+  - Il faut préférer travailler en ligne de commande plut?t que sur le serveur galaxy.
+  - Il serait bien de faire une génome browser avec dessus le génome du bar, les annotations, tous les SN, la r?partition des marqueurs gén?tique en fonction du taux de recombinaison du génome et y ajouter des données de variants issus de RNA-seq (donc touchant uniquement les gènes et non les zones intergéniques). Pour cela, différentes possibilités : utiliser Geneious (logiciel payant mais une bonne partie des données y sont éj? présentes), UCSC qui serait plus l?ger (donc moins gourmand en ressource informatique), Ensembl voir IGV.</p>
+
+<p style="text-align:justify";>Réunion avec Erick et Pierre-Alexandre
+  - Pour parler du génome browser.
+  - Il est donc possible d'utiliser IGV pour visualiser tout ce qui a été mentionné ci-dessus.
+  - Le probl?me d'IGV est qu'il faut toujours recharger toutes les "séquences n?cessaires" pour la visualisation. C'estéch-dire le génome de référence, les annotaions, les SNPs de la puce et ceux que l'on va trouver.
+  - Il faudrait donc voir pour rendre disponible IGV (car gratuit) avec les "séquences stock?es" éj? dessus pour s'y connecter via une page web à distance.
+  - Il serait peut-être plus simple de télécharger UCSC genome browser ou Ensembl.
+  - L'utilisation de la puce sera très probablement possible si Bruno et Erick font un courrier expliquant ce qu'ils ont l'intention de faire avec les data qui sortiront de la puce (pas en comp?tition avec l'autre consortium).</p>
+
+<p style="text-align:justify";>Quelques remarques : 
+  - Une fichier VCF contient tous les variants (SNP) sous forme d'un encodage pour pouvoir le flanquer sur une séquence Fasta d'un génome (Par exemple avec IGV).
+  - Sur Geneious : un RepeatMasker c'est le positionnement de r?p?titions en tandem (trouvées et recherch?es).
+  - Un manhattan plot représente un score d'association.</p>
+
+<p style="text-align:justify";>Je suis elligible pour le remboursement de la moitié de mes frais de transport.J'ai fait une demande orale auprès de Bruno qui a donné son aval et auprès de la secrétaire Monique qui fait le n?cessaire pour m'envoyer un dossier si le besoin est.</p>
+
+<p style="text-align:justify";>J'ai récupér? auprès de la secrétaire mes papiers concernant la visite H et S du 14/03/2018 à 14h30.</p>
+
+<p style="text-align:justify";>J'ai regaré pour le genome browser en ligne pour une équipe de recherche ou plus sur le bar. Cela donne pour les différents outils propos?s par Erick :
+  - IGV : Le code est dispo sur Github mais sous licence MIT.
+  - UCSC : le mettre sur le serveur c'est possible mais c'est payant sauf pour la recherche acaémique sans profit.
+  - Ensembl : création d'un site web via leur site pour avoir notre propre site Ensembl param?tr? comme on le souhaite.</p>
+
+<p style="text-align:justify";>Je me suis renseign?e sur le fonctionnement de GATK en ligne de commande et non via le serveur galaxy. Il y a deux grosses ?tapes, une ?tape de pr?-processing et une ?tape de processing, qui contiennent chacunes différentes ?tapes.</p>
+
+<p style="text-align:justify";>J'ai également regaré les cours sur les analyses bioinformatiques et statistiques des polymorphismes. Car j'imagine que l'objectif global de mon stage est deréaliser une GWAS sur les SNP liés à la tolérance ou à l'intolérance au stress. J'aurai donc à ma disposition quelquechose comme deux tableaux de données avec 1 liés au taux de cortisol dans le sang des poissons et donc à leur stress et un 2?me lié au position des SNP sur le génome du Bar (loup).</p>
+
+<p style="text-align:justify";>Je viens de recevoir mes LOG pour me connecter sur le serveur MBB pour lancer mes scripts.</p>
+
+## Jour 3 : 28/02/2018
+
+<p style="text-align:justify";>J'ai re?u le fichier à compl?ter pour me faire rembourser mes titres de transport.</p>
+
+<p style="text-align:justify";>Je dois me renseigner sur le fonctionnement de SnpEff.</p>
+
+<p style="text-align:justify";>téléchargement des fichiers/logiciels suivants:
+  - IGV
+  - SnpEff
+  - Java (qui ne fonctionne pas avec google chrome)</p>
+
+<p style="text-align:justify";>J'ai r?ussi à lancer IGV mais pas SnpEff car il est en jar. Dans mon .bat il faut que je rajoute un fichier input "genome_version".</p>
+
+<p style="text-align:justify";>J'ai récupér? les data du génome du bar et les snp  prèsents sur la puce affymetrix.</p>
+
+<p style="text-align:justify";>Normalement Erick et Bruno doivent ?crire ce qu'ils veulent obtenir avec la puce pour que l'autre consortium ("genesis") accepte que l'on utilise leur puce et ainsi génotyper l'ensemble de nos échantillons et non uniquement 160/800.</p>
+
+<p style="text-align:justify";>J'ai cré? un fichier excel pour suivre mes heures de  prèsence au sein du stage.</p>
+
+<p style="text-align:justify";>J'ai install? un Ubuntu sous mon Windows10 et j'ai r?ussi à me connecter en ssh sur le serveur.</p>
+
+
+#Journal de bord - Mars
+
+## Jour 4 : 01/03/2018
+
+<p style="text-align:justify";>La neige n'a pas fondu donc pas de transport en commun donc pas de stage.</p>
+
+## Jour 5 : 02/03/2018
+
+<p style="text-align:justify";>La neige a commenc? à fondre mais il n'y a toujours pas de transport en commun donc pas de stage.</p>
+
+## Jour 6 : 05/03/2018
+
+<p style="text-align:justify";>J'ai r?ussi à visualiser un peu les data que m'a donné Erick gr?ce à IGV sans grand int?r?t sous Windows ^^.</p>
+
+<p style="text-align:justify";>Je suis un tuto snakemake à l'adresse suivante : <https://snakemake.readthedocs.io/en/stable/tutorial/setup.html>. Dans le but deréaliser un pipeline GATK gr?ce aux data de RAD-seq qu'on va surement obtenir.
+Je suis bloquée car il me manque plein de commande comme apt, apt-get install, etc. Donc je ne peux pas continuer le tuto puisque que je ne sais pas comment installer ces paquets manquants ^^.
+J'ai eu une iée, tout recommencer mais sur mon ordi cette fois et non pas sur le serveur MBB. (Rqe : C'est beaucoup plus lent sur mon ordi que sur le serveur).
+Commeçan'a pas mieux fonctionné, j'ai écié de regarder la viéo "Linux on Windows" et le résultat est que je n'ouvrais pas le bon ubuntu sur mon ordi et du coup je n'avais pas accès à mon r?pertoire ^^. Mais maintenant c'est bon! Il faut ouvrir l'invite de commande windows et taper bash pour "transformer" l'invite de commande windows en shell ubuntu.
+Du coup je peux avoir accès à mes documents en tapant : mnt/c/Users/missl/Documents/Stage UM- ISEM.
+Tuto Snakemake termin?!!!! J'ai compris commentçafonctionne il n'y a plus qu'? l'adapter pour GATK.</p>
+
+<p style="text-align:justify";>Installation de GATK en ligne de commande impossible donc je ne peux pas le faire depuis mon ordi et donc je ne peux pas faire de tuto.</p>
+
+<p style="text-align:justify";>téléchargement d'un package R pour avoir des moéles d'articles en Rmarkdown. Le moéle PLOS ne peut pas ?tre knitr.</p>
+
+<p style="text-align:justify";>Selon Erick, il faut que je suive une réunion H & S au sein du bâtiment 24 et non au sein du bâtiment 22 car c'est au sein de celui-ci que je vais faire des manip' et non au 22. Je lui ai donc demané quand ils ?taient disponible cette semaine sachant que moi j'êtais disponible toute la semaine ^^.</p>
+
+<p style="text-align:justify";>J'aurai aim? faire un tuto R affy pour me remêmorer les ?tapes ?réaliser pour faire une analyse de puce Affymetrix avant d'obtenir mes data.</p>
+
+## Jour 7 : 06/03/2018
+
+<p style="text-align:justify";>Aujourd'hui, je teste à nouveau de faire fonctionner GATK sur mon ordi. Pour feinter le non fonctionnement sous windows, je le télécharge sous windows, ensuite je vais le éplacer dans le bon r?pertoire pour le unzip via la ligne de commande et j'esp?re queçava fonctionner cette fois. Youpiçafonctionne !!</p>
+
+<p style="text-align:justify";>Je suis un premier tuto GATK à l'adresse suivante :
+<https://software.broadinstitute.org/wdl/documentation/article?id=7158> . Pour l'instant ça se passe pas mal même si c'est moins simple qu'un snakemake ^^. Puis un deuxième tuto GATK à l'adresse suivante : <https://software.broadinstitute.org/wdl/documentation/article?id=7221> . Ca fonctionne pas tip-top. Et je ne sais pas pourquoi mais demain je lance mes .wdl direct depuis le serveur ^^. </p>
+
+<p style="text-align:justify";>Je viens de voir Erick qui me dit qu'il faut que je refasse tout ce que je viens de faire sur le serveur directement et non pas sur mon ordi...</p> 
+
+<p style="text-align:justify";>J'ai commenc? à lire un article sur Stacks mais c'est hard ^^</p> 
+
+## Jour 8 : 07/03/2018
+
+<p style="text-align:justify";>Comme je dois refaire tous mes tutos éj? effectué sur le serveur, j'utilise WinSCP pour copier mes fichiers dans mon home sur le serveur ^^. Pour cela j'ai suivi le tuto à l'adresse suivante : <http://www.otium-france.net/2009/10/20/tutorial-transferer-des-fichiers-sur-un-serveur-en-scp-sftp-via-winscp/>.</p> 
+
+<p style="text-align:justify";>Les fichiers n?cessaires à faire tourner GATK sont les suivants:
+  - refIndex = fasta.fai
+  - refFasta = fasta
+  - refDict = dict
+  - inputBAM = bam
+  - bamIndex = bai
+  - gatk = jar
+  - name = string "nom de l'échantillon".
+Pour créer un fichier refDict, il faut tout d'abord installer BWA, SAMtools et picard. Ensuite il faut :
+  1 générer le BWAIndex
+    $ bwa index -a bwtsw reference.fa [rqe : bwtsw-> permet de choisir l'algorithme n?cessaire à aligner tout le génome humain]
+  2 générer l'index du fichier fasta
+    $ samtools faidx reference.fa
+  3 générer le dictionnaire (latest version = ce qui fonctionne sur mon ordi)
+    $ java -jar picard.jar CreataSequenceDictionary \
+    $ REFERENCE=reference.fa \
+    $ OUTPUT=reference.dict
+  
+  ou (older version)
+  
+    $ java -jar CreataSequenceDictionary.jar</p>
+    
+Pour créer ces fichiers, les lignes de code suivantes ont été utilis?es :
+générer les fichiers n?cessaires à BWA
+$ bwa index -a bwtsw labrax.fa
+
+générer l'index de la référence en fai
+$ samtools faidx labrax.fa
+
+générer le dictionnaire n?cessaire à GATK
+$ java -jar picard.jar CreateSequenceDictionary REFERENCE=labrax.fa OUTPUT=labrax.dict
+
+A cet endroit : C:\Users\missl\Documents\Stage_UM_ISEM\Data.
+
+<p style="text-align:justify";>Il faut donc que je teste cela pour voir si j'obtiens le même fa.fai que celui que l'on m'a donné.R?sultat : J'obtiens exactement le même fa.fai!!!!! Toutes les commandes ?crites au-dessus ont fonctionnées!!</p>
+
+<p style="text-align:justify";>Maintenant essayons de créer le script n?cessaire à analyser des données de RAD-seq</p>.
+
+<p style="text-align:justify";>Certains workflow sont ?crits en Snakemake pour faire l'analyse RAD-seq. Il n'y a donc plus qu'? les mettre les uns à la suite des autres pour pouvoir faire mon analyse ^^. Il sont disponibles à l'adresse suivante : <https://snakemake-wrappers.readthedocs.io/en/stable/index.html> . Il concerne les 4 ?tapes de Data_Pre-processing (bwa_mem, MergeBAMAlignement, MarkDuplicates et SortSAM qui sont aussi disponibles sur wdl (encore faut-il savoir commentçafonctionne? ^^). Toutes les autres ?tapes(8)  sont ?réaliser en wdl. Il faut donc faire fonctionner tous ces scripts sur le serveur ^^ et créer l'arborescence n?cessaire pour tout faire tout fonctionner au sein du serveur.</p>
+
+## Jour 9 : 08/03/2018
+
+<p style="text-align:justify";>Installation de snakmeake sur mon ordi et sur le serveur. Pour que le fichier fonctionne il faut qu'il s'appelle Snakefile (?a va poser probl?me si il en faut plusieurs), il faut que l'environnement où il est soit activ? pour que le script se lance. Il faut que je trouve un moyen de le faire s'activer tout seul sans que j'ai besoin de le faire moi-même. D'autre part, ma commande java n'est pas reconnu par snakemake. Il faut que je trouve comment faire car je sais que c'est possible ^^.</p>
+
+<p style="text-align:justify";>Aujourd'hui, j'ai eu ma réunion hygi?ne et sécurité au sein du batiment 24 l? où je vais faire des manip'. Reste plus qu'? faire signer le papier par Bruno.</p>
+
+<p style="text-align:justify";>Exemple d'un Snakefile avec du java dedans : <https://github.com/leipzig/snakemake-example/blob/master/Snakefile> .</p>
+
+<p style="text-align:justify";>Exemple d'un snakefile avec Mark duplicates dedans : <https://github.com/inodb/snakemake-workflows/blob/master/bio/ngs/rules/mapping/samtools.rules> .</p>
+
+<p style="text-align:justify";>Deux workflow Snakemake existant : <https://github.com/snakemake-workflows/docs> . Ils peuvent notamment permettre de faire des ?tapes suppl?mentaires avant l'alignement des reads.</p>
+
+<p style="text-align:justify";>Workflow stacks pour utiliser process_radtags : <https://github.com/enormandeau/stacks_workflow>> .</p>
+
+<p style="text-align:justify";>Voir pour demander au g?rant du serveur : 
+  - comment j'appelle stacks plus particuliérement process_radtags
+  - comment j'appelle GenomeAnalysisTK.jar (sachant que je vais mettre le chemin pour y accèder)
+  - comment j'appelle bwa, samtools, bcftools, trimmomatic</p>
+
+## Jour 10 : 09/03/2018
+
+<p style="text-align:justify";>Probl?me du script pour pr?parer le genome de référence résolu : c'êtait pas le bon chemin d'accès qui ?tait sp?cifi?. Maintenant qu'il est adpat? pour fonxtionner sur le cluster, il faut le lancer. Ce script s'appelle : Reference_preparation. Il s'agit d'un Snakefile.</p>
+
+<p style="text-align:justify";>J'ai également pr?-pr?par? le script suivant qui permet de pr?-processer les données. Ce script s'appelle : Data_preprocessing. Il s'agit d'un snakefile.</p>
+
+<p style="text-align:justify";>J'ai également tout juste commenc? à pr?parer le script qui suivra les deux scripts mentionnés ci-dessus. Il s'agit d'un script wdl qui utilise l'outils GATK. Ce script est à revoir entièrement pour donner les bons fichiers d'entr?es et de sorties de chaque téche.</p>
+
+<p style="text-align:justify";>Probl?me informatique : je n'ai plus accès à internet via Eduroam du coup je suis sur le Wi-Fi de mon téléphone mais je n'ai plus accès au cluster et savoir si le job que j'ai lanc? ce matin à fonctionner ou non. Je ne le saurais très probablement que lundi.</p>
+
+<p style="text-align:justify";>Pour ce probl?me informatique, il faut que je tienne Yannick au courant en lui disant que ce week-end je n'ai eu aucun probl?me pour me connecter à internet en Wi-Fi. Que j'en ai profité pour faire toutes les mises à jour propos?es par le HP Support Assistant. Et je vais voir Lundi siçachange quelquechose sinon, il va me fournir un ordinateur fixe en attendant que mon ordinateur commané arrive au labo. J'ai également lu tous les messages qui ?taient dans le HP Support Assitant. Il en reste 2 à faire mais elles ne font pas parties des mise à jour recommanées par le HP Support Assistant.</p>
+
+<p style="text-align:justify";>Pour la 40aine de minutes qu'il me reste je vais me renseigner sur les fichiers bibtex pour faire ma biblio directement dans ce format et j'aimerai faire mon rapport de stage en Rmarkdown si j'y arrive bien s?r ^^. En fait il faut rentrer beaucoup de chose manuellement pour faire une biblio avec bibtex.</p>
+
+<p style="text-align:justify";>Erick est pass? dans le bureau en fin de matin?e. Il est content que je me forme à l'?criture de script. D'autre part, il m'a parler d'une commande qui pourrait me permettre de lancer un job sur le cluster puis de récupérer la main. Ca serait bien que je la trouve pour l'utiliser ult?rieurement. D'autre part, j'ai accès à des formations online sur le cluster donc je pense que je vais y jeter un oeil pour voir ce que je sais faire et ce que je vais apprendre à faire. Je lui ai demané pour le choix des puces et de séquençage et pour l'instant, le premier verrou pour utiliser les puces est lev?. Il faut donc qu'on se voit la semaine prochaine avec Bruno pour éterminer notre méthode de géntotypage. Pour aider à faire le choix, il faut que les concentrations en ADN des échantillons extraits soit correct. Cependant, Eric n'arrive pas à voir quels sont les probl?mes car il à doser des échantillons avec une méthode de spectrophotom?trie et à obtenue une valeur puis il l'a refaite deux fois avec deux méthodes fluorim?trique et as obtenues deux autres valeurs qui ne concordent pas avec celles qu'il avait abtenu précédemment. J'esp?re qu'il va résoudre ce probl?me avant notre réunion de la semaine prochaine car cela pourra nous orienter sur le choix de notre méthode de génotypage. Pour les analyses j'aimerais queçasoit des données  de la puce mais question manip' j'esp?re queçasera du séquençage car commeçaje vais pouvoir participer à la fabrication des librairies. Il faut pas que j'oublies de lui proposer mon aide pour quantifier les ADN si il a besoin. Il m'a dit qu'il y avait de bon tutos Stacks à faire pour se former. Il m'a aussi dit que les bioinformaticiens préféraient utiliser GATK qui leur permet de choisir beaucoup plus d'option que Stacks et qui donc ?tait lus puissant pour obtenir des données correctes et exploitables. Je pense que je vais faire pareil parce que Stacks me semble encore indigeste pour le moment ^^. On verra siçava mieux quand j'aurai fait les tutos Stacks en entier et directement sur le serveur cette fois-ci pour gagner du temps peut-être.</p> 
+
+## Jour 11 : 12/03/2018
+
+<p style="text-align:justify";>A près la RAD-seq, les puces maintenant l'epiGBS sera peut-être utilis?e pour séquencer mes échantillons et ainsi faire avec un même run de séquençage du génotypage et de l'épigéntique en même temps, c'estéch-dire sur les mêmes data. Le pipeline est dispo à l'adresse suivante : <https://www.nature.com/articles/nmeth.3763/figures/12> .</p>  
+
+<p style="text-align:justify";>J'ai enfin r?ussi à lancer mon script Snakemake mais il est en attente sur la queue mbb.J'ai tap? la commande suivante : snakemake -s Reference_preparation --drmaa 'qsub -V -q mbb.q -l h_rt=01:00:00 -N "ref_prep" -cwd' -j. J'ai h?te de savoir si elle a fonctionnée.</p> 
+
+<p style="text-align:justify";>J'ai pos? quelques questions concernent le cluster de calcul : screen?, comment récupérer la main et si quand je me éconnecte mon job tourne toujours. Mon ticket est le  : QUX-GAT-T59Y. Il m'a répondu ceci : "Je ne comprend pas ce que tu veux dire. As-tu bien lu la documentation à  <http://gitlab.mbb.univ-montp2.fr/docs/doc_user/docs/_book/articles/cluster.html> . Un job se lance par qsub et rend la main imm?diatement. En aucun cas, il ne faut lancer un programme sur le noeud ma?tre car ce dernier risquerait de devenir inaccessible." Puis il a ajout? : "Elise, je vois que tu utilises snakemake pour soumettre tes jobs. Je pense qu'il serait plus pertinent de soumettre avec l'option --drmaa. Normalement,çadoit passer. Pour ton soucis de terminal, tu peux regarder ce message :
+<https://stackoverflow.com/questions/4369866/what-is-the-easiest-way-to-detach-daemonize-a-bash-script> .
+En général, tu peux utiliser "nohup ta_commande &". Le probl?me avec screen ou tmux, c'est que si je metçasur le cluster,çava encourager les utilisateurs à ne pas passer par qsub et à soumettre directement sur le noeud ma?tre, ce que je souhaite absolument ?viter."</p> 
+
+<p style="text-align:justify";>J'essaye de faire le tuto-stakcs en téléchargeant des data de GEO via la commande suivante : wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR126/006/SRR1265586/SRR1265586.fastq.gz . Le premier script disponible fonctionne très bien. Le second est parti sur le cluster il est en attente avec le snakemake de ce matin.^^ J'esp?re qu'ils vont partir bient?t. Je crois qu'il a fonctionné quand je ne l'ai pas lanc? sur le cluster du coup j'ai sauv? les fichiers dans des dossiers ok et si jamais le script par cette nuit alors je verrai si il a fonctionné ou pas. Il afut aussi que je me remette en t?te les log pour queça?crive les erreurs dans un fichiers et non dans le terminal (fichiers log) et faire du benchmarking pour voir combien de tempsçaa mis pour manager mieux a près la soumission au cluster.</p>
+
+<p style="text-align:justify";>Quand je modifie un script sur mon ordi et qu'en suite je l'ajoute à mon home sur le cluster je ne peux pas l'ex?cuter donc je dois taper la commande suivante pour le rendre ex?cutable :"$ chmod u=rwx,g=rx,o=r myfile" avant de pouvoir le lancer à nouveau.</p>
+
+<p style="text-align:justify";>Comme j'en ai marre de "rien faire" et que je viens d'avoir cette iée : et si je faisais un Rmarkdown sur les puces affymetrix à l'aide de mes ppt de LicencePro. Je me dis que c'est pas mal alors je vais tenter de faireçaavec ce que je vais trouver dans ma boùte mail. En fait, dans ma boùte mail j'ai que les diapos sur R en général pas les diapos sur comment analyser des puces affymetrix. En plus, je viens de penser : comme la puce n'est pas commercialis?e et ne le sera pas avant un petit moment je suppose qu'ils ne vont pas évelopper un package R pour analyser les données produites avec cette puce. ^^ Je ne sais pas on verra bien ^^.</p>
+
+## Jour 12 : 13/03/2018
+
+<p style="text-align:justify";>Bon bah mes jobs ne sont pas partis...</p>
+
+<p style="text-align:justify";>J'ai loader plusieurs modules via module load (dot, bcftools, samtools, java8, java8 jre, stacks2 et vcftools). A 9h42, je vais voir si mes scrpits se suppriment tous seuls sinon je les qdel pour les relancer.</p>
+
+<p style="text-align:justify";>Je viens de soumettre un nouveau ticket parce que l'option --drmaa à la place de --cluster ne fonctionne pas ^^. Ce ticket porte le num?ro ZPH-JQA-W3YZ. J'ai donc fait comme il m'a dit c'estéch-dire installer le package python pour pour ce qu'il en ai de modifier mon bashrc je ne sais pas comment faire ^^ Du coup je lui ai demané pour savoir comment faire. Et j'imagine que tous les probl?mes viennent du fait que je suis sous windows 10 et que le cluster de calcul est sous ubuntu. On va bien voir ce qu'il me répond. J'ai r?ussi à modifier mon .bashrc en téléchargeant tout mon home sur mon ordi puis en le remettant sur le cluster ^^ Mais ce n'est pas la meilleure fa?on de faire. Il a répondu à mon autre ticket mais pas à celui-l?.</p>
+
+Le job 445553 0.55208 cutadapt_s egueret      qw    03/13/2018 10:00:56
+a été lanc? avec la commande : qsub 00-scrpits/01_cutadapt.sh
+Le job  445561 0.55052 cutadapt   egueret      qw    03/13/2018 12:12:45
+a été lanc? avec la commande : qsub 00-scripts/01_cutadapt.sge
+Le job 445563 0.55042 cutadapt_s egueret      qw    03/13/2018 12:13:59
+a été lanc? avec la commande : qsub 00-scrpits/01_cutadapt.sh
+Les jobs  445584 0.00000 ref_pre    egueret      qw    03/13/2018 14:08:39 et                     
+ 445585 0.00000 ref_pre    egueret      qw    03/13/2018 14:08:39
+ont été lanc? sur une autre queue que le queue mbb.q c'estéch-dire la queue cemeb.q
+
+<p style="text-align:justify";>Ticket à propos des machines auxquelles j'ai accès: MLQ-2D5-1ML5. Alors elles sont toutes occup?es donc je ne peux rien faire il faut juste que j'attende ^^. Qselect ne fais la s?lection qu'? l'instant t. Donc les graph sur leur site sont faux ^^. Et ganglia monitoring ne fonctionne pas ^^.</p>
+
+<p style="text-align:justify";>Je ne fais rien de mes journ?es vu que j'attends que mes scripts tournent cette fois je ne vais pas les qdel pour si ils tournent correctement. J'esp?re seulement qu'ils vont partir un jour ^^. Ca ne m'est jamais arriv? d'attendre aussi longtemps pour un petit script:-O .</p>
+
+## Jour 13 : 14/03/2018
+
+<p style="text-align:justify";>Ce matin il y a eu réunion pour mon stage avec Erick et Bruno. J'ai eu quelques informations suppl?mentaires : le génome du loup re prèsente 700mb pour les contigs éj? assembl?s . Cependant il doit ?tre un peu plus conséqquent vu qu'il y a un groupe de liaison non assembl? éfinitivement. On va dans un premier temps faire du ddRADseq pour que j'ai des data à analyser. La cerise sur le g?teau serait de faire de l'epi-GBS (GBS ?tant l'autre nom  du ddRADseq) car il serait possible de faire avec une seule quantité d'ADN et un seuk run de séquençage à la fois une analyse des SNP et une analyse épigéntique. Car pour le moment dans le consortium dans lequel  mon travail s'insert il est question de faire une carte des SNPs puis de faire une analyse épigéntique. Cependant, pour l'?pi-GBS il faut des adaptateurs sp?cifiques qui ne sont pas sensible à la méthylation, ils doivent donc ?tre méthyl?s. La plate-forme GenSeq UM n'en a pas et ne sais pas combiençava coùter. Le set entier d'échantillons re prèsente 62 familles avec 10-12 descendants soit un total de 800 échantillons. Il ne va donc pas ?tre possible financi?rement dans un permier temps de séquencer l'ensemble des échantillons à notre disposition. Pour pallier à cela nous allons choisir un set d'un 15aines de famille dont certaines serait extr?me+ et  d'autres extr?me- avec en plus des familles moyenne (entre les deux). Ce la permettra pour l'analyse des SNP de ne pas donner le même poids à chacun des SNPs trouv?s en fonction de leur r?partition dans les familles (+/-). L s?lection d'une 15aine de famille re prèsenterai 192 (96*2) échantillons (éj? 170 s?lectionnées pour ?tre extr?mes donc reste 22 échantillons moyens à s?lectionner). Cela permettrait de mettre 96 échantillons dans une ligne de séquençage et nous permettrais donc d'en faire 2. avec une bonne profondeur pour écouvrir les SNP. Comme je veux participer aux manipulations, Eric va m'envoyer le protocole de pr?paration des librairies dd-RADseq pour que je calcule les quantités n?cessaire pour que je fasse cette manip. Ensuite on commande ce qu'il risque de manquer et on commence à pr?parer ces librairies. Eric me disait aussi que les kits nous faisait mesurer les quantités d'ADN avant la fragmentation alors que les biologiste mléculaire d'avant la gn??nration kit faisiat une mesure de la quantité a près la digestion carçapermet de mieux quantifier l'ADN avec lequel on va travailler ensuite et non de quantifier l'ADN que l'on a extrait.</p>
+
+<p style="text-align:justify";>Mes scripts d'hier ne sont toujours pas partis. J'esp?re qu'ils vont partir aujourd'hui.</p>
+
+<p style="text-align:justify";>Concernant le dd-RADseq que je vais faire, l'article qui a invent? cette technique en 2012 à aussi rendu libre son pipeline d'analyse. Il est disponible à l'adresse suivante : <https://github.com/brantp/rtd>.</p>
+
+<p style="text-align:justify";>J'ai fait signer à Bruno le papier concernant la visite hygi?ne et sécurité. Je suis all?e voir la secrétaire pour lui donner le papier concernant la prise en charge partiel de mes frais de transport. Je lui ai envoy? par mail les justificatifs concernant mon abonnement à TAM.</p>
+
+<p style="text-align:justify";>Nouveau ticket pour savoir comment utiliser BWA qui est éj? installer sur le serveur mais qui ne fais pas partie des modules avail. Il porte le num?ro : G5L-ZYL-TXH4.</p>
+
+<p style="text-align:justify";>J'ai fait les calculs pour le protocole de ddRADseq mais il restait quelques points obscurs donc je suis all?e voir Erick et en fait ce que je comprennait mal c'êtait les coquilles du protocole ^^.</p>
+
+## Jour 14 : 15/03/2018
+
+<p style="text-align:justify";>Mon script snakemake est parti. La première rule a fonctionné mais pas la seconde donc je l'ai relanc?e ce matin. C'est trop bien. J'ai é faire quelques modifications pour que le script fonctionne maisça? l'air correct. On va bien voir plus tard.</p>
+
+<p style="text-align:justify";>J'ai trouv? les rules snakemake pour faire du GATK sans passer par du wdl. C'est à cette adresse : <https://bitbucket.org/johanneskoester/snakemake-workflows/src/fa47806ee1da/bio/ngs/?at=master> .Du coup j'ai commenc? à ?crire les snakemake qui vont utiliser GATK sans faire du wdl. Pour les peaufiner, il faut que je regarde les options de chaque outils afin de choisir les bons. Je vais voir pour commencer mon rapport de stage : c'estéch-dire faire l'introduction et le mat?riel et méthode de l? où j'en suis pour le moment commeça?a sera fait. Je feraiçademain surtout si je n'ai rien de plus à faire. Parce que je m'ennuie pas mal quand même. La preuve j'ai fait le m?nage dans ma boùte mail, je me suis ésinscrite de plusieurs mail automatique et je me suis connect?e à mon compte CAF qui n'est pas encore fini parce qu'il est en cours de traitement par leur service. J'ai même pris le temps de lire les articles publiés par Jeanne qui est en th?se avec BEN l? où j'êtais en stage l'an dernier.</p>
+
+<p style="text-align:justify";>L'aide pour process_radtags est à l'adresse suivante : <http://catchenlab.life.illinois.edu/stacks/comp/process_radtags.php> .</p>
+
+<p style="text-align:justify";>J'ai lu 3 articles sur les GWAS sur ordi portable, les taux d'erreur des GWAS via stacks et un autre sur les challenges bioinfo lié aux GWAS. J'ai pas appris grand chose mais c'êtait int?ressant quand même sur l'article pour faire une GWAS sur un ordi portable :çaveut dire que sur le clusterçapeut ?tre ultra-ultra-ultra rapide à faire. A potasser plus profonément pour savoir si c'est envisageable.</p>
+
+## Jour 15 : 16/03/2018
+
+<p style="text-align:justify";>Mes scripts ne sont toujours pas parti.</p>
+
+<p style="text-align:justify";>Par contre j'ai refait le tuto GATK-WDL pour helloHaplotypeCaller etçaa fonctionné. Du coup je teste aussi le deuxi?me script qui ?tait simpleVariantSelection. Celui-ci me pose probl?me vu qu'il tourne sur mon ordi mais ne tourne pas sur le serveur. Il faut que je résolve ce probl?me. Je ne comprends vraiment pas pourquoiçane fonctionne pas. J'ai essayer en mettant le chemin en entier pour accèder aux logiciels et uax fichiers maisçane fonctionne pas non plus. Il doit y avoir un autre probl?me.</p>
+
+<p style="text-align:justify";>Je suis all?e voir Eric pour une mise au point. La semaine prochaine : ébut des manipulations à 14h!!!</p>
+
+<p style="text-align:justify";>Nouveau ticket pour installer la dernière version de GATK sur le cluster DZ2-7H7-2YGE. Comme il est éj? 16h je ne pense pas qu'ils vont me repondre aujourd'hui ^^.</p>
+
+<p style="text-align:justify";>Pour faire tourner cromwell sur le serveur (! != de cluster ^^) : java -jar cromwell-[version].jar server</p>
+
+## Jour 16 : 19/03/2018
+
+<p style="text-align:justify";>Relecture des protocoles pour me les remettre en t?te pour cet a près-midi.</p>
+
+<p style="text-align:justify";>Ticket suite erreur lors de ma connection en ssh sur le cluster : Z3B-8N8-1UPA. L'erreur est la suivante :/home/egueret/.bashrc: line 4: 
+: command not found
+/home/egueret/.bashrc: line 6: syntax error near unexpected token `in
+'
+/home/egueret/.bashrc: line 6: `case $- in
+'
+Du coup devant le $ j'ai -bash-4.1 . Et il m'a delané si j'avais modifi? mon .bashrc (oui puisque j'y ai ajout? le path pour GATK. Je viens de me rappeler que j'ai aussi fait un chmod 755 à tout mes bashrc et bash (Fallait peut-être pas ^^). J'attends de voir ce qu'il me dit.</p>
+
+<p style="text-align:justify";>Mes scripts de validation ne fonctionne pas sur le cluster, mon script d'Input crée un fichier vide avec rien dedans ^^. Donc je l'ai modifi? manuellement pour voir si le script suivant fonctionne ^^. Ce n'est pas la meilleure fa?on de faire mais siçafonctionne je suis preneuse. Je vais voir ce queçadonne ce midi ^^. J'ai é faire une bâtise en ajoutant le path pour gatk dans mon bashrc puisque lorsque je lance mes scripts dans les erreurs il y a celle citée juste au-dessus qui s'affiche donc je suppose que mes lancement ne fonctionne pas à cause de ?a. </p>
+
+<p style="text-align:justify";>J'ai peut-être trouv? pourquoi cromwell ne fonctionnait pas sur le cluster. En effet sur le site sp?cifique de Cromwell j'ai vu que pour le lancer en SGE il lui faut un fichier .conf qui est un fichier de configuration dans lequel est sp?cifi? toutes les caract?ristiques pour le faire fonctionner correctement en qsub. Je n'ai pas pu tester mon config file vu que j'ai un bug de bashrc qui m'empéche de pouvoir travailler correctement ^^. Je le testerrai demain ou plus tard si j'y arrive. En tout cas l? maintenant je ne peux pas car je n'ai aucune connection internet et je vais aller faire les manip' car je dois y ?tre pour 14h et qu'il est 13h58^^</p>
+
+<p style="text-align:justify";>On a test? le protocole p200_matrix à l'automate avec 8 échantillons commerciaux de hareng pour voir si la vaisselle (plaque cones) est compatible avec le protocole de dilution de l'ADN au format plaque 96puits. On voulait une concentration de 50ng/?L, les concentrations obtenues sont proches de celle attendue=>conformité : le protocole fonctionne. Comme le protocole a été valié, nous avons choisis 24 échantillons de RobustBass pour tester le protocole dans un premier temps. Nous avonsréalis? la dilution pour les échantillons pas assez concentr? on a mis un volume de 40?L (pas de dilution). On a ensuite vérifi? les concentrations ainsi obtenues au Nanodrop 8000. On s'attendait à avoir une concentration aux alentour de 100ng/?L. Cette concentration a été obtenue pour les échantillons ayant une concentration suffisante. Un seul échantillon n'a pas été suffisamment dilu?. Ce protocole fonctionne.</p>
+
+## Jour 17 : 20/03/2018
+
+<p style="text-align:justify";>Ce matin nous avons pr?par? les échantillons pourréaliser la double digestion avec les enzymes de restriction EcoRI et MspI. Pour l'échantillon trop concentr? (Dl475) nous avons ajout? 12 ?L d'eau. Comme toutes les concentrations ?taient loin d'être égales nous avons essayer de normaliser une seconde fois en ne mettant pas d'eau dans la mix de digestion afin de mettre le maximum d'ADN dans nos tubes de digestion.</p>
+
+<p style="text-align:justify";>Pour mon ticket d'hier, je ne sais plus quoi faire ^^. J'ai supprim? la ligne que j'avais ajout? à la fin de mon .bashrc et il ne fonctionne plus même sans avoir ajout? la ligne. Par contre j'avais remplac? d'autres lignes par celle-ci, il faut que je les retrouve pour voir siçane viendrai pas de l? ^^. Et bien nonçane vient pas de l? ^^.</p>
+
+## Jour 18 : 21/03/2018
+
+<p style="text-align:justify";>On a essay? de passer quelques échantillons au fragment analyser pour obtenir leur concentration ainsi que la distribution de leurs fragments. Pour cela, on a choisi les échantillons qui sont en duplicas dans l'êtude. On a mis 5?L d'ADN avec 19?L de TE pour la migration.
+comme ce n'est pas joli il faudra faire un gel demain.</p>
+
+<p style="text-align:justify";>J'ai r?ussi à faire tourner mes scripts wdl sur le serveur avec un config file.</p>
+
+## Jour 19 : 22/03/2018
+
+<p style="text-align:justify";>On a fait un gel d'agarose qui ne nous permet pas de valider r?ellement notre digestion donc il faut que l'on voit demain si elles sont actives en les testant avec des ADNs commerciaux.</p>
+
+<p style="text-align:justify";>J'ai commenc? un read-me pour mes scripts GATK en wdl, j'ai regaré quelques options d'outils que ll'on pourrait ?tudi?.</p>
+
+<p style="text-align:justify";>IGV ne fonctionne plus sur mon ordi donc je ne peux pas regarder les résultats que j'obtiens.</p>
+
+<p style="text-align:justify";>Il faut que je trouve ce que sont les data qui sont utilis?s dans le tuto (WGS?). Voir quels sont les options et dans quel ordre les faire pour faire une analyse ddRAD-seq comme il se doit ^^.</p>
+
+## Jour 20 : 23/03/2018
+
+<p style="text-align:justify";>Test efficacité des enzymes avec 4 ADN utilis?s pour la formationau dd-RADseq. On a afait une double digestion avec 1?L/enzyme. et en parall?le on a test? une digestion avec seulement EcoRI et une seulement avec MspI. On a fait 2h et 4h de double digestion et 4 h de simple digestion.</p>
+<p style="text-align:justify";>Pr?parartion d'un gel d'agarose à 0.6% avec un peigne donnant des puits bizeaut?s pour limiter la éformation lors de la migration et augmenter la résolution du gel.
+Mais il nous ?tait impossible de voir les puits pour y faire des ép?ts.</p>
+S?minaire au CNRS
+
+## Jour 21 : 26/03/2018
+
+<p style="text-align:justify";>Migration des digestion de vendredi. R?sultats peu concluant : les bandes semblent tass?es, comme si quelquechose intervenait et empéchait la migration. Pour essayer de palier à cela : digestion double sur la nuit entière puis purification.</p>
+
+<p style="text-align:justify";>Si on a pas de data à temps il faudra que j'annote tous les snp de la puce voir de r?-assembler le génome du loup en entier car beaucoup de data on été accumul?e depuis qu'il a été assembl? la dernière fois.</p>
+
+## Jour 22 : 27/03/2018
+
+<p style="text-align:justify";>SNPeff sur GATK on wdl
+<https://gatkforums.broadinstitute.org/gatk/discussion/50/adding-genomic-annotations-using-snpeff-and-variantannotator></p>
+
+<p style="text-align:justify";>Purification sur billes des produits de digestion.</p>
+<p style="text-align:justify";>Migration sur gel d'agarose.</p>
+
+<p style="text-align:justify";>essai de Build database sur snpeff maisçane fonctionne pas.</p>
+
+## Jour 23 : 28/03/2018
+
+<p style="text-align:justify";>Ligation des adaptateurs et purification à l'aide de billes. On a mis 10 fois plus d'adaptateurs en Y. Pr?paration des amorces PCR à 10µM par Erick.</p>
+
+## Jour 24 : 29/03/2018
+
+<p style="text-align:justify";>PCR d'enrichissement</p>
+
+<p style="text-align:justify";>Test de digestion avec différentes enzyme de restriction (EcoRI/MseI ; ApekI ; PstI)</p>
+
+<p style="text-align:justify";>Récupération de l'?luat des billes 1 de la double SPRI</p>
+
+<p style="text-align:justify";>Purification des produits de PCR</p>
+
+## Jour 25 : 30/03/2018
+
+<p style="text-align:justify";>Passage au fragment analyser des différentes fraction obtenu lors des purification et des dernières digestion avec les enzymes de la plate-forme.</p>
+
+
+#Journal de bord - Avril
+
+## Jour 26 : 03/04/2018
+
+<p style="text-align:justify";>Gel de migration avec les produits de digestion obtenu par les enzymes de la plate-forme et fabrication de TBE à 0.5X à partir de TBE à 10X.</p>
+
+<p style="text-align:justify";>Réunion avec Erick, Bruno et Madoka:</p>
+<p style="text-align:justify";>Il faut absolument que je fasse l'annotation fonctionnelle des SNP de la puce. Cela va s'avérer très utile pour tout le monde. Voir pour annoter le génome du loup (bar) un peu mieux (surtout au niveau des promoteurs) en alignant avec le génome de Morone Saxatilis. Toujours en attente de la commande des puces pour passer les 800 individus avec un budget d'environs 9000€. Mias pour cela il faut encore attendre que le prix soit fini d'être n?goci? par les différents acteurs impliqués dans les différents projets.</p>
+
+<p style="text-align:justify";>Erick m'a donné le rapport et la  prèsentation d'un ancien ?tudiant que j'ai parcouru très très vite ^^.</p>
+
+<p style="text-align:justify";>Bruno m'a envoy? des slides suite à une réunion du consortiumréalis? fin 2017.</p>
+
+## Jour 27 : 04/04/2018
+
+<p style="text-align:justify";>J'ai télécharg? le génome de Morone saxatilis qui est disponible sur NCBI.</p>
+
+<p style="text-align:justify";>J'ai télécharg? un concurrent de snpEff qui est ANNOVAR. Il faut que je vois si je peux l'utiliser avec autre chose que de l'humain sinon je ne pourrai pas l'utiliser.</p>
+
+<p style="text-align:justify";>Pr?paration d'un site web pour  prèsenter tout ce que je fais à mes tuteurs. Pour cela j'ai crée différents fichiers dont : _site.yaml ; index.Rmd ; about.Rmd. J'ai aussi partitionner ce notebook en différentes parties pour que mes tuteurs voient l'avanc?e de mon travail. Demain il ne me reste plus qu'? faire une partie Bioinfo pour qu'ils voient les problèmes que j'ai rencontr? ainsi que les solutions que j'ai trouvées. Il me faudra une partie tutorial, troubleshooting, tools description, etc. Je vais commencerçatout de suite mais je finirai demain.</p>
+
+<p style="text-align:justify";>Il faut aussi que je me penche sur le format des données Affymetrix. Il y a plusieurs package Affymetrix à savoir utiliser et dans le bon ordre. Il va falloir que je trouve un tuto pour faire tout ?a.</p>
+
+## Jour 28 : 05/04/2018
+
+<p style="text-align:justify";>Eric est pass? me voir ce matin. On a regaré l'erreur que me donnait snpEff et il a compris que c'êtait parce que je n'avait pas la même nomenclature des groupes de liaisons entre le fasta et le vcf. Il m'a donc donné un fasta et un vcf compatible. Cela a résolu le probl?me de snpEff. J'ai visualis? ce que j'ai obtenu sur IGV et je ne vois pas une grande différence. Par contre, il faut que je lui demande si *D_labrax* poss?de les codons standard pour l'atribution des acides amin?s. D'autre part, DAVID n'est pas un bon outils dans mon cas, enfin pas pour le moment. En effet, ilréalise une annotation fonctionnelle par enrichissement en fonction d'une liste de gènes. En fait ce qu'Erick entendait par annotation fonctonnelle des SNP c'êtait les outils qui permettent de prouver qu'un SNP est significativement impliqués dans une lign?e et pas dans une autre. Il a mentionné de faire des PCA ainsi que des manhattan plot pour voir les SNP outlayer. J'ai dit qu'il devait exister des packages R qui pouvait faire cela ^^. Donc il va falloir que je regarde cela de plus  près.</p>
+
+<p style="text-align:justify";>Recherche d'outils ou package R pour faire de la GWAS ainsi que de l'analyse de liaison. Pour cela j'ai list? plusieurs outils qu'il faut que je creuse un peu plus demain : PLINK, SHEsis, MapChart, GCTA et différents package : GWASTools, adegenet, genetics, gap, haplo.stats, ASMap, identity, pedigree, hwde, multic, LDheatmap, SNPassoc, snpMatrix, GenABEL, SNPstats. Je suppose que ectte liste est non exhaustive.</p>
+
+<p style="text-align:justify";>J'ai recherch? comment analyser des données affymetrix. Il y a différents moyens : avec des logiciels commerciaux (payants), des logiciels libres, des logiciels dispo sur le site affymetrix ou avec Bioconductor : packages R.</p>
+
+## Jour 29 : 06/04/2018
+
+<p style="text-align:justify";>Réunion avec Erick, Bruno et Pierre-Alexandre:
+Il faut que je récupére les données de RNA-seq de Morone saxatilis dans le but de rechercher les CDS commun afin d'avoir une base d'ID identique pour ensuite trouver/?tudier les probl?mes de paralogie et d'homologie, cela nous donnera le nombre de comparaison à effectuer. Tout ceci va permettre de donner une mailleure annotation en amont et en aval des gènes. Pour cela il faut que je trouve des outils de transfert d'annotation à partir de données de RNA-seq. Sachant que j'ai à ma disposition les 3 transcriptome de *labrax*, *punctatus* et *saxatilis* ainsi que les génomes align?s de *labrax* et *saxatilis*. La meilleure stratégie serait de récupérer ces transcriptomes, de les aligner puis de faire un BLAT. Les meilleurs outils  pour l'annotation seraient : snpEff, VCFanno et ANNOVAR. Pour les alignement il faut que je creuse TopHat et Stream et Bowtie2. Il faut que je lise les papiers sur les pipelines d'annotation de UCSC datant de 2003, du projet ENCODE et de regarder l'outils MAKER2 dans BMC informatics. Pierre-Alexandre a utilis? les mots cl?s suivants : genome annotation mRNA (pipeline).</p>
+
+<p style="text-align:justify";>Pour Erick il faut que je creuse ANNOVAR pour faire de la pr?diction de site de fixation des facteurs de transcription adapt? à *D_labrax*, car c'estçale boulot d'un ingénieur bioinformatique ^^.</p>
+
+<p style="text-align:justify";>Je suis all?e récupérer ma carte multi-services pour pouvoir ouvrir les portes du bâtiment 22.</p>
+
+<p style="text-align:justify";>Pierre-Alexandre m'a transmis via Bruno 5 articles et 1 livre à lire pour faire de l'annotation.</p>
+
+## Jour 30 : 09/04/2018
+
+<p style="text-align:justify";>J'ai fini de lire et de noter ce que j'ai vu sur l'article "A beginner's guide to eukaryotic genome annotation" dans la partie "Un peu de biblio".</p>
+
+<p style="text-align:justify";>Erick est pass? me voir. Il faut que je relance snpeff avec l'ancien fichier fasta et le nouveau fichier d'annotation (GTF). C'est fait : il n'y a plus que 16 000 erreurs. Il faut que je vois pour ajouter la séquence Mitochondriale au 1er fichier Fasta ou voir pour mettre sur une seule ligne chaque Groupe de Liaison du nouveau fasta. Ce n'est pas à faire car sans cela fonctionne très bien. D'autre part je lui ai parl? de l'option phastCons de SnpSift qui est fournis avec SnpEff. Donc il faut que je regarde comment il fonctionne et ce dont il a besoin pour fonctionner. Il faut aussi que je trouve comment récupérer les WARNINGS produits pour les corriger si cela est possible. C'est possible : on peut les récupérer avec l'option -debug. La dernière question soulevée est : Est-ce que des SNP tombent dans le génome mitochondrial de *D_labrax* Erick a regaré et la réponse est non, aucun snp tombent dans dans le génome mitochondrial de *D_labrax*.</p>
+
+<p style="text-align:justify";>PhastCons (<http://compgen.cshl.edu/phast/index.php>) est un programme inépendant qui permet de calculer un score de conservation entre deux séquences nucl?otidiques en connaissant le moéle phylogén?tique conserv? ou non des esp?ces. L'option -phastCons de snpSift permet d'ajouter ce score ainsi obtenu lors de l'annotation. L'aide de phastCons se trouve ici : <http://compgen.cshl.edu/phast/help-pages/phastCons.txt> .</p>
+
+<p style="text-align:justify";>Je viens de m'inscrire à MOOC SecNumAcaémie. Je vais essayer de suivre les cours pour savoir comment me protéger sur Internet. J'ai suivi la première unité et la dernière unité. Il m'en reste 3 à suivre. Sachant que dans les deux que j'ai faîtes je n'ai pas regeré les différentes viéos.</p>
+
+<p style="text-align:justify";>D'autre part, j'ai voulu faire le tuto MAKER sur le serveur mais je n'ai pas les droits pour installer les épendances perl dont j'ai besoin pour faire ce tuto.</p>
+
+<p style="text-align:justify";>Je vais regarder l'outils VEP Ensembl car Erick me l'a demané par mail. Je le télécharge directement dans mon home maisçane focntionne pas car je suis en wi-fi et que celui-ci est trop lent.</p>
+
+## Jour 31 : 10/04/2018
+
+<p style="text-align:justify";>Je suis allée voir Erick pour savoir comment chercher les Warnings sur le génome. Il m'a dit qu'il ne fallait pas que je les recherche tous à la main ^^. Je les ai triés selon leur effet : absence de codon start ou stop, la présence de multiple stop ou encore s'ils sont incomplet.</p>
+
+<p style="text-align:justify";>Pour réaliser mon site web, j'ai séparé quelques fichiers pour faire plus joli comme me l'a dit Flo.</p>
+
+<p style="text-align:justify";>J'ai regarder d'autre outils bioinfo pour l'alignement de séquence : Bowtie2 et Tophat. Tophat fait appel à Bowtie pour faire des alignements de short-reads et faire une analyse de splicing en plus mais aussi pour faire de l'annotation de variant. Là j'ai trouvé pas mal d'autres outils qui sont uniquement dédiés à l'homme ou quasiment (souris et rat en plus pour certains). (VAI UCSC, SeattleSeq annotation, Variant Analysis Tool, VAT, Funseq2 et snpdat.</p>
+
+<p style="text-align:justify";>Mon ordinateur est arrivé au bâtiment 21 donc normalement le temps que les informaticiens aillent le chercher et le paramètre comme il se doit je devrais l'avoir au plus tard vendredi.</p>
+
+## Jour 32 : 11/04/2018
+
+<p style="text-align:justify";>J'ai lu le papier sur snpEff qui date de 2012 pour voir si je pouvais trouver des informations sur le fichier avec tous les Warnings que j'ai trouvé. Et je n'ai rien trouvé de plus. Ce que je voualis trouver c'est est-ce qu'il prioritise les annotations pour une curation manuelle? parce que j'ai vu ça écrit quelque part mais je ne sais plus pour quels outils et je voulais savoir si c'était le cas pour snpEff.</p>
+
+<p style="text-align:justify";>Erick vient de me dire de continuer de regarder manuellement sur IGV les warnings pour savoir si cela vient d'un décalage ou non entre l'annotation et le GTF d'annotation. D'autre part ce qui est sur le brin -, antisens doit être lu à l'envers, c'est-à-dire de droite à gauche. Du coup je vais passer ma journée à faire cela ^^.</p>
+
+<p style="text-align:justify";>J'ai fait une liste de logiciels dont j'aurai besoin sur mon ordi pour que les informaticiens me les installent car je n'aurai aucun droit sur l'ordinateur pour installer quoique se soit.</p>
+
+<p style="text-align:justify";>J'ai refait mon TP sur les puces affymetrix de ma licence pro.</p>
+
+<p style="text-align:justify";>J'ai regardé les astuces pandcoc-Rmarkdown pour faire un rendu joli.</p>
+
+## Jour 33 : 12/04/2018
+
+<p style="text-align:justify";>J'ai continué de regarder les positions des différents warnings sur le annotations et j'en ai trouvé plusieurs qui peuvent être résolues, d'autres non et j'ai aussi relevé quelques problèmes. J'ai également préparé un mail pour en voyer au créateur de snpEff pour qu'il m'éclaire sur le résultat obtenu avec l'option -debug. Je vais l'envoyer à Erick pour qu'il me donne son avis sur mon mail ou pas ^^.</p>
+
+<p style="text-align:justify";>J'ai également remplcé beaucoup de ? par les bons accent quand c'était possible et quand je les ai trouvés.</p>
+
+<p style="text-align:justify";>J'ai refait l'analyse des puces pour les données de pesticides au format Rmd. Mais ça ne fonctionne pas toujours notamment au niveau des statistiques, cela donne beaucoup de NA. Donc il faut que je regarde ce soir mes data de licence pro pour trouver ce que l'on a fait pour adapter ce que j'ai fait avec ce que j'avais fait.</p>
+
+<p style="text-align:justify";J'ai trouvé deux nouveaux outils pour faire de l'analyse de SNP avec R. (GAP et snpReady)</p>
+
+## Jour 34 : 13/04/2018
+
+<p style="text-align:justify";>Ce matin j'ai regard? d'autres probl?mes sur IGV suite aux warnings de snpEff.</p>
+
+<p style="text-align:justify";>J'ai ?galement mis ? jour mon site pour s?parer tous les parties de bioinfo ainsi que toutes les parties de Biblio.</p>
+
+<p style="text-align:justify";>Erick est pass? en fin de matin?e pour me demander o? j'en ?tait. Bref pas beaucoup plus loin que deux jours avant. Je crois que je n'avais pas compris ce qu'il me demandait implicitement au d?but, qui ?tait de regarder avec un outils bioinfo ces probl?mes obtenus par snpEff. Du coup ce midi je suis rentr?e ? l'appart pour r?cup?rer mon disque dur externe pour m'inspirer de ce que l'on avait en PS1 avec Compseq et Freak. Du coup, je vais piquer quelques fonctions que l'on avait fa?tes pour r?cup?rer les s?quences du fichier fasta ainsi que l'id qui correspond au chromosome dans mon cas ainsi que la s?quence et qui la reverse compl?mente. Ainsi j'obtiens le brin sens et le brin antisens. Reste plus qu'? mettre la suite en place ^^. Sachant que le suite est en version simplifi?e et ne fran?ais est : r?cup?rer la position du g?ne qui pose probl?me, utiliser cette position pour r?cup?rer sa s?quence ainsi que 30 caract?res suppl?mentaires. Si dans les caract?res suppl?mentaires il y a des N il ne faut pas prendre en compte ce g?ne pour la la suite. Puis il faut faire une recherche soit de codon start soit de codon stop en fonction du probl?me trouv? pour ce g?ne. D'ailleurs il voulait que je l'informe de mon avanc?e du coup je lui ai envoy? un petit mail pour qu'il sache ce que j'ai commenc? ? faire.</p>
+
+## Jour 35 : 16/04/2018
+
+<p style="text-align:justify";>Pour l'outils qu'Erick m'avait demand?, j'ai r?cup?rer tous les probl?mes et fait la recherche des codons stop. Cette partie du script fonctionne. Par contre pour les start, on a pas pris en compte de d?but des CDS mais le d?but du g?ne ce qui peut poser un probl?me dans la recherche du codon start ? partir de ces CDS qui sont diff?ents du d?but des g?nes.</p>
+
+<p style="text-align:justify";>Erick est pass? me voir et du coup j'ai quelques corrections ? apporter ? notre script. Il ne faut pas que lorsque j'ai incomplete + is not a stop codon je recherche le codon stop parce que je vais avoir un d?calage du cadre de lecture. Il faut que je traite les stop seul uniquement pour commencer ? modifier le GTF tout en gardant l'initial ^^. Dans le cas du start, il faut que je me base sur le cadre de lecture donn? par le fichier GTF sur l'exon 2. ou que j'utilise un outils existant d?j? pour faire de la transcription en aval des g?nes pour rechercher une M?thionine et non un codon start.(c'est mieux qu'une recherche en "dur".</p>
+
+## Jour 36 : 17/04/2018
+
+<p style="text-align:justify";>J'ai fini ma bibliographie au format bibtex pour le moment.</p>
+
+<p style="text-align:justify";>J'ai continu? ma recherche de codon stop et start pour faire les remplacements. Je vais finir ?a ce soir.</p>
+
+<p style="text-align:justify";>J'ai ajout? les photos des gels ? mon site web.</p>
+
+<p style="text-align:justify";>J'ai regard? un site qui s'appelle ThinkR et dedans il parle de Python dans R mais quand j'ai essay? de t?l?charger le package Rpython j'ai eu un message comme quoi il n'est pas disponible pour ma version de R.</p>
+
+## Jour 37 : 18/04/2018
+
+<p style="text-align:justify";>Depuis le d?but, je me trompais sur les coordonn?es des g?nes sur le brin anti-sens vu que j'ai fait son reverse-compl?ment. Du coup pour obtenir les bonnes coordonn?es il a fallu faire une petite gymnastique pour g?rer ce pb ^^.</p>
+
+<p style="text-align:justify";>J'ai r?ussi ? r?cup?rer les cadre de lecture mais pas ? les ajouter ? ma liste d'info.</p>
+
+<p style="text-align:justify";>J'ai relancer snpEff en changeant juste les codon_stop et pas les exons qui finissent au codon stop, juste pour voir si ?a fonctionne o? si il faut vraiment que je les prolonge jusqu'au codon_stop. Il y a moiti? moins de probl?me avec no_stop mais quelques probleme se sont ajout?s aux incomplete et au multiple stop. Cela me donne 13162 warnings ? la place de 16448.</p>
+
+<p style="text-align:justify";>Je vais ajouter les liens de ma biblio pour tous les articles et outils que je vais utiliser sur mon site web. Et bah je ne epux pas ^^. Biblio c'est uniquement pour les formats word ^^ pas pour les formats html. Dommage ... .</p>
+
+## Jour 38 : 19/04/2018
+
+<p style="text-align:justify";>Aujourd'hui, Yannick est venu raccorder mon ordi au domaine intra.isem pour que mon ordi puisse faire ces mises à jour tout seul. J'en ai profité pour lui demander comment faire pour installer R vu que je n'ai pas réussi hier.^^ En fait pour modifier un fichier il me suffit de l'ouvrir en sudo. Du coup si j'avais su ça je l'aurai fait hier. Grâce à mon rattachement au domaine j'ai maintenant accès à l'imprimante ^^.</p>
+
+<p style="text-align:justify";>Yannick m'a conseillé de faire un snapshot après chaque nouvelle installation majeure afin de sauvegarder mon Ubuntu en cas de problème ultérieur. Donc c'est ce que j'ai fait après chaque installation (R, Rstudio, Sublime Text, Biopython et IGV) ps un à chaque fois mais presque.</p>
+
+<p style="text-align:justify";>J'ai ajouté les frames pour la recherche des no_stop dans le cas du brin sens : et aucune erreur est apparue! Reste plus qu'à faire de même pour pour les start ainsi que pour les no_stop en anti-sens. Sauf que le fichier produit est vide ^^.</p>
+
+<p style="text-align:justify";>Erick vient de passer, il faut donc que j'ai fini de traiter mes start et stop pour demain et que j'ai commencé à les vérifier sur IGV. Donc il faut que j'installe IGV sur mon ordi ^^. On a également parlé des vacances et des ponts du mois de Mai. Comme il n'est pas là la semaine du 8 et du 10 Mai il me conseille de prendre une semaine pour décompresser plutôt que de venir travailler un jour sur deux. Il m'a aussi conseiller de commencer à rédiger un plan ainsi que l'intro et le matériel et méthode concernant la correction de l'annotation du fichier GTF à ma disposition.</p>
+
+<p style="text-align:justify";>Je me suis fait un schéma pour comprendre les brins sens et anti-sens dans le cas de mon script python parce que jusqu'à maintenant cela m'était abstrait.Avant de partir il ne faut pas que j'oublies de copier-coller ce que j'ai fait aujourd'hui sur ma workstation sur mon disque-dur pour le récupérer sur mon ordi pour demain ^^.</p>
+
+## Jour 39 : 20/04/2018
+
+<p style="text-align:justify";>J'ai regardé les fichiers produits ce matin avec les modifications d'hier. J'ai découvert que pour les brin sens toReassignOneMappingQualityFilterut se passe pour le mieux. Par contre concernant le brin antisens cela ne se passe pas de la même manière. En effet, il y a un décalage de 1 par rapport au fasta. Il faut donc que je récrive un fichier GTF avec les modifications pour les brins antisens uniquement ^^.</p>
+
+<p style="text-align:justify";>J'ai lancé la modification de tous les brins antisens mais ça va prendre environ8h pour faire ça donc je l'ai également lancé sur le cluster pour qu'il continue de tourner ce soir et demain matin s'il n'a pas fini.</p>
+
+<p style="text-align:justify";>En attendant, j'ai fait une recherche de SNP stress et fish comme mots-clés et j'ai trouvé 2 GWAS qui parlent de ça donc je les ai rajouté à mon site web ainsi qu'à mon fichier .bib.
+Je récupère mes fichiers, j'envoie un mail à Erick et je me casse en week-end.</p>
+
+## Jour 40 : 23/04/2018
+
+<p style="text-align:justify";>Ce que j'ai lancé sur le cluster n'a pas fonctionné. J'ai donc tout relancé avec les modifications de ce week-end.</p>
+
+<p style="text-align:justify";>J'ai voulu faire le tuto MAKER2 sur mon ordi via ma VM Linux en suivant le tuto suivant : <http://gmod.org/wiki/MAKER_Tutorial#About_MAKER>. Mais pour cela il faut installer de nombreux outils dont un mais il me faut attendre leur accord : <http://www.repeatmasker.org/RMDownload.html>. J'ai essayé en passant directement à l'étape suivante. C'est-à-dire de faire l'installation de Maker à partir du fichier que j'ai téléchargé sur le cluster. A la fin de cette installation il ne faut pas que j'oublies de faire un snapshot de ma VM pour sauvegarder cette installation. Il faut que je relance ça lorsqu'il m'auront répondu.
+$ sudo ./Build installexes [option n] à la place de Y pour faire le téléchargement de repeatmasker. Je crois que je vais finir d'installer MAKER2 demain parce que ça prend beaucoup de temps. J'y suis depuis le début d'aprèm et ce n'est toujours pas fini ^^. Je ne sais pas du tout combien de temps cela va encore prendre.</p>
+
+<p style="text-align:justify";>Installation de biopython sur le cluster.</p>
+
+## Jour 41 : 24/04/2018
+
+<p style="text-align:justify";>Je continue d'installer MAKER2 et toutes ses dependances. J'espère que je vais y arriver aujourd'hui. C'est fait et fini. J'en ai profité pour installer Augustus et GeneMark-ES.</p>
+
+<p style="text-align:justify";>Erick vient de passer pour me donner les fichiers BAM du projet CRECHE de 2016. Il faut qu'à partir de ces fichiers je fasse une recherche de SNP via GATK. J'ai 67 BAM à analyser. Je vais voir pour analyser tout ça.</p>
+
+<p style="text-align:justify";>J'ai refait le 1er tuto GATK sur ma VM en y ajoutant la tâche VariantToTable pour produire un tableau. Tout d'abord ça ne fonctionne pas si les données sont dans /media/sf_DATA. Et ça ne fonctionne pas non plus quand le script seul y est. Il faut donc que tout soit dans le même répertoire et directement sur ma VM et pas sur le disque-dur de Windows. Pour VariantToTable j'avais mis une option -R comme sur le forum mais cette option n'est pas disponible. Donc je l'ai supprimé et j'ai relancé mon script. Mais je n'avais pas enregistré la modification donc ça na strictement rien changé. J'ai donc enregistré et relancé le script. Sauf que je modifiais le fichier sur le disque-dur Windows et non celui que je lançais dans le terminal ^^. En changeant la place des arguments pour VariantsToTable, j'ai oublié de rajouter un "-" devant "F" du coup il ne comprend pas cet argument. J'espère vraiment que cette fois est la bonne. Et c'est la bonne : tout fonctionne correctement ^^. Plus qu'à faire la suite pour créer in fine le script pour tous les bams. Il faut aussi que je crée tous les BAI de tous les BAM que m'a donné Erick.</p>
+
+## Jour 42 : 25/04/2018
+
+<p style="text-align:justify";>Mon script python a fonctionné et il a mis environ 16h à tourner mais il y a encore quelques erreurs pour les Nostart sur le brin antisens il ya encore quelques décalage à gérer. Et pour les Nostop, pour les brins antisens les coordonnées sont bonnes mais ne s'affichent pas dans le bon sens (le début et la fin du codon sont inversées : le début est inscrit dans le colonne fin et inversement pour la fin).</p>
+
+<p style="text-align:justify";>J'ai refait tous les tutos WDL pour utiliser GATK. Je vais maintenant pouvoir passer à l'étape suivante, c'est-à-dire créer les bai à partir des bam pour essayer de faire la même chose sur les BAM qu'Erick m'a donné.
+J'ai indexé les fichiers bam d'Erick via la commande :
+$ samtools index file.bam file.bam.bai.</p>
+
+<p style="text-align:justify";>Info complémentaires sur les fichiers BAM : Le séquençage a été réalisé en paired-end 2x150bp. Les données ont été mettoyées avec trimmomatic et alignées sur le génome avec TopHat2. La suite a été faite avec cufflinks puis cuffmerge. Tout cela a été effectué en suivant l'ordre alphanumérique des chromosomes, aussi bien dans le fichier d'annotation de référence utilisé : Combined-annotation_Labrax-2014_Ordered.gtf que dans le fichier fasta du génome. Cela donne donc : LG10 à LG19 puis LG1A, LG1B, LG2, LG20, LG22-25, LG24, puis LG3 à LG9, LGx, MT et enfin UN.</p>
+
+<p style="text-align:justify";>Trimmomatic permet d'éliminer tous les reads correspondant aux séquences des adaptateurs illumina, des séquences avec des N et selon la qualité.
+TopHat est un aligneur de reads qui réalise aussi des analyses de "splice-jonction".</p>
+<p style="text-align:justify";>Cufflinks : Cufflinks assembles transcripts, estimates their abundances, and tests for differential expression and regulation in RNA-Seq samples. It accepts aligned RNA-Seq reads and assembles the alignments into a parsimonious set of transcripts. Cufflinks then estimates the relative abundances of these transcripts based on how many reads support each one, taking into account biases in library preparation protocols.<http://cole-trapnell-lab.github.io/cufflinks/></p>
+<p style="text-align:justify";>Cuffmerge : Merge multiple Cufflinks assemblies.<http://software.broadinstitute.org/cancer/software/genepattern/modules/docs/Cuffmerge/3></p>
+
+## Jour 43 : 26/04/2018
+
+<p style="text-align:justify";>Mes scripts python pour corriger les erreurs ne mettent plus que 15min environ ^^. Je ne sais pas ce qu'il s'est passé avant pour qu'il mettent autant de temps. Les deux versions sont quasi aussi rapide.</p>
+
+<p style="text-align:justify";>D'autre part j'ai lancé sur le cluster mon script wdl pour pre-processer mes data Creche. On verra bien ce que cela va donner.</p>
+
+## Jour 44 : 27/04/2018
+
+<p style="text-align:justify";>Aujourd'hui j'ai essayé de rendre compatible mes scripts wdl à mes bam. Mais ça ne fonctionne pas. Il faut que je creuse encore ^^.
+Je n'ai pas touché à mon script python de la journée.</p>
+
+## Jour 45 : 30/04/2018
+
+<p style="text-align:justify";>Aujourd'hui est un jour d'appui pour les grèves résultat il n'y a personne à la fac. Je ne l'ai jamais vu aussi vide. Même quand il y a eu la grève il y avait plus de monde sur le campus et dans les couloirs. Bruno à reommander aux stagiaires et à Madoka de ne pas venir aujourd'hui car le travail isolé est interdit mais comme je ne suis pas UM il pensait que ça s'appliquait aussi à moi. Je ne savais donc pas quoi faire mais j'étais contente de pouvoir avoir un grand weekend. Mais c'était sans compter sur les réponses de Christelle la tutrice d'Olivia qui a dit être présente mais dont le bureau est fermé ainsi qu'Erick qui a dit qu'il serait présent et pas seul au sein du bâtiment 24.
+Du coup dans le doute je suis venue ce matin mais je ne fais pas grand chose de très efficace.</p>
+
+<p style="text-align:justify";>J'ai relancé mon script python en faisant les modif dans le GTF des Nostop et des NoStart et des allongements des séquences (CDS Exons) jusqu'au stop ou au start trouvé.
+Il faut maintenant que j'y ajoute la comptablisation de la longueur en bp qui sépare la fin ou le début du codon stop ou du codon start.</p>
+
+<p style="text-align:justify";>Concernant mes scripts wdl, je me suis dit que comme mes BAM sont "corrompus" il devait y avoir un problème de compatibilité entre TopHat2 et MarkDuplicates. Hors en vérifiant c'est bien le cas. TopHat donne les niveau de qualité de 255 qui sont considérés par GATK comme des niveau de qualité null et les reads ayant cette qualité sont ignorés. Cf : <https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_engine_filters_ReassignOneMappingQualityFilter.php>. Donc j'ai lancé un changement de cette qualité mais pour ce faire il faut utiliser GATK3.5.0 et non GATK4.0.3.0. Sauf qu'ensuite un nouveau problème est apparu : Lordre des chromosomes n'est pas le même dans le bam et dans le fasta. Donc j'ai dû ajouté une nouvelle étape qui va réordrer les reads en fonction des contigs du fichier fasta. Cf : <https://software.broadinstitute.org/gatk/documentation/article.php?id=1328>. Il seront donc comptatibles. Je viens donc de lancer cela sur le cluster.</p>
+
+<p style="text-align:justify";>J'ai fait ma présentation au format ppt sur mon windows du bureau.</p>
+
+#Journal de bord - Mai
+
+## Jour 46 : 02/05/2018
+
+<p style="text-align:justify";>Aujourd'hui j'ai relancé mon script python avec la modif du calcul de longueur de l'ajout du codon stop.</p>
+
+<p style="text-align:justify";>J'ai également relancé mon script wdl de GATK. J'ai toujours mon problème avec GATK.</p>
+
+<p style="text-align:justify";>J'essaye maintenant de faire un présentation en Rmd ^^. Ça ne fonctionne pas. Je laisse tomber.
+
+<p style="text-align:justify";>Erick est passé en toute fin d'après-midi. On a discuté de mon outils python auquel je dois ajouter des NA pour ceux qui ne fonctionnent pas pour la recherche des codons strat et stop. Je dois également ajouter des NA dès qu'il rencontre un N lors de la recherche des codons start ou stop. Concernant la validation de ce que je fais: je dois dans un premier temps relancer snpEff et voir si j'ai mpoins ou plus d'erreur avec mes corrections. En suite je dois "Blaster" les protéines pour voir si certains d eleur domaine se retrouve également dans d'autres espèces.</p>
+<p style="text-align:justify";>Concernant mon pb entre GATK et TopHat2 il faut bien que je fasse la correction pour que les fichiers deviennent comptibles pour la suite de l'analyse.</p>
+<p style="text-align:justify";>Concernant ma présentation pour le Lundi 14 Mai, il faut que j'explique un peu mieux le pourquoi et le comment des différents choses que je dois faire et comment elles se sont manifestées. D'autre part, il faut que je sache bien ce que je vais dire lors de mon oral donc je suppose qu'il va vouloir que j'écrive un texte à dire et qu'il va vouloir le corriger. Cette semaine car il n'est pas là la semaine prochaine.</p>
+
+## Jour 47 : 03/05/2018
+
+<p style="text-align:justify";>Donc pour l'instant c'est-à-dire depuis que je suis arrivée (3h) je suis après résoudre mes problèmes avec GATK. Le réordrage des reads à l'air de fonctionner sans problème mais le changement de la valeur de qualité pose toujourts pb; Sauf que en regardant bien l'erreur que j'obtiens en fait j'utilise GATK 3.5.0 alors qu'il faut que j'utilise GATK 3.8.0. Donc j'ai téléchargé cette version de GATK, j'ai changé kle path dans le fichier jason et j'ai relancé tout ça sur le cluster. 
+Comme ça ne fonctionnait toujours pas après plusieurs lancement et changement j'ai décidé de changer mon fusil d'épaule et de chercher si 255 était la bonne valuer or je viens de trouver [ceci](https://gatkforums.broadinstitute.org/gatk/discussion/7227/mapq-60-is-compulsory-for-the-whole-of-gatk-pipeline) qui dit que TopHat2 donne une valeur de 50 et que cette valeur de 50 est prise en compte donc pas besoin de faire ce réassignement de score. J'ai donc modifié mon script "Data_PreProcessing.wdl" pour y ajouter l'étape de Réordrage. Et je l'ai ensuite lancé sur le cluster.</p>
+
+<p style="text-align:justify";>Ensuite je me suis attelée à l'écriture du script de data_processing. Pour cela je me suis penchée sur le choix des filtres à appliquer et j'ai trouvé différents sites qui en parlent :</p>
+
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=1255>    
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=3225>    
+* <https://software.broadinstitute.org/gatk/documentation/article.php?id=6925>    
+
+<p style="text-align:justify";>Puis je me suis lancée dans l'écriture du suivi des troubleshooting sur mon site web.</p>
+
+<p style="text-align:justify";>Je viens d efaire un ticket pour savoir quelle est la taille de mon espace disque sur le cluster.</p>
+
+<p style="text-align:justify";>Je vais tenter de refaire une analyse snpEff. Je ne sais plus combien de temps cela prenait. On verra bien. Du coup le temps est cours mais j'ai un problème avec 14 gènes car snpEff les circularise donc il faut que je traite cela demain en priorité.</p>
+
+A la fin de mes scripts wdl il faut faire une évaluation de ce callset pour cela on peut choisir deux voies : 
+
+* CollectVariantCallingMetrics de Picard  
+* et GenotypeConcordance de Picard   
+* ou VariantEval de GATK    
+* et GenotypeConcordance de GATK   
+
+Comme dit [ici](https://gatkforums.broadinstitute.org/gatk/discussion/6308/evaluating-the-quality-of-a-variant-callset).
+
+## Jour 48 : 04/05/2018
+
+<p style="text-align:justify";>Dès que je suis arrivée j'ai retravaillé ma présentation pour en parler avec Erick et Bruno à la réunion de ce matin.</p>
+
+<p style="text-align:justify";>Réunion avec Erick et Bruno :</p>
+<p style="text-align:justify";>Concernant la présentation, il ne faut pas faire quelquechose de compliqué mais quelquechose de simple et clair.</p>
+<p style="text-align:justify";>Concernant le projet RobustBass, il faut que je résolve mes pbs avec snpEff qui circularise certains de mes gènes modifiés. Ensuite pour mon script Python qui corrige mon GTF de l'annotation du génome, il faut que je contrôle dans un premier temps avec le transcriptome qu'Érick m'a envoyé. Pour cela le plus simple serait de transformer les fichiers GTF au format BED (format de fichier simple tabulé) pour voir si les coordonnéesque je rajoute tombe dans des gènes du fichiers transcriptome. Si c'est la cas c'est parfait. D'autre part, il faudrait que je regarde si dans ce transcriptome il y a des infos concernant les UTR 3' ou 5'. Si il y en a il faut que je les ajoute à mon GTF. Dans un second temps, il sera peut-être nécessaire de faire un correction des allongements des gènes du GTF par un transcription de ces allongements suivis d'un BLAST pour trouver les protéines ou du moins les domaines similaires dans d'autres espèces.</p>
+<p style="text-align:justify";>Concernant le projet CRECHE de 2016, il faut que je continue la mise en place de GTAK pour trouver les SNPs. Après il faudra que je fasse une analyse de liaison entre les phénotypes et les SNPs trouvés (via les outils de Théo). Pour finir trouver les haplotypes liés via des outils simples.</p>
+
+<p style="text-align:justify";>Pour le run de GATK d'hier : J'avais laissé les runtime en actif et non en commentaire du coup ça ne lui a pas plu. Donc j'ai fait cette modif et j'ai relancé le script.</p>
+
+<p style="text-align:justify";>Je suis allée voir Théo pour qu'il me parle de son analyse RDA (redondance analysis).</p>
+
+
+## Jour 49 : 07/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, pas grand chose de très productif. J'ai regardé où mon script wdl en était et j'ai découvert qu'il s'était arrêté à MarkDuplicates car  il n'y a plus assez d'espace disque. Si mes calculs sont corrects il devait s'arrêter ce soir vers 17h. Mais n'ayant plus d'espace disue il ne pouvait plus rien faire. Donc je l'ai arrêté. POur voir si toutes les étapes fonctionnent, je l'ai relancé mais avec un seul fichier BAM à traiter à la place de 3. Ça devrait prendre moins d'espace disque sur le serveur et pouvoir tourner jusqu'à la fin. En fin j'espère. J'aimerais que ça ait fini de tourner mercredi pour que je lance la suite du script et voir ce qui fonctionne et ce qui ne fonctionne pas. Ensuite pour le choix des filtres à appliquer à mes données ("hardfiltering") je pense que je vais produire un VariantsToTable pour voir les scores disponibles avant de choisir mes filtres. IL faut aussi que je sache exactement ce qu'ils veulent dire.</p>
+
+<p style="text-align:justify";>Comme j'ai pas trop envie de travailler sur mon script Python j'essaie de faire une digestion in silico du génome du bar via un Package R nommé SimRAD. Pour l'instant j'en suis seulement à l'installation des packages. J'ai réussi à faire fonctionner le package et là je suis après essayer de faire un Rmd avec cela pour en rendre compte à Erick plus tard. En disant que j'avais fait ça avant. Sauf que je n'arrive pas à faire fonctionner knitr.</p>
+
+## Jour 50 : 09/05/2018
+
+<p style="text-align:justify";>J'ai relancé GATK, il a planté lundi soir car je n'avais pas mis le bon chemin pour aller jusqu'au fasta de référence. J'ai donc ajouté le fasta de référence dans le dossier d'inputs de GATK. Sinon l'étape SortSam a été réalisée et semble fonctionner correctement. En fait le problème ne venait pas de là mais surement du fait que les fichiers fasta et son index étaient exécutable au lieu de ne pas l'être. Mais j'ai toujours la même erreur même après ces changements. Je vais voir si j'ai encore une fois la même erreur. Si c'est le cas, il faudra que je vois pour ajouter la création d'un  fichier bai à cahcune des étapes précédentes et suivantes.</p>
+
+<p style="text-align:justify";>Lorsque je regarde les problèmes obtenus avec SnpEff, c'est-à-dire les problèmes de circularisation : ils se produisent avec des gènes que je n'ai pas traité avec mon outils python de recherche de codon strat et stop. La majeure partie des 14 problèmes (11) correspondent à des codons stop qui se trouvent avant la fin du dernier exon. Les 3 autres problèmes sont des problèmes plus importants. Il faut que je regarde si c'est la même chose dans le GTF initial que m'a donné Erick. Ensuite il va falloir que je regarde via IGV pour voir ce qu'il se passe visuellement.</p>
+
+<p style="text-align:justify";>Après il va falloir que je tape mon "discours" pour ma présentation de Lundi prochain pour rassurer Erick et Bruno. J'ai pas trop envie comme Bruno a dit que ça devait être simple vu qu'il s'agit d'une courte présentation afin de savoir qui on est, pourquoi on est là et ce que l'on fait.</p>
+
+<p style="text-align:justify";>Il faudrait aussi que je commence à rédiger mon introduction ainsi que le début de mon matériel et méthodes.</p>
+
+
+
+## Jour 51 : 14/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, mail pour demande à propos de ma gratification qui n'a toujours pas été versée. Bruno vient d'appuyer ma demande.</p>
+
+<p style="text-align:justify";>Demande d'augmentation de mon espace disque : demande à Erick et Bruno pour utiliser leur baie de stockage. Bruno va essayer de savoir ce qu'il a besoin de faire pour que j'y accède. Pensez à suivre le ticket de Bruno pour cela.</p>
+
+<p style="text-align:justify";>Mon étape de BaseRecalibrator fonctionne lorsqu'elle est seule mais pas lorsqu'elle est intégrée dans le pipeline. IL faut que je résolve ce problème. Création d'un ticket pour savoir comment cela fonctionne.</p>
+
+<p style="text-align:justify";>Réunion d'équipe pour que tous les stagiaires présentent leurs sujet de stage à l'ensemble de l'équipe ISEM.</p>
+
+
+
+## Jour 52 : 15/05/2018
+
+<p style="text-align:justify";>Ce matin transformation des fichiers GTF en fichiers BED. Mais j'ai une erreur qui apparaît: " Genomic end coordinate is less than (or equal to) start coordinate". Certaines de ces erreurs sont les mêmes que celles que SnpEff me donne mais certaines sont en plus (celles là je ne sais pas dire combien elles sont car gtf2bed ne me les donne que 1 par 1). Je pense que ces erreurs viennent du fait que  certaines de mes nouvelles coordonnées de nouveau start et stop sont comprises dans d'autre coordonnées (exemple : 86594 dans 32786594). Cela reste à prouver. Il y a une des erreurs que je dois vérifier sur IGV mais IGV ne veut pas fonctionner aujourd'hui. Je réessairai cet après-midi.</p>
+
+<p style="text-align:justify";>Je vais maintenant m'attaquer au Config file de GATK. Car l'erreur proviendrait du fait que GATK travaille dans des fichiers temporaires différents de ceux dans lesquels PICARD travaille et stocke ces données. Je ne trouve pas comment écrire un fichier config pour GATK. Dons je teste autre chose : Un script de nettoyage des données qui utilise PICARD puis un script de nettoyage bis qui utilise GATK. On va voir si ça fonctionne ainsi. Si ça fonctionne comme ça alors parfait. Je vais décomposer mes scripts en fonction de GATK ou de PICARD. Hier j'avaiss changé le nom de mon dossier pour y supprimer l'accent présent. Sauf que je n'ai pas modifié le fichier d'input.txt. Du coup il ne trouvait pas le dossier avec les accents. Je viens donc de remédier à ce problème. J'ai toujours le même problème qui est : BaseRecalibrator ne trouves pas de fa.fai alors qu'il y est. J'ai ajouté l'option -OBI true. Je vais voir si cela fonctionne mieux ainsi. Ça ne change strictement rien.</p>
+
+
+## Jour 53 : 16/05/2018
+
+<p style="text-align:justify";>Il faut absolument que je m'occupe des erreurs obtenues après snpEff. Car quand je veux transformer les fichiers GTF en fichiers BED je retrouve les erreurs que snpEff me donne. Je ne comprend pas pourquoi il y a des modif parasites d'une seule extrémité et que le changement de cette coordonnée ajoute une grande séquence. De plus ces erreurs sont absentes des fichiers NoStart et NoStop que j'ai créé. J'ai tout relancé ce matin pour voir d'où ça vient. Mais le script est super long alors qu'il doit âtre court. Je ne sais pas d'où ça vient.</p>
+
+<p style="text-align:justify";>Concernant BaseRecalibrator de GATK, je ne sais pas d'où vient le problème, j'ai rajouté le TMP_DIR de mon choix mais il n'y va pas. J'essaye de relancer le premier script avec la création d'un bam index à la fin de la dernière étape, peut-être que l'erreur vient de là même si il mentionne le fichier index du fichier fasta. On verra bien quand il aura fini.</p>
+
+<p style="text-align:justify";>Comme je ne sais aps travailler avec Python, j'ai lu deux articles cet après-midi sur les GWAS : Forester (RDA de Théo) et PLINK. Maintenant je vais tout copier sur mon disque dur pour essayer de résoudre les problèmes de git ce soir. Plus que 8 minutes à tenir. Je vais écrire un mail à Erick. Puis récupérer les datas et partir.</p>
+
+## Jour 54 : 17/05/2018
+
+<p style="text-align:justify";>Aujourd'hui, j'ai récupéré le fichier GTF qu'Erick a modifié je ne sais comment pour relancer snpEff. J'attends de voir les résultats de snpEff. Il reste 2  gène circulaires à explorer. Il a vérifié que l'extension était correct et en phase puis il a remis les coordonnées initiales.</p>
+
+<p style="text-align:justify";>J'ai lancé BaseRecalibrator seul en direct dans le cluster et ça fonctionne. Du coup je me suis dit que les chemin étaient en dur dans cette option de lancement. Alors pourquoi ça ne marcherait pas dans le script wdl. J'ai donc testé en mettant le chemin du fasta en dur. Résultat : plus de problème avec l'index de ce fichier. Par contre il rencontre le même problème avec le fichier des sites de variations connus. Donc j'ai décidé de le mettre en dur lui aussi. Et résultat : ça tourne de puis maintenant 12 min sans aucun message d'erreur. Je crois que j'ai résolu ce problème!!! Enfin!!!!!!!! Il me reste un problème avec les librairies R qu'utilise AnalyzeCovariate pour faire son plot.pdf pour voir les résultats avant et après la recalibration. Mais ce n'est pas grave car cette étape n'est pas nécessaire pour les étapes suivantes, elle permet juste de vérifier visuellement les recalibrartions qui ont été faites.</p>
+
+<p style="text-align:justify";>J'ai demandé mes vacances et Bruno me les a validées. Reste plus qu'à Erick de les valider. Et il les qa validées lui aussi.</p>
+
+## Jour 55 : 18/05/2018
+
+<p style="text-align:justify";>Sur le forum de GATK ils ont répondu. En fait il suffit de mentionner les fichiers RefIndex et RefDict dans la tâche et dans le call même si l'outils ne l'appelle pas car il va l'utiliser quand même. Je suis en train de tester ce qu'ils m'ont dit. J'espère que ça va marcher. Ce qu'il m'ont dit fonctionne donc je teste maintenant le script suivant qui n'est autre que le script de variant calling.</p>
+
+<p style="text-align:justify";>Dimitri est venu m'installer WinSCP pour que je puisse transférer mes données depuis mon ordinateur jusqu'à la baie de stockage. Sauf que je n'y ai pas encore accès. Normalement Rémy doit y remédier aujourd'hui. De toute façon ce n'est pas urgent mais ça va le devenir si le script fonctionne.</p>
+
+<p style="text-align:justify";>Ce matin j'ai lu 3 papiers sur les statistics des SNPs à savoir des test d'association de variant et des tests d'association d'haplotype. Cet aprèm j'ai lu un papier sur la génétique des pops de *D.labrax*. Et je me suis renseignée sur l'outils GENETIX qu'ils utilisent leur étude. J'ai également fait les ajouts nécessaires sur mon site web.</p>
+
+<p style="text-align:justify";>J'ai essayé de configurer une connection VPN sur l'ordi ubuntu de Flo mais ça ne fonctionne pas car il y a un problème avec des packages R. J'imagine qu'ils ne sont pas à jour. On va voir ça ce soir avec Flo. Il suffisait de faire apt-get update et ap-get upgrade pour tout mettre à jour sous un Ubuntu. Et en plus le logiciel était déjà présent sur son ordi donc je n'avais plus qu'à télécharger l fichier client vpn pour que cela fonctionne correctement.</p>
+
+## Jour 56 : 22/05/2018
+
+<p style="text-align:justify";>Je vais répondre au mail d'Erick cet aprèm comme ça si il passe juste après ça ne me dérangera pas. J'ai peur qu'en lui répondant maintenant il débarque rapidement et je n'ai pas fait grand chose pour ne pas dire rien.</p>
+
+<p style="text-align:justify";>Finalement, mon script python fonctionne. En fait c'est mieux quand on lance le bon script et pas son ancienne version.</p>
+
+<p style="text-align:justify";>Pour GATK, il a tourner pendant 1h50 mais il a rencontré un problème avec GenotypeGVCF car il ne reconnaissait pas l'argument pour la nombre de giga alloué pour cette étape à Java. J'ai donc enlevé les guillemets et relancé le script. Je vais pas tarder à lancer le script alternatif à celui que j'ai écrit pour savoir lequel fonctionne le mieux ^^. Mais il me semble que je dois d'abord finir de l'écrire. Je vais voir ça de suite. Effectivement, il faut que je la peaufine.</p>
+
+<p style="text-align:justify";>J'ai écrit un mail à Erick ainsi qu'un docx pour lui expliquer pourquoi et comment je compte choisir mes filtres pour mes SNPs et mes INDELs. Comme ça il arrêtera de ne pas comprendre de quoi je parle (enfin j'espère).</p>
+
+<p style="text-align:justify";>A la suite de son mail je me suis dit que je pouvais lancer un script similaire sur le cluster qui me permet de récupérer les données pour le choix des filtres plus rapidement. Sauf que toutes les queues sont overbookés à cause de taubier et fgeoffroy qui prennent toutes les noeuds de toutes les queues qui fonctionnent. Donc je dois être patiente et attendre que mes jobs partent.</p>
+
+<p style="text-align:justify";>Madoka va avoir passé la journée entière au labo, ça m'arrange comme ça Erick ne peut pas passer au bureau me demander où j'en suis et ce que je faistout le temps.</p>
+
+<p style="text-align:justify";>Rien à voir avec le taf mais j'ai fait une demande CAF pour savoir pourquoi je n'ai plus aucun droit, j'ai pris RDV pour la vidange, j'ai remboursé la CAF pour le mois de Février perçu en trop (Au moins j'aurai essayé).</p>
+
+## Jour 57 : 23/05/2018
+
+<p style="text-align:justify";>Erick est passé ce matin, on a parlé des filtres pour faire la sélection des véritables SNPs. C'est bien de faire ce que je compte faire même si il semble ne pas avoir tout compris ^^. Il faut absolument que je comprenne la génétique qui est derrière les filtres que je vais choisir pour ne pas choisir n'importe quoi. De plus, on aura un biais dans la répartition des SNPs car on trvaille avec des familles et non des individus totalement indépendants. Je continue de mettre en place le VariantCalling de GATK.
+Il faut que je résolve ce pb avec la baie de stockage pour pouvoir lancer des analyses à plus grande échelle (j'entends par là: sur plus de bam).
+Pour mon script python, il faut que j'examine les longueurs ajoutées peut-être sous forme de graph pour voir la taille ajoutée aussi bien en start qu'en stop. Il faut qu'on continue ce qu'on a commencé avec Flo. et il faut que je vois pour faire une traduction des CDS avec les ajouts pour voir si la protéines en entière ou tronquée par la présence de codon stop au milieu; Si il y a des codons stop au milieu cela signifiera que les "frame" prises en compte ne sont pas les bonnes. et qu'il faudra y remédier car il est nécessaire d'avoir le bon ORF (cadre de lecture) pour chaque CDS.
+Concernant le rapport, il faudrait que je teste différente chose pour voir si la méthodologie fonctionne bien. (avec de gros et de petits bam, avec des réplicas de manip) pour voir si toutes ces possibilités impactent le fonctionnement de GATK.</p>
+
+<p style="text-align:justify";>Pour mon script Python, je me suis occupée de commencer à écrire le script pour parser le fichier gtf du transcriptome que m'a donné Erick. Je vais demander à Flo pour récupérer le fichier au format tabular et non au format visuellement lisible pour pouvoir examiner la longueur que j'ajoute car ça fait plusieurs fois qu'érick me le demande et qu'à chaque fois j'oublies. Donc il faudrait que j'ai fait cela pour demain.</p>
+
+<p style="text-align:justify";>Je pense que je vais me faire une fiche en RMD pour tout ce qui est GATK et j'y ajouterait le choix des filtres. Ou alors je détaille plus GATK et je me fais une fiche à part pour les filtres. Je pense que la deuxième option est la meilleure. C'est celle que je vais choisir pour ne pas faire du double emploi quoi que, une page script et leur détail peut être utile. Finalement j'ai choisi de supprimer la page tools used pour la remplacer par Scripts dans le quel je décrit tout pour mes scripts.</p>
+
+<p style="text-align:justify";>Cet aprèm je serai plus tranquille pour plusieurs raisons : Erick ne risquera pas de débarquer puisqu'il est passé ce matin et Madoka ne sera pas là car elle va maniper au bâtiment 24.</p>
+
+<p style="text-align:justify";>Comme ma carte multi-services ne me permet plus d'ouvrir la porte de l'ISEM, j'ai écrit un mail à la logistique. J'y suis donc allée et elle m'a dit que mon numéro de carte était mentionné 2 fois et que cela venait peut-être de cela. En retournant au bâtiment 22, j'ai testé ma carte à nouveau mais cela n'a rien changé. Elle ne fonctionne toujours pas. J'ai donc écrit un second mail pour dire que ça ne fonctionne toujours afin qu'elle voit avec le service informatique d'où vient le problème. Comme ça ne vient pas du service informatique, j'ai envoyé un mail au responsable de la porte.</p>
+
+## Jour 58 : 24/05/2018
+
+<p style="text-align:justify";>Pour la porte, en fait il fallait que je demande à Yannick et pas à la logistique pour que l'accès fonctionne car Yannick s'occupe de la porte côté ISEM et son collègue de la porte côté Géosciences. Or celle qui ne fonctionne plus c'est celle de l'ISEM.</p>
+
+<p style="text-align:justify";>En fait, j'ai juste à l'ouvrir avec read.table() dans R pour que ça fonctionne. Maintenant il ne me reste plus qu'à faire les graphs. Mais il faut que je trouve comment faire. J'ai réussi à faire des barplot avec ggplot2. POur les Nostart il n'y a aucun problème de visualisation mais pour les Nostop c'est plus délicat car il y a beaucoup de valeurs différentes d'ajouts de longueurs.</p>
+
+<p style="text-align:justify";>Mon accès à la baie de stockage est résolu : j'ai les droits mais je n'ai plus qu'à trouver comment y accéder. Ensuite il faut que je vois comment y transférer mes données. Puis il faudra que je vois comment faire pour travailler sur les bam qui y seront stockés depuis le cluster.</p>
+
+<p style="text-align:justify";>J'ai également fait une demande d'accès au cluster depuis l'extérieur. Et j'ai reçu tout ce qu'il fallait pour le faire. Reste plus qu'à tester ça.</p>
+
+<p style="text-align:justify";>Une femme est venue me voir pour résoudre un de ses problèmes avec ces fichiers fastq qu'elle ne peut merger. Quand elle est venue, je ne savais pas pourquoi ni comment l'aider. Ensuite elle est repartie et j'ai fait une recherche sur Internet pour savoir comment faire. Et j'ai réussi à trouver 4 possibilités différentes. J'ai donc écrit un mail à Bruno pour qu'il lui transmette car je ne connait pas son nom.</p>
+
+## Jour 59 : 25/05/2018
+
+<p style="text-align:justify";>Mes scripts wdl ont plantés parce que Variants to table ne peut prendre qu'un seul fichier à la fois. Donc dans un premier temps je ne vais récupérer que les SNPs pour voir pour les filtres et plus tard je le referai avec les INDELs. J'espère que cette fois ça va marcher et que mes scripts vont partir rapidement.</p> 
+
+<p style="text-align:justify";>J'ai trouvé un rapport de stage sur internet ou quelqu'un fait quasiment la même chose que moi. Donc je vais m'inspirer de son rapport pour faire le miens de la même manière. J'ai donc écrit un plan ainsi que les consignes à respecter sur mon carnet pour m'en rappeler. Et j'ai ajouté tout ça à mon rapport.Rmd que j'avais déjà commencé en rassemblant des consignes de différents horizons comme nous n'avons que des consignes sur la quantité et l'écriture.</p>
+
+<p style="text-align:justify";>J'essaie de transformer mes données de NoStart et NoStop en "numérique" pour pouvoir faire les graphs en ordre croissant mais pour le moment ça me change mes valeurs au lieu de les transformer^^. Ça y est j'ai réussi avec l'aide de Flo en transformant mes données en string puis en numeric.</p>
+
+## Jour 60 : 28/05/2018
+
+<p style="text-align:justify";>Mes jobs sont partis à 22h vendredi soir. Heureusement que je ne les ai pas attendus. Mettre en commentaires les rawIndels n'a pas fonctionné pour la tâche VariantToTable. Je les ai donc supprimé des deux scripts.</p>
+
+<p style="text-align:justify";>Build snpEff s'est bien déroulé. Reste plus qu'à tester l'annotation de la puce avec les dernières modif d'Erick. Je ne suis pas sûre qu'il m'ai envoyé le bon fichier vu que j'ai toujours les deux même erreurs de cricularisation de snpEff.</p>
+
+<p style="text-align:justify";>Erick a téléphoné. Il faut que je continue mes scripts Python. Pour GATK, il faut que je continue de résoudre les différents problèmes avec VaraintToTable pour pouvoir sortir les graphs et choisir les bonnes valeurs pour les filtres et que ke labce en paralèlle le premier script qui c=fonctionne sur plusieurs bam. Il faut que je fasse le transfert des données sur la baie de stockage. Il faut que je vois avec Rémy comment communiquer entre le cluster et la baie de stockage. Pour R (graph des longueurs ajoutées), il faut que je mette en log les valeurs de mon axes des ordonnées ou que je fasse des groupements de classes. Et sur le fichier html il faut qu'il apparaisse différentes choses, par exemple, le nombre total de valeurs traitées ainsi que des phrases explicatives pour mieux comprendre.</p>
+
+<p style="text-align:justify";>J'ai modifié mon fichier html pour y mettre plus de détail et pour y ajouter des données. Je n'arrive pas à passer en log() mon graph des NoStop du coup je suis passée par le second graph pour passer les valeurs de count en log.</p>
+
+<p style="text-align:justify";>J'ai lancé mon script python de correction avec le transcriptome mais il me crée des fichiers vide. Apparemment, j'ai un problème dans mes NoStart NoStop.</p>
+
+## Jour 61 : 29/05/2018
+
+<p style="text-align:justify";>VariantToTable a planté parce que apparemment quand on mets un commentaires dans une ligne de commande il ne voit pas ce qu'il se passe après. Du coup, il pensait que je ne lui avait pas donné d'output. Et HardfilterIndels a planté parce que j'vais remplacé tous les name par samplename et du coup ça avait modifié  un argument de  la fonction. J'avais pourtant regardé pour tout corriger mais cela prouve s=que je n'avais pas tout vu.</p>
+
+<p style="text-align:justify";>Je suis retournée à l'appart rapidement parce qu'on  fait des modifications à mon script hier soir et on a oublié de faire git push. Du coup, j'ai pu récupéré le script faire quelques modifications et tout relancer sur le cluster. Mais mes jobs mettent 100 ans à partir en calcul.</p>
+
+<p style="text-align:justify";>Maintenant je vais m'occuper de l'exo que Flo m'a donné à faire pour m'occuper et lui faire plaisir. C'est fait et tout était quasiment parfait. Je n'ai plus qu'à me trouver qqch à faire pour cet aprèm.</p>
+
+<p style="text-align:justify";>Je vais peut-être leur parler de mon site web. Je vais peut-être creuser PLINK. Enfin bref il faut que je me trouve un truc à faire sinon l'aprèm va être super longue.</p>
+
+<p style="text-align:justify";>Finalement je n'ai rien foutu cet aprèm.</p>
+
+## Jour 62 : 30/05/2018
+
+<p style="text-align:justify";>Mes jobs partent lorsque je ne spécifie pas de queue.</p>
+
+<p style="text-align:justify";>ChoixFiltres a planté sûrement parce que je n'avais pas mis l'option -F qui permet de sélectionner les colonnes que l'on souhaite afficher.</p>
+
+<p style="text-align:justify";>VariantCalling a planté parce qu'il ne reconnaissait pas l'option --java-options. Du coup j'ai mis cette option au tout début juste après java et avant -jar.</p>
+
+<p style="text-align:justify";>On a un petit problème avec mon script python. Les filtres ne fonctionnent pas. Je ne sais pas pourquoi. Mais j'ai pensé à deux possibilités : soit il compare des lettres et non pas des chiffres du coup ça ne peut pas fonctionner soit il y a un problème d'indentation de  "$ if Pass == False". J'ai demandé à Flo, je vais voir ce qu'il en pense. Il pense que ça viens des lettres à la place des chiffres. J'ai donc ajouté la fonction 'int()' à chacune des variables que je déclare. Je me suis également demandé si il ne fallait pas mieux mettre =< à la place de <. Au cas où il serait égal.</p>
+
+<p style="text-align:justify";>J'ai fait un ticket pour demander plusieurs chose: accès à la baie, transfert de data sur la baie et communication entre la baie et le cluster.</p>
+
+<p style="text-align:justify";>J'ai fait une liste de chose que je voudrais que mon (mes) script(s) python fassent :
+
+* Lors de la recherche de codon start ou stop : afficher si il y a des N;       
+* A la place de la traduction faire une recherche de stop dans le CDS en fonction des frames;   
+* Pour les multiples stop : Noter le frame quelquepart et faire une recherche de stop avec toutes les frames possibles;   
+* Pour les non multiple de 3 : Faire une comparaison de la longueur avec le transcriptome et voir pour ajouter ou supprimer des nt en fonction;   
+* Modifier le gtf quand tous les tests ont été vérifiés et validés.</p>
+
+## Jour 63 : 31/05/2018
+
+<p style="text-align:justify";>Mon ticket a été résolu en partie. En effet, la connexion ne fonctionnait plus car ils ont eu une coupure de courant. De plus, pour le transfert : je n'étais pas dans le bon dossier mais pour ma défense on ne m'vait pas donné le bon chemin ^^. Pour les calculs sur le cluster avec la baie, je vais devoir réserver une machine big.mem pour pouvoir faire tourner GATK sur l'ensemble de mes Bam.</p>
+
+<p style="text-align:justify";>Pour mon script wdl de Variant_calling j'ai changé de stratégie et supprimer l'étape de GenomicsDBImport pour la remplacer par CombineGVCFs et GenotypeGVCFs. On va bien voir si ça fonctionne.</p>
+
+<p style="text-align:justify";>Erick est content de mon rapport html sur l'évaluation des longueurs ajoutées et la vérification par le transcriptome.</p>
+
+<p style="text-align:justify";>J'ai commencé le script pour vérifier qu'il n'y a pas de stop au sein des CDS que j'ai rallongé avec mon premier script python. Dans une première partie je récupère les positions et les séquences des CDS puis dans une sceonde je les traduit et évalue la présence de stop ou non dans la séquence protéique.</p>
+
+#Journal de bord - Juin
+
+## Jour 64 : 01/06/2018
+
+<p style="text-align:justify";>Erick doit passer ce matin. Du coup, si je trouve des erreurs en me basant sur les données du GTF initial c'est quelles viendront sûrement d'erreurs qu'il y avait déjà au sein de ce GTF initial. Erick prend 3 semaines de vacances en juillet (les 3 dernières semaines). Ca sera la période dans laquelle je devrais commencer à rédiger mon Rapport car il ne sera pas là pour me guider. (Même si au final il ne fait que me donner des pistes et non pas m'aider à programmer). Il vaut mieux que je fasse mon rapport en word car ERick déteste LaTeX qui est un langage que je ne connait pas.</p>
+
+<p style="text-align:justify";>Mon script choixfiltres a fonctionné sans erreur mais le fichier de sortie est vide . Donc je l'ai relancé sans sélection cette fois.</p>
+
+<p style="text-align:justify";>Mon script Variant calling a planté pour la même erreur qu'hier. Je ne sais pas d'où elle vient. J'essaye en sortant CombinedGVCFs de la boucle scatter-gather. Peut-être que le problème vient de là. L'erreur était expected Rbrace ConbinedGVCFs mais je ne sais pas ce que veut dire rbrace.</p>
+
+<p style="text-align:justify";>J'ai commencé un tuto LaTeX pour apprendre ce lana=gage mais c'est un pau complexe de se rappeler de toutes les possibilités.</p>
+
+
+## Jour 65 : 04/06/2018
+
+<p style="text-align:justify";>Mes scripts wdl ont fonctionné. J'ai rajouté des champs à variantstotable. Mes scripts wdl ne prennent plus que 3h à la place de 17h de temps de calcul.</p>
+
+<p style="text-align:justify";>J'essaye de faire des graphs pour le choix des filtres.</p>
+
+<p style="text-align:justify";>J'ai assisté à la présentation de Théo. C'était bien même si il a pas mal de chose à changer d'ici jeudi et que ça va être court et que Bruno n'est pas là pour l'aider à faire des choix.</p>
+
+## Jour 66 : 05/06/2018
+
+<p style="text-align:justify";>J'ai fait des graph avec les données que j'ai obtenu après haplotypecaller. J'obtiens des Mixed et des Symbolic. Donc ce n'est pas aussi simple qu'avec des SNPs et des INDELs.</p>
+
+<p style="text-align:justify";>Erick m'a envoyé la liste des individus à passer sur GATK en premier et j'ai fait une première sélection parmi ceux-là. Je suis en train de les transférer sur le cluster. Ensuite il faut que je produise le fichier d'index et que je prépare le fichier tsv. Les données ont fini d'être téléchargée mais je ne peux produire leur index car je ne sais pas utiliser samtools du cluster. Donc j'ai chargé les données sur mon disuque dur pour faire ce soir à l'appart. Mais cela ne m'empêche pas de faire le fichier TSV.</p>
+
+<p style="text-align:justify";>Je suis en train de sauvegarder les données que j'ai obtenu avec GATK pour Creche-11GB sur mon ordi pour ensuite les transférer sur la baie de stockage (tycho).</p>
+
+<p style="text-align:justify";>J'ai modifié mon script python pour faire ce que je n'arrivais pas à faire.</p>
+
+## Jour 67 : 06/06/2018
+
+<p style="text-align:justify";>J'ai fais les corrections à mon script python.</p>
+
+<p style="text-align:justify";>Hier soir, j'ai préparé les fichiers .bam.bai et j'ai pu lancer ce matin la préanalyse pour les 8 bam que j'ai sélectionné. J'espère que la mémoire de mon home sur le cluster est bien de 500Go comme il m'a dit sinon ça va planter.^Ca plante parce que je ne lui donne pas assez de ram.</p>
+
+<p style="text-align:justify";>Cet après-midi j'ai rendez-vous avec Erick et Bruno pour parler de l'avancée de mon stage. On se voit tous les 3 environ 1 fois par mois. Bon bah on ne s'est pas vu ^^</p>
+
+<p style="text-align:justify";>A mon fichier rmd j'ai ajouté quelques graphs pour le choix des filtres. Mais erick pense que ça vient de HaplotypeCaller qui ne trouve pas de SNP mais que des mixed ou des symbolic.</p>
+
+## Jour 68 : 07/06/2018
+
+<p style="text-align:justify";>Aujourd'hui c'est mon anniversaire et le cluster de calcul n'est pas accessible donc je ne vais pas pouvoir travailler tant que le disque ne sera pas installé. Et R ne veut pas ouvrir mon projet annotation. Ca y est maintenant il veut bien ^^ . Je ne sais pas pourquoi il ne voulait pas mais maintenant sans que je n'ai rien changé il veut bien, encore un mystère de l'informatique.</p>
+
+<p style="text-align:justify";>Je teste le Pre-processing avec 4 fichiers à la place de 8, pour voir si il peut allouer de la mémoire. Il peut !!!!!!! Du coup c'est trop bien. Je les lance 4/4. Je suis en train de sauvegarder la première partie sur mon ordi. Après je pourrais tout envoyer sur Tycho.</p>
+
+<p style="text-align:justify";>Je teste le choix des filtres avec --output-mode EMIT_ALL_SITES, pour voir si il peut nommer des SNPs.</p>
+
+<p style="text-align:justify";>Sur tycho il n'y a plus le dossier /export/poolz3/bguinand/elise ... J'espère que je n'ai pas fait une fausse manip'. Normalement tout est revenu. Je ne sais pas où tout était parti mais bon, encore un mystère de l'informatique.</p>
+
+<p style="text-align:justify";>J'ai fait ma distribution de gâteaux ausein de l'isem epoiss et au bâtiment 24 pour en donner à la plate-forme. J'en ai profité pour en distribuer aux responsables du cluster. Du coup, j'ai enfin découvert qui était Rémy : il est super jeunne alors que je m'attendais à quelqu'un de plus âgé. En plus, je l'avais déjà croisé plusieurs fois dans les couloirs sans savoir qui c'était. Mais maintenant je le sais et je peux mettre un visage dessus.</p>
+
+<p style="text-align:justify";>J'ai fait un ticket au SR2i pour qu'ils m'installent R et Rstudio sur mon windows car j'aurai accès à 32Go de RAM et au 2To de stockage. Donc ça devrait être plus simple pour moi de travailler mes filtres sur Windows quand ils auront fini bien sûr. Du coup, Dimitri est passé vite fait pour me les installer ppour mon anniversaire sinon je crois qu'il ne serait venu que demain ou plus tard à un moment de creux.</p>
+
+
+## Jour 69 : 08/06/2018
+
+<p style="text-align:justify";>Hier j'ai testé HaplotypeCaller avec une autre option pour voir si je trouve des SNPs simple sauf que je me suis trompée dans un chemin d'accès à un fichier du coup il n'a pas pu travailler correctement. Donc j'ai fait la correction ce matin et je l'ai relancé. D'autre part, j'avais lancé le PreProcessing sur 4 autres fihciers. Ils ont terminé hier en fin d'aprèm du coup je suis en train de les transférer sur mon ordi. Et après je pourrais les envoyer sur Tycho.</p>
+
+<p style="text-align:justify";>Madoka n'est pas là aujourd'hui ni lundi car elle a pris des jours pour aller en Allemeagne voir sa soeur et son bébé.</p>
+
+## Jour 70 : 11/06/2018
+
+<p style="text-align:justify";>j'ai réservé un bigmem pour mon retour de vacances.</p>
+
+<p style="text-align:justify";>Je ne pouvais plus rien sauvegarder sur le cluster. En fait j'avais plus de place dans mon home (501/500Go) du coup il ne voulais plus rien que je fasse. D'où le temps d'attente super long de mon script. En fait, je crois qu'il n'aurait jamais fini. J'ai tout récupérer grâce à git.</p>
+
+<p style="text-align:justify";>Je ne comprends pas pourquoi Erick ne comprend pas que c'est en log10.</p>
+
+<p style="text-align:justify";>J'ai changer mon script wdl selon les consignes d'ERick. C'est-à-dire produire un fichier bam et faire la soartie des variants lorsque le génotype calling a été réalisé, pour voir d'une part d'où viennent les problèmes d'alignement et d'autre part pour voir si HaplotypeCaller ne sort pas quelquechose de généralisé et que GenotypeGVCF faitle véritable calling final. Ce job est en train de tourner de puis tout à l'heure. J'espère que ça ne va pas être trop long.</p>
+
+<p style="text-align:justify";>J'ai envie d'écrire. Pour assouvir cette envie, je pourrais commencer mon rapport de stage mais je ne suis pas très inspirée pour le moment. Par contre, si jamais je bosse depuis Doué il va falloir que je pense à tout sauvegarder sur mon disque dur si j'en ai besoin jeudi soir avant de partir.</p>
+
+<p style="text-align:justify";>Je ne fais qu'attendre que le temps passe et il ne passe pas vite du coup. J'ai décidé de faire mon sport à l'aide de l'appli que j'ai téléchargé l'autre soir histoire de passer le temps. Du coup, j'ai bien chaud et bien soif. Quand j'aurai fini j'irai chercher de l'eau à la fontaine. Je dois tenir 1 mois. Pour retrouver la forme que j'ai perdu et surtout pour perdre monb petit ventre et mes petites hanches. On va bien voir si ça fait effet ou non.</p>
+
+## Jour 71 : 12/06/2018
+
+<p style="text-align:justify";>Le script wdl a fonctionné : le problème venait bien du fait que les calling d'HaplotypeCaller sont aléatoire et non filtré. Il faut donc faire la sélection des SNPs et INDELs après avoir fait le CombineGVCFs et le GenotypeGVCFs. J'ai fait les graphiques pour l'individus 11GB. Et j'ai lancé l'analyse pour les 4 premiers individus (18, 17, 4, 20B). Quand ça aura terminé je pourrais transférer les données sur Tycho et lancer la suite sur les 4 autres individus (27, 17B, 52, 77).</p>
+
+<p style="text-align:justify";>J'aimerais bien que l'on choisisse les valeurs des filtres avant jeudi soir comme ça je pourrai les appliquer sur toutes les données dès que je rentre de mes vacances sur la big-mem que j'ai réservé et qui me sera attribuée pour 3 semaines entières. J'espère que tout va aller comme sur des roulettes pour la fin de mon stage. En plus pendant 3 semaines voir 4 en juillet je serai libre de faire ce que je veux car Erick sera en vacances et ça sera trop cool. Il veut juste que le premier jet de mon rapport soit dans sa boîte mail avant qu'il ne revienne de vacances pour qu'il n'ai plus que ça à le lire et le corriger en rentant de ses vacances.</p> 
+
+<p style="text-align:justify";>Suite à cette modification du script de choix des filtres, j'ai modifié deux choses: la flowchart sur mon google drive et le script de Variant calling.</p>
+
+<p style="text-align:justify";>D'autre part concernant mon script Python: il produit bien le fichier avec les CDS mais il ne faisait pas de retour à la ligne. J'ai fait ce changement. et J'ai oublié ce que Flo m'avait demandé de faire ensuite. C'était de vérifier que ma condition était bonne et elle ne l'était pas vraiment vu qu'il confondait les tabs avec les espaces. J'ai tout mis sur mon disque dur comme ça on pourra tout regarder ensemble ce soir.</p>
+
+## Jour 72 : 13/06/2018
+
+<p style="text-align:justify";>Erick m'a demandé où j'en était de toutes mes affaires. Donc je lui ai dit que j'avais réservé la bigmem pour mon retour de vacances et sue je pourrais lancer toutes les analyse depuis là-bas dès mon retour de vacances. Je lui ai aussi dit que j'avais quasiment fini de faire la traduction. Et je lui ai également dit ce que je comptait faire avec les autres problèmes de la correction du génome. Je ne sais pas si je vais réussir à faire tout cela en 2 jours seulement.</p>
+
+<p style="text-align:justify";>D'autre part mes script wdl ont planté cette nuit car le séparateur ne séparait pas bien les fichiers si j'ai bien compris. Sinon il faudra que je mette cette étape dans le scatter-gather et peut-être que ça fonctionnera. Mais ça je ne le saurai surement que demain.</p>
+
+<p style="text-align:justify";>Je vais créer tous les bai de tous mes bam à l'aide de mon ordi. Ensuite je vais faire le transfert sur Tycho de tous ça.</p>
+
+<p style="text-align:justify";>J'ai fais une liste de tous ce dont j'aurai besoin pour travailler sur la big-mem. Ainsi qu'une question à poser. Me demande de réservation est toujours en cours de modérartion. Du coup j'ai fait un changement en mettent mon nom comme titrecomme tous le monde.</p>
+
+<p style="text-align:justify";>J'ai fait des recherches sur tout les packeges R que j'avais trouvé</p>
+
+## Jour 73 : 14/06/2018
+
+<p style="text-align:justify";>Vivement ce soir car c'est les vacances !!!!!!!!</p>
+
+<p style="text-align:justify";>Mon wdl a fonctionne trop bien! J'ai donc transférer toutes les données sur mon ordi puis sur Tycho. Je vais pouvoir charger le fichier dans R et voir si il y a beaucoup de différence à les faire seuls ou à plusieurs. J'ai lancé la suite des analyses sur les autres bam que j'avais choisi. Cette analyse s'est terminé rapidement et j'ai donc tout transférer sur mon ordi puis sur Tycho comme d'hab. Ça change quelques trucs mais surtout les MLEAC et MLEAF.</p>
+
+<p style="text-align:justify";>J'ai créé 2 fichier .map et.ped à l'aide de VCFtools pour pouvoir utiliser PLINK. PLINK produit des fichier text séparé par des espaces et ces fichiers sont ouvrables par R ou HaploView. J'ai ensuite rer-regarder le pipeline d'association du rapport que j'avais trouvé et j'ai noter son pipeline sur mon carnet. Et j'ai également regarder le tuto PLINK et notamment les lignes de commandes utilisées. J'ai créé un script sge avec toutes les commandes dedans et je l'ai lancé sur le cluster. Je ne sais pas ce que ça va donner surtout que je n'ai pas ajouté les phénotypes^^.</p>
+
+<p style="text-align:justify";>si pendant mes vacs je dois faire un ticket pour mon ordi : http://help.isem.intra/index.php?redirect=ticket_1124 .</p>
+
+## Jour 74 : 25/06/2018
+
+<p style="text-align:justify";>Aujourd'hui retour de vacances et je suis déjà KO.</p>
+
+<p style="text-align:justify";>J'ai eu les infos que je voulais concernant l'utilisation de la big-mem. J'ai plus qu'à tout transférer pour tous lancer ensuite. J'ai quasiment tout préparé. Je ne vais avoir plus qu'à installer java8 pour faire fonctionner GATK.</p>
+
+<p style="text-align:justify";>Erick est passé me voir pendant près d'1h pour discuter d'où j'en était dans mon taf et de ce que je prevois de faire avant qu'il ne parte en vacances le 6 Juillet au soir. Il faut que je lance GATK par lignée afin de ne pas perdre les snps qui ne seraient supportés que par une seule lignée et éliminé lors du joint calling (GenotypeGVCFs). Puis je lancerai GATK sur l'ensemble des données pour faire une comparariosn avec le lancement pare lignée.
+Pour l'annotation du génome : Il faut que je fasse en parallèlle la recherche d'orf (cadre de lecture) et la recherche de start et stop pour faire d'une pierre deux coups. Et pour ceux qui ne fonctionnerait pas il faudrait que j'ajoute un start artificiel pour qu'il mle fasse la traduction en fonction de différents frame.
+Pouyr mon rapport, il ne faut pas que j'oublie d'inclure les chiffres prouvant mon avancée avec le nombre d'erreyurs au départ puis à chaque étape pour voir l'évolution de mon travail.
+Il faudrait que je preprenne des vacs pour m'aérer la tête avant d'entamer la rédaction d emon rapport.
+Pour GATK comme il n'auront surement pas les données avant que je parte (du projet initail) il va falloir que j'écrive un tuto - mode d'emploi de l'utilisation des mes différents scripts pour qu'ils puissent l'utiliser après mon départ sans gros problèmes d'organisation.</p>
+
+<p style="text-align:justify";>D'autre part Madoka n'est pas là de la semaine car elle est à Perpignan pour se former à l'analyse des données épigénétique et l'obtention de données de dd-RAD. Elle ne rvient que la semaine prochaine; Donc j'ai le bureau rien que pour moi toute la semaine pour faire tout ce que je veux !!!!</p>
+
+<p style="text-align:justify";>J'ai fait un schéma de la vue générale de mon pipeline pour la découverte de variants à partir de données de RNA-seq.</p>
+
+<p style="text-align:justify";>J'ai tout transférer sur la big-mem et j'ai lancé mon job mais je ne sais pas comment faire pour qu'il me rende la main.</p>
+
+## Jour 75 : 26/06/2018
+
+<p style="text-align:justify";>J'ai trouvé comment faire pour qu'il me rende la main : c'est "nohup ... &". Il écrit tout ce qui sort dans un fichier nohup.out mais reste à savoir où il le met. Je n'ai pas encore testé mais je vais le faire cet aprèm quand mon script aura fini. Du coup ça ne me rned pas la main.</p>
+
+<p style="text-align:justify";>Comme le script a planté à 20h50 hier soir à cause de la mémoire, j'ai ajouté un argument à ma commande qui est -d64 pour qu'il utilise une JavaVM de 64 bit. Je vais bien voir si ça fonctionne en début d'aprèm. Sinon il va falloir que je joue avec les options -Xms et -Xmx. Le seul pb c'est que je ne sais pas comment faire pour bien choisir les valeurs. Du coup j'ai mis -Xmx4g pour Markduplicates. Et ça fonctionne. Ensuite nouvelle erreur : pas d'index pour le fichier des snps de la puce. Donc je l'ai produit. Et ça m'a donné le même que celui qui était présent. Si ça ne fonctionne pas avec ce petit changement, je l'ajouterai au json et aux task et call du script wdl. En espérant que ça fonctionne sans que j'ai besoin de faire ça.</p>
+
+<p style="text-align:justify";>J'ai fait quelques modifications de mon script pour avoir les tables de recalibration avant et après la recalibration pour voir la différence et l'impact de cette recalibration pour chacun des individus impliqués dans mon étude. Pour l'instant, j'ai lancé mon job avec tous les individus sélectionnés par Erick. Par contre il semblerait que pour faire le joint Calling (GenotypeGVCFs) je doivent le faire par lignée et non tous les individus ensemble.</p>
+
+<p style="text-align:justify";>Je vais attaquer la rédaction de mon rapport, notamment tout ce qui est matériel et méthode ainsi que l'obtention de mes données. Cet aprèm je bosse Python avec l'aide de Flo car il aura fini son oral et sera moins stressé mais pas forcément plus disponible.</p>
+
+## Jour 76 : 27/06/2018
+
+<p style="text-align:justify";>Bon bah mon script wdl a planté pour le même erreur du coup j'ai ajouté le path de ce fichier dans le json et dans mon script wdl. La dernière solution si ça ne fonctionne pas est de mettre le chemin de ce fichier en dur. J'avais fait un oubli et erreur de frappe du coup ça ne lançait pas le job. J'ai fait les modif nécessaires et le job est parti. J'espère que ça va fonctionner cette fois.</p>
+
+<p style="text-align:justify";>Finalement je n'ai pas bossé python de l'aprèm. Je vais faire cela cet aprèm. Pour de vrai cette fois car Flo ne sera pas dispo demain pour m'aider. Il faut que je visualise mentalement ce que je veux faire et comment je compte le faire. Puis j'en parle à Flo et il m'aide et demain je fais tout ce qu'il m'aura dit de faire.</p>
+
+<p style="text-align:justify";>Hier j'ai fait un ticket pour qu'ils viennent m'installer les périphériques d'imprimantes sur mon ordi pour que je puisse imprimer le rapport CRECHE 2016 et avancer plus vite sur la rédaction de mon rapport de stage. Pour mon rapport, j'ai pas beaucoup avancé. J'ai fait le mat etmeth que pour GATK et pour le 1er wdl seulement. Je vais donc m'occuper du second wdl.</p>
+
+<p style="text-align:justify";>Donc PLINK semble fonctionner mais il n'a pas de phénotype et notamment pas de sexe donc c'est difficile pour lui de travailler. Aucun des fichiers ne semble contenir qqch de pertinent car tout est dans nosex.</p>
+
+
+## Jour 77 : 28/06/2018
+
+<p style="text-align:justify";>Data_PreProcessing a fonctionné. C'est trop cool. Je suis en train de le relancer avec mon script R dans le PATH, j'aimerais bien que ça fonctionne. Je l'ai lancé sans avoir installé les packages nécessaires du coup je les installe. J'espère que ce n'est pas trop tard. Je pense que du coup ça n'a pas été pris en compte car il me dit qu'il ne trouve pas les packages que j'ai installé. Du coup, j'ai ajouté le chemin de la library pour qu'il les trouve. au cas où ça ne fonctionnerait pas j'ai ajouté -l DEBUG et je lancerait le script manuellement. Et d'autre part je transfert les données obtenues sur mon ordi. Pour pouvoir ensuite les transférer sur TYCHO. Mais je sens que ça va prendre du temps car le dossier fait dans les 800Go. Oui oui autant !!!!</p>
+
+<p style="text-align:justify";>Il ne faut pas que j'oublie d'aller voir la présentation d'Olivia sur les Gobies au 2ème étage. Bruno avait 11h15 du coup je me suis pointée à 11h05 et Olivia était déjà en train de faire ça présentation. Du coup je n'ai pas pu assister à sa présentation. En plus elle n'a même pas pensé à moi avant de partir manger. Surtout que je l'ai vu à la cafèt mais ils sont tout de suite parti je ne sais où du coup j'ai mangé toute seule dans mon bureau.</p>
+
+<p style="text-align:justify";>Dimitri vient de passer pour m'installer R 3.5.0 et non  3.4.4 car il ne l'a pas et cele là n'est pas dispo pour Ubuntu ^^. Il m'a aussi paramétré l'imprimante mais je ne peux pas imprimer en recto verso du coup ça va faire du gaspillage donc je vais l'imprimer à l'appart. Et en plus ça sera en couleur.</p>
+
+Pour mettre R à jour:   
+* $sudo su   
+* $echo "deb http://www.stats.bris.ac.uk/R/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list   
+* $apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9   
+* $apt-get update   
+* $apt-get upgrade   
+
+## JOur 78 : 29/06/2018
+
+<p style="text-align:justify";>Hier j'ai tenté de lancer le script avec -l DEBUG sauf que ce n'est pas une option reconnue. Du coup je l'ai enlevé et j'espère que ça va fonctionner cette fois sinon je laisse tomber. Je suis un peu têtue du coup je pense qu'il y a un truc que je n'avais pas compris. J'imagines qu'il fallait remplacer le fichie .pdf par le fichier .csv et non mettre les deux. En fait l'erreur est le chargement des librairies qui ne peut-être fait. Je ne sais pas d'où vient ce pb car quand je tape mon script R dans R de la big-mem il "fontionne". De plus, j'ai lancé le job avec nohup &. J'espère que cette fois ça va fonctionner et dans le doute je ne vais pas éteindre mon ordi du week-end même si je sais que ce n'est pas bien.</p>
+
+[site mal compris dans un 1er temps](https://gatkforums.broadinstitute.org/gatk/discussion/4294/analyzecovariates-fails-with-error-message-rscript-exited-with-1)
+
+<p style="text-align:justify";>Je viens de préparer un mail pour l'envoyer à Erick avant de partir. J'espère que ce que j'ai fait cette semaine va lui convenir parce que c'est mon unique mail de la semaine. Vivement qu'il soit en vacances pour ne plus me sentir inutile et fénéante ur mon trvail. Surtout que par rapport à Flo j'ai rien fait. Mais pour ma défense j'ai pas de bioinformaticien pour m'aider dans l'écriture de mes scripts ou l'utilisation des outils que j'emploi. Ce qui m'énerve le plus c'est qu'il fait genre qu'il sait tout mais en fait il sait juste que ça existe et pas comment faire. En fait il ne connait que la partie biologie.</p>
+
+<p style="text-align:justify";>J'ai également corriger les erreurs de traduction de la signification des sigles des filtres que je vais employer aussi bien sur le rapport que sur le mode d'emploi de mes scripts. J'ai aussi ajouté quelques trucs au sein de mon matériel et méthode pour étoffer mon rapport.</p>
+
+<p style="text-align:justify";>J'ai de nouveau écrit ce que je veux faire avec mon script Python pour faire la correction de l'annotation en prennnat en compte ce que Erick m'a dit Lundi dernier. J'espère qu'avec Flo on ourra bosser samedi aprèm sur ça. Entre le coiffeur et la préparation de la quiche.</p>
+
+<p style="text-align:justify";></p>
+
+#Bibliographie
+
+Sur Mendeley dans le dossier Stage ISEM et dans le menu : "Biblio".
+
+##Vocabulaire
+
+###Anglais
+
+bar (loup) = seabass fish
+
+###Français
+
+euryhalin = qui peut vivre dans des conditions de salinité variable
+
+nom latin du bar : *Dicentrarchus labrax*
+

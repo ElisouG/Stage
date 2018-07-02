@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>GWAS_Stress_Fish</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">GWAS_Stress_Fish</h1>
+
+</div>
+
+
+<hr />
+<p>Some interesting extracts from papers :</p>
+<hr />
+<div id="a-genome-wide-association-study-of-heat-stress-associated-snps-in-catfish-jin-et-al.-2016-animal-genetics" class="section level1">
+<h1>A genome-wide association study of heat stress-associated SNPs in catfish, Jin et al., 2016, Animal Genetics</h1>
+<p style="text-align:justify" ;>
+Genome-wide association studies (GWAS) allow the detection of linked QTLs in families as well as historically accumulated recombination events.
+</p>
+<p style="text-align:justify" ;>
+Using a reference genome, candidate genes physically close to QTLs can be detected, which is useful for understanding the underlying biology of a trait by identifying it in proximity to QTL.
+</p>
+<p style="text-align:justify" ;>
+The genotyping of each DNA sample was performed using the catfish 250 K SNP array (Liu et al. 2014) at GeneSeek. The SVS (SNP &amp; VARIATION SUITE, Version 8.1) software package was used to perform the quality filtering procedures and the following statistical analysis.
+</p>
+<p style="text-align:justify" ;>
+Apparently, the two families were distantly related. EMMAX (Efficient Mixed-Model Association eXpedited) analysis was carried out using all informative SNPs with the first two principal component scores and the fish body weight as covariates for genome-wide association (Kang et al. 2010). The EMMAX is efficient for controlling population stratifi- cation, especially between-family genotype differences in our study.
+</p>
+<p style="text-align:justify" ;>
+This is the first association analysis at the whole genome level to investigate the genomic loci and genes related to heat stress in aquaculture species. The results provide a valuable base of genes and pathways to be further inves- tigated for their possible functions in heat stress. Consider- ing the population specificity of QTLs and the minor allele effect in association analyses, futures studies using larger or more catfish families and various catfish strains are necessary for fine mapping and accurate GWAS for heat stress analysis.
+</p>
+</div>
+<div id="coding-gene-snp-mapping-reveals-qtl-linked-to-growth-and-stress-response-in-brook-charr-salvelinus-fontinalis-sauvage-et-al.-2012-genesgenomesgenetics-investigation" class="section level1">
+<h1>Coding Gene SNP Mapping Reveals QTL Linked to Growth and Stress Response in Brook Charr ( Salvelinus fontinalis ), Sauvage et al., 2012, Genes|Genomes|Genetics Investigation</h1>
+<p style="text-align:justify" ;>
+Quantitative trait loci (QTL), the portions of a species’ genome that affect the variation of heritable phenotypic traits, are revealed by the association of phenotypes with molecular markers. They provide in- sight into the number of loci affecting a trait and on the distribution of the QTL effects of each locus (Lynch andWalsh 1998). QTL analysis has become a popular method for studying the genetic basis of con- tinuous variation in a variety of systems and is now an integral tool in medical genetics, livestock production, plant breeding, and population genetics of model organisms (Slate 2005). Thus, this approach is of great interest when studying experimental populations obtained from livestock species. Knowledge gained from these analyses can be used to improve traits of economic importance such as growth, resistance to pathogens, sexual maturation, or stress response through the clar- ification of their underlying genetic basis.
+</p>
+<p style="text-align:justify" ;>
+Indeed, the use of QTL in marker-assisted selection for phenotypic traits of interests offers great potential and provides the basis for cloning genes underlying the genetic architecture of these traits (Mackay 2001; Remington et al. 2001). This approach has been applied in many livestock species but was introduced relatively recently (a decade ago) in farmed aquatic species such as rainbow trout Oncorhynchus mykiss (Ozaki et al. 2001), Atlantic salmon Salmo salar (Houston et al. 2008), and Pacificoyster Crassostrea gigas (Sauvage et al. 2010a) to improve disease resistance or growth. QTL studies provide a frame- work for the identification of genes and genetic architecture underly- ing heritable variation within populations and divergence among them. However, this has not proven true from QTL studies alone, which need to be supported by candidate genes approach to fully detect and understand the complex traits architecture.
+</p>
+<p style="text-align:justify" ;>
+Stress response, which has been defined as a “diversion of metabolic energy from animal’s normal activities” (Barton and Schreck 1987), is another important fitness-related trait in aquaculture production. In aquaculture facilities, fish are submitted to many stressful manipula- tions (handling, sorting, transportation, vaccination). All these have the potential to initiate a severe stress response (Barton and Iwama 1991; Portz et al. 2006), which can affect other relevant production traits, including growth performance, feed conversion, immunocompetence, reproductive performance, and disease resistance
+</p>
+<p style="text-align:justify" ;>
+the identification of QTL and candidate genes related to plasma cortisol concentration in rainbow trout (Drew et al. 2007; Vallejo et al. 2009) as well as three potential QTL related to stress response in sea bass Dicentrarchus labrax (Massault et al. 2010). De- spite these studies,QTL related to stress response remain poorly studied in fish
+</p>
+<p style="text-align:justify" ;>
+Our analyses were based on a single-nucleotide polymorphism (SNP)-based consensus linkage map (Sauvage et al. 2012) identified by RNA-seq
+</p>
+<p style="text-align:justify" ;>
+Traits related to the stress response:
+</p>
+<p style="text-align:justify" ;>
+QTL related to stress response The present study identified four QTL associated with the three phenotypes related to stress response and localized on four different LGs.
+</p>
+<p style="text-align:justify" ;>
+This finding is in accordance with Drew et al. (2007), who detected one QTL associated with juvenile rainbow trout bodymass overlapping with a QTL for cortisol levels, indicating a pu- tative genetic link between these two traits.
+</p>
+<p style="text-align:justify" ;>
+suggesting a positive relationship between cortisol levels and growth rate. How- ever, this finding is in contrast with Fevolden et al. (2002), who pre- viously reported a negative correlation between stress response and growth performance in rainbow trout. However, this statement should be interpreted cautiously when comparing both studies, as fish were younger in Fevolden et al. (2002) and were not subjected to any domestication process that may alter stress response and growth. Taken together, our results and previous ones suggest that the cortisol response after a stress exposure may be under variable genetic control depending on species. This also demonstrates that stress response measured through plasma cortisol is a highly complex trait and may influence a range of underlying physiological mechanisms
+</p>
+<p style="text-align:justify" ;>
+Here again, we suggest that these SNP markers are in linkage disequi- libriumwith the causative locus (or transcription factors). As such, our results should be perceived as representing a necessary first step to- ward the identification of the genes underlying the genetic architecture of stress response in fish and of growth performance in S. fontinalis
+</p>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

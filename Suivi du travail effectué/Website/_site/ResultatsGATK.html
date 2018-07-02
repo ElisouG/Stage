@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Résultats obtenus par GATK</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Résultats obtenus par GATK</h1>
+
+</div>
+
+
+<div id="visualiser-les-donnees-produites-par-haplotypecaller-combinegvcfs-et-genotypegvcfs-gatk" class="section level1">
+<h1>Visualiser les données produites par HaplotypeCaller, CombineGVCFs et GenotypeGVCFs (GATK)</h1>
+<div id="importation-des-donnees" class="section level2">
+<h2>Importation des données</h2>
+<p>HaplotypeCaller produit un fichier au format vcf (Variant Calling Format). Afin de visualiser les données qui y sont inscrites, un second outil : VariantsToTable est utilisé. Cet outil crée un fichier tabulé qui contient tous les champs choisi par l’utilisateur. Pour visualiser cette table sous forme de différents graphiques il est donc nécessaire d’importer les données dans R sous la forme d’une DataFrame.</p>
+<p>Selon les bonnes pratiques de découverte de Variants à partir de données de RNA-seq données sur le site web de GATK, il faut réaliser un “hard-filtering”. C’est-à-dire choisir des valeurs seuils qui définissent quelles données sont considérées comme correcte de celles qui ne le sont pas. Pour cela, ils recommandent différentes valeurs pour différents champs en fonction de la variation (SNPs ou Indels). Ces valeurs sont présentées dans le tableau suivant :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Sigle du champs utilisé</th>
+<th align="center">Valeur si SNPs</th>
+<th align="center">Valeur si INDELs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">QD</td>
+<td align="center">&lt;2.0</td>
+<td align="center">&lt;2.0</td>
+</tr>
+<tr class="even">
+<td align="center">FS</td>
+<td align="center">&gt;60.0</td>
+<td align="center">&gt;200.0</td>
+</tr>
+<tr class="odd">
+<td align="center">SOR</td>
+<td align="center">&gt;3.0</td>
+<td align="center">&gt;10.0</td>
+</tr>
+<tr class="even">
+<td align="center">ReadPosRankSum</td>
+<td align="center">&lt;-8.0</td>
+<td align="center">&lt;20.0</td>
+</tr>
+<tr class="odd">
+<td align="center">MQ</td>
+<td align="center">&lt;40.0</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">MQRankSum</td>
+<td align="center">&lt;-12.5</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">InbreedingCoeff</td>
+<td align="center"></td>
+<td align="center">&lt;-0.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="quelques-graphiques" class="section level2">
+<h2>Quelques graphiques</h2>
+<p>Tout d’abord, il faut savoir que HaplotypeCaller peut identifier 5 types de variant différents. <a href="https://software.broadinstitute.org/gatk/documentation/article?id=3682">Source1</a> Il s’agit des SNPs, MNPs, INDELs, Mixed, et Symbolic. Les SNPs représentent des “single nucleotide polymorphism”. Les MNPs représentent les “multi-nucleotide polymorphism”. Les INDELs représentent des évènements d’insertions ou de délétions de nucléotides. Les Mixed représentent une combinaison de SNPs et d’INDELs à une seule et même position. Les Symbolic montrent qu’il se passe quelque chose à cette position mais qu’on ne sait pas exactement ce qu’il représente. Parfois, HaplotypeCaller utilise l’allèle “non ref” ou * pour signifier la présence d’une suppression étendue ou des évènements indéfinis comme un trés grand allèle, la perte d’un seul allèle, la perte de deux allèles, etc. <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=6926">Source 2</a></p>
+<p>La première question est donc : <strong>quels types de Variants a-t-il trouvé dans nos données ?</strong></p>
+<table>
+<caption>
+Génotypes Individu 11GB
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variants
+</th>
+<th style="text-align:right;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+INDEL
+</td>
+<td style="text-align:right;">
+10829
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MIXED
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SNP
+</td>
+<td style="text-align:right;">
+66945
+</td>
+</tr>
+</tbody>
+</table>
+<p>Ce tableau montre que trois types de variants sont trouvés au sein des données. Il s’agit de SNPs, d’INDELs et de Variants Mixed.</p>
+<p>Parmi les filtres proposés (uniquement pour les SNPs ou les INDELs) : <strong>quels sont ceux qui sont représentables pour l’individu 11GB ?</strong></p>
+<p><img src="ResultatsGATK_files/figure-html/graph_MQ-1.png" width="672" /></p>
+<p>La valeur seuil pour RMSMappingQuality, si il s’agit de SNPs, est de 40. Ici, on prendrait donc tous les variants si on se base sur leur seuil pour les SNPs.<br />
+<strong>Remarque</strong> : Ce champs représente la racine carré de la qualité moyenne de l’alignement.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_QD-1.png" width="672" /></p>
+<p>La valeur seuil pour QD, si il s’agit de SNPs, est de 2. Ici, on 3 pics à 12, 22 et 32. Il faudrait donc prendre tous les SNPs ayant une QD supérieur à 2.<br />
+<strong>Remarque</strong> : Ce champs représente la “Variant Confidence”. Il s’agit de la normalisation de la qualité par la profondeur pour limiter l’inflation lorsqu’il y a une profonde couverture.</p>
+<pre><code>##      FS Count     log_FS
+## 1 0.000 57678       -Inf
+## 2 0.368     1 -0.4341522
+## 3 0.374     1 -0.4271284
+## 4 0.387     1 -0.4122890
+## 5 0.392     1 -0.4067139
+## 6 0.393     1 -0.4056074</code></pre>
+<p><img src="ResultatsGATK_files/figure-html/graph_FS-1.png" width="672" /></p>
+<p>La valeur seuil pour FischerStrand, si il s’agit de SNPs, est 60. Ici, on prendrait donc les variants ayant un FS inférieur à log10(60)=1.78.<br />
+<strong>Remarque</strong> : Ce champs est la probabilité (en Phred-Scaled) d’avoir un biais dû au brin.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_SOR-1.png" width="672" /></p>
+<p>La valeur seuil pour StrandOddsRatio, si il s’agit de SNPs, est 3. Ici, on prendrait donc les variants ayant un SOR inférieur à 3.<br />
+<strong>Remarque</strong> : Ce champs estime le biais dû au brin. Ce champs a été créé car le FS tend à pénaliser les variants situé en fin d’exon.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_ReadPosRankSum-1.png" width="672" /></p>
+<p>La valeur seuil pour ReadPosRankSum, si il s’agit de SNPs, est -8 ou 20,0 si il s’agit d’INDELs. Ici, on prendrait donc tous les variants supérieur à -8 si on se base sur leur seuil pour les SNPs.<br />
+<strong>Remarque</strong> : Ce champs vérifie que les variants ne se trouve pas uniquement en fin de reads, car c’est là où les séquenceurs font le plus d’erreur.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_MQRankSum-1.png" width="672" /></p>
+<p>La valeur seuil pour MQRankSum, si il s’agit de SNPs, est -12,5. Ici, on prendrait donc tous les variants si on se base sur leur seuil pour les SNPs.<br />
+<strong>Remarque</strong> : Ce champs vérifie que les variants et la référence ont une qualité d’alignement similaire afin de limiter tous biais dû à l’alignement.</p>
+<p>Autres filtres <em><strong>“représentables”</strong></em> :</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_BaseQRankSum-1.png" width="672" /></p>
+<p>La valeur idéale est de 0. Si la valeur est supérieur à 0 cela signifie que la qualité des données est supérieur pour l’allèle alternatif et inversement pour une valeur inférieur à 0.<br />
+<strong>Remarque</strong> : Ce champs compare la qualité en base des données supportant l’allèle de référence et l’allèle alternatif.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_Excess_Het-1.png" width="672" /></p>
+<p>En abscisse il s’agit de la “phred-scale p-value”.<br />
+<strong>Remarque</strong> : Ce champs donne la probabilité d’avoir le même nombre ou plus d’hétérozygote qu’attendu sous l’équilibre de Hardy Weinberg.</p>
+<pre><code>##    QUAL Count log_QUAL
+## 1 10.15     3 1.006466
+## 2 10.17    93 1.007321
+## 3 10.18     7 1.007748
+## 4 10.20    63 1.008600
+## 5 10.21     6 1.009026
+## 6 10.22     9 1.009451</code></pre>
+<p><img src="ResultatsGATK_files/figure-html/graph_QUAL-1.png" width="672" /><img src="ResultatsGATK_files/figure-html/graph_QUAL-2.png" width="672" /></p>
+<p><strong>Remarque</strong> : Ce champs représente la “Variant confidence”.</p>
+<pre><code>##      DP Count   log_DP
+## 1 10.15     3 1.006466
+## 2 10.17    93 1.007321
+## 3 10.18     7 1.007748
+## 4 10.20    63 1.008600
+## 5 10.21     6 1.009026
+## 6 10.22     9 1.009451</code></pre>
+<p><img src="ResultatsGATK_files/figure-html/graph_DP-1.png" width="672" /><img src="ResultatsGATK_files/figure-html/graph_DP-2.png" width="672" /></p>
+<p><strong>Remarque</strong> : Ce champs représente la profondeur de couverture totale.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_MLEAC-1.png" width="672" /></p>
+<p><strong>Remarque</strong> : Ce champs représente le Maximum de vraisemblance attendu pour les allèles en nombre d’occurence.</p>
+<p><img src="ResultatsGATK_files/figure-html/graph_MLEAF-1.png" width="672" /></p>
+<p><strong>Remarque</strong> : Ce champs représente le Maximum de vraisemblance attendu pour les allèles en fréquence.</p>
+</div>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

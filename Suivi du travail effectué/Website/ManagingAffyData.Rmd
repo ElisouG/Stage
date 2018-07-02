@@ -1,0 +1,36 @@
+---
+title: "Managing Affymetrix data"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * *
+
+# With differents R-package (affy...)
+
+# With openaccess software
+
+Bioconductor
+dChip
+L2L
+RMAExpress
+TAIR's Seqviewer
+TAIR's Mapviewer
+TAIR's AraCyc Pathways
+TAIR's Chromosome map tool
+TIGR's MIDAS
+TIGR's MultiExperiment Viewer (MeV)
+
+source : <http://ipmb.sinica.edu.tw/affy/document/tool_kits.pdf>
+
+# With Affymetrix software
+
+<https://www.thermofisher.com/fr/fr/home/life-science/microarray-analysis/microarray-analysis-instruments-software-services/microarray-analysis-software.html>
+
+
