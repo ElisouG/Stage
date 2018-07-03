@@ -68,10 +68,27 @@ Décrire les différents projets européens (RobustBass et CRECHE 2016). Dire à
 
 Commencer par parler de Dicentrarchus labrax (MORONIDÉ, TÉLÉOSTÉEN), de l'aquaculture et du projet CRECHE 2016. **Papier : Impact of selective breeding on European aquaculture**
 
-Parler ensuite des SNPs et des GWAS (définition et existants).
-
 Parler des NGS et plus particulièrement du RNA-seq. **papier : Variant callers for Next-Generation Sequencing Data: A Comparison Study**
 [GATK parralèlisme](https://software.broadinstitute.org/gatk/documentation/article?id=11059)
+
+Parler ensuite des SNPs et des GWAS (définition et existants).
+
+La pêche est réglementée dans de nombreuses parties maritimes afin de protéger de nombreuses espèces marines. Cette limitation de la pêche a contribué au développement de l'élevage d'organismes aquatiques telles que les mollusques, les poissons, les crustacés et les plantes aquatiques. Aujourd'hui l'aquaculture joue un rôle croissant dans la production alimentaire mondiale. Dans le sud de l'Europe différentes espèces de poissons sont élevées à des fins alimentaires telles que le bar européen (*Dicentrarchus labrax*) ou encore le saumon atlantique (*Salmo salar*). 
+
+L'espèce dont il est question dans cette étude est le bar Européen (*Dicentrarchus labrax*). Il fait partie des Téléostéen et appartient à la famille des Moronidés. Ce poisson marin est très largement répandue le long des côtes de l'Océan atlantique sud, de la Mer Méditerannée et de la Mer Noire.
+
+L'aquaculture de ce moronidé reposait au départ sur la capture de larves et de juvéniles sauvages. Puis elle s'est largement développée suite aux améliorations des techniques de reproduction. Depuis différents programmes de sélection visant à l'amélioration de caractères ont été mis en place. Les traits sélectionnés en premier sont des caractères économique. C'est-à-dire des caractères qui vont permettre de produire plus et plus rapidement. Parmi ces traits, la résistance au jeûne, la vitesse de croissance et le stress sont particulièrement étudiés. 
+
+Par exemple le projet **Creche 2016** visait à étudier les individus résitant au jeûne et ayant une forte croissance afin de les sélectionner. Un autre projet, intitulé **RobustBass** vise à sélectionner les individus résistant au stress. Il est reconnu que le stress engendre un retard de croissance chez les poissons. En effet, à des fins financières il est important pour les entreprises réalisant de l'aquaculture d'avoir des individus qui grandissent vite sans avoir besoin de trop mangeret qui font partis des individus les moins stressés.
+
+Afin d'étudier, de sélectionner et de maintenir les espèces aquacoles, il est nécessaire d'avoir des données génétiques et génomiques de ces différentes espèces. Concernant le bar européen, différentes études ont abouti à un 1er assemblage du génome, à la production de cartes de liaison génétiques ainsi qu'à des panneaux d'hybrides. 
+
+Le développement du génotypage par des techniques de séquençage de nouvelle génération (NGS) permet de découvrir un très grand nombre de SNPs par individus et ce, à un coût réaliste. Ces études vont permettre d'évaluer plus précisément l'efficacité de la sélection des individus selon leur phénotype (appartenance à une lignée résistante au jeûne, non stressée, de croissance lente, etc.).
+
+Dans cette étude le criblage des SNPs sera effectué à partir de données de séquençage de transcrits (RNA-seq).
+
+
+Un trait économique important est le stress, lié à l'infection ou au comportement pathogène (comme le confinement et la manipulation). Le cortisol, un indicateur largement accepté du stress chez les poissons, affecte la réponse du système immunitaire (Engelsma et al., 2002). Par conséquent, si des régions génomiques influent sur la réponse au stress, cela pourrait avoir un effet bénéfique sur la gestion de la condition physique. Toutes ces caractéristiques représentent de multiples étapes vers l'utilisation d'outils génétiques et moléculaires pour l'amélioration de la production.
 
 # Problématique - Objectifs
 
@@ -99,7 +116,7 @@ Le génome de référence de *Dicentrarchus labrax* utilisé das cette étude es
 
 L'annotation du génome de référence de *Dicentrarchus labrax* utilisée est une annotation plus complète que celle qui a été publiée puisque des données de transcriptome y ont été ajoutés.
 
-Le transcriptome utilisé est issu du Porojet CRECHE. En effet, en plus des analyses citées précédemment pour ce projet, une analyses d'expression différentielle a été employée par l'équipe de la plate-forme MBB. Cette étude a abouti à la création d'un transcriptome à partir des 65 individus pris en compte dans ce projet.
+Le transcriptome utilisé est issu du Porojet CRECHE. En effet, en plus des analyses citées précédemment pour ce projet, une analyse d'expression différentielle a été effectuée par l'équipe de la plate-forme MBB. Cette étude a abouti à la création d'un transcriptome à partir des 65 individus pris en compte dans ce projet.
 
 Liste de variants connus chez *Dicentrarchus labrax*, obtenus par le séquençage de génome complet d'une  60aine d'individus avec à chaque fois les parents et un de leur enfants.
 
@@ -117,8 +134,7 @@ Pour étendre et complémenter l'analyse de ces données, un pipeline complémen
 * VCFtools;   
 * PLINK;   
 * Package R qqman;   
-* Package R ggplot2;   
-* Package R vegan.   
+* Package R ggplot2.   
 
 ## Description des pipelines
 
