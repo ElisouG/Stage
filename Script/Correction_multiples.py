@@ -41,12 +41,11 @@ if __name__ == "__main__":
 			K = line.split('\t')[0]
 			S = line.split('\t')[3]
 			E = line.split('\t')[4]
+			B = line.split('\t')[6]
 			F = line.split('\t')[7]
-			ListeExons.append([K,S,E,F])
-			#print(ListeExons)		
-		
-
-
+			gID = line.split('\t')[8].split('"')[1].split('|')[0]
+			ListeExons.append([K,S,E,B,F,gID])
+			#print(ListeExons)
 
 
 	######################## Récupération frame transcriptome ###########################
@@ -61,6 +60,45 @@ if __name__ == "__main__":
 		K = line.split('\t')[0]
 		S = line.split('\t')[3]
 		E = line.split('\t')[4]
+		B = line.split('\t')[6]
 		F = line.split('\t')[7]
-		ListeTranscrits.append([K,S,E,F])
-		#print(ListeTranscrits)
+		gID = line.split('\t')[8].split('"')[7]
+		ListeTranscrits.append([K,S,E,B,F,gID])
+		print(ListeTranscrits)
+
+
+	###################### Egalité frame ? Recherche frame #########################
+
+	ListegIDEgaux = []
+
+	for elt in ListeExons:
+		K = elt[1]
+		S = elt[2]
+		E = elt[3]
+		B = elt[4]
+		F = elt[5]
+		gID = elt[6]
+		for elt in ListeTranscrits:
+			K1 = elt[1]
+			S1 = elt[2]
+			E1 = elt[3]
+			B1 = elt[4]
+			F1 = elt[5]
+			gID1 = elt[6]
+			if gID == gID1:
+				T = 'égaux'
+				ListegIDEgaux.append([gID,T])
+				if F == F1 and F == '.':
+					Tester tous les frames
+				elif F == F1 and F == '1':
+					Tester les frames 2 et 3
+				elif F == F1 and F == '2':
+					Tester les frames 1 et 3
+				elif F == F1 and F == '3':
+					Tester les frames 1 et 2
+			elif gID != gID1:
+				T = 'différents'
+				ListegIDEgaux.append([gID,gID1,T])
+
+
+				
