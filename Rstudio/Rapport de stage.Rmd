@@ -32,10 +32,9 @@ Insertion de saut de page Word : <https://datascienceplus.com/r-markdown-how-to-
 
 # Remerciements
 
-Erick pour tous les conseils et la rédaction du rapport
-Bruno pour m'avoir confié ce sujet
+Erick et Bruno  pour m'avoir confié ce sujet pour tous les conseils et la rédaction du rapport
 Pierre-Alexandre données de la puce et vcf des variants
-Madoka pour avoir continuer ce que j'avais commencé niveau manip
+Madoka pour avoir continuer ce que j'avais commencé niveau manip ddRAD et d'avoir partagé mon bureau
 Flo pour toutes ses pistes concernant python
 Les stagiaires ISEM et Darwin pour les repas qu'on a partagé
 L'équipe ISEM pour leur conseil sur le fond et la forme de ma présentation
@@ -84,32 +83,32 @@ Différentes études sur le Bar européen ont déjà été menée et ont abouti 
 
 # Problématique - Objectifs
 
-L'objectif principal de ce sujet de Master 2 professionnel Biologie structurale, Bioinformatique et Génomique (BBSG) est la mise en place d'un pipeline d'analyse de données de RNA-seq de plusieurs lignées dans le but d'obtenir les génotypes des individus de chaque lignée et de réaliser une étude d'association afin de définir les SNPs spécifique d'une lignée. Un étude d'association consiste à identifier les locus génétiques auxquels l'état alélique est corrélé avec un phénotype d'intérêt.
+L'objectif principal de ce sujet de Master 2 professionnel Biologie structurale, Bioinformatique et Génomique (BBSG) est la mise en place d'un pipeline d'analyse de données de RNA-seq de plusieurs lignées dans le but d'obtenir les génotypes des individus de chaque lignée et de réaliser une étude d'association afin de définir les SNPs spécifique d'une lignée. Une étude d'association consiste à identifier les locus génétiques auxquels l'état allélique est corrélé avec un phénotype d'intérêt.
 
-Le pipeline bioinformatique construit se focalise sur le points suivants :
+Le pipeline bioinformatique construit se focalise sur les points suivants :
 
 + Intégrer différents contrôles qualité tout au long du pipeline ;        
 + Réaliser une analyse fonctionnelle avec snpEff des SNPs trouvés par le logiciel Genome Analysis ToolKit (GATK) ;       
 + Produire une analyse d'association à l'aide du logiciel PLINK.     
 
-Afin de produire une analyse fonctionnelle décente, il a fallu mettre en place un autre pipeline bioinformatique indépendant pour corriger l'annotation du génome de *Dicentrarchus labrax*.
+Afin de produire une analyse fonctionnelle décente/correcte/valide, il a fallu mettre en place un autre pipeline bioinformatique indépendant pour corriger l'annotation du génome de *Dicentrarchus labrax*.
 
 Un objectif secondaire de ce sujet est de fournir une annotation fonctionnelle de la puce de génotypage de *Dicentrarchus labrax* en cours de développement.
 
-Ces objectifs ont abouti à la création d'une collection de scripts en langage wdl (Workflow Description Language), bash, python3.5 et R. Ces scripts ont été développé sur une machine Linux LTS 16.04 xenial, testé sur le cluster de calcul MBB (508 CPU et 1082 Go de RAM) et lancé sur une big-mem de la plate-forme MBB (64 coeurs avec 512 Go de RAM et plusieurs To de stockage).
+Ces objectifs ont abouti à la création d'une collection de scripts en langage wdl (Workflow Description Language), bash, python3.5 et R. Ces scripts ont été développés sur une machine Linux LTS 16.04 xenial, testés sur le cluster de calcul MBB (508 CPU et 1082 Go de RAM) et lancés sur une big-mem de la plate-forme MBB (64 coeurs avec 512 Go de RAM et plusieurs To de stockage).
 
 # Matériels et méthodes
 
 Mettre en valeur l'acquisition d'une technique, d'un savoir-faire enrichissant mes connaissances initiales.
 Décrire la méthode ou le logiciel.
 Pour la correction de l'annotation : Mise en place de scripts Python.
-Pour le Variant Calling : script en langage wdl (workflow description language) et les suites d'outils Picard et GATK (Genome Analysis ToolKit). Sans oublier les visualisation à l'aide de R. L'analyse d'association PLINK.
+Pour le Variant Calling : script en langage wdl (workflow description language) et les suites d'outils Picard et GATK (Genome Analysis ToolKit). Sans oublier les visualisations à l'aide de R. L'analyse d'association PLINK.
 
 ## Design de l'étude
 
-Pour accomplir les objectifs mentionnés ci-dessus, les étapes suivantes ont été réalisées: le développement un pipeline pour extraire les génotypes des individus qui a entrainer le développement d'un pipeline de correction l'annotation existante du génome de *Dicentrarchus labrax* puis de mettre en oeuvre des analyses d'association entre ces SNPs et les lignées.
+Pour accomplir les objectifs mentionnés ci-dessus, les étapes suivantes ont été réalisées: le développement d'un pipeline pour extraire les génotypes des individus qui a entrainé le développement d'un pipeline de correction de l'annotation existante du génome de *Dicentrarchus labrax* puis de mettre en oeuvre des analyses d'association entre ces SNPs et les lignées.
 
-Les données de RNA-seq sont issus du Projet CRECHE 2016. Les ARN ont été extraits à partir de foie prélévés sur des individus sacrifiés appartenant aux quatres lignées suivantes J-/J+ (résistant ou non au jeûne) ou C-/C+ (divergence de croissance). Les étapes préliminaires au séquençage ont été réalisées par la plateforme GenSeq. Ces étapes sont : la conservation des échantillons, l'extraction des ARN ainsi que les contrôles qualités des ces ARN. La plateforme GET (Génomique et Transcriptomique) a quant à elle réalisée la création des banques d'ADN complémentaires ainsi que le contrôle qualité des ses banques. Elle a également réalisée le séquençage et les pré-traitement bioinformatiques. L'obtention des reads a été effectué en paired-end 150 sur 5 lignes de séquenceur Illumina HiSeq3000.  Parmi les 65 fichiers d'alignement, 24 ont été sélectionnés pour mener cette étude. Ces fichiers proviennent de 23 individus différents (1 individus est en duplica). Chaque lignée est représentée par 6 individus. Les phénotypes disponibles pour ces individus sont : la lignée, le sexe, l'EAi moyen, la classe de l'EAi ainsi que leur comportement.
+Les données de RNA-seq sont issus du Projet CRECHE 2016. Les ARN ont été extraits à partir de foie prélévés sur des individus sacrifiés appartenant aux quatres lignées suivantes J-/J+ (résistant ou non au jeûne) ou C-/C+ (divergence de croissance). Les étapes préliminaires au séquençage ont été réalisées par la plateforme GenSeq. Ces étapes sont : la conservation des échantillons, l'extraction des ARN ainsi que les contrôles qualités des ces ARN. La plateforme GET (Génomique et Transcriptomique) a quant à elle réalisée la création des banques d'ADN complémentaires ainsi que le contrôle qualité des ces banques. Elle a également réalisée le séquençage et les pré-traitement bioinformatiques. L'obtention des reads a été effectué en paired-end 150 sur 5 lignes de séquenceur Illumina HiSeq3000.  Parmi les 65 fichiers d'alignement, 24 ont été sélectionnés pour mener cette étude. Ces fichiers proviennent de 23 individus différents (1 individus est en duplica). Chaque lignée est représentée par 6 individus. Les phénotypes disponibles pour ces individus sont : la lignée, le sexe, l'EAi moyen, la classe de l'EAi ainsi que leur comportement.
 
 Le génome de référence de *Dicentrarchus labrax* utilisé das cette étude est le génome qui a été publié. Assemblage jusqu'à des contigs incomplets plus ou moins longs.
 
@@ -119,18 +118,18 @@ Le transcriptome utilisé est issu du Projet CRECHE 2016. En effet, en plus des 
 
 Liste des variants connus chez *Dicentrarchus labrax*, obtenus par le séquençage de génome complet d'une  60aine d'individus avec à chaque fois les parents et un de leur enfants.
 
-Une puce de génotypage contenant 57000 SNPs est en cours de dévelppement. Pour ces SNPs seule leur position sur le génome est connu. Il serait utile d'annoter fonctionnellement ces SNPs au sein du génome de *Dicentrarchus labrax*.
+Une puce de génotypage contenant 57907 SNPs est en cours de développement. Pour ces SNPs seule leur position sur le génome est connu. Il serait utile d'annoter fonctionnellement ces SNPs au sein du génome de *Dicentrarchus labrax*.
 
 ## Vue générale des pipelines
 
-Les données d'alignement proviennent d'une analyse bioinformatique qui a été réalisée par la plateforme MBB. Cette analyse comprend deux étapes : l'élimination des séquences de mauvaise qualité par TRIMMOMATIC et l'alignement des reads sur le génome de *Dicentrarchus labrax* par l'outils ou le logiciel HISAT2. Une seconde analyse bioinformatique est nécessaire pour effectuer une recherche de variants. Cette analyse consiste à réaliser une recalibration des reads alignés (Picard et GATK) afin de générer des fichiers BAM qui sont le point de départ de cette étude.
+Les données d'alignement proviennent d'une analyse bioinformatique qui a été réalisée par la plateforme MBB. Cette analyse comprend deux étapes : l'élimination des séquences de mauvaise qualité par TRIMMOMATIC *Biblio* et l'alignement des reads sur le génome de *Dicentrarchus labrax* par l'outils ou le logiciel HISAT2 *Biblio*. Une seconde analyse bioinformatique est nécessaire pour effectuer une recherche de variants. Cette analyse consiste à réaliser une recalibration des reads alignés (Picard et GATK) afin de générer des fichiers BAM qui sont le point de départ de cette étude.
 
 Pour étendre et complémenter l'analyse de ces données, un pipeline complémentaire a été programmé. Il utilise les outils suivants :   
-* Snpeff;   
-* VCFtools;   
-* PLINK;   
-* Package R qqman;   
-* Package R ggplot2.   
+* snpEff *Biblio* pour l'annotation fonctionnelle de la puce de génotypage et des variants obtenus à partir de données NGS;   
+* VCFtools *Biblio* est une suite de programme fournissant des méthodes facilement accessibles pour travailler avec des données de variation génétique complexes sous la forme de fichiers VCF. Il est possible de valider, fusionner et comparer plusieurs VCF ;   
+* PLINK *Biblio* est un ensemble d'outils d'analyse d'association génomique de données génotype / phénotype libre et open-source, conçu pour effectuer une gamme d'analyses de base à grande échelle de manière efficace sur le plan informatique.;   
+* Package R qqman *Biblio* inclut des fonctions pour créer des Manhattan plots et des q-q plots à partir de résultats provenant de PLINK ;   
+* Package R ggplot2 *Biblio* permet de créer des graphiques élégants à l'aide de la grammaire des graphiques ("The Grammar of Graphics").   
 
 ## Description des pipelines
 
@@ -192,7 +191,7 @@ La troisième étape intitulée "SortSam" est également réalisée par Picard. 
 
 Les deux étapes qui vont suivre sont nécessaires car les algorithmes de découverte de variants utilisent la qualité des bases de chaque reads pour déterminer s'il s'agit bel et bien d'une variation ou d'un artéfact. En effet, les scores de qualité sont dépendants du nombre de reads présents. Or certains reads considérés comme des duplicats de séquençage ont été retirés. Il ne faut donc plus les prendre en compte. D'autre part, à ces scores de qualité sont appliqués des erreurs systématiques qui  doivent être recalibrés. POur faire cela GATK utilise un algorithmle de "machine-learning" pour modeller empiriquement ces erreurs et ajuster les scores de qualité. Ces deux étapes sont "BaseRecalibrator"et "ApplyBQSR". La première est réalisée 2 fois afin de visualiser l'efficacité de la recalibration des reads.  Cette étape crée une table qui sera utilisée pour la recalibration. La seconde ("ApplyBQSR") utilise donc la table de recalibration produite par l'étape précédente pour effectuer la recalibration de chacune des bases de chaque reads.
 
-La dernière étape nommée "AnalyzeCovariates" eégalement effectuée par GATK, produit des graphiques montrant l'efficacité de cette recalibration. 
+La dernière étape nommée "AnalyzeCovariates" également effectuée par GATK, produit des graphiques montrant l'efficacité de cette recalibration. 
 
 #### Découverte de variants
 
@@ -240,7 +239,7 @@ Il faut donc faire la différence entre un jeu de variants considérés comme "b
 
 La méthode envisagée ici est donc dans un premier temps d'estimer la qualité globale du jeu de variants obtenus en regardant différentes valeurs. Ces valeurs sont : le nombre de SNPs et d'INDELs obtenus, le ratio Ti/Tv (Transition/Transversion) et le ratio d'INDELs (Insertion/Délétion). Ces valeurs sont calculés par l'outils Picard CollectVAriantsCallingMetrics. Il prend en entrée les fichiers filtrés précédemment ainsi qu'un fichiers de variants connus issus d'un autre séquençage sur des individus différents en considérant ce dernier comme étant la vérité. Cet outils produit 2 fichiers (Summary et detail) qui sont lus à l'aide du logiciel R.
 [Source des paragraphes précédents](https://software.broadinstitute.org/gatk/documentation/article.php?id=6308)
-Ces différentes  valeurs sont calculés ainsi:    
+Ces différentes  valeurs sont calculées ainsi:    
 + **Nombre de SNPs et d'INDELs**: CollectVAriantsCallingMetrics recueille le nombre de SNP (polymorphismes mononucléotidiques) et d'indels (insertions et délétions) tels qu'ils se trouvent dans le fichier variants. Il ne compte que les sites bialléliques et filtre les sites multialléliques. De nombreux facteurs influent ces chiffres, notamment la taille de la cohorte, la parenté entre les échantillons, la rigueur du filtrage, l'origine ethnique des échantillons et même l'amélioration de l'algorithme due à la mise à jour du logiciel. Bien que cette métrique soit insuffisante pour évaluer les variants trouvés, elle fournit une bonne base de référence.      
 + **Indel Ratio**: Le ratio d'indel est déterminé comme étant le nombre total d'insertions divisé par le nombre total de délétions; cet outil n'inclut pas les variants filtrés dans ce calcul. Habituellement, le rapport indel est d'environ 1, car les insertions se produisent généralement aussi souvent que les délétions.        
 + **Rapport TiTv**: Cette métrique est le rapport entre les mutations de transition (Ti) et de transversion (Tv). Pour les données de séquençage du génome entier, TiTv devrait être ~ 2.0-2.1, tandis que les données de séquençage de l'exome entier auront un rapport TiTv de ~ 3.0-3.31. Dans le cas de cette étude il s'agit de données de transcriptome, ce type de données étant proche de données d'exome le rapport attendu sera donc aux alentour de 3.0-3.31.
@@ -257,7 +256,7 @@ La dernière étape de GATK ("hardfiltering") produit deux VCFs (un par type de 
 
 La première étape consiste donc à obtenir le nombre de SNPs et d'INDELs obtenus, le ratio Ti/Tv (Transition/Transversion) et le ratio d'INDELs (Insertion/Délétion) via l'utilisation de CollectVAriantsCallingMetrics (Picard) puis d'analyser ces données à l'aide du logiciel R et son interface graphique RStudio.
 
-La seconde étape consiste à réaliser une annotation fonctionnelle des SNPs potentiels trouvés par la prédiction des effets. Cette étape est réalisée par le logiciel snpEff [aHoff2015] qui analyse le fichier d'entrée, annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
+La seconde étape consiste à réaliser une annotation fonctionnelle des SNPs potentiels trouvés par la prédiction des effets. Cette étape est réalisée par le logiciel snpEff [aHoff2015] qui annote les variants et calcule les effets qu'ils produisent sur les gènes connus.
 
 La troisième étape consiste à une analyse d'association génotype/phénotype. Cette étape est consitituée de sous-étapes. En effet, PLINK a besoin de fichier au format ped et au format map pour procéder aux associations. Or, GATK produit des fichiers au format VCF. L'outils VCFtools est donc nécessaire pour produire les fichiers ped et map à partir de fichiers VCF. 
 
@@ -283,6 +282,8 @@ Discussion :
 
 ### Contrôles qualité
 
+Mettre des graph de ResultatsPython 
+
 ## Résultats du génotypage
 
 Parler de Picard et de GATK
@@ -290,6 +291,8 @@ Parler de Picard et de GATK
 Une étude de 2013 a permis de comparer différents outils de découverte de variants. Les outils testés étaient GATK, SAMtools, glftools et Atlas2. Ces différents outils ont été testés sur des données de séquençage d'exome en mode multi-échantillon et en mode échantillon par échantillon. Les auteurs concluent que GATK a le taux de redécouverte (0.9969) et la spécificité (0.99996) les plus élevés. D'autre part son ratio transition-transversion (Ti/Tv) proche de la valeur attendue (3.02 pour des données d'exome). Suite à cette étude, la stratégie GATK a donc été choisie. *Variant callers*
 
 ### Contrôles qualités
+
+Mettre quqleques graphs de AnalyzeCovariates
 
 ## Résultats de l'étude d'association
 
@@ -305,6 +308,7 @@ Dans le but d'obtenir les fréquences allèliques ainsi que les données manquan
 
 ## Analyse fonctionnelle de la puce
 
+Mettre des données que donnent snpEff report.html comme par exemple les régions touchés, les effets qu'ils produisent, etc.
 
 # Conclusion
 
