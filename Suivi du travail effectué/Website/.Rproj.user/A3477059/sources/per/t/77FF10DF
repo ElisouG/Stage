@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524818466053.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2589710516",
+    "id" : "77FF10DF",
+    "lastKnownWriteTime" : 1526643326,
+    "last_content_update" : 1526643329228,
+    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/pipeline_tools.Rmd",
+    "project_path" : "pipeline_tools.Rmd",
+    "properties" : {
+        "cursorPosition" : "16,9",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

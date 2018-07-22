@@ -1,0 +1,3 @@
+"0","simseq.sel3 <- adapt.select(simseq.dig3, type=""AB+BA"", cs_5p3, cs_3p3, cs_5p2, cs_3p2)"
+"2","subscript is an array, passing it thru as.vector() first"
+"2","subscript is an array, passing it thru as.vector() first"

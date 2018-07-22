@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Reunion du 03/04/2018</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Génotypage du bar</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bioinfo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tools_description.html">Description des outils</a>
+    </li>
+    <li>
+      <a href="tuto.html">Tutoriaux suivis</a>
+    </li>
+    <li>
+      <a href="Scripts.html">Scripts</a>
+    </li>
+    <li>
+      <a href="Troubleshooting.html">Troubleshooting</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ModeEmploiGATK.html">Mode d'emploi</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manip'
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LaboSemaine1.html">Semaine 1</a>
+    </li>
+    <li>
+      <a href="LaboSemaine2.html">Semaine 2</a>
+    </li>
+    <li>
+      <a href="LaboSemaine3.html">Semaine 3</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Résultats
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ResultatsPython.html">Annotation du génome</a>
+    </li>
+    <li>
+      <a href="ResultatsGATK.html">GATK</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Réunions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="premiereReunion_2702.html">Réunion du 27/02/2018</a>
+    </li>
+    <li>
+      <a href="deuxiemeReunion_1403.html">Réunion du 14/03/2018</a>
+    </li>
+    <li>
+      <a href="troisiemeReunion_0304.html">Réunion du 03/04/2018</a>
+    </li>
+    <li>
+      <a href="quatriemeReunion_0604.html">Réunion du 06/04/2018</a>
+    </li>
+    <li>
+      <a href="cinquiemeReunion_0405.html">Réunion du 04/05/2018</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Séminaires
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seminaires_CNRS.html">Séminaires CNRS</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-newspaper-o"></span>
+     
+    Biblio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Seabass.html">Dicentrarchus labax</a>
+    </li>
+    <li>
+      <a href="sequencing_methods.html">Méthodes de séquençage</a>
+    </li>
+    <li>
+      <a href="SNP_annotation.html">Annotation des SNPs</a>
+    </li>
+    <li>
+      <a href="statisticSNP.html">Analyse statistiques des SNPs</a>
+    </li>
+    <li>
+      <a href="GWAS_Stress_Fish.html">GWAS Stress Fish</a>
+    </li>
+    <li>
+      <a href="genome_annotation.html">Annotation d'un génome</a>
+    </li>
+    <li>
+      <a href="ManagingAffyData.html">Managing Affymetrix Data</a>
+    </li>
+    <li>
+      <a href="pipeline_tools.html">Pipeline tools</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Reunion du 03/04/2018</h1>
+
+</div>
+
+
+<hr />
+<div id="reunion-avec-erick-bruno-et-madoka" class="section level1">
+<h1>Réunion avec Erick, Bruno et Madoka</h1>
+<p style="text-align:justify" ;>
+Il faut absolument que je fasse l’annotation fonctionnelle des SNP de la puce. Cela va s’avérer très utile pour tout le monde. Voir pour annoter le génome du loup (bar) un peu mieux (surtout au niveau des promoteurs) en alignant avec le génome de <em>Morone Saxatilis</em>. Toujours en attente de la commande des puces pour passer les 800 individus avec un budget d’environs 9000€. Mais pour cela il faut encore attendre que le prix soit fini d’être négocié par les différents acteurs impliqués dans les différents projets. Pour faire cette annotation, il faut regarder les outils les plus fréquemment utilisés dans la littérature ainsi que leur fonctionnement sachant que les données seront des données de puces et non de dd-RADseq. D’autre part, si jamais les données n’arrive que trop tard dans mon stage, ils ont des données CRECHE de RNA-seq. Il faudrait donc rechercher les SNP dans ces reads. Les phénotypes sont connus (croissance, tolérance au jeûne). De plus un apparentement des individus serait possible. D’autre part, Il faudrait détailler l’annotation du bar sur le début des gènes et notamment des promoteurs en réalisant par exemple un alignement entre <em>D_labrax</em> (voir <em>D_punctatus</em>) et <em>Morone saxatilis</em>.
+</p>
+</div>
+
+<p>Copyright &copy; 2018 | Elise GUERET</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

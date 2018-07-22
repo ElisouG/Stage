@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524132310177.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5CAD413F",
+    "lastKnownWriteTime" : 1524562259,
+    "last_content_update" : 1524562262087,
+    "path" : "/media/sf_DATA/Stage/Suivi du travail effectué/Website/genome_annotation.Rmd",
+    "project_path" : "genome_annotation.Rmd",
+    "properties" : {
+        "cursorPosition" : "112,767",
+        "scrollLine" : "25"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

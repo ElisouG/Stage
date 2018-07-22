@@ -1,0 +1,67 @@
+---
+title: "Description des outils"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+    toc: yes
+    toc_depth: 5
+    toc_float: yes
+---
+
+* * * * * 
+
+# Bowtie2
+
+Cet outils permet d'aligner des short-reads sur un génome.
+
+# BWA : Burrows-wheeler aligner
+
+Ce "logiciel paquet" permet d'aligner des séquences peu divergente sur un grand génome de référence.
+
+Par exemple l'algorithme bwa mem permet de faire un alignement de reads (70bp - 1Mbp) sur le génome. Cet algorithme peut être intégré à GATK. (bwa mem -M).
+
+Il est également possible de créer, via l'option index,  de nombreux fichierS utileS aux différents algorithmeS dispionible avec bwa.
+
+
+# TopHat
+
+Cet outils permet d'aligner des short-reads et de réaliser une analyse "splice-jonction".
+
+# Snakemake
+
+C'est un "outil" qui permet de gérer d'autre outils et de les combiner dans un seul et même script pour ensuite en lancer un seul qui va tous les lancer un à un les uns à la suite des autres.
+
+# GATK - wdl
+
+GATK est un logiciel écrit en langage java. On peut l'utiliser en direct ou via des scripts écrit en langage wdl. Ce langage est un langage de description de worflow adapter spécifiquement pour être lu et écrit facilement par l'Homme sans la nécessité d'un background en programmation.
+GATK nécessite plusieurs autres outils qui sont : wdltool.jar et cromwell.jar
+
+## wdltool
+
+Cet outil permet via l'option validate de valider si le script est correctement écrit. Via l'option inputs, il permet de créer la base du fichier inputs au format json qui va permettre au script d'être lancer avec cromwell.
+
+## cromwell
+
+Cromwell est une machine open-source exécutable qui peut se connecter à différentes plate-formes (local ou cloud). Cromwell via l'option run, va lancer le script wdl qui utilise GATK pour réaliser le script à l'aide du fichier inputs créer précédemment via l'outils wdltool.
+
+# Stacks
+
+Il s'agit d'un pipeline d'analyse complet composé de différents scripts. Il n'y a plus qu'à crée l'arborescence nécessaire au bon fonctionnement des scripts et de lancer ceux-ci.
+
+# snpEff
+
+Cet outils permet d'annoter des fichiers au format VCF (Vriant Call Format) ? partir d'une base de données. Ici la base de données a été créé de toute pièce avec la commande build à l'aide du génome du loup (bar).
+
+# samtools
+
+Samtools est une suite de programmes pour interagir abec des données de séquençage haut-débit. Le programme samtools permet de lire/écrire/indexer/éditer/voir les fichiers SAM/BAM/CRAM.
+
+faidx : Cette commande permet de créer l'index d'un fichier fasta.
+
+index : Permet de créer l'index d'un fichier bam.
+
+# picard
+
+L'option CreateSequenceDictionary de cet outils permet de créer un dictionnaire à partir d'une séquence au format fasta.

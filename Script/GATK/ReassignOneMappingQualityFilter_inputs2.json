@@ -1,8 +1,0 @@
-{
-  "ReassignOneMappingQualityFilter.refDict": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.dict",
-  "ReassignOneMappingQualityFilter.refFasta": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa",
-  "ReassignOneMappingQualityFilter.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/inputsTSV.txt",
-  "ReassignOneMappingQualityFilter.gatk": "/home/egueret/tools/gatk-3.8.0/GenomeAnalysisTK.jar",
-  "ReassignOneMappingQualityFilter.refIndex": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa.fai",
-  "ReassignOneMappingQualityFilter.picard": "/home/egueret/tools/picard.jar"
-}

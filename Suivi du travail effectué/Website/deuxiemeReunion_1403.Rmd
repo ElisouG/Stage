@@ -1,0 +1,17 @@
+---
+title: "Reunion du 14/03/2018"
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+---
+
+* * * * * 
+
+# Reunion avec Bruno et Erick
+
+<p style="text-align:justify";>J'ai eu quelques informations supplémentaires : le génome du loup représente 700mb pour les contigs déjà assemblés. Cependant il doit être un peu plus conséquent vu qu'il y a un groupe de liaison non assemblé définitivement. 
+On va dans un premier temps faire du ddRADseq pour que j'ai des données à analyser. La cerise sur le gâteau serait de faire de l'epi-GBS (GBS étant l'autre nom  du ddRADseq) car il serait possible de faire avec une seule quantité d'ADN et un seul run de séquençage à la fois une analyse des SNP et une analyse épigénétique. Car pour le moment dans le consortium dans lequel  mon travail s'insert, il est question de faire une carte des SNPs puis de faire une analyse épigénétique. Cependant, pour l'epi-GBS il faut des adaptateurs spécifiques qui ne sont pas sensible à la méthylation, ils doivent donc être méthylés. La plate-forme GenSeq UM n'en a pas et ne sais pas combien cela va coûter. Le set entier d'échantillons représente 62 familles avec 10-12 descendants soit un total de 800 échantillons. Il ne va donc pas être possible financièrement dans un permier temps de séquencer l'ensemble des échantillons à notre disposition. Pour pallier cela nous allons choisir un set d'une quinzaine de famille dont certaines serait extrême+ et  d'autres extrême- avec en plus des familles moyenne (entre les deux). Cela permettra pour l'analyse des SNP de ne pas donner le même poids à chacun des SNPs trouvés en fonction de leur répartition dans les familles (+/-). La sélection d'une quinzaine de famille représenterai 192 (96*2) échantillons (déjà 170 sélectionnés pour être extrêmes donc reste 22 échantillons "moyens" à sélectionner). Cela permettrait de mettre 96 échantillons dans une ligne de séquençage et nous permettrais donc d'en faire 2 avec une bonne profondeur pour découvrir les SNP. 
+Comme je veux participer aux manipulations, Eric va m'envoyer le protocole de préparation des librairies dd-RADseq pour que je calcule les quantités nécessaire pour que je fasse cette manip. Ensuite il faudra commander ce qu'il risque de manquer et on commencera à préparer ces librairies. 
+EricK me disait aussi que les kits nous faisait mesurer les quantités d'ADN avant la fragmentation alors que les biologiste moléculaire d'avant la génération kit faisiat une mesure de la quantité après la digestion car cela permet de mieux quantifier l'ADN avec lequel on va travailler ensuite et non de quantifier l'ADN que l'on a extrait.</p>

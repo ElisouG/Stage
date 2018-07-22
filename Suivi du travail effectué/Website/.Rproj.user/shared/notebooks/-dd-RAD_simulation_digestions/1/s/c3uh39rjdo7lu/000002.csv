@@ -1,0 +1,4 @@
+"0","FASTA.file <- "" path to fasta file"""
+"0","ref.DNAseq <- ref.DNAseq(FASTA.file, subselect.contigs = TRUE, prop.contigs = 0.1)"
+"2","Erreur : impossible de trouver la fonction ""ref.DNAseq""
+"

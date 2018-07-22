@@ -1,8 +1,0 @@
-{
-  "DataCleanupGATK.refFasta": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta",
-  "DataCleanupGATK.variationSites": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/Final_list_57907_SNPs.recode.vcf",
-  "DataCleanupGATK.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/inputTSV_gatk.txt",
-  "DataCleanupGATK.refIndex": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta.fai",
-  "DataCleanupGATK.refDict": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.dict",
-  "DataCleanupGATK.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar"
-}

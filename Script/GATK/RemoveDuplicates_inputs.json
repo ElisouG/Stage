@@ -1,8 +1,0 @@
-{
-  "RemoveDuplicates.refFasta": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa",
-  "RemoveDuplicates.inputSamplesFile": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/inputs/inputsTSV.txt",
-  "RemoveDuplicates.refIndex": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.fa.fai",
-  "RemoveDuplicates.refDict": "/home/egueret/Stage_UM_ISEM/Données_CRECHE/ref/labrax.dict",
-  "RemoveDuplicates.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar",
-  "RemoveDuplicates.picard": "/home/egueret/tools/picard.jar"
-}

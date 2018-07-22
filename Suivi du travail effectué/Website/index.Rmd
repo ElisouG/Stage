@@ -1,0 +1,32 @@
+---
+title: "Bienvenue"
+date : '`r format(Sys.time(), "%d %B %Y")`'
+output:
+   html_document: 
+    fig_caption: yes
+    highlight: zenburn
+    theme: cerulean
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+* * * * *
+
+#Objectif du stage
+
+<p style="text-align:justify";>Faire une analyse SNP par famille (tolérante ou non au stress en donnant la position des SNP liés à la tolérance ou à l'intolérance au stress = > donc faire une GWAS (association des SNP avec la tolérance ou l'intolérance au stress) à partir de données issus de ddRAD-seq ou Génotypage des SNP par puce à ADN.</p>
+
+#Equipe
+
+Ce stage est réalisé au sein de l'équipe évolution des poissons (UMR ISEM) composée des personnes suivantes:
+
+* Bruno GUINAND, Maître de conférence, Responsable Equipe évolution des poissons    
+* Erick DESMARAIS, Ingénieur de recherche, Equipe évolution des poissons, Plateforme de Génomique Environnementale          
+* Madoka KRICK, Ingénieur d'études, Equipe évolution des poissons   
+
+![Source : https://dircom.univ-amu.fr/public_content/logotype](logo_amu_rvb.png)
+
+![Source : http://institut-montpellier-management.fr/logo-et-charte-graphique/](LOGO_original_RVB_UM.png)
+
+![Source : http://www.isem.univ-montp2.fr/](logo_isem.png)
+
