@@ -179,7 +179,7 @@ if __name__ == "__main__":
 			
 			if  seqNt[-3:] not in ['TAA','TAG','TGA'] :
 				erreur.append('Stop_erreur')
-			if  slen(seqNt)%3 != 0  :
+			if  len(seqNt)%3 != 0  :
 				erreur.append('Len_erreur')
 
 			listeErreur.append(elt.append(erreur))
