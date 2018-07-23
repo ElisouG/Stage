@@ -179,14 +179,14 @@ def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3
 
 	return listeNoStart,listeNoStop
 
-def newAnnotation(output,pathAnnotation,listeNoStop) :
+def newAnnotation(output,pathAnnotation,listeNoStop,listeNoStart) :
 	"""
 	"""
 	Annotation = open(pathAnnotation)
 	linesAnnotation = Annotation.readlines()
 	Annotation.close()
-	print('ListeAnnotation Done')
-	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
+	# print('ListeAnnotation Done')
+	# print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
 	newAnnotation = open(output, "w")
 	for line in linesAnnotation:
 		for elt in listeNoStop:
@@ -221,7 +221,7 @@ def newAnnotation(output,pathAnnotation,listeNoStop) :
 		newAnnotation.write(line)
 	newAnnotation.close()
 
-def transcriptomeParse(pathTranscriptome) :
+def transcriptomeParse(pathTranscriptome,pathTranscrits) :
 	"""
 	"""
 	# Lecture du fichier transcriptome et sauvegarde des lignes dans linesTranscriptome
@@ -278,7 +278,7 @@ def TestStopCorrection(pathStopTested,listeNoStop,listeTranscrit):
 	StopTested.close()
 	return listeNoStopTested
 
-def TestStopCorrection(pathStartTested,listeNoStart,listeTranscrit):
+def TestStartCorrection(pathStartTested,listeNoStart,listeTranscrit):
 	"""
 	"""
 	StartTested = open(pathStartTested, "w")
@@ -349,7 +349,7 @@ def recupPosCDS(pathAnntotationNew,pathCDS) :
 
 	return CDSFinaux
 
-def recupSeqCDS(pathSequenceCDS,CDSFinaux):
+def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 	"""
 	"""
 	SequenceCDS = open(pathSequenceCDS, "w")
