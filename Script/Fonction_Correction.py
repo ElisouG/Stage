@@ -22,32 +22,32 @@ def warningParse(pathFile):
 				pb.append("No Start") # Ajouter ce pb à la liste des pb
 			elif "has length" in line.split("'")[-1] : # Récupérer les incomplets
 				pb.append("Incomplet") # Ajouter ce pb à la liste des pb
-			# Récupérer leur cadre de lecture
-			elif "rank:" in line and b!=1:
-				frame1 = line.split(',')[2].split(':')[1] # Récupérer le 1er cadre de lecture
-				b=1 # Mettre le compteur b à 1
-			elif b == 1 and "rank:" in line :
-				frame2 = line.split(',')[2].split(':')[1] # Récupérer le dernier cadre de lecture
-			# Récupérer le reste des informations
-			elif a == 1 and len(pb) == 1: # Vérifier si le compteur est à 1
-				a = 0 # Ré-initialisation du compteur
-				lineSplit = line.split(",") # Séparation des caractères de la ligne par ","
-				if "-" in lineSplit[1] : # Récupération de l'information brin anti-sens
-					brin = "anti-sens"
-				elif "+" in lineSplit[1] : # Récupération de l'information brin sens
-					brin = "sens"
-				lineSplit = lineSplit[0].split(":") # Séparation des caractères de la ligne par ":"
-				chromosome = lineSplit[0] # Récupération du chromosome
-				lineSplit = lineSplit[1].split("-") # Séparation des caractères de la ligne par "-"
-				start = int(lineSplit[0]) # Récupération du début du gène et mise en integer (chiffre)
-				end = int(lineSplit[1]) # Récupération de la fin du gène et mise en integer (chiffre)
-			elif line[0:5] == '\t\tCDS' and len(pb) == 1:
-				b = 0 # Ré-initialisation du compteur
-				for elt in pb :
-					listeInfo.append([chromosome,start,end,brin,elt,frame1,frame2]) # Création d'une liste comportant des listes des différentes info sur les problèmes rencontrés
-				pb = [] # Ré-initialisation de la liste
-			elif a == 1 and len(pb) != 1:
-				pb = [] # Ré-initialisation de la liste
+		# Récupérer leur cadre de lecture
+		elif "rank:" in line and b!=1:
+			frame1 = line.split(',')[2].split(':')[1] # Récupérer le 1er cadre de lecture
+			b=1 # Mettre le compteur b à 1
+		elif b == 1 and "rank:" in line :
+			frame2 = line.split(',')[2].split(':')[1] # Récupérer le dernier cadre de lecture
+		# Récupérer le reste des informations
+		elif a == 1 and len(pb) == 1: # Vérifier si le compteur est à 1
+			a = 0 # Ré-initialisation du compteur
+			lineSplit = line.split(",") # Séparation des caractères de la ligne par ","
+			if "-" in lineSplit[1] : # Récupération de l'information brin anti-sens
+				brin = "anti-sens"
+			elif "+" in lineSplit[1] : # Récupération de l'information brin sens
+				brin = "sens"
+			lineSplit = lineSplit[0].split(":") # Séparation des caractères de la ligne par ":"
+			chromosome = lineSplit[0] # Récupération du chromosome
+			lineSplit = lineSplit[1].split("-") # Séparation des caractères de la ligne par "-"
+			start = int(lineSplit[0]) # Récupération du début du gène et mise en integer (chiffre)
+			end = int(lineSplit[1]) # Récupération de la fin du gène et mise en integer (chiffre)
+		elif line[0:5] == '\t\tCDS' and len(pb) == 1:
+			b = 0 # Ré-initialisation du compteur
+			for elt in pb :
+				listeInfo.append([chromosome,start,end,brin,elt,frame1,frame2]) # Création d'une liste comportant des listes des différentes info sur les problèmes rencontrés
+			pb = [] # Ré-initialisation de la liste
+		elif a == 1 and len(pb) != 1:
+			pb = [] # Ré-initialisation de la liste
 	return listeInfo
 
 def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3,pathF4):

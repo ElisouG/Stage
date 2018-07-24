@@ -78,6 +78,7 @@ if __name__ == "__main__":
 ################### Récupération info #################
 
 	listeInfo = warningParse(pathWarning)
+	print(listeInfo)
 
 	print('Warning Parse')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
