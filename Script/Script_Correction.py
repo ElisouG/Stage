@@ -78,7 +78,6 @@ if __name__ == "__main__":
 ################### Récupération info #################
 
 	listeInfo = warningParse(pathWarning)
-	print(listeInfo)
 
 	print('Warning Parse')
 	print(strftime("%d-%m-%Y_%H:%M:%S", localtime()))
@@ -144,6 +143,7 @@ if __name__ == "__main__":
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 
 	for elt in CDSComplete:
+		print(elt) # ['LG22-25', 'DLAgn_00136160 ', '+', Seq('TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGG...ACC', SingleLetterAlphabet())]
 		listeErreur = []
 		K1 = elt[0]
 		geneID = elt[1]
@@ -187,4 +187,4 @@ if __name__ == "__main__":
 	ProteinesCDS.close()
 
 	for elt in listeErreur :
-		print(elt)
+		print(elt) # none
