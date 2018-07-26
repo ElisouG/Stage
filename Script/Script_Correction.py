@@ -141,13 +141,13 @@ if __name__ == "__main__":
 
 	ProteinesCDS = open(pathProteinesCDS, "w")
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
-
+	print(CDSComplete)
 	for elt in CDSComplete:
 		print(elt) # ['LG22-25', 'DLAgn_00136160 ', '+', Seq('TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGG...ACC', SingleLetterAlphabet())]
 		listeErreur = []
 		K1 = elt[0]
 		geneID = elt[1]
-		seqNt = elt[3]
+		seqNt = str(elt[3])
 		if seqNt[0:2] == 'ATG' and seqNt[-3:] in ['TAA','TAG','TGA'] and len(seqNt)%3 == 0 :
 			if K1 != 'MT':
 				seqProt = str(seqNt.translate())
