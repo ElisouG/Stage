@@ -140,14 +140,15 @@ if __name__ == "__main__":
 	ProteinesCDS = open(pathProteinesCDS, "w")
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 	print(CDSComplete)
-	for elt in CDSComplete:
+	for elt in CDSComplete: # Ca peut pas marcher vu que c'est une liste de liste ça veut dire que elt[0] est une liste et ainsi de suite.
 		print(elt) 
 		listeErreur = []
 		K1 = elt[0]
 		geneID = elt[1]
 		seqNt = elt[3]
 		seq1 = str(elt[3])
-		if seq1[0:2] == 'ATG' and seq1[-3:] in ['TAA','TAG','TGA'] and len(seq1)%3 == 0 :
+		print(seq1)
+		if seq1[0:3] == 'ATG' and seq1[-3:] in ['TAA','TAG','TGA'] and len(seq1)%3 == 0 :
 			if K1 != 'MT':
 				seqProt = str(seqNt.translate())
 				nbreStar = seqProt.count('*')
@@ -174,7 +175,7 @@ if __name__ == "__main__":
 					ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
 		else :
 			erreur = []
-			if  seq1[0:2] != 'ATG' :
+			if  seq1[0:3] != 'ATG' :
 				erreur.append('Start_erreur')
 			
 			if  seq1[-3:] not in ['TAA','TAG','TGA'] :
@@ -187,3 +188,20 @@ if __name__ == "__main__":
 
 	for elt in listeErreur :
 		print(elt)
+###### Fichier output de ce script
+# Warning Parse
+# 27-07-2018_12:15:46
+# Genome
+# 27-07-2018_12:15:55
+# GenomeR
+# 27-07-2018_12:16:03
+# Création fichier NoStart/NoStop
+# 27-07-2018_12:16:06
+# Debut Annotation
+# 27-07-2018_12:16:11
+# Fin Annotation
+# 27-07-2018_12:26:05
+# [['LG22-25', 'DLAgn_00136160 ', '+', Seq('TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGG...ACC', SingleLetterAlphabet())]]
+# ['LG22-25', 'DLAgn_00136160 ', '+', Seq('TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGG...ACC', SingleLetterAlphabet())]
+# TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGGCGAGGCTTACTGAATTAGAAGAATGGTACCGCACCACAGGGTGTGGCGCAATAGTTAGCCAGCCCCCAGTAGCCGGTGCGGGCCGACCGAAGGTAGCTTCTGTTGGCTGTCCCCCGGTAGATCCCGAGCAGCCGGGAATCAAGGGAGAGTGGAGAGACAGCATCCATCCCNNNNNNNNNNNNNNNNNNNNAATACATTTTCCCCACTCAGCGATACACCCGCTGAGGAACCAACTCTGGTTATTGGCAGCTCCATAGTCAGAAACGTGAAGTTAGCGAAGCCAGCGGCCATAGTTAAATGCATCCCTGGGGCCAGAGCGGGCGACATTGAATCAAATTTAAAACTGCTGGCTAAAGATAAACGTAAATACAGTAAGATTGTTATCCACGTCGGCGGTAACGACACCCGTTTACGCCAATCGGAGGTCACTAAGATTAATGTGGAGTCGGTGTGTAACTATGCTAAGACAATGTCGGACACCGTAGTTTTCTCTGGACCCCTGCCCAATGTGACAAGTGATGACATGTATAGCCGCATGTCGTCATTCCACCGCTGGCTGTCGAGGTGGTGTCCAGTAAATGATGTGGGCTTCATAGATAACTGGCGGCCTTTTTGGGGAAAACCTGGTCTGATTAGGAGAGACAGCATCCATCCCACGTTGGATGGAGCGGCTGTCTTATCTAGGAATATGGCGAAGTTTATTTCTAAAACC
+# None
