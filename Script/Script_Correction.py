@@ -7,7 +7,7 @@
 
 #################### Commande lancement sur le cluster ###########################
 
-#qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_Script_Correction -o /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.out -e /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.err -b y "python3 /home/egueret/Stage/Script/Script_Correction.py"
+# qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_Script_Correction -o /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.out -e /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.err -b y "python3 /home/egueret/Stage/Script/Script_Correction.py"
 
 ##################### Importation Module #######################
 ## Python modules
@@ -18,7 +18,7 @@ from time import localtime, strftime, sleep, clock, time
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
-from Bio.Alphabet import SingleLetterAlphabet, IUPAC, Gapped
+from Bio.Alphabet import generic_dna, SingleLetterAlphabet, IUPAC, Gapped
 from Bio import AlignIO
 from Bio.Nexus import Nexus
 
@@ -131,9 +131,7 @@ if __name__ == "__main__":
 	
 	CDSComplete = recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR)
 
-
-
-	######################## TRADUCTION DES CDS EN PROTÉINES #########################
+######################## TRADUCTION DES CDS EN PROTÉINES #########################
 
 	# SequenceCDS = open(pathSequenceCDS)
 	# linesSequenceCDS= SequenceCDS.readlines()
@@ -143,12 +141,13 @@ if __name__ == "__main__":
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
 	print(CDSComplete)
 	for elt in CDSComplete:
-		print(elt) # ['LG22-25', 'DLAgn_00136160 ', '+', Seq('TGTTTATTGATAATGGTACATGTATTAAGTGTAGTTCATTTACTGCGCTGGAGG...ACC', SingleLetterAlphabet())]
+		print(elt) 
 		listeErreur = []
 		K1 = elt[0]
 		geneID = elt[1]
-		seqNt = str(elt[3])
-		if seqNt[0:2] == 'ATG' and seqNt[-3:] in ['TAA','TAG','TGA'] and len(seqNt)%3 == 0 :
+		seqNt = elt[3]
+		seq1 = str(elt[3])
+		if seq1[0:2] == 'ATG' and seq1[-3:] in ['TAA','TAG','TGA'] and len(seq1)%3 == 0 :
 			if K1 != 'MT':
 				seqProt = str(seqNt.translate())
 				nbreStar = seqProt.count('*')
@@ -175,10 +174,10 @@ if __name__ == "__main__":
 					ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
 		else :
 			erreur = []
-			if  seqNt[0:2] != 'ATG' :
+			if  seq1[0:2] != 'ATG' :
 				erreur.append('Start_erreur')
 			
-			if  seqNt[-3:] not in ['TAA','TAG','TGA'] :
+			if  seq1[-3:] not in ['TAA','TAG','TGA'] :
 				erreur.append('Stop_erreur')
 			if  len(seqNt)%3 != 0  :
 				erreur.append('Len_erreur')
@@ -187,4 +186,4 @@ if __name__ == "__main__":
 	ProteinesCDS.close()
 
 	for elt in listeErreur :
-		print(elt) # none
+		print(elt)
