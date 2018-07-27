@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# Define shell to use for this job
+#$ -S /bin/bash
+
+# Export all my environment variables into runtime context
+#$ -V
+
+#$ -terse
+
+# User to inform
+#$ -M elise.gueret@gmail.com
+
+# Get a mail when the job begins, ends, or is suspended.
+#$ -m bes
+
+# Using current working directory
+#$ -cwd
+
+# Ram to use
+# -l mf=30G
+
+# Inform scheduler how many Ram are used
+# -l h_vmem=30G
+
+# Choose to run on a specific queue
+# -q cemeb20.q
+
+# Job hardware time limit
+#$ -l h_rt=99:00:00
+
+# Job name
+#$ -N "run_PLINK"
+
+# Standard output (you can use the option '-j y' which add stderr with sdtout)
+#$ -o /home/egueret/Stage_UM_ISEM/PLINK/sge_PLINK.out
+
+# Erreur output (don't use with the option '-j y')
+#$ -e /home/egueret/Stage_UM_ISEM/PLINK/sge_PLINK.err
+
+# Pour la lignée All
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All_VCFTools_bis.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --freq --out All_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy  --missing --out All_Missing
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf All_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt --pheno-name eaimoy --linear --all-pheno --adjust --out Alleai_Association_Linear
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf All_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt --pheno-name eaimoy --logistic --adjust --out Alleai_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All_VCFTools_bis.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_ligneeCC.txt --out All_Association_All
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf All_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt --pheno-name eaimoy --assoc --out Alleai_AdjustedAssociation
+
+# Pour la lignée C
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out C_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out C_Missing
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf C_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Ceaimoy_Association_Linear
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf C_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Ceaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Ceaimoy_Association_All
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf C_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Ceaimoy_AdjustedAssociation
+
+# Pour la lignée J
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out J_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out J_Missing
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf J_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Jeaimoy_Association_Linear
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf J_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Jeaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Jeaimoy_Association_All
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf J_SNP_filtered_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Jeaimoy_AdjustedAssociation
+
+# Pour la lignée Cpos
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out C_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out C_Missing
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cpos_VCFTools.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Cpos_eaimoy_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cpos_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Cpos_eaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Ceaimoy_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cpos_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Cpos_eaimoy_AdjustedAssociation
+
+# Pour la lignée Cneg
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out C_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out C_Missing
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cneg_VCFTools.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Cneg_eaimoy_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cneg_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Cneg_eaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_C_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Ceaimoy_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Cneg_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Cneg_eaimoy_AdjustedAssociation
+
+# Pour la lignée Jpos
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out J_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out J_Missing
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jpos_VCFTools.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Jpos_eaimoy_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jpos_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Jpos_eaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Jeaimoy_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jpos_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Jpos_eaimoy_AdjustedAssociation
+
+# Pour la lignée Jneg 
+# Analyse des fréquences alléliques
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy --freq --out J_Freq
+# Analyse des SNPs manquants
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf  --aec --chr-set 25 no-x no-y no-xy  --missing --out J_Missing
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jneg_VCFTools.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --linear --all-pheno --adjust --out Jneg_eaimoy_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jneg_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --logistic --adjust --out Jneg_eaimoy_Association_Logistic
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_J_VCFTools_bis.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --out Jeaimoy_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_Jneg_VCFTools.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno All_Pheno2.txt  --pheno-name eaimoy --assoc --out Jneg_eaimoy_AdjustedAssociation
