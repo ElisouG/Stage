@@ -39,33 +39,67 @@
 #$ -e /home/egueret/Stage_UM_ISEM/PLINK/sge_PLINK.err
 
 # Analyse des fréquences alléliques
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --freq --out Freq_all
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --freq --out CC_Freq_all
+
+# Rapport des fréquences allèliques 3 lignes pour enlever les duplicats d'ID
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --write-snplist --out all_snps
+#cat all_snps.snplist | sort | uniq -d > duplicated_snps.snplist 
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf  --aec --chr-set 25 no-x no-y no-xy --exclude duplicated_snps.snplist --make-bed
+
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --allow-no-sex --read-freq Freq_all.frq --aec --chr-set 25 no-x no-y no-xy --make-bed --out CC_Report
 
 # Analyse des SNPs manquants
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --missing --out Missing
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy  --missing --out CC_Missing
 
-# Suppression des génotype ayant un callrate inférieur à 95%
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --make-bed -- mind 0.05 --out Highgeno
+# Suppression des génotype ayant un callrate inférieur à 95% (80% et 79% et 78% et 0.05 ne fonctionne pas) 50% et 70% et 75% 77.5% fonctionne
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy  --make-bed --mind 0.5 --out CC_Highgeno_0.5
 
 # Analyse de stratifictation de la population
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --cluster --mc2 --ppc 0.05 --out Strat
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy  --cluster --mc 2 --ppc 0.05 --out CC_Strat
+
+# Analyse d'association
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO.txt --pheno-name PHENO --assoc --all-pheno --out Association
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO.txt --pheno-name PHENO --linear --adjust --all-pheno --out Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO.txt --pheno-name PHENO --logistic --adjust --all-pheno --out Association_Logistic
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO.txt --pheno-name PHENO --all-pheno --out Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO.txt --pheno-name PHENO --assoc --adjust --all-pheno --out AdjustedAssociation
+# Avec des phénotypes de type case/control et --all-pheno
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --linear --adjust --all-pheno --out CC1_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --logistic --adjust --all-pheno --out CC1_Association_Logistic
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --all-pheno --out CC1_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --assoc --adjust --all-pheno --out CC1_AdjustedAssociation
+# Avec des phénotypes de type case/control
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --linear --adjust --out CC2_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --logistic --adjust --out CC2_Association_Logistic
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --out CC2_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --assoc --adjust --out CC2_AdjustedAssociation
+# POur la lignée J
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_J.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --linear --adjust --out J_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_J.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --logistic --adjust --out J_Association_Logistic
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_J.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --out J_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_J.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --assoc --adjust --out J_AdjustedAssociation
+# Pour la lignée C
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_C.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --linear --adjust --out C_Association_Linear
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_C.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --logistic --adjust --out C_Association_Logistic
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_C.vcf --aec --make-bed --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --out C_Association_All
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered_SNP_lignees_C.vcf --aec --chr-set 25 no-x no-y no-xy --allow-no-sex --pheno PHENO_CC.txt --assoc --adjust --out C_AdjustedAssociation
 
 # Ancestry
-#/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --mh --within pop.phe --adjust --out Ancestry
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --mh --within pop.phe --adjust --out Ancestry
 
 # Visualisation de la substructure
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --cluster --matrix --out Substructure
+/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --chr-set 25 no-x no-y no-xy --cluster --matrix --out CC_Substructure
 
 # TDT : test disease trait
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --parentdt2 --out TDT2
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --parentdt1 --out TDT1
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --tdt --out TDT
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --parentdt2 --chr-set 25 no-x no-y no-xy  --out TDT2
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --parentdt1 --chr-set 25 no-x no-y no-xy  --out TDT1
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --tdt --chr-set 25 no-x no-y no-xy  --out TDT
 
 # POO : Parent of origin
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --tdt --poo --out POO
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --tdt --poo --chr-set 25 no-x no-y no-xy  --out POO
 
 # QFAM : Association trait quantitatif (family based)
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --qfam-total --mperm 100000 --out QFAM_tot
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --qfam --mperm 100000 --out QFAM
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --qfam-parents --mperm 100000 --out QFAM_parents
-/home/egueret/tools/plink-1.07-x86_64/plink --ped /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.ped --map /home/egueret/Stage_UM_ISEM/vcftools/Variants_final.map --qfam-between --mperm 100000 --out QFAM_between
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --qfam-total --chr-set 25 no-x no-y no-xy --mperm 100000 --out QFAM_tot
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --qfam --chr-set 25 no-x no-y no-xy --mperm 100000 --out QFAM
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec  --qfam-parents --chr-set 25 no-x no-y no-xy  --mperm 100000 --out QFAM_parents
+#/home/egueret/tools/plink_linux_x86_64/plink --vcf filtered.snps_All.vcf --aec --qfam-between --chr-set 25 no-x no-y no-xy  --mperm 100000 --out QFAM_between
