@@ -1,0 +1,8 @@
+{
+  "SplitVCF_singleSample.gatk": "/home/egueret/tools/gatk-4.0.3.0/gatk.jar",
+  "SplitVCF_singleSample.refFasta": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta",
+  "SplitVCF_singleSample.sampleName": "Cre-97",
+  "SplitVCF_singleSample.vcfFile": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/inputs/filtered.snps_Cpos.vcf",
+  "SplitVCF_singleSample.refIndex": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.fasta.fai",
+  "SplitVCF_singleSample.refDict": "/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/ref/labrax.dict"
+}

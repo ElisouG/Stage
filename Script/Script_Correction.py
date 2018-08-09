@@ -63,17 +63,17 @@ if __name__ == "__main__":
 	pathTranscriptome = "/home/egueret/Stage_UM_ISEM/Puce_57K/Dicentrarchus_merged-transcript.gtf"
 	PathGenomeR = '/home/egueret/Stage_UM_ISEM/Puce_57K/genome_IGV/labrax_reverse.fa'
 
-	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_23_07_18.txt"
-	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_23_07_18.txt"
-	pathF3 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/MultipleStop_23_07_18.txt"
-	pathF4 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Incomplete_23_07_18.txt"
-	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_23_07_18.gtf"
-	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Liste_transcrits_23_07_18.txt"
-	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_23_07_18.txt"
-	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_23_07_18.txt"
-	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_23_07_18.txt"
-	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_23_07_18.txt"
-	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_23_07_18.txt"
+	pathF2 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStop_exo_09_08_18.txt"
+	pathF1 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/NoStart_exo_09_08_18.txt"
+	pathF3 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/MultipleStop_09_08_18.txt"
+	pathF4 = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Incomplete_09_08_18.txt"
+	pathAnntotationNew = "/home/egueret/Stage_UM_ISEM/SnpEff_last/New_Annotation_09_08_18.gtf"
+	pathTranscrits = "/home/egueret/Stage_UM_ISEM/SnpEff_last/Liste_transcrits_09_08_18.txt"
+	pathStopTested = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStop_Tested_09_08_18.txt"
+	pathStartTested ="/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/NoStart_Tested_09_08_18.txt"
+	pathCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/CDS_09_08_18.txt"
+	pathSequenceCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Sequence_CDS_09_08_18.txt"
+	pathProteinesCDS = "/home/egueret/Stage_UM_ISEM/SnpEff_Modif_28-05-18/Protéines_CDS_09_08_18.txt"
 
 ################### Récupération info #################
 

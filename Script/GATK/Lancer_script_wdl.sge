@@ -30,13 +30,13 @@
 #$ -l h_rt=99:00:00
 
 # Job name
-#$ -N "run_ChoixFiltresTable"
+#$ -N "run_GATK"
 
 # Standard output (you can use the option '-j y' which add stderr with sdtout)
-#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_ChoixFiltresTable.out
+#$ -o /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_GATK.out
 
 # Erreur output (don't use with the option '-j y')
-#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_ChoixFiltresTable.err
+#$ -e /home/egueret/Stage_UM_ISEM/Donnees_CRECHE/sge_lancer_GATK.err
 
 #Modules à charger pour que le script fonctionne sur le cluster mbb
 module load java1.8
@@ -47,12 +47,15 @@ module load java1.8_jre
 #java -jar /home/egueret/tools/wdltool.jar validate Data_cleanup_GATK.wdl
 #java -jar /home/egueret/tools/wdltool.jar validate Data_Variant_Calling.wdl
 #java -jar /home/egueret/tools/wdltool.jar validate ChoixFiltresTable.wdl 
+#java -jar /home/egueret/tools/wdltool.jar validate SplitVCF_singleSample.wdl
 
 # Créer l'input
 #java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_picard.wdl > Data_cleanup_picard_inputs.json
 #java -jar /home/egueret/tools/wdltool.jar inputs Data_cleanup_GATK.wdl > Data_cleanup_GATK_inputs.json
 #java -jar /home/egueret/tools/wdltool.jar inputs Data_Variant_Calling.wdl > Data_Variant_Calling_inputs.json
 #java -jar /home/egueret/tools/wdltool.jar inputs ChoixFiltresTable.wdl > ChoixFiltresTable_inputs2.json
+
+#java -jar /home/egueret/tools/wdltool.jar inputs SplitVCF_singleSample.wdl > SplitVCF_singleSample_inputs.json
 
 #Lancer le pipeline
 
@@ -72,7 +75,8 @@ module load java1.8_jre
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run Data_Variant_Calling.wdl -i Data_Variant_Calling_inputs.json
 
 # Lancment du script pour pouvoir faire le choix des filtres ensuite :
-java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTable.wdl -i ChoixFiltresTable_inputs.json
+#java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTable.wdl -i ChoixFiltresTable_inputs.json
+java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run SplitVCF_singleSample.wdl -i SplitVCF_singleSample_inputs.json
 
 # Lancment du script pour pouvoir faire le choix des filtres BAM ensuite :
 # java -Dconfigfile=/home/egueret/Stage_UM_ISEM/Donnees_CRECHE/cromwell.conf -jar /home/egueret/tools/cromwell.jar run ChoixFiltresTableBam.wdl -i ChoixFiltresTable_inputs.json

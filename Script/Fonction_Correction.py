@@ -84,12 +84,12 @@ def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3
 		if brin == 'sens':
 			sequence = dico_genome[chromosome].seq # Si le brin est sens alors il prend le fichier "sens"
 			if pb == 'No Stop' :
-				if frame2 == '1' :
-					end = end - 2
-					end1 = end1 - 2
-				elif frame2 == '2' :
-					end = end - 1 
-					end1 = end1 -1
+				# if frame2 == '1' :
+				# 	end = end - 2
+				# 	end1 = end1 - 2
+				# elif frame2 == '2' :
+				# 	end = end - 1 
+				# 	end1 = end1 -1
 				for i in range(end+1,end1-2,3): # Recherche des codons stop en aval du gène
 					if sequence[i:i+3] in codonStop :
 						Longueur = (i+3) - (int(endGTF)+1)
@@ -102,12 +102,12 @@ def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3
 			elif pb == 'No Start':
 				st = 'NA'
 				en = 'NA'
-				if frame1 == '1':
-					start = start +1
-					start1 = start1 +1
-				elif frame1 == '2':
-					start = start + 2
-					start1 = start1 + 2
+				# if frame1 == '1':
+				# 	start = start +1
+				# 	start1 = start1 +1
+				# elif frame1 == '2':
+				# 	start = start + 2
+				# 	start1 = start1 + 2
 
 				for i in range(start1,start-3,3): # Recherche d0es codons start en amont du gène
 					if sequence[i:i+3] == codonStart :
@@ -136,10 +136,10 @@ def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3
 				sequence = dico_GenomeR[chromosome].seq # Si le brin est anti-sens alors il prend le fichier "anti-sens"
 				length = len(sequence)
 				if pb == 'No Stop' :
-					if frame1 == '1' :
-						start = start + 2
-					elif frame1 == '2' :
-						start = start +1
+					# if frame1 == '1' :
+					# 	start = start + 2
+					# elif frame1 == '2' :
+					# 	start = start +1
 					for i in range(length-1-(start-1),length-1-(start-1002),3): # Recherche des codons stop en aval du gène
 						if sequence[i:i+3] in codonStop :
 							Longueur = (int(startGTF)+1) - (length-(i+1))
@@ -152,10 +152,10 @@ def correctionSens(listeCorrection,dico_GenomeR,dico_genome,pathF1,pathF2,pathF3
 				elif pb == 'No Start' :
 					st = 'NA'
 					en = 'NA'
-					if frame2 == '1':
-						end = end -1
-					if frame2 == '2':
-						end = end -2
+					# if frame2 == '1':
+					# 	end = end -1
+					# if frame2 == '2':
+					# 	end = end -2
 					for i in range(length-1-(end+99),length-1-(end +1) ,3): # Recherche des codons start en amont du gène
 						if sequence[i:i+3] == codonStart :
 							st = i
@@ -366,46 +366,46 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
 				sequence = Genome[K1].seq 
-				if frame == '1':
-					CDS_start = int((elt.split(':')[0]))+1
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end] 
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-				elif frame == '2':
-					CDS_start = int((elt.split(':')[0]))+2
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end]
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-				elif frame == '0':
-					CDS_start = int(elt.split(':')[0])
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end]
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				# if frame == '1':
+				# 	CDS_start = int((elt.split(':')[0]))+1
+				# 	CDS_end = int(elt.split(':')[1])
+				# 	seqCDS = sequence[CDS_start:CDS_end] 
+				# 	seqFinale = seqFinale+seqCDS
+				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				# elif frame == '2':
+				# 	CDS_start = int((elt.split(':')[0]))+2
+				# 	CDS_end = int(elt.split(':')[1])
+				# 	seqCDS = sequence[CDS_start:CDS_end]
+				# 	seqFinale = seqFinale+seqCDS
+				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				# elif frame == '0':
+				CDS_start = int(elt.split(':')[0])
+				CDS_end = int(elt.split(':')[1])
+				seqCDS = sequence[CDS_start:CDS_end]
+				seqFinale = seqFinale+seqCDS
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
 			elif brin == '-':
 				sequence = GenomeR[K1].seq	
-				if frame == '1':
-					CDS_start = int((elt.split(':')[0]))+1
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end]
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-				elif frame == '2':
-					CDS_start = int((elt.split(':')[0]))+2
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end]
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-				elif frame == '0':
-					CDS_start = int(elt.split(':')[0])
-					CDS_end = int(elt.split(':')[1])
-					seqCDS = sequence[CDS_start:CDS_end]
-					seqFinale = seqFinale+seqCDS
-					SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
-					seqFinale = seqFinale+seqCDS
+				# if frame == '1':
+				# 	CDS_start = int((elt.split(':')[0]))+1
+				# 	CDS_end = int(elt.split(':')[1])
+				# 	seqCDS = sequence[CDS_start:CDS_end]
+				# 	seqFinale = seqFinale+seqCDS
+				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				# elif frame == '2':
+				# 	CDS_start = int((elt.split(':')[0]))+2
+				# 	CDS_end = int(elt.split(':')[1])
+				# 	seqCDS = sequence[CDS_start:CDS_end]
+				# 	seqFinale = seqFinale+seqCDS
+				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				# elif frame == '0':
+				CDS_start = int(elt.split(':')[0])
+				CDS_end = int(elt.split(':')[1])
+				seqCDS = sequence[CDS_start:CDS_end]
+				seqFinale = seqFinale+seqCDS
+				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
+				seqFinale = seqFinale+seqCDS
 			CDSComplete.append([K1,geneID,brin,seqFinale])	#Idente le de facon a qu'il soit dans la boucle et au meêm niveau que elit brin ='-';
 	SequenceCDS.close()
 	return CDSComplete
