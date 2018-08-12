@@ -170,8 +170,9 @@ if __name__ == "__main__":
 					Filtre = 'Pas de stop'
 					ProteinesCDS.write("%s | %s | %s | %s\n" % (K1,geneID,Filtre,seqProt))	
 		else :
-			erreur = []
+			erreur = [K1,geneID]
 			if  seq1[0:3] != 'ATG' :
+				#print('testZTG')
 				erreur.append('Start_erreur')
 			
 			if  seq1[-3:] not in ['TAA','TAG','TGA'] :
@@ -179,7 +180,7 @@ if __name__ == "__main__":
 			if  len(seqNt)%3 != 0  :
 				erreur.append('Len_erreur')
 
-			listeErreur.append(elt.append(erreur))
+			listeErreur.append(erreur)
 	ProteinesCDS.close()
 
 	for elt in listeErreur :
