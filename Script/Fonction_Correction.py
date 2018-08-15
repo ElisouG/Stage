@@ -363,9 +363,9 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 		brin = elt[2]
 		frame = elt[3]
 		positionCDS=elt[4:len(CDSFinaux)]
+		sequence = Genome[K1].seq 
 		for elt in positionCDS: # Est-ce qu'il ne faudrait pas que j'échange cette ligne avec celle du dessous?
 			if brin == '+':
-				sequence = Genome[K1].seq 
 				# if frame == '1':
 				# 	CDS_start = int((elt.split(':')[0]))+1
 				# 	CDS_end = int(elt.split(':')[1])
@@ -380,13 +380,12 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				# elif frame == '0':
 				CDS_start = int(elt.split(':')[0]) -1 # Correction entre GTF et python
-				CDS_end = int(elt.split(':')[1]) -1
+				CDS_end = int(elt.split(':')[1])+3 -1 # +3 pour récupéré le codon stop qui n'est pas dans le cds
 				seqCDS = sequence[CDS_start:CDS_end]
 				seqFinale = seqFinale+seqCDS
 				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
 			elif brin == '-':
-				sequence = GenomeR[K1].seq	
 				# if frame == '1':
 				# 	CDS_start = int((elt.split(':')[0]))+1
 				# 	CDS_end = int(elt.split(':')[1])
@@ -406,6 +405,7 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				seqFinale = seqFinale+seqCDS
 				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				seqFinale = seqFinale+seqCDS
+			seqFinale = seqFinale.reverse_complement()
 			CDSComplete.append([K1,geneID,brin,seqFinale])	#Idente le de facon a qu'il soit dans la boucle et au meêm niveau que elit brin ='-';
 	SequenceCDS.close()
 	return CDSComplete
