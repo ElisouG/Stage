@@ -379,9 +379,9 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				# 	seqFinale = seqFinale+seqCDS
 				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				# elif frame == '0':
-				CDS_start = int(elt.split(':')[0]) -1 # Correction entre GTF et python
+				CDS_start = int(elt.split(':')[0]) -1 +1 # Correction entre GTF et python
 				CDS_end = int(elt.split(':')[1])+3 -1 # +3 pour récupéré le codon stop qui n'est pas dans le cds
-				seqCDS = sequence[CDS_start:CDS_end]
+				seqCDS = sequence[CDS_start:CDS_end +1] # le derniers n'est pas compris en python
 				seqFinale = seqFinale+seqCDS
 				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 			
@@ -401,7 +401,7 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				# elif frame == '0':
 				CDS_start = int(elt.split(':')[0]) -4 # Correction entre GTF et python
 				CDS_end = int(elt.split(':')[1]) -1 
-				seqCDS = sequence[CDS_start:CDS_end]
+				seqCDS = sequence[CDS_start:CDS_end +1] # le derniers n'est pas compris en python
 				seqFinale = seqFinale+seqCDS
 				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				seqFinale = seqFinale+seqCDS
