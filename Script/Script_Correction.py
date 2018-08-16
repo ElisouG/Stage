@@ -178,7 +178,7 @@ if __name__ == "__main__":
 			if  seq1[-3:] not in ['TAA','TAG','TGA'] :
 				erreur.append('Stop_erreur')
 			if  len(seqNt)%3 != 0  :
-				erreur.append('Len_erreur')
+				erreur.append('Len_erreur : %s'%(len(seqNt)%3))
 
 			listeErreur.append(erreur)
 	ProteinesCDS.close()
