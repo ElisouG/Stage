@@ -399,7 +399,7 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				# 	seqFinale = seqFinale+seqCDS
 				# 	SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				# elif frame == '0':
-				CDS_start = int(elt.split(':')[0]) -1 # Correction entre GTF et python
+				CDS_start = int(elt.split(':')[0]) -4 # Correction entre GTF et python
 				CDS_end = int(elt.split(':')[1]) -1 
 				seqCDS = sequence[CDS_start:CDS_end]
 				seqFinale = seqFinale+seqCDS
