@@ -138,8 +138,8 @@ if __name__ == "__main__":
 	# SequenceCDS.close()
 	ProteinesCDS = open(pathProteinesCDS, "w")
 	ProteinesCDS.write("%s | %s | %s | %s\n" % ('Chromosome','geneID','Filtre','Protéines'))
+	listeErreur = []
 	for elt in CDSComplete: # Ca peut pas marcher vu que c'est une liste de liste ça veut dire que elt[0] est une liste et ainsi de suite.
-		listeErreur = []
 		K1 = elt[0]
 		geneID = elt[1]
 		seqNt = elt[3]
