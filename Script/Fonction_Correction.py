@@ -405,7 +405,8 @@ def recupSeqCDS(pathSequenceCDS,CDSFinaux,Genome,GenomeR):
 				seqFinale = seqFinale+seqCDS
 				SequenceCDS.write("%s | %s | %s | %s\n" % (K1,geneID,brin,seqCDS))
 				seqFinale = seqFinale+seqCDS
+		if brin == '-' :
 			seqFinale = seqFinale.reverse_complement()
-			CDSComplete.append([K1,geneID,brin,seqFinale])	#Idente le de facon a qu'il soit dans la boucle et au meêm niveau que elit brin ='-';
+		CDSComplete.append([K1,geneID,brin,seqFinale])	#Idente le de facon a qu'il soit dans la boucle et au meêm niveau que elit brin ='-';
 	SequenceCDS.close()
 	return CDSComplete
