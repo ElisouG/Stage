@@ -5,7 +5,7 @@
 # @author Elise GUERET
 
 
-#qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_Script_Correction -o /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.out -e /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.err -b y "python3 /home/egueret/Stage/Script/Modif-CDS_start_end.py"
+qsub -cwd -V -S /bin/bash -l h_rt=99:00:00 -M elise.gueret@gmail.com -m bes -N Test_sge_Script_Correction -o /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.out -e /home/egueret/Stage_UM_ISEM/sge_test_Script_Correction.err -b y "python3 /home/egueret/Stage/Script/Modif-CDS_start_end.py"
 
 if __name__ == "__main__":
 
@@ -28,5 +28,5 @@ if __name__ == "__main__":
 		end = line.split("	")[4]
 		brin = line.split("	")[6]
 		gene_id = line.split("	")[8].split(" ")[1].replace('"',"")
-		listeFct.append([K,fct,st,end,brin,gene_id])
+		listeFct.append([gene_id,brin,K,fct,st,end])
 	print(listeFct)
