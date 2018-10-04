@@ -19,14 +19,34 @@ if __name__ == "__main__":
 	lines = info.readlines() # Sauvegarder dans la variable lines les lignes du fichier précédent
 	info.close() # Fermer le fichier
 
-	listeFct = [] # Création d'une seconde liste vide
+	listeFct = [] # Création d'une liste vide
+	listeFinale = [] # Création d'une liste vide
+	a = False # Initialisation du compteur
 	
 	for line in lines:
-		K = line.split("	")[0]
-		fct = line.split("	")[2]
-		st = line.split("	")[3]
-		end = line.split("	")[4]
-		brin = line.split("	")[6]
-		gene_id = line.split("	")[8].split(" ")[1].replace('"',"")
+		lineSplit = line.split('\t')
+		K = lineSplit[0]
+		brin = lineSplit[6]
+		gene_id = lineSplit[8].split(" ")[1].replace('"',"")
+		fct = lineSplit[2]
+		st = lineSplit[3]
+		end = lineSplit[4]
 		listeFct.append([gene_id,brin,K,fct,st,end])
-	print(listeFct)
+
+		for elt in listeFct :
+			if gene_id == lineSplit[8].split(" ")[1].replace('"',"") :
+				gene_id = gene_id
+				brin = brin
+				k = K 	
+				if brin == '+' and fct == "CDS" or fct == "exon" and a = False :
+					a = True
+					fct = lineSplit[2]
+					st = lineSplit[3]
+					end = lineSplit[4]
+				elif brin == '-' and fct == "CDS" or fct == "exon" and a = True:
+					a = False
+					fct = lineSplit[2]
+					st = lineSplit[3]
+					end = lineSplit[4]
+		listeFinale.append([gene_id,brin,K,fct,st,end])
+	print(listeFinale)
