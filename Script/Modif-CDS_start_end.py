@@ -38,12 +38,12 @@ if __name__ == "__main__":
 				gene_id = gene_id
 				brin = brin
 				k = K 	
-				if brin == '+' and fct == "CDS" or fct == "exon" and a = False :
+				if brin == '+' and fct == "CDS" or fct == "exon" and a == False :
 					a = True
 					fct = lineSplit[2]
 					st = lineSplit[3]
 					end = lineSplit[4]
-				elif brin == '-' and fct == "CDS" or fct == "exon" and a = True:
+				elif brin == '-' and fct == "CDS" or fct == "exon" and a == True:
 					a = False
 					fct = lineSplit[2]
 					st = lineSplit[3]
