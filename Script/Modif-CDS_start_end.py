@@ -22,8 +22,10 @@ if __name__ == "__main__":
 
 	listeFct = [] # Création d'une liste vide
 	listeFinale = [] # Création d'une liste vide
-	listeTrue = [] # Création d'une liste vide
-	listeFalse = [] # Création d'une liste vide
+	listeStartTrue = [] # Création d'une liste vide
+	listeStartFalse = [] # Création d'une liste vide
+	listeStopTrue = [] # Création d'une liste vide
+	listeStopFalse = [] # Création d'une liste vide
 	listeAnomalies = [] # Création d'une liste vide
 	listeCorrigee = [] # Création d'une liste vide
 	start = False # Initialisation du compteur
@@ -128,6 +130,7 @@ if __name__ == "__main__":
 				else :
 					listeFinale.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 
+######### Test des starts ##############
 
 	for elt in listeFinale :
 		if '' in elt :
@@ -144,22 +147,53 @@ if __name__ == "__main__":
 			stopCodon = elt[7]
 			if brin == '+' :
 				if startCodon[0] == firstExon[0] == firstCDS[0] :
-					listeTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+					listeStartTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 					#print('True(+)',elt)
-				else :
-					listeFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				elif startCodon[0] != firstExon[0] or firstExon[0] != firstCDS[0] or startCodon[0] !=  firstCDS[0] : 
+					listeStartFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 					#print('False(+)',elt)
+	
 			elif brin == '-' :
 				if startCodon[1] == firstExon[1] == firstCDS[1] :
-					listeTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+					listeStartTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 					#print('True(-)',elt)
-				else :
-					listeFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				elif startCodon[1] != firstExon[1] or firstExon[1] != firstCDS[1] or startCodon[1] !=  firstCDS[1] :
+					listeStartFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 					#print('False(-)',elt)
+
+################ Test des Falses ###################
+
+	for elt in listeFinale :
+		gene_id = elt[0]
+		brin = elt[1]
+		startCodon = elt[2]
+		firstCDS = elt[3]
+		firstExon = elt[4] 
+		lastCDS = elt[5] 
+		lastExon = elt[6]
+		stopCodon = elt[7]
+		print('stopCodon',stopCodon)
+		print('lastExon',lastExon)
+		print('lastCDS',lastCDS)
+		if brin == '+' :
+			if stopCodon[0] == lastExon[0] == lastCDS[0] :
+				listeStopTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				#print('True(+)',elt)
+			elif stopCodon[0] != lastExon[0] or lastCDS[0] != lastCDS[0] or stopCodon[0] !=  lastCDS[0] :
+				listeStopFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				#print('False(+)',elt)
+		elif brin == '-' :
+			if stopCodon[1] == lastExon[1] == lastCDS[1] :
+				listeStopTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				#print('True(+)',elt)
+			elif stopCodon[1] != lastExon[1] or lastCDS[1] != lastCDS[1] or stopCodon[1] !=  lastCDS[1] : 
+				listeStopFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				#print('False(+)',elt)
+
 
 ################### CORRECTION #################
 
-	for elt in listeFalse :
+	for elt in listeStartFalse :
 		gene_id = elt[0]
 		brin = elt[1]
 		startCodon = elt[2]
@@ -169,15 +203,15 @@ if __name__ == "__main__":
 		lastExon = elt[6]
 		stopCodon = elt[7]
 		if brin == '+' :
-			if startCodon[0] != firstExon[0] or firstExon[0] != firstCDS[0] or startCodon[0] !=  firstCDS[0] :
-				startCodon[0] = firstExon[0] = firstCDS[0]
-				listeCorrigee.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
-				#print('Corrigee(+)',elt)
+			#if startCodon[0] != firstExon[0] or firstExon[0] != firstCDS[0] or startCodon[0] !=  firstCDS[0] :
+			startCodon[0] = firstExon[0] = firstCDS[0]
+			listeCorrigee.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+			#print('Corrigee(+)',elt)
 		elif brin == '-' :
-			if startCodon[1] != firstExon[1] or firstExon[1] != firstCDS[1] or startCodon[1] !=  firstCDS[1] :
-				startCodon[1] = firstExon[1] = firstCDS[1]
-				listeCorrigee.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
-				#print('Corrigee(-)',elt)
+			#if startCodon[1] != firstExon[1] or firstExon[1] != firstCDS[1] or startCodon[1] !=  firstCDS[1] :
+			startCodon[1] = firstExon[1] = firstCDS[1]
+			listeCorrigee.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+			#print('Corrigee(-)',elt)
 
 ################### VERIFICATION #################
 
@@ -192,18 +226,21 @@ if __name__ == "__main__":
 		stopCodon = elt[7]
 		if brin == '+' :
 			if startCodon[0] == firstExon[0] == firstCDS[0] :
-				listeTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				listeStartTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 				#print('True(+)',elt)
 			else :
-				listeFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				listeStartFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 				#print('False(+)',elt)
 		elif brin == '-' :
 			if startCodon[1] == firstExon[1] == firstCDS[1] :
-				listeTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				listeStartTrue.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 				#print('True(-)',elt)
 			else :
-				listeFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
+				listeStartFalse.append([gene_id,brin,startCodon,firstCDS,firstExon,lastCDS,lastExon,stopCodon])
 				#print('False(-)',elt)
+
+	# for elt in listeStopFa:
+	# 	print(elt)
 
 
 
